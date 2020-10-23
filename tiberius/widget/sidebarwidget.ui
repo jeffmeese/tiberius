@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SidebarWidget</class>
+ <widget class="QWidget" name="SidebarWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>162</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Sidebar</string>
+  </property>
+  <widget class="QWidget" name="cMinimap" native="true">
+   <property name="geometry">
+    <rect>
+     <x>8</x>
+     <y>34</y>
+     <width>148</width>
+     <height>115</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="Button" name="cOverlay">
+   <property name="geometry">
+    <rect>
+     <x>4</x>
+     <y>3</y>
+     <width>117</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Overlays</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="cCollapse">
+   <property name="geometry">
+    <rect>
+     <x>127</x>
+     <y>5</y>
+     <width>31</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cAdvisors">
+   <property name="geometry">
+    <rect>
+     <x>8</x>
+     <y>156</y>
+     <width>71</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cEmpire">
+   <property name="geometry">
+    <rect>
+     <x>85</x>
+     <y>156</y>
+     <width>71</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cRotateLeft">
+   <property name="geometry">
+    <rect>
+     <x>124</x>
+     <y>185</y>
+     <width>33</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cRotateRight">
+   <property name="geometry">
+    <rect>
+     <x>85</x>
+     <y>185</y>
+     <width>33</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cRotateNorth">
+   <property name="geometry">
+    <rect>
+     <x>47</x>
+     <y>185</y>
+     <width>33</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cMission">
+   <property name="geometry">
+    <rect>
+     <x>8</x>
+     <y>185</y>
+     <width>33</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cCycle">
+   <property name="geometry">
+    <rect>
+     <x>114</x>
+     <y>422</y>
+     <width>39</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cEngineering">
+   <property name="geometry">
+    <rect>
+     <x>14</x>
+     <y>386</y>
+     <width>39</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cRoad">
+   <property name="geometry">
+    <rect>
+     <x>114</x>
+     <y>278</y>
+     <width>39</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cGovernment">
+   <property name="geometry">
+    <rect>
+     <x>114</x>
+     <y>350</y>
+     <width>39</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cWater">
+   <property name="geometry">
+    <rect>
+     <x>14</x>
+     <y>314</y>
+     <width>39</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cUndo">
+   <property name="geometry">
+    <rect>
+     <x>14</x>
+     <y>422</y>
+     <width>39</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cEntertainment">
+   <property name="geometry">
+    <rect>
+     <x>64</x>
+     <y>350</y>
+     <width>39</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cEducation">
+   <property name="geometry">
+    <rect>
+     <x>14</x>
+     <y>350</y>
+     <width>39</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cHealth">
+   <property name="geometry">
+    <rect>
+     <x>64</x>
+     <y>314</y>
+     <width>39</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cHouse">
+   <property name="geometry">
+    <rect>
+     <x>14</x>
+     <y>278</y>
+     <width>39</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cIndustry">
+   <property name="geometry">
+    <rect>
+     <x>114</x>
+     <y>386</y>
+     <width>39</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cReligion">
+   <property name="geometry">
+    <rect>
+     <x>114</x>
+     <y>314</y>
+     <width>39</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cClear">
+   <property name="geometry">
+    <rect>
+     <x>64</x>
+     <y>278</y>
+     <width>39</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cSecurity">
+   <property name="geometry">
+    <rect>
+     <x>64</x>
+     <y>386</y>
+     <width>39</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cMessages">
+   <property name="geometry">
+    <rect>
+     <x>64</x>
+     <y>422</y>
+     <width>39</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cExpand">
+   <property name="geometry">
+    <rect>
+     <x>127</x>
+     <y>5</y>
+     <width>31</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="cPanelImage">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>735</y>
+     <width>162</width>
+     <height>285</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="cPanelImage2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>450</y>
+     <width>162</width>
+     <height>285</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="cOutline">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>162</width>
+     <height>455</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Plain</enum>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="indent">
+    <number>0</number>
+   </property>
+  </widget>
+  <widget class="QLabel" name="cBuildImage">
+   <property name="geometry">
+    <rect>
+     <x>8</x>
+     <y>216</y>
+     <width>149</width>
+     <height>54</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <zorder>cOutline</zorder>
+  <zorder>cMinimap</zorder>
+  <zorder>cOverlay</zorder>
+  <zorder>cCollapse</zorder>
+  <zorder>cAdvisors</zorder>
+  <zorder>cEmpire</zorder>
+  <zorder>cRotateLeft</zorder>
+  <zorder>cRotateRight</zorder>
+  <zorder>cRotateNorth</zorder>
+  <zorder>cMission</zorder>
+  <zorder>cCycle</zorder>
+  <zorder>cEngineering</zorder>
+  <zorder>cRoad</zorder>
+  <zorder>cGovernment</zorder>
+  <zorder>cWater</zorder>
+  <zorder>cUndo</zorder>
+  <zorder>cEntertainment</zorder>
+  <zorder>cEducation</zorder>
+  <zorder>cHealth</zorder>
+  <zorder>cHouse</zorder>
+  <zorder>cIndustry</zorder>
+  <zorder>cReligion</zorder>
+  <zorder>cClear</zorder>
+  <zorder>cSecurity</zorder>
+  <zorder>cMessages</zorder>
+  <zorder>cExpand</zorder>
+  <zorder>cPanelImage</zorder>
+  <zorder>cPanelImage2</zorder>
+  <zorder>cBuildImage</zorder>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Button</class>
+   <extends>QPushButton</extends>
+   <header>widget/button.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

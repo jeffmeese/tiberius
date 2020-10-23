@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>829</width>
+    <height>653</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>640</width>
+    <height>480</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Tiberius</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+   </layout>
+  </widget>
+  <widget class="MenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>829</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>9</pointsize>
+    </font>
+   </property>
+   <property name="nativeMenuBar">
+    <bool>false</bool>
+   </property>
+   <widget class="Menu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionNew_Game"/>
+    <addaction name="actionReplay_Map"/>
+    <addaction name="actionLoad_Game"/>
+    <addaction name="actionSave_Game"/>
+    <addaction name="actionDelete_Game"/>
+    <addaction name="actionExit_Game"/>
+   </widget>
+   <widget class="Menu" name="menuOptions">
+    <property name="title">
+     <string>Options</string>
+    </property>
+    <addaction name="actionDisplay_Settings"/>
+    <addaction name="actionSound_Settings"/>
+    <addaction name="actionSpeed_Settings"/>
+    <addaction name="actionDifficulty"/>
+    <addaction name="actionMonthly_Autosave"/>
+   </widget>
+   <widget class="Menu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionHelp"/>
+    <addaction name="actionMouse_Help"/>
+    <addaction name="actionWarnings"/>
+    <addaction name="actionAbout"/>
+   </widget>
+   <widget class="Menu" name="menuAdvisors">
+    <property name="title">
+     <string>Advisors</string>
+    </property>
+    <addaction name="actionLabor"/>
+    <addaction name="actionLegion"/>
+    <addaction name="actionEmperor"/>
+    <addaction name="actionRatings"/>
+    <addaction name="actionTrade"/>
+    <addaction name="actionPopulation"/>
+    <addaction name="actionHealth"/>
+    <addaction name="actionEducation"/>
+    <addaction name="actionEntertainment"/>
+    <addaction name="actionReligion"/>
+    <addaction name="actionFinances"/>
+    <addaction name="actionChief_Advisor"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuOptions"/>
+   <addaction name="menuHelp"/>
+   <addaction name="menuAdvisors"/>
+  </widget>
+  <action name="actionNew_Game">
+   <property name="text">
+    <string>New Game</string>
+   </property>
+  </action>
+  <action name="actionLoad_Game">
+   <property name="text">
+    <string>Load Game</string>
+   </property>
+  </action>
+  <action name="actionReplay_Map">
+   <property name="text">
+    <string>Replay Map</string>
+   </property>
+  </action>
+  <action name="actionSave_Game">
+   <property name="text">
+    <string>Save Game</string>
+   </property>
+  </action>
+  <action name="actionDelete_Game">
+   <property name="text">
+    <string>Delete Game</string>
+   </property>
+  </action>
+  <action name="actionExit_Game">
+   <property name="text">
+    <string>Exit Game</string>
+   </property>
+  </action>
+  <action name="actionDisplay_Settings">
+   <property name="text">
+    <string>Display Settings</string>
+   </property>
+  </action>
+  <action name="actionSound_Settings">
+   <property name="text">
+    <string>Sound Settings</string>
+   </property>
+  </action>
+  <action name="actionSpeed_Settings">
+   <property name="text">
+    <string>Speed Settings</string>
+   </property>
+  </action>
+  <action name="actionDifficulty">
+   <property name="text">
+    <string>Difficulty</string>
+   </property>
+  </action>
+  <action name="actionMonthly_Autosave">
+   <property name="text">
+    <string>Monthly Autosave</string>
+   </property>
+  </action>
+  <action name="actionHelp">
+   <property name="text">
+    <string>Help</string>
+   </property>
+  </action>
+  <action name="actionMouse_Help">
+   <property name="text">
+    <string>Mouse Help</string>
+   </property>
+  </action>
+  <action name="actionWarnings">
+   <property name="text">
+    <string>Warnings</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionLabor">
+   <property name="text">
+    <string>Labor</string>
+   </property>
+  </action>
+  <action name="actionLegion">
+   <property name="text">
+    <string>Legion</string>
+   </property>
+  </action>
+  <action name="actionEmperor">
+   <property name="text">
+    <string>Emperor</string>
+   </property>
+  </action>
+  <action name="actionRatings">
+   <property name="text">
+    <string>Ratings</string>
+   </property>
+  </action>
+  <action name="actionTrade">
+   <property name="text">
+    <string>Trade</string>
+   </property>
+  </action>
+  <action name="actionPopulation">
+   <property name="text">
+    <string>Population</string>
+   </property>
+  </action>
+  <action name="actionHealth">
+   <property name="text">
+    <string>Health</string>
+   </property>
+  </action>
+  <action name="actionEducation">
+   <property name="text">
+    <string>Education</string>
+   </property>
+  </action>
+  <action name="actionEntertainment">
+   <property name="text">
+    <string>Entertainment</string>
+   </property>
+  </action>
+  <action name="actionReligion">
+   <property name="text">
+    <string>Religion</string>
+   </property>
+  </action>
+  <action name="actionFinances">
+   <property name="text">
+    <string>Finances</string>
+   </property>
+  </action>
+  <action name="actionChief_Advisor">
+   <property name="text">
+    <string>Chief Advisor</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MenuBar</class>
+   <extends>QMenuBar</extends>
+   <header>widget/menubar.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Menu</class>
+   <extends>QMenu</extends>
+   <header>widget/menu.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

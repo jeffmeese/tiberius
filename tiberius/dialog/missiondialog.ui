@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MissionDialog</class>
+ <widget class="QDialog" name="MissionDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>608</width>
+    <height>432</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="Label" name="cName">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>4</y>
+     <width>630</width>
+     <height>36</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Mission Name</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cDescription">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>34</y>
+     <width>630</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Mission Objective</string>
+   </property>
+  </widget>
+  <widget class="Button" name="cContinue">
+   <property name="geometry">
+    <rect>
+     <x>468</x>
+     <y>394</y>
+     <width>27</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Label" name="cCityLabel">
+   <property name="geometry">
+    <rect>
+     <x>364</x>
+     <y>394</y>
+     <width>100</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>To the city</string>
+   </property>
+  </widget>
+  <widget class="Button" name="cFavor">
+   <property name="geometry">
+    <rect>
+     <x>292</x>
+     <y>68</y>
+     <width>240</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cPeace">
+   <property name="geometry">
+    <rect>
+     <x>292</x>
+     <y>114</y>
+     <width>240</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cCulture">
+   <property name="geometry">
+    <rect>
+     <x>292</x>
+     <y>90</y>
+     <width>240</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cPopulation">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>90</y>
+     <width>240</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cProsperity">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>114</y>
+     <width>240</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Label" name="cObjectives">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>64</y>
+     <width>240</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Objectives</string>
+   </property>
+  </widget>
+  <widget class="MessageWidget" name="cObjectivesWidget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>62</y>
+     <width>528</width>
+     <height>80</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="TextEdit" name="cMessage" native="true">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>150</y>
+     <width>568</width>
+     <height>240</height>
+    </rect>
+   </property>
+  </widget>
+  <zorder>cObjectivesWidget</zorder>
+  <zorder>cName</zorder>
+  <zorder>cDescription</zorder>
+  <zorder>cContinue</zorder>
+  <zorder>cCityLabel</zorder>
+  <zorder>cFavor</zorder>
+  <zorder>cPeace</zorder>
+  <zorder>cCulture</zorder>
+  <zorder>cPopulation</zorder>
+  <zorder>cProsperity</zorder>
+  <zorder>cObjectives</zorder>
+  <zorder>cMessage</zorder>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Button</class>
+   <extends>QPushButton</extends>
+   <header>widget/button.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Label</class>
+   <extends>QLabel</extends>
+   <header>widget/label.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MessageWidget</class>
+   <extends>QWidget</extends>
+   <header>widget/messagewidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TextEdit</class>
+   <extends>QWidget</extends>
+   <header>widget/textedit.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

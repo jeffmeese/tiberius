@@ -1,0 +1,34 @@
+#include "videowindow.h"
+
+#include <QDebug>
+#include <QVBoxLayout>
+
+VideoWindow::VideoWindow(QWidget *parent)
+    : QWidget(parent)
+{
+  setLayout(new QVBoxLayout);
+
+  mVideoWidget = new QVideoWidget(this);
+  mVideoWidget->move(0, 0);
+  mVideoWidget->resize(width(), height());
+  layout()->addWidget(mVideoWidget);
+
+  QString fileName("D:\\videos\\HBSquirtB2018.avi");
+  mPlayer.setMedia(QUrl::fromLocalFile(fileName));
+  mPlayer.setVideoOutput(mVideoWidget);
+  mPlayer.play();
+}
+
+void VideoWindow::resizeEvent(QResizeEvent *event)
+{
+  qDebug() << QObject::tr(__FUNCTION__);
+
+}
+
+void VideoWindow::showEvent(QShowEvent *event)
+{
+  qDebug() << QObject::tr(__FUNCTION__);
+
+
+  //mVideoWidget->show();
+}

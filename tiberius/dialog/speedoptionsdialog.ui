@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SpeedOptionsDialog</class>
+ <widget class="QDialog" name="SpeedOptionsDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>320</width>
+    <height>256</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="Label" name="cTitle">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>320</width>
+     <height>48</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Title</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cGameSpeedLabel">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>74</y>
+     <width>210</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Game Speed</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cScrollSpeedLabel">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>106</y>
+     <width>210</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Scroll Speed</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="Button" name="cDecreaseGameSpeed">
+   <property name="geometry">
+    <rect>
+     <x>212</x>
+     <y>74</y>
+     <width>24</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cIncreaseGameSpeed">
+   <property name="geometry">
+    <rect>
+     <x>238</x>
+     <y>74</y>
+     <width>24</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cDecreaseScrollSpeed">
+   <property name="geometry">
+    <rect>
+     <x>212</x>
+     <y>108</y>
+     <width>24</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cIncreaseScrollSpeed">
+   <property name="geometry">
+    <rect>
+     <x>238</x>
+     <y>108</y>
+     <width>24</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cOK">
+   <property name="geometry">
+    <rect>
+     <x>64</x>
+     <y>174</y>
+     <width>192</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>OK</string>
+   </property>
+  </widget>
+  <widget class="Button" name="cCancel">
+   <property name="geometry">
+    <rect>
+     <x>64</x>
+     <y>206</y>
+     <width>192</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cGameSpeedPercent">
+   <property name="geometry">
+    <rect>
+     <x>274</x>
+     <y>74</y>
+     <width>40</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>100%</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cScrollSpeedPercent">
+   <property name="geometry">
+    <rect>
+     <x>274</x>
+     <y>106</y>
+     <width>40</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>100%</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Button</class>
+   <extends>QPushButton</extends>
+   <header>widget/button.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Label</class>
+   <extends>QLabel</extends>
+   <header>widget/label.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

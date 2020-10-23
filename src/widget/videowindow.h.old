@@ -1,0 +1,29 @@
+#ifndef VIDEOWINDOW_H
+#define VIDEOWINDOW_H
+
+#include "tiberius.h"
+
+#include <QWidget>
+#include <QVideoWidget>
+#include <QMediaPlayer>
+
+class VideoWindow
+    : public QWidget
+{
+  Q_OBJECT
+
+public:
+  TIBERIUS_LIB_DECL explicit VideoWindow(QWidget *parent = nullptr);
+
+protected:
+  void resizeEvent(QResizeEvent *event) override;
+  void showEvent(QShowEvent *event) override;
+
+signals:
+
+private:
+  QMediaPlayer mPlayer;
+  QVideoWidget * mVideoWidget;
+};
+
+#endif // VIDEOWINDOW_H
