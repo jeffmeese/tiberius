@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LaborAdvisorWidget</class>
+ <widget class="QWidget" name="LaborAdvisorWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>416</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="Button" name="cIconButton">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>40</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Label" name="cTitle">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>12</y>
+     <width>545</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Labor Allocation</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cPriority">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>52</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Priority</string>
+   </property>
+  </widget>
+  <widget class="MessageWidget" name="cButtons" native="true">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>70</y>
+     <width>576</width>
+     <height>240</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="Label" name="cSector">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>52</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Sector</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cNeed">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>52</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Need</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cHave">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>52</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Have</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cEmployed">
+   <property name="geometry">
+    <rect>
+     <x>64</x>
+     <y>320</y>
+     <width>183</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Employed Workforce</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cUnemployed">
+   <property name="geometry">
+    <rect>
+     <x>312</x>
+     <y>320</y>
+     <width>197</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Unemployed Workforce</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="MessageWidget" name="cWagesWidget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>64</x>
+     <y>350</y>
+     <width>512</width>
+     <height>32</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="Button" name="cHelp">
+   <property name="geometry">
+    <rect>
+     <x>4</x>
+     <y>384</y>
+     <width>24</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Label" name="cBill">
+   <property name="geometry">
+    <rect>
+     <x>64</x>
+     <y>390</y>
+     <width>249</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Annual Bill</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cNumEmployed">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>320</y>
+     <width>27</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cNumUnemployed">
+   <property name="geometry">
+    <rect>
+     <x>282</x>
+     <y>320</y>
+     <width>25</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cPercentUnemployed">
+   <property name="geometry">
+    <rect>
+     <x>516</x>
+     <y>320</y>
+     <width>43</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>  0%</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cBillAmount">
+   <property name="geometry">
+    <rect>
+     <x>324</x>
+     <y>390</y>
+     <width>27</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cDenarii">
+   <property name="geometry">
+    <rect>
+     <x>368</x>
+     <y>390</y>
+     <width>99</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Dn</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="LaborAdvisorButton" name="cGovernanceButton">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>252</y>
+     <width>560</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="LaborAdvisorButton" name="cWaterButton">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>152</y>
+     <width>560</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="LaborAdvisorButton" name="cEntertainmentButton">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>228</y>
+     <width>560</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="LaborAdvisorButton" name="cHealthButton">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>277</y>
+     <width>560</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="LaborAdvisorButton" name="cPrefectureButton">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>177</y>
+     <width>560</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="LaborAdvisorButton" name="cMilitaryButton">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>202</y>
+     <width>560</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="LaborAdvisorButton" name="cEngineeringButton">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>127</y>
+     <width>560</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="LaborAdvisorButton" name="cIndustryButton">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>77</y>
+     <width>560</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="LaborAdvisorButton" name="cFoodButton">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>102</y>
+     <width>560</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Label" name="cWages">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>359</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Wages</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Button" name="cWagesUp">
+   <property name="geometry">
+    <rect>
+     <x>182</x>
+     <y>354</y>
+     <width>24</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cWagesDown">
+   <property name="geometry">
+    <rect>
+     <x>158</x>
+     <y>354</y>
+     <width>24</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Label" name="cRomeWages">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>359</y>
+     <width>31</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>30 )</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cCityWages">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>359</y>
+     <width>31</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cRomePays">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>359</y>
+     <width>95</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>(Rome Pays</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cWagesDenarii">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>359</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Denarii</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Button</class>
+   <extends>QPushButton</extends>
+   <header>widget/button.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Label</class>
+   <extends>QLabel</extends>
+   <header>widget/label.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MessageWidget</class>
+   <extends>QWidget</extends>
+   <header>widget/messagewidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>LaborAdvisorButton</class>
+   <extends>QPushButton</extends>
+   <header>widget/laboradvisorbutton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

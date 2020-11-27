@@ -21,7 +21,13 @@ LanguageItem::LanguageItem(const QString & textPath)
   setText(fileName);
 
   mLanguage.reset(new Language);
-  mLanguage->load(textPath, messagePath);
+  try {
+    mLanguage->load(textPath, messagePath);
+  }
+  catch (std::invalid_argument & ex) {
+    messagePath.replace("c3", "C3");
+    mLanguage->load(textPath, messagePath);
+  }
 
   QStandardItem * textItem = new TextDataItem(mLanguage->stringData());
   textItem->setText("Text Data");

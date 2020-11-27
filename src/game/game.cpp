@@ -2,6 +2,10 @@
 
 #include "core/streamio.h"
 
+#include "city/city.h"
+
+#include "game/player.h"
+
 #include "map/map.h"
 
 #include "mission/mission.h"
@@ -13,8 +17,10 @@
 #include <stdexcept>
 
 Game::Game()
-  : mDifficulty(Difficulty::Type::Hard)
+  : mCity(new City)
+  , mDifficulty(Difficulty::Type::Hard)
   , mMission(new Mission)
+  , mPlayer(new Player)
 {
 }
 

@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>GiftDialog</class>
+ <widget class="QDialog" name="GiftDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>480</width>
+    <height>240</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="Button" name="cIcon">
+   <property name="geometry">
+    <rect>
+     <x>16</x>
+     <y>16</y>
+     <width>24</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="MessageWidget" name="cGiftArea" native="true">
+   <property name="geometry">
+    <rect>
+     <x>16</x>
+     <y>64</y>
+     <width>448</width>
+     <height>80</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="Label" name="cTitle">
+   <property name="geometry">
+    <rect>
+     <x>48</x>
+     <y>16</y>
+     <width>416</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cTimeSinceLabel">
+   <property name="geometry">
+    <rect>
+     <x>48</x>
+     <y>162</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="BorderedButton" name="cDispatch">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>192</y>
+     <width>240</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>PushButton</string>
+   </property>
+  </widget>
+  <widget class="BorderedButton" name="cCancel">
+   <property name="geometry">
+    <rect>
+     <x>304</x>
+     <y>192</y>
+     <width>160</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>PushButton</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cTimeSinceAmount">
+   <property name="geometry">
+    <rect>
+     <x>128</x>
+     <y>162</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cModestLabel">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>74</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Modest</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cGenerousLabel">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>94</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Generous</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cLavishLabel">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>114</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Lavish</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cModestGift">
+   <property name="geometry">
+    <rect>
+     <x>128</x>
+     <y>74</y>
+     <width>107</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Modest Gift</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cGenerousGift">
+   <property name="geometry">
+    <rect>
+     <x>128</x>
+     <y>94</y>
+     <width>113</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Generous Gift</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cLavishGift">
+   <property name="geometry">
+    <rect>
+     <x>128</x>
+     <y>114</y>
+     <width>85</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Lavish Gift</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Button</class>
+   <extends>QPushButton</extends>
+   <header>widget/button.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Label</class>
+   <extends>QLabel</extends>
+   <header>widget/label.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MessageWidget</class>
+   <extends>QWidget</extends>
+   <header>widget/messagewidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>BorderedButton</class>
+   <extends>QPushButton</extends>
+   <header>widget/borderedbutton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

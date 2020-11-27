@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ChiefAdvisorWidget</class>
+ <widget class="QWidget" name="ChiefAdvisorWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>368</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="MessageWidget" name="cButtons" native="true">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>60</y>
+     <width>576</width>
+     <height>256</height>
+    </rect>
+   </property>
+   <widget class="QLabel" name="cButton1">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>6</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="cButton5">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>26</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="cButton6">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>46</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="cButton7">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>66</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="cButton8">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>86</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="cButton9">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>106</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="cButton10">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>126</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="cButton11">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>146</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="cButton12">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>166</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="cButton2">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>186</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="cButton3">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>206</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="cButton4">
+    <property name="geometry">
+     <rect>
+      <x>8</x>
+      <y>226</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cEmploymentLabel">
+    <property name="geometry">
+     <rect>
+      <x>29</x>
+      <y>6</y>
+      <width>166</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cFinanceLabel">
+    <property name="geometry">
+     <rect>
+      <x>29</x>
+      <y>26</y>
+      <width>166</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cMigrationLabel">
+    <property name="geometry">
+     <rect>
+      <x>29</x>
+      <y>46</y>
+      <width>166</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cFoodLabel">
+    <property name="geometry">
+     <rect>
+      <x>29</x>
+      <y>66</y>
+      <width>166</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cConsumptionLabel">
+    <property name="geometry">
+     <rect>
+      <x>29</x>
+      <y>86</y>
+      <width>166</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cMilitaryLabel">
+    <property name="geometry">
+     <rect>
+      <x>29</x>
+      <y>106</y>
+      <width>166</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cCrimeLabel">
+    <property name="geometry">
+     <rect>
+      <x>29</x>
+      <y>126</y>
+      <width>166</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cCityHealthLabel">
+    <property name="geometry">
+     <rect>
+      <x>29</x>
+      <y>146</y>
+      <width>166</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cEducationLabel">
+    <property name="geometry">
+     <rect>
+      <x>29</x>
+      <y>166</y>
+      <width>166</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cHealthLabel">
+    <property name="geometry">
+     <rect>
+      <x>29</x>
+      <y>186</y>
+      <width>166</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cEntertainmentLabel">
+    <property name="geometry">
+     <rect>
+      <x>29</x>
+      <y>206</y>
+      <width>166</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cSentimentLabel">
+    <property name="geometry">
+     <rect>
+      <x>29</x>
+      <y>226</y>
+      <width>166</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cEmploymentData">
+    <property name="geometry">
+     <rect>
+      <x>208</x>
+      <y>6</y>
+      <width>355</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cMigrationData">
+    <property name="geometry">
+     <rect>
+      <x>208</x>
+      <y>46</y>
+      <width>355</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cFoodData">
+    <property name="geometry">
+     <rect>
+      <x>208</x>
+      <y>66</y>
+      <width>355</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cConsumptionData">
+    <property name="geometry">
+     <rect>
+      <x>208</x>
+      <y>86</y>
+      <width>355</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cMilitaryData">
+    <property name="geometry">
+     <rect>
+      <x>208</x>
+      <y>106</y>
+      <width>355</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cCrimeData">
+    <property name="geometry">
+     <rect>
+      <x>208</x>
+      <y>126</y>
+      <width>355</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cHealthData">
+    <property name="geometry">
+     <rect>
+      <x>208</x>
+      <y>146</y>
+      <width>355</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cEducationData">
+    <property name="geometry">
+     <rect>
+      <x>208</x>
+      <y>166</y>
+      <width>355</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cCityHealthData">
+    <property name="geometry">
+     <rect>
+      <x>208</x>
+      <y>186</y>
+      <width>355</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cFinanceData">
+    <property name="geometry">
+     <rect>
+      <x>208</x>
+      <y>26</y>
+      <width>355</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cEntertainmentData">
+    <property name="geometry">
+     <rect>
+      <x>208</x>
+      <y>206</y>
+      <width>355</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="Label" name="cSentimentData">
+    <property name="geometry">
+     <rect>
+      <x>208</x>
+      <y>226</y>
+      <width>355</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="Button" name="cIconButton">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>40</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Label" name="cTitle">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>12</y>
+     <width>545</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Title</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Button</class>
+   <extends>QPushButton</extends>
+   <header>widget/button.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Label</class>
+   <extends>QLabel</extends>
+   <header>widget/label.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MessageWidget</class>
+   <extends>QWidget</extends>
+   <header>widget/messagewidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

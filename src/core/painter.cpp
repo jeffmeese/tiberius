@@ -16,7 +16,7 @@ Painter::Painter(QPaintDevice * device)
 
 }
 
-void Painter::drawText(int x, int y, const QString & text, const Font & font)
+int32_t Painter::drawText(int32_t x, int32_t y, const QString & text, const Font & font)
 {
   const Language * language = TiberiusApplication::language();
   const SgImageData * imageData = TiberiusApplication::climateImages();
@@ -36,4 +36,5 @@ void Painter::drawText(int x, int y, const QString & text, const Font & font)
       xOffset += record->imageWidth() + font.letterSpacing();
     }
   }
+  return xOffset;
 }

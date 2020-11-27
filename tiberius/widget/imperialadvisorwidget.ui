@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ImperialAdvisorWidget</class>
+ <widget class="QWidget" name="ImperialAdvisorWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>416</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="Button" name="cIconButton">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>40</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Label" name="cName">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>12</y>
+     <width>545</width>
+     <height>28</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Title</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="BorderedButton" name="cDonate">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>367</y>
+     <width>250</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="BorderedButton" name="cGiveGift">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>341</y>
+     <width>250</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="BorderedButton" name="cSetSalary">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>393</y>
+     <width>500</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="MessageWidget" name="cPersonalSection" native="true">
+   <property name="geometry">
+    <rect>
+     <x>64</x>
+     <y>324</y>
+     <width>516</width>
+     <height>96</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="MessageWidget" name="cRequestArea" native="true">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>90</y>
+     <width>576</width>
+     <height>224</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="Label" name="cNoRequests">
+   <property name="geometry">
+    <rect>
+     <x>64</x>
+     <y>160</y>
+     <width>512</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cFavor">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>44</y>
+     <width>544</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cEmperorSentiment">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>60</y>
+     <width>544</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cRank">
+   <property name="geometry">
+    <rect>
+     <x>72</x>
+     <y>338</y>
+     <width>237</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cSavings">
+   <property name="geometry">
+    <rect>
+     <x>72</x>
+     <y>372</y>
+     <width>237</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <zorder>cPersonalSection</zorder>
+  <zorder>cIconButton</zorder>
+  <zorder>cName</zorder>
+  <zorder>cDonate</zorder>
+  <zorder>cGiveGift</zorder>
+  <zorder>cSetSalary</zorder>
+  <zorder>cRequestArea</zorder>
+  <zorder>cNoRequests</zorder>
+  <zorder>cFavor</zorder>
+  <zorder>cEmperorSentiment</zorder>
+  <zorder>cRank</zorder>
+  <zorder>cSavings</zorder>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Button</class>
+   <extends>QPushButton</extends>
+   <header>widget/button.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Label</class>
+   <extends>QLabel</extends>
+   <header>widget/label.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MessageWidget</class>
+   <extends>QWidget</extends>
+   <header>widget/messagewidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>BorderedButton</class>
+   <extends>QPushButton</extends>
+   <header>widget/borderedbutton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

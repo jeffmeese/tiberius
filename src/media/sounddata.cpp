@@ -5,6 +5,10 @@ SoundData::SoundData()
 {
 }
 
+SoundData::~SoundData()
+{
+}
+
 void SoundData::addSound(std::unique_ptr<Sound> sound)
 {
   mIndexMap[sound->id()] = static_cast<int>(mSounds.size());

@@ -50,6 +50,10 @@ ScrollBar::ScrollBar(QWidget * parentWidget)
   updateSliderPosition();
 }
 
+ScrollBar::~ScrollBar()
+{
+}
+
 int ScrollBar::calculateValueFromPosition(const QPoint &pos)
 {
   QRect rect(this->rect());

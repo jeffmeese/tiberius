@@ -3,6 +3,7 @@
 
 #include "tiberius.h"
 
+#include <memory>
 #include <QSoundEffect>
 #include <QString>
 
@@ -10,6 +11,7 @@ class Sound
 {
 public:
   TIBERIUS_LIB_DECL Sound(int id, const QString & fileName);
+  TIBERIUS_LIB_DECL ~Sound();
 
 public:
   TIBERIUS_LIB_DECL int id() const;
@@ -23,7 +25,7 @@ private:
   int mId;
   QString mFileName;
   bool mLoaded;
-  QSoundEffect mSoundEffect;
+  std::unique_ptr<QSoundEffect> mSoundEffect;
 };
 
 #endif // SOUND_H

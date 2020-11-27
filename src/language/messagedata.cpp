@@ -3,6 +3,7 @@
 
 #include <QDebug>
 #include <QFile>
+#include <QFileInfo>
 
 #include <sstream>
 #include <stdexcept>

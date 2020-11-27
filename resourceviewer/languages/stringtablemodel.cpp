@@ -23,10 +23,10 @@ QVariant StringTableModel::data(const QModelIndex & modelIndex, int32_t role) co
       int32_t row = modelIndex.row();
       int32_t col = modelIndex.column();
       if (col == 0) {
-        return mRecords.at(row).groupId;
+        return static_cast<int>(mRecords.at(row).groupId);
       }
       else if (col == 1) {
-        return mRecords.at(row).stringId;
+        return static_cast<int>(mRecords.at(row).stringId);
       }
       else if (col == 2) {
         return mRecords.at(row).string;

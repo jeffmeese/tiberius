@@ -38,7 +38,8 @@ public:
   ~MainWindow();
 
 protected:
-  bool eventFilter(QObject * object, QEvent * event);
+  bool eventFilter(QObject * object, QEvent * event) override;
+  void keyPressEvent(QKeyEvent * event) override;
   void resizeEvent(QResizeEvent * event) override;
 
 private slots:

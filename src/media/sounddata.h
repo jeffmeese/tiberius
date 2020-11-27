@@ -13,6 +13,7 @@ class SoundData
 {
 public:
  TIBERIUS_LIB_DECL SoundData();
+ TIBERIUS_LIB_DECL ~SoundData();
 
 public:
  TIBERIUS_LIB_DECL void addSound(std::unique_ptr<Sound> sound);

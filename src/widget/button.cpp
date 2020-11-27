@@ -93,6 +93,7 @@ void Button::playClickSound()
   if (mEnableClickSound) {
     SoundData * soundData = TiberiusApplication::soundData();
     Sound * sound = soundData->findSound(SOUND_ICON1);
-    sound->play();
+    if (sound != nullptr)
+        sound->play();
   }
 }

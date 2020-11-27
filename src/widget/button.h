@@ -40,7 +40,7 @@ protected:
 private slots:
   void playClickSound();
 
-private:
+protected:
   void drawBackground(Painter & painter);
   void drawText(Painter & painter);
   bool isHover() const;

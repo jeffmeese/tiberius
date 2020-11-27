@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DonationDialog</class>
+ <widget class="QDialog" name="DonationDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>512</width>
+    <height>160</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="Label" name="cTitle">
+   <property name="geometry">
+    <rect>
+     <x>48</x>
+     <y>16</y>
+     <width>448</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="MessageWidget" name="cDonationArea" native="true">
+   <property name="geometry">
+    <rect>
+     <x>48</x>
+     <y>48</y>
+     <width>416</width>
+     <height>64</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="Button" name="cIcon">
+   <property name="geometry">
+    <rect>
+     <x>16</x>
+     <y>16</y>
+     <width>20</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="BorderedButton" name="cGiveMoney">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>123</y>
+     <width>160</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Give Money</string>
+   </property>
+  </widget>
+  <widget class="BorderedButton" name="cCancel">
+   <property name="geometry">
+    <rect>
+     <x>272</x>
+     <y>123</y>
+     <width>160</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="BorderedButton" name="cZero">
+   <property name="geometry">
+    <rect>
+     <x>64</x>
+     <y>56</y>
+     <width>64</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="BorderedButton" name="c500">
+   <property name="geometry">
+    <rect>
+     <x>144</x>
+     <y>56</y>
+     <width>64</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="BorderedButton" name="c2000">
+   <property name="geometry">
+    <rect>
+     <x>224</x>
+     <y>56</y>
+     <width>64</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="BorderedButton" name="c5000">
+   <property name="geometry">
+    <rect>
+     <x>304</x>
+     <y>56</y>
+     <width>64</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="BorderedButton" name="cAll">
+   <property name="geometry">
+    <rect>
+     <x>384</x>
+     <y>56</y>
+     <width>64</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Label" name="cDonationLabel">
+   <property name="geometry">
+    <rect>
+     <x>64</x>
+     <y>88</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Donation</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Button" name="cDown">
+   <property name="geometry">
+    <rect>
+     <x>176</x>
+     <y>82</y>
+     <width>24</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cUp">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>82</y>
+     <width>24</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Label" name="cDonationAmount">
+   <property name="geometry">
+    <rect>
+     <x>252</x>
+     <y>88</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Button</class>
+   <extends>QPushButton</extends>
+   <header>widget/button.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Label</class>
+   <extends>QLabel</extends>
+   <header>widget/label.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MessageWidget</class>
+   <extends>QWidget</extends>
+   <header>widget/messagewidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>BorderedButton</class>
+   <extends>QPushButton</extends>
+   <header>widget/borderedbutton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SalaryDialog</class>
+ <widget class="QDialog" name="SalaryDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>384</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="MessageWidget" name="cSalaryArea" native="true">
+   <property name="geometry">
+    <rect>
+     <x>16</x>
+     <y>48</y>
+     <width>352</width>
+     <height>240</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="Button" name="cIcon">
+   <property name="geometry">
+    <rect>
+     <x>16</x>
+     <y>16</y>
+     <width>24</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Label" name="cTitle">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>12</y>
+     <width>315</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Title</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cMessage">
+   <property name="geometry">
+    <rect>
+     <x>16</x>
+     <y>306</y>
+     <width>336</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="BorderedButton" name="cCancel">
+   <property name="geometry">
+    <rect>
+     <x>112</x>
+     <y>363</y>
+     <width>160</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cCitizen">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>58</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Citizen</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cClerk">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>78</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Clerk</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cArchitect">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>118</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Architect</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cEngineer">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>98</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Engineer</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cQuaestor">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>138</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Quaestor</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cProcurator">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>158</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Procurator</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cAedile">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>178</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Aedile</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cPraetor">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>198</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Praetor</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cProconsul">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>238</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Proconsul</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cConsul">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>218</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Consul</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cCaesar">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>258</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Caesar</string>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Button</class>
+   <extends>QPushButton</extends>
+   <header>widget/button.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Label</class>
+   <extends>QLabel</extends>
+   <header>widget/label.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MessageWidget</class>
+   <extends>QWidget</extends>
+   <header>widget/messagewidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>BorderedButton</class>
+   <extends>QPushButton</extends>
+   <header>widget/borderedbutton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

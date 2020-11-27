@@ -9,6 +9,11 @@ Sound::Sound(int id, const QString & fileName)
 {
 }
 
+Sound::~Sound()
+{
+
+}
+
 int Sound::id() const
 {
   return mId;
@@ -22,11 +27,12 @@ QString Sound::fileName() const
 void Sound::play()
 {
   if (!mLoaded) {
-    mSoundEffect.setSource(QUrl::fromLocalFile(mFileName));
+    mSoundEffect.reset(new QSoundEffect);
+    mSoundEffect->setSource(QUrl::fromLocalFile(mFileName));
     mLoaded = true;
   }
 
-  mSoundEffect.play();
+  mSoundEffect->play();
 }
 
 void Sound::stop()
@@ -34,5 +40,5 @@ void Sound::stop()
   if (!mLoaded)
     return;
 
-  mSoundEffect.stop();
+  mSoundEffect->stop();
 }

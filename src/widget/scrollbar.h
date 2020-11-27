@@ -16,6 +16,7 @@ class ScrollBar
 
 public:
   TIBERIUS_LIB_DECL explicit ScrollBar(QWidget * parentWidget = nullptr);
+  TIBERIUS_LIB_DECL ~ScrollBar();
 
 public:
   TIBERIUS_LIB_DECL int maxmimum() const;

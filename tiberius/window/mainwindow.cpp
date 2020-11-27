@@ -11,6 +11,7 @@
 #include "dialog/speedoptionsdialog.h"
 
 #include "game/game.h"
+#include "game/player.h"
 
 #include "language/language.h"
 #include "language/stringdata.h"
@@ -25,6 +26,7 @@
 #include "window/titlewindow.h"
 
 #include <QDir>
+#include <QKeyEvent>
 
 MainWindow::MainWindow(Application & application, QWidget * parentWidget)
   : QMainWindow(parentWidget)
@@ -278,6 +280,10 @@ void MainWindow::handleLoadGame(const QString & fileName)
   mGame->setMission(std::move(mission));
   mGameWindow->setGame(mGame.get());
 
+  mGame->player()->setName("Player");
+
+  mAdvisorsWindow->setGame(mGame.get());
+
   mMenuWindow->hide();
   mUi->menuBar->show();
   mGameWindow->show();
@@ -434,6 +440,96 @@ void MainWindow::handleWarnings()
   Application::settings().setWarningsEnabled(!Application::settings().warningsEnabled());
   int32_t textIndex = Application::settings().warningsEnabled() ? 6 : 5;
   mUi->actionWarnings->setText(textData->getString(3, textIndex));
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+  int key = event->key();
+
+  switch (key) {
+  case Qt::Key_0:
+    handleReligionAdvisor();
+    break;
+  case Qt::Key_1:
+    handleLaborAdvisor();
+    break;
+  case Qt::Key_2:
+    handleMilitaryAdvisor();
+    break;
+  case Qt::Key_3:
+    handleEmperorAdvisor();
+    break;
+  case Qt::Key_4:
+    handleRatingsAdvisor();
+    break;
+  case Qt::Key_5:
+    handleTradeAdvisor();
+    break;
+  case Qt::Key_6:
+    handlePopulationAdvisor();
+    break;
+  case Qt::Key_7:
+    handleHealthAdvisor();
+    break;
+  case Qt::Key_8:
+    handleEducationAdvisor();
+    break;
+  case Qt::Key_9:
+    handleEntertainmentAdvisor();
+    break;
+  case Qt::Key_Minus:
+    handleGovernmentAdvisor();
+    break;
+  case Qt::Key_Equal:
+    handleChiefAdvisor();
+    break;
+  case Qt::Key_F:
+    break;
+  case Qt::Key_D:
+    break;
+  case Qt::Key_C:
+    break;
+  case Qt::Key_T:
+    break;
+  case Qt::Key_W:
+    break;
+  case Qt::Key_P:
+    break;
+  case Qt::Key_BracketLeft:
+    break;
+  case Qt::Key_BracketRight:
+    break;
+  case Qt::Key_Left:
+    break;
+  case Qt::Key_Right:
+    break;
+  case Qt::Key_Up:
+    break;
+  case Qt::Key_Down:
+    break;
+  case Qt::Key_F1:
+    break;
+  case Qt::Key_F2:
+    break;
+  case Qt::Key_F3:
+    break;
+  case Qt::Key_F4:
+    break;
+  case Qt::Key_F5:
+    break;
+  case Qt::Key_F6:
+    break;
+  case Qt::Key_F7:
+    break;
+  case Qt::Key_F8:
+    break;
+  case Qt::Key_F9:
+    break;
+  case Qt::Key_Space:
+    break;
+  case Qt::Key_L:
+    break;
+  }
 }
 
 void MainWindow::init()

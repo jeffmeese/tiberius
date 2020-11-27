@@ -22,14 +22,31 @@ set(HDR_FILES
   tiberius.h
   application/tiberiusapplication.h
   advisor/advisor.h
+  building/building.h
+  city/buildingdata.h
+  city/city.h
+  city/educationdata.h
+  city/entertainmentdata.h
+  city/figuredata.h
+  city/financedata.h
+  city/healthdata.h
+  city/imperialdata.h
+  city/labordata.h
+  city/militarydata.h
+  city/populationdata.h
+  city/ratingsdata.h
+  city/religiondata.h
+  city/tradedata.h
   core/abstractfactory.h
   core/painter.h
   core/streamio.h
   dialog/dialog.h
   dialog/filedialog.h
   dialog/messagedialog.h
+  figure/figure.h
   game/difficulty.h
   game/game.h
+  game/player.h
   graphics/font.h
   graphics/imagedata.h
   graphics/imagegroups.h
@@ -39,6 +56,8 @@ set(HDR_FILES
   graphics/sgimagerecord.h
   graphics/sgpixeldata.h
   graphics/stitchedimage.h
+  imperial/gift.h
+  imperial/request.h
   language/language.h
   language/message.h
   language/messagedata.h
@@ -54,6 +73,8 @@ set(HDR_FILES
   media/video.h
   media/videos.h
   media/videodata.h
+  military/legion.h
+  military/soldier.h
   mission/demandchange.h
   mission/earthquake.h
   mission/emperorchange.h
@@ -65,6 +86,8 @@ set(HDR_FILES
   mission/invasion.h
   mission/mission.h
   mission/pricechange.h
+  resource/resource.h
+  widget/borderedbutton.h
   widget/button.h
   widget/citywidget.h
   widget/label.h
@@ -83,13 +106,30 @@ set(HDR_FILES
 set(SRC_FILES
   application/tiberiusapplication.cpp
   advisor/advisor.cpp
+  building/building.cpp
+  city/buildingdata.cpp
+  city/city.cpp
+  city/educationdata.cpp
+  city/entertainmentdata.cpp
+  city/figuredata.cpp
+  city/financedata.cpp
+  city/healthdata.cpp
+  city/imperialdata.cpp
+  city/labordata.cpp
+  city/militarydata.cpp
+  city/populationdata.cpp
+  city/religiondata.cpp
+  city/ratingsdata.cpp
+  city/tradedata.cpp
   core/painter.cpp
   core/streamio.cpp
   dialog/dialog.cpp
   dialog/filedialog.cpp
   dialog/messagedialog.cpp
+  figure/figure.cpp
   game/difficulty.cpp
   game/game.cpp
+  game/player.cpp
   graphics/font.cpp
   graphics/imagedata.cpp
   graphics/imageset.cpp
@@ -98,6 +138,8 @@ set(SRC_FILES
   graphics/sgimagerecord.cpp
   graphics/sgpixeldata.cpp
   graphics/stitchedimage.cpp
+  imperial/gift.cpp
+  imperial/request.cpp
   language/language.cpp
   language/message.cpp
   language/messagedata.cpp
@@ -112,6 +154,8 @@ set(SRC_FILES
   media/video.cpp
   media/videos.cpp
   media/videodata.cpp
+  military/legion.cpp
+  military/soldier.cpp
   mission/demandchange.cpp
   mission/earthquake.cpp
   mission/emperorchange.cpp
@@ -123,6 +167,8 @@ set(SRC_FILES
   mission/invasion.cpp
   mission/mission.cpp
   mission/pricechange.cpp
+  resource/resource.cpp
+  widget/borderedbutton.cpp
   widget/button.cpp
   widget/citywidget.cpp
   widget/label.cpp

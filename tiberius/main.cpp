@@ -4,6 +4,11 @@
 
 #include <QDebug>
 #include <QMessageBox>
+#include <QSoundEffect>
+
+#include "media/sound.h"
+#include "media/sounds.h"
+#include "media/sounddata.h"
 
 int main(int argc, char *argv[])
 {

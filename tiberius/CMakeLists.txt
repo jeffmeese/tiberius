@@ -17,11 +17,30 @@ set(HDR_FILES
   application/settings.h
   dialog/difficultydialog.h
   dialog/displayoptionsdialog.h
+  dialog/donationdialog.h
+  dialog/giftdialog.h
   dialog/missiondialog.h
   dialog/newcareerdialog.h
+  dialog/prioritydialog.h
+  dialog/salarydialog.h
   dialog/soundoptionsdialog.h
   dialog/speedoptionsdialog.h
+  widget/advisorwidget.h
+  widget/chiefadvisorwidget.h
+  widget/educationadvisorwidget.h
+  widget/entertainmentadvisorwidget.h
+  widget/financeadvisorwidget.h
+  widget/healthadvisorwidget.h
+  widget/imperialadvisorwidget.h
+  widget/laboradvisorbutton.h
+  widget/laboradvisorwidget.h
+  widget/legionadvisorwidget.h
+  widget/populationadvisorwidget.h
+  widget/prioritylabel.h
+  widget/ratingsadvisorwidget.h
+  widget/religionadvisorwidget.h
   widget/sidebarwidget.h
+  widget/tradeadvisorwidget.h
   window/advisorswindow.h
   window/cityconstructionwindow.h
   window/empirewindow.h
@@ -39,11 +58,30 @@ set(SRC_FILES
   application/settings.cpp
   dialog/difficultydialog.cpp
   dialog/displayoptionsdialog.cpp
+  dialog/donationdialog.cpp
+  dialog/giftdialog.cpp
   dialog/missiondialog.cpp
   dialog/newcareerdialog.cpp
+  dialog/prioritydialog.cpp
+  dialog/salarydialog.cpp
   dialog/soundoptionsdialog.cpp
   dialog/speedoptionsdialog.cpp
+  widget/advisorwidget.cpp
+  widget/chiefadvisorwidget.cpp
+  widget/educationadvisorwidget.cpp
+  widget/entertainmentadvisorwidget.cpp
+  widget/financeadvisorwidget.cpp
+  widget/healthadvisorwidget.cpp
+  widget/imperialadvisorwidget.cpp
+  widget/laboradvisorbutton.cpp
+  widget/laboradvisorwidget.cpp
+  widget/legionadvisorwidget.cpp
+  widget/populationadvisorwidget.cpp
+  widget/prioritylabel.cpp
+  widget/ratingsadvisorwidget.cpp
+  widget/religionadvisorwidget.cpp
   widget/sidebarwidget.cpp
+  widget/tradeadvisorwidget.cpp
   window/advisorswindow.cpp
   window/cityconstructionwindow.cpp
   window/empirewindow.cpp
@@ -58,11 +96,27 @@ set(SRC_FILES
 set(UI_FILES
   dialog/difficultydialog.ui
   dialog/displayoptionsdialog.ui
+  dialog/donationdialog.ui
+  dialog/giftdialog.ui
   dialog/missiondialog.ui
   dialog/newcareerdialog.ui
+  dialog/prioritydialog.ui
+  dialog/salarydialog.ui
   dialog/soundoptionsdialog.ui
   dialog/speedoptionsdialog.ui
+  widget/chiefadvisorwidget.ui
+  widget/educationadvisorwidget.ui
+  widget/entertainmentadvisorwidget.ui
+  widget/financeadvisorwidget.ui
+  widget/healthadvisorwidget.ui
+  widget/imperialadvisorwidget.ui
+  widget/laboradvisorwidget.ui
+  widget/legionadvisorwidget.ui
+  widget/populationadvisorwidget.ui
+  widget/ratingsadvisorwidget.ui
+  widget/religionadvisorwidget.ui
   widget/sidebarwidget.ui
+  widget/tradeadvisorwidget.ui
   window/advisorswindow.ui
   window/cityconstructionwindow.ui
   window/empirewindow.ui

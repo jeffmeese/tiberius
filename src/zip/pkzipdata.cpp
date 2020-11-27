@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QFile>
 
+#include <cmath>
 #include <map>
 
 // The number of bits for each copy length range

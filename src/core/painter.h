@@ -14,7 +14,7 @@ public:
   TIBERIUS_LIB_DECL Painter(QPaintDevice * device);
 
 public:
-  TIBERIUS_LIB_DECL void drawText(int x, int y, const QString & text, const Font & font);
+  TIBERIUS_LIB_DECL int32_t drawText(int32_t x, int32_t y, const QString & text, const Font & font);
 };
 
 #endif // PAINTER_H
