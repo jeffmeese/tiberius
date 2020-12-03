@@ -74,6 +74,8 @@ int32_t Player::salaryForRank(Rank rank)
   case Rank::Caesar:
     return 100;
   }
+
+  return 0;
 }
 
 void Player::setName(const QString & name)
