@@ -66,3 +66,8 @@ QByteArray streamio::readUncompressedData(QDataStream &dataStream, int32_t size)
 {
   return dataStream.device()->read(size);
 }
+
+void streamio::writeUInt8(QDataStream & dataStream, uint8_t value)
+{
+  dataStream << value;
+}
