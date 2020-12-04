@@ -1,11 +1,12 @@
 #ifndef FIGUREDATA_H
 #define FIGUREDATA_H
 
-#include "tiberius.h"
+#include "datamodel.h"
 
 #include <cstdint>
 
 class FigureData
+    : public DataModel
 {
 public:
   static const int32_t MAX_CHARACTERS = 10000;

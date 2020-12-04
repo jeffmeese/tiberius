@@ -37,6 +37,9 @@ public:
   TIBERIUS_LIB_DECL Type type() const;
   TIBERIUS_LIB_DECL void setType(Type type);
 
+protected:
+  void mousePressEvent(QMouseEvent * event) override;
+
 private:
    void initUi();
 

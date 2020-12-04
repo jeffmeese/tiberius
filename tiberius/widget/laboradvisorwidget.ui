@@ -499,7 +499,7 @@
   <customwidget>
    <class>LaborAdvisorButton</class>
    <extends>QPushButton</extends>
-   <header>widget/laboradvisorbutton.h</header>
+   <header>widget/laboradvisorwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

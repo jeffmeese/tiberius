@@ -3,6 +3,9 @@
 
 #include "advisorwidget.h"
 
+#include "graphics/font.h"
+
+class Label;
 namespace Ui {
   class FinanceAdvisorWidget;
 }
@@ -21,6 +24,11 @@ protected:
 
 private:
   void init();
+  void setLabelText(Label * label, const QString & text, Font font, int32_t height);
+
+private slots:
+  void handleDecreaseTaxes();
+  void handleIncreaseTaxes();
 
 private:
   Ui::FinanceAdvisorWidget *mUi;

@@ -147,7 +147,7 @@ void SalaryDialog::initSalaryString(Label * label, int32_t textId, Player::Rank 
   Font normalWhite(Font::Type::NormalWhite);
   Font normalRed(Font::Type::NormalRed);
 
-  int32_t salary = Player::salaryForRank(rank);
+  int32_t salary = Player::rankSalary(rank);
   QString text = stringData->getString(52, textId);
   text += " " + QString::number(salary) + " ";
   text += stringData->getString(6, 0);

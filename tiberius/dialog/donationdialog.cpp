@@ -82,6 +82,7 @@ void DonationDialog::init()
   int32_t resourceId = imageData->getGroupBaseImageId(GROUP_RESOURCE_ICONS);
 
   Font normalWhite(Font::Type::NormalWhite);
+  Font normalBlack(Font::Type::NormalBlack);
   Font largeBlack(Font::Type::LargeBlack);
 
   mUi->setupUi(this);
@@ -90,24 +91,38 @@ void DonationDialog::init()
 
   mUi->cZero->setTextFont(normalWhite);
   mUi->cZero->setText("0");
+  mUi->cZero->setEnableBorder(true);
+  mUi->cZero->setEnableFocusBorder(true);
 
   mUi->c500->setTextFont(normalWhite);
   mUi->c500->setText("500");
+  mUi->c500->setEnableBorder(true);
+  mUi->c500->setEnableFocusBorder(true);
 
   mUi->c2000->setTextFont(normalWhite);
   mUi->c2000->setText("2000");
+  mUi->c2000->setEnableBorder(true);
+  mUi->c2000->setEnableFocusBorder(true);
 
   mUi->c5000->setTextFont(normalWhite);
   mUi->c5000->setText("5000");
+  mUi->c5000->setEnableBorder(true);
+  mUi->c5000->setEnableFocusBorder(true);
 
   mUi->cAll->setTextFont(normalWhite);
   mUi->cAll->setText(stringData->getString(52, 19));
+  mUi->cAll->setEnableBorder(true);
+  mUi->cAll->setEnableFocusBorder(true);
 
-  mUi->cGiveMoney->setTextFont(normalWhite);
+  mUi->cGiveMoney->setTextFont(normalBlack);
   mUi->cGiveMoney->setText(stringData->getString(52, 18));
+  mUi->cGiveMoney->setEnableBorder(true);
+  mUi->cGiveMoney->setEnableFocusBorder(true);
 
-  mUi->cCancel->setTextFont(normalWhite);
+  mUi->cCancel->setTextFont(normalBlack);
   mUi->cCancel->setText(stringData->getString(44, 17));
+  mUi->cCancel->setEnableBorder(true);
+  mUi->cCancel->setEnableFocusBorder(true);
 
   mUi->cTitle->setTextFont(largeBlack);
   mUi->cTitle->setText(stringData->getString(52, 16));

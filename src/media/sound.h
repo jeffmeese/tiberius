@@ -8,6 +8,7 @@
 #include <QString>
 
 class Sound
+    : public QObject
 {
 public:
   TIBERIUS_LIB_DECL Sound(int id, const QString & fileName);
@@ -25,7 +26,8 @@ private:
   int mId;
   QString mFileName;
   bool mLoaded;
-  std::unique_ptr<QSoundEffect> mSoundEffect;
+  QSoundEffect * mSoundEffect;
+  //QSoundEffect mSoundEffect;
 };
 
 #endif // SOUND_H

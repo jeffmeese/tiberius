@@ -5,6 +5,11 @@
 #include "core/painter.h"
 
 #include "graphics/font.h"
+#include "graphics/imagedata.h"
+#include "graphics/imagegroups.h"
+#include "graphics/sgimagedata.h"
+#include "graphics/sgimagerecord.h"
+#include "graphics/stitchedimage.h"
 
 #include "media/sound.h"
 #include "media/sounds.h"
@@ -13,8 +18,10 @@
 #include <QDir>
 
 Button::Button(QWidget * parentWidget)
-  : QAbstractButton(parentWidget)
+  : QPushButton(parentWidget)
   , mEnableClickSound(true)
+  , mEnableBorder(false)
+  , mEnableFocusBorder(false)
 {
   connect(this, SIGNAL(pressed()), SLOT(playClickSound()));
 }
@@ -54,7 +61,6 @@ void Button::drawText(Painter &painter)
   int32_t xOffset = (w - textWidth) / 2;
   int32_t yOffset = (h - textHeight) / 2;
   painter.drawText(xOffset, yOffset, textString, f);
-  //paintText(xOffset, yOffset, textString, painter);
 }
 
 void Button::enterEvent(QEvent * e)
@@ -81,10 +87,20 @@ void Button::leaveEvent(QEvent * e)
   update();
 }
 
-void Button::paintEvent(QPaintEvent *)
+void Button::paintEvent(QPaintEvent * event)
 {
+  if (!icon().isNull()) {
+    QPushButton::paintEvent(event);
+  }
+
   Painter painter(this);
   drawBackground(painter);
+
+  if (mEnableBorder) {
+    bool hover = isHover() && mEnableFocusBorder;
+    painter.drawBorder(0, 0, width(), height(), hover);
+  }
+
   drawText(painter);
 }
 
@@ -96,4 +112,74 @@ void Button::playClickSound()
     if (sound != nullptr)
         sound->play();
   }
+}
+
+QImage Button::disabledImage() const
+{
+  return mDisabledImage;
+}
+
+bool Button::enableBorder() const
+{
+  return mEnableBorder;
+}
+
+bool Button::enableClickSound() const
+{
+  return mEnableClickSound;
+}
+
+bool Button::enableFocusBorder() const
+{
+  return mEnableFocusBorder;
+}
+
+QImage Button::hoverImage() const
+{
+  return mHoverImage;
+}
+
+QImage Button::image() const
+{
+  return mImage;
+}
+
+QImage Button::pressedImage() const
+{
+  return mPressedImage;
+}
+
+void Button::setDisabledImage(const QImage & image)
+{
+  mDisabledImage = image;
+}
+
+void Button::setEnableBorder(bool value)
+{
+  mEnableBorder = value;
+}
+
+void Button::setEnableClickSound(bool value)
+{
+  mEnableClickSound = value;
+}
+
+void Button::setEnableFocusBorder(bool value)
+{
+  mEnableFocusBorder = value;
+}
+
+void Button::setHoverImage(const QImage & image)
+{
+  mHoverImage = image;
+}
+
+void Button::setImage(const QImage & image)
+{
+  mImage = image;
+}
+
+void Button::setPressedImage(const QImage & image)
+{
+  mPressedImage = image;
 }

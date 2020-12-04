@@ -42,6 +42,271 @@
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
    </property>
   </widget>
+  <widget class="MessageWidget" name="cMessageArea" native="true">
+   <property name="geometry">
+    <rect>
+     <x>48</x>
+     <y>336</y>
+     <width>544</width>
+     <height>80</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="Label" name="cMainLabel">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>295</y>
+     <width>400</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Main</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cTopLabel">
+   <property name="geometry">
+    <rect>
+     <x>504</x>
+     <y>120</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Top</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cBottomLabel">
+   <property name="geometry">
+    <rect>
+     <x>504</x>
+     <y>220</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Bottom</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="cBullet1">
+   <property name="geometry">
+    <rect>
+     <x>56</x>
+     <y>344</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="cBullet2">
+   <property name="geometry">
+    <rect>
+     <x>56</x>
+     <y>362</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="cBullet3">
+   <property name="geometry">
+    <rect>
+     <x>56</x>
+     <y>380</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="cBullet4">
+   <property name="geometry">
+    <rect>
+     <x>56</x>
+     <y>398</y>
+     <width>16</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cGranaryStorage">
+   <property name="geometry">
+    <rect>
+     <x>75</x>
+     <y>342</y>
+     <width>475</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cFoodVariety">
+   <property name="geometry">
+    <rect>
+     <x>75</x>
+     <y>360</y>
+     <width>475</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cImmigrationStatus">
+   <property name="geometry">
+    <rect>
+     <x>75</x>
+     <y>378</y>
+     <width>475</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cImmigrants">
+   <property name="geometry">
+    <rect>
+     <x>75</x>
+     <y>396</y>
+     <width>475</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="cBackground">
+   <property name="geometry">
+    <rect>
+     <x>56</x>
+     <y>60</y>
+     <width>557</width>
+     <height>211</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Label" name="cMinY">
+   <property name="geometry">
+    <rect>
+     <x>-2</x>
+     <y>260</y>
+     <width>60</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cMidY">
+   <property name="geometry">
+    <rect>
+     <x>-2</x>
+     <y>160</y>
+     <width>60</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>1200</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cMaxY">
+   <property name="geometry">
+    <rect>
+     <x>-2</x>
+     <y>61</y>
+     <width>60</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>2400</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <zorder>cBackground</zorder>
+  <zorder>cIconButton</zorder>
+  <zorder>cTitle</zorder>
+  <zorder>cMessageArea</zorder>
+  <zorder>cMainLabel</zorder>
+  <zorder>cTopLabel</zorder>
+  <zorder>cBottomLabel</zorder>
+  <zorder>cBullet1</zorder>
+  <zorder>cBullet2</zorder>
+  <zorder>cBullet3</zorder>
+  <zorder>cBullet4</zorder>
+  <zorder>cGranaryStorage</zorder>
+  <zorder>cFoodVariety</zorder>
+  <zorder>cImmigrationStatus</zorder>
+  <zorder>cImmigrants</zorder>
+  <zorder>cMinY</zorder>
+  <zorder>cMidY</zorder>
+  <zorder>cMaxY</zorder>
  </widget>
  <customwidgets>
   <customwidget>
@@ -53,6 +318,12 @@
    <class>Label</class>
    <extends>QLabel</extends>
    <header>widget/label.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MessageWidget</class>
+   <extends>QWidget</extends>
+   <header>widget/messagewidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

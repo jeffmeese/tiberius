@@ -34,6 +34,7 @@ public:
   TIBERIUS_LIB_DECL Rank rank() const;
   TIBERIUS_LIB_DECL int32_t salary() const;
   TIBERIUS_LIB_DECL Rank salaryRank() const;
+  TIBERIUS_LIB_DECL QString salaryString() const;
   TIBERIUS_LIB_DECL void setName(const QString & name);
   TIBERIUS_LIB_DECL void setPersonalSavings(int32_t value);
   TIBERIUS_LIB_DECL void setRank(Rank rank);
@@ -42,7 +43,11 @@ public:
 public:
   TIBERIUS_LIB_DECL void decreaseSavings(int32_t value);
   TIBERIUS_LIB_DECL void increaseSavings(int32_t value);
-  TIBERIUS_LIB_DECL static int32_t salaryForRank(Rank rank);
+  TIBERIUS_LIB_DECL QString rankString() const;
+
+public:
+  TIBERIUS_LIB_DECL static QString rankString(Rank rank);
+  TIBERIUS_LIB_DECL static int32_t rankSalary(Rank rank);
 
 private:
   QString mName;

@@ -1,12 +1,23 @@
 #include "legion.h"
 
+#include "application/tiberiusapplication.h"
+
+#include "graphics/imagegroups.h"
+#include "graphics/sgimagedata.h"
+#include "graphics/sgimagerecord.h"
+
+#include "language/language.h"
+#include "language/stringdata.h"
+
 #include "soldier.h"
 
-Legion::Legion(Type type)
-  : mType(type)
+Legion::Legion(Type type, int32_t id)
+  : mId(id)
+  , mType(type)
 {
   mAcademyTrained = false;
   mEmpireService = false;
+  mMorale = Morale::Average;
 }
 
 Legion::~Legion()
@@ -29,9 +40,41 @@ bool Legion::empireService() const
   return mEmpireService;
 }
 
+int32_t Legion::id() const
+{
+  return mId;
+}
+
+Legion::Morale Legion::morale() const
+{
+  return mMorale;
+}
+
+QString Legion::moraleString() const
+{
+  return moraleString(mMorale);
+}
+
+QString Legion::moraleString(Morale morale)
+{
+  const StringData * stringData = TiberiusApplication::language()->stringData();
+  return stringData->getString(138, static_cast<int32_t>(morale) + 37);
+}
+
 QString Legion::name() const
 {
-  return mName;
+  const StringData * stringData = TiberiusApplication::language()->stringData();
+  return stringData->getString(138, static_cast<int32_t>(mId));
+}
+
+QPixmap Legion::image() const
+{
+  const SgImageData * imageData = TiberiusApplication::climateImages();
+  uint32_t baseId = imageData->getGroupBaseImageId(GROUP_FIGURE_FORT_STANDARD_ICONS);
+
+  int32_t imageId = baseId + static_cast<int32_t>(mId);
+  QPixmap pixmap = QPixmap::fromImage(imageData->getImageRecord(imageId)->createImage());
+  return pixmap;
 }
 
 void Legion::removeSolider(const QString & name)
@@ -54,9 +97,9 @@ void Legion::setEmpireService(bool value)
   mEmpireService = value;
 }
 
-void Legion::setName(const QString & name)
+void Legion::setMorale(Morale value)
 {
-  mName = name;
+  mMorale = value;
 }
 
 int32_t Legion::totalSoldiers() const
@@ -67,4 +110,15 @@ int32_t Legion::totalSoldiers() const
 Legion::Type Legion::type()
 {
   return mType;
+}
+
+QString Legion::typeString() const
+{
+  return typeString(mType);
+}
+
+QString Legion::typeString(Type type)
+{
+  const StringData * stringData = TiberiusApplication::language()->stringData();
+  return stringData->getString(138, static_cast<int32_t>(type)+33);
 }

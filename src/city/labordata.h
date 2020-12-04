@@ -1,11 +1,12 @@
 #ifndef LABORDATA_H
 #define LABORDATA_H
 
-#include "tiberius.h"
+#include "datamodel.h"
 
 #include <cstdint>
 
 class LaborData
+    : public DataModel
 {
 public:
   static const int32_t MAX_LABOR_CATEGORIES = 9;

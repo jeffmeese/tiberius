@@ -185,6 +185,9 @@ void AdvisorsWindow::init()
   connect(mUi->cMilitaryButton, SIGNAL(clicked()), SLOT(showMilitaryAdvisor()));
   connect(mUi->cReligionButton, SIGNAL(clicked()), SLOT(showReligionAdvisor()));
   connect(mUi->cReturnButton, SIGNAL(clicked()), SLOT(close()));
+
+  connect(mChiefAdvisor.get(), SIGNAL(changed()), SLOT(update()));
+  connect(mEntertainmentAdvisor.get(), SIGNAL(changed()), SLOT(update()));
 }
 
 void AdvisorsWindow::paintEvent(QPaintEvent *)
@@ -294,6 +297,7 @@ void AdvisorsWindow::setGame(Game *game)
   mHealthAdvisor->setGame(game);
   mEducationAdvisor->setGame(game);
   mEntertainmentAdvisor->setGame(game);
+  mReligionAdvisor->setGame(game);
   mFinanceAdvisor->setGame(game);
   mChiefAdvisor->setGame(game);
 }

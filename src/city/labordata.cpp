@@ -15,6 +15,7 @@ LaborData::LaborData()
 void LaborData::decreaseWage()
 {
   setWage(mWage-1);
+  emit changed();
 }
 
 int32_t LaborData::estimateAnnualBill() const
@@ -25,6 +26,7 @@ int32_t LaborData::estimateAnnualBill() const
 void LaborData::increaseWage()
 {
   setWage(mWage+1);
+  emit changed();
 }
 
 int32_t LaborData::minPriorityAvaiable() const
@@ -41,6 +43,7 @@ int32_t LaborData::minPriorityAvaiable() const
 void LaborData::setRomeWage(int32_t wage)
 {
   mRomeWage = wage;
+  emit changed();
 }
 
 void LaborData::setWage(int32_t value)
@@ -49,6 +52,7 @@ void LaborData::setWage(int32_t value)
     return;
 
   mWage = value;
+  emit changed();
 }
 
 int32_t LaborData::totalEmployed() const
@@ -107,6 +111,7 @@ void LaborData::updatePriority(Type type, int newPriority)
       }
     }
   }
+  emit changed();
 }
 
 int32_t LaborData::workersNeeded() const

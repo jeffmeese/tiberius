@@ -52,7 +52,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="BorderedButton" name="cGiveMoney">
+  <widget class="Button" name="cGiveMoney">
    <property name="geometry">
     <rect>
      <x>80</x>
@@ -65,7 +65,7 @@
     <string>Give Money</string>
    </property>
   </widget>
-  <widget class="BorderedButton" name="cCancel">
+  <widget class="Button" name="cCancel">
    <property name="geometry">
     <rect>
      <x>272</x>
@@ -78,7 +78,7 @@
     <string>Cancel</string>
    </property>
   </widget>
-  <widget class="BorderedButton" name="cZero">
+  <widget class="Button" name="cZero">
    <property name="geometry">
     <rect>
      <x>64</x>
@@ -91,7 +91,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="BorderedButton" name="c500">
+  <widget class="Button" name="c500">
    <property name="geometry">
     <rect>
      <x>144</x>
@@ -104,7 +104,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="BorderedButton" name="c2000">
+  <widget class="Button" name="c2000">
    <property name="geometry">
     <rect>
      <x>224</x>
@@ -117,7 +117,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="BorderedButton" name="c5000">
+  <widget class="Button" name="c5000">
    <property name="geometry">
     <rect>
      <x>304</x>
@@ -130,7 +130,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="BorderedButton" name="cAll">
+  <widget class="Button" name="cAll">
    <property name="geometry">
     <rect>
      <x>384</x>
@@ -218,11 +218,6 @@
    <extends>QWidget</extends>
    <header>widget/messagewidget.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>BorderedButton</class>
-   <extends>QPushButton</extends>
-   <header>widget/borderedbutton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

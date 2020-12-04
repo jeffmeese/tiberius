@@ -18,10 +18,13 @@ set(HDR_FILES
   dialog/difficultydialog.h
   dialog/displayoptionsdialog.h
   dialog/donationdialog.h
+  dialog/festivaldialog.h
   dialog/giftdialog.h
   dialog/missiondialog.h
   dialog/newcareerdialog.h
+  dialog/pricesdialog.h
   dialog/prioritydialog.h
+  dialog/resourcetradedialog.h
   dialog/salarydialog.h
   dialog/soundoptionsdialog.h
   dialog/speedoptionsdialog.h
@@ -32,7 +35,6 @@ set(HDR_FILES
   widget/financeadvisorwidget.h
   widget/healthadvisorwidget.h
   widget/imperialadvisorwidget.h
-  widget/laboradvisorbutton.h
   widget/laboradvisorwidget.h
   widget/legionadvisorwidget.h
   widget/populationadvisorwidget.h
@@ -59,10 +61,13 @@ set(SRC_FILES
   dialog/difficultydialog.cpp
   dialog/displayoptionsdialog.cpp
   dialog/donationdialog.cpp
+  dialog/festivaldialog.cpp
   dialog/giftdialog.cpp
   dialog/missiondialog.cpp
   dialog/newcareerdialog.cpp
+  dialog/pricesdialog.cpp
   dialog/prioritydialog.cpp
+  dialog/resourcetradedialog.cpp
   dialog/salarydialog.cpp
   dialog/soundoptionsdialog.cpp
   dialog/speedoptionsdialog.cpp
@@ -73,7 +78,6 @@ set(SRC_FILES
   widget/financeadvisorwidget.cpp
   widget/healthadvisorwidget.cpp
   widget/imperialadvisorwidget.cpp
-  widget/laboradvisorbutton.cpp
   widget/laboradvisorwidget.cpp
   widget/legionadvisorwidget.cpp
   widget/populationadvisorwidget.cpp
@@ -97,10 +101,13 @@ set(UI_FILES
   dialog/difficultydialog.ui
   dialog/displayoptionsdialog.ui
   dialog/donationdialog.ui
+  dialog/festivaldialog.ui
   dialog/giftdialog.ui
   dialog/missiondialog.ui
   dialog/newcareerdialog.ui
+  dialog/pricesdialog.ui
   dialog/prioritydialog.ui
+  dialog/resourcetradedialog.ui
   dialog/salarydialog.ui
   dialog/soundoptionsdialog.ui
   dialog/speedoptionsdialog.ui

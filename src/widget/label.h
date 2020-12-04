@@ -20,8 +20,10 @@ public:
   TIBERIUS_LIB_DECL explicit Label(QWidget * parentWidget = nullptr);
 
 public:
+  TIBERIUS_LIB_DECL bool enableBorder() const;
   TIBERIUS_LIB_DECL bool enableHover() const;
   TIBERIUS_LIB_DECL Font hoverFont() const;
+  TIBERIUS_LIB_DECL void setEnableBorder(bool value);
   TIBERIUS_LIB_DECL void setEnableHover(bool enable);
   TIBERIUS_LIB_DECL void setHoverFont(Font font);
 
@@ -39,6 +41,7 @@ signals:
   void clicked();
 
 private:
+  bool mEnableBorder;
   bool mEnableHover;
   Font mHoverFont;
   Font mOldFont;

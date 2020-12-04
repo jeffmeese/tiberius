@@ -14,8 +14,8 @@ public:
 protected:
   TIBERIUS_LIB_DECL void paintEvent(QPaintEvent * event) override;
 
-private:
-  void drawBorder(QPainter & painter);
+//private:
+//  void drawBorder(QPainter & painter);
 };
 
 #endif // DIALOG_H

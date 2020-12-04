@@ -83,9 +83,13 @@ void GiftDialog::init()
 
   mUi->cDispatch->setTextFont(normalBlack);
   mUi->cDispatch->setText(stringData->getString(52, 66));
+  mUi->cDispatch->setEnableBorder(true);
+  mUi->cDispatch->setEnableFocusBorder(true);
 
   mUi->cCancel->setTextFont(normalBlack);
   mUi->cCancel->setText(stringData->getString(13, 4));
+  mUi->cCancel->setEnableBorder(true);
+  mUi->cCancel->setEnableFocusBorder(true);
 
   textWidth = normalWhite.calculateTextWidth(stringData->getString(52, 63));
   mUi->cModestLabel->setTextFont(normalWhite);

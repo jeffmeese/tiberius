@@ -28,17 +28,6 @@ MessageWidget::MessageWidget(QWidget * parent)
 {
 }
 
-void MessageWidget::drawBackground(Painter & painter)
-{
-  const SgImageData * imageData = TiberiusApplication::climateImages();
-  uint32_t baseImageId = imageData->getGroupBaseImageId(GROUP_SUNKEN_TEXTBOX_BACKGROUND);
-
-  int32_t w = width();
-  int32_t h = height();
-  StitchedImage image(16, 16, 7, 7, baseImageId);
-  painter.drawImage(0, 0, image.constructImage(w, h));
-}
-
 void MessageWidget::drawForeground(Painter & painter)
 {
   const SgImageData * imageData = TiberiusApplication::climateImages();
@@ -100,7 +89,7 @@ void MessageWidget::drawForeground(Painter & painter)
 void MessageWidget::paintEvent(QPaintEvent *)
 {
   Painter painter(this);
-  drawBackground(painter);
+  painter.drawPanel(0, 0, width(), height(), 16, 7, GROUP_SUNKEN_TEXTBOX_BACKGROUND);
   drawForeground(painter);
 }
 

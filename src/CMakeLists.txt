@@ -25,6 +25,7 @@ set(HDR_FILES
   building/building.h
   city/buildingdata.h
   city/city.h
+  city/datamodel.h
   city/educationdata.h
   city/entertainmentdata.h
   city/figuredata.h
@@ -35,6 +36,7 @@ set(HDR_FILES
   city/militarydata.h
   city/populationdata.h
   city/ratingsdata.h
+  city/resourcedata.h
   city/religiondata.h
   city/tradedata.h
   core/abstractfactory.h
@@ -43,6 +45,7 @@ set(HDR_FILES
   dialog/dialog.h
   dialog/filedialog.h
   dialog/messagedialog.h
+  entertainment/festival.h
   figure/figure.h
   game/difficulty.h
   game/game.h
@@ -86,8 +89,10 @@ set(HDR_FILES
   mission/invasion.h
   mission/mission.h
   mission/pricechange.h
+  religion/god.h
   resource/resource.h
-  widget/borderedbutton.h
+  widget/buildmenu.h
+  widget/buildmenuitem.h
   widget/button.h
   widget/citywidget.h
   widget/label.h
@@ -96,6 +101,7 @@ set(HDR_FILES
   widget/menu.h
   widget/menubar.h
   widget/messagewidget.h
+  widget/panel.h
   widget/scrollbar.h
   widget/scrollwidget.h
   widget/textedit.h
@@ -109,6 +115,7 @@ set(SRC_FILES
   building/building.cpp
   city/buildingdata.cpp
   city/city.cpp
+  city/datamodel.cpp
   city/educationdata.cpp
   city/entertainmentdata.cpp
   city/figuredata.cpp
@@ -118,14 +125,16 @@ set(SRC_FILES
   city/labordata.cpp
   city/militarydata.cpp
   city/populationdata.cpp
-  city/religiondata.cpp
   city/ratingsdata.cpp
+  city/religiondata.cpp
+  city/resourcedata.cpp
   city/tradedata.cpp
   core/painter.cpp
   core/streamio.cpp
   dialog/dialog.cpp
   dialog/filedialog.cpp
   dialog/messagedialog.cpp
+  entertainment/festival.cpp
   figure/figure.cpp
   game/difficulty.cpp
   game/game.cpp
@@ -167,8 +176,10 @@ set(SRC_FILES
   mission/invasion.cpp
   mission/mission.cpp
   mission/pricechange.cpp
+  religion/god.cpp
   resource/resource.cpp
-  widget/borderedbutton.cpp
+  widget/buildmenu.cpp
+  widget/buildmenuitem.cpp
   widget/button.cpp
   widget/citywidget.cpp
   widget/label.cpp
@@ -177,6 +188,7 @@ set(SRC_FILES
   widget/menu.cpp
   widget/menubar.cpp
   widget/messagewidget.cpp
+  widget/panel.cpp
   widget/scrollbar.cpp
   widget/scrollwidget.cpp
   widget/textedit.cpp

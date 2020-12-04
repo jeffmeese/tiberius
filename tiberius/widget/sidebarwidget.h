@@ -4,6 +4,8 @@
 #include <QWidget>
 
 class Button;
+class BuildMenu;
+class BuildMenuItem;
 namespace Ui
 {
   class SidebarWidget;
@@ -19,17 +21,71 @@ public:
   ~SidebarWidget();
 
 protected:
+  void mousePressEvent(QMouseEvent *event) override;
   void paintEvent(QPaintEvent *event) override;
 
 private:
+  using BuildMenuPtr = std::unique_ptr<BuildMenu>;
+  using BuildMenuItemPtr = std::unique_ptr<BuildMenuItem>;
+
+private:
+  void cancelMenu();
+  void connectActions();
+  void createMenus();
+  void createMenuItem(BuildMenu * menu, const QString & label, int32_t price = -1);
   void init();
   void initButton(Button * button, uint32_t groupId, uint32_t offset, bool canDisable);
+  void playClickSound();
+  void showBuildMenu(BuildMenu * menu, Button * button);
+  void startBuild();
+
+private slots:
+  void handleAdvisorsButton();
+  void handleClearButton();
+  void handleCollapseButton();
+  void handleCycleButton();
+  void handleEducationButton();
+  void handleEmpireButton();
+  void handleEngineeringButton();
+  void handleEntertainmentButton();
+  void handleExpandButton();
+  void handleGovernmentButton();
+  void handleHealthButton();
+  void handleHouseButton();
+  void handleIndustryButton();
+  void handleMessagesButton();
+  void handleMissionButton();
+  void handleOrientNorthButton();
+  void handleOverlaysButton();
+  void handleReligionButton();
+  void handleRoadButton();
+  void handleRotateLeftButton();
+  void handleRotateRightButton();
+  void handleSecurityButton();
+  void handleWaterButton();
+  void handleUndoButton();
 
 signals:
   void advisorsRequested();
+  void empireRequested();
 
 private:
   std::unique_ptr<Ui::SidebarWidget> mUi;
+  BuildMenuPtr mEducationMenu;
+  BuildMenuPtr mEngineeringMenu;
+  BuildMenuPtr mEntertainmentMenu;
+  BuildMenuPtr mFarmMenu;
+  BuildMenuPtr mFortMenu;
+  BuildMenuPtr mGovernmentMenu;
+  BuildMenuPtr mHealthMenu;
+  BuildMenuPtr mIndustryMenu;
+  BuildMenuPtr mLargeTempleMenu;
+  BuildMenuPtr mRawMaterialsMenu;
+  BuildMenuPtr mReligionMenu;
+  BuildMenuPtr mSecurityMenu;
+  BuildMenuPtr mSmallTempleMenu;
+  BuildMenuPtr mWaterMenu;
+  BuildMenuPtr mWorkshopMenu;
 };
 
 #endif // SIDEBARWIDGET_H

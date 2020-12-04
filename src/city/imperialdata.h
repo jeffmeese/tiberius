@@ -1,18 +1,20 @@
 #ifndef IMPERIALDATA_H
 #define IMPERIALDATA_H
 
-#include "tiberius.h"
+#include "datamodel.h"
 
 #include "imperial/gift.h"
 
-#include <cstdint>
 #include <memory>
 #include <vector>
 
 class Gift;
 class Request;
 
+class ResourceData;
+
 class ImperialData
+    : public DataModel
 {
 public:
   static const int32_t TOTAL_REQUESTS = 20;
@@ -42,6 +44,7 @@ public:
 
 public:
   TIBERIUS_LIB_DECL void addRequest(std::unique_ptr<Request> request);
+  TIBERIUS_LIB_DECL void dispatchRequest(Request * request, ResourceData * resourceData);
 
 private:
   typedef std::unique_ptr<Request> RequestPtr;

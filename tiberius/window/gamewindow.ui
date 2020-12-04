@@ -36,37 +36,9 @@
      </property>
     </widget>
    </item>
-   <item>
-    <widget class="SidebarWidget" name="cSidebarWidget" native="true">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>162</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>162</width>
-       <height>16777215</height>
-      </size>
-     </property>
-    </widget>
-   </item>
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>SidebarWidget</class>
-   <extends>QWidget</extends>
-   <header>widget/sidebarwidget.h</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>CityWidget</class>
    <extends>QWidget</extends>

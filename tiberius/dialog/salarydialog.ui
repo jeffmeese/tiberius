@@ -65,7 +65,7 @@
     <string>TextLabel</string>
    </property>
   </widget>
-  <widget class="BorderedButton" name="cCancel">
+  <widget class="Button" name="cCancel">
    <property name="geometry">
     <rect>
      <x>112</x>
@@ -238,11 +238,6 @@
    <extends>QWidget</extends>
    <header>widget/messagewidget.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>BorderedButton</class>
-   <extends>QPushButton</extends>
-   <header>widget/borderedbutton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

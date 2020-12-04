@@ -1,15 +1,15 @@
 #ifndef MILITARYDATA_H
 #define MILITARYDATA_H
 
-#include "tiberius.h"
+#include "datamodel.h"
 
-#include <cstdint>
 #include <memory>
 #include <vector>
 
 class Legion;
 
 class MilitaryData
+    : public DataModel
 {
 public:
   static const int32_t MAX_LEGIONS = 6;
@@ -20,6 +20,10 @@ public:
   TIBERIUS_LIB_DECL ~MilitaryData();
 
 public:
+  TIBERIUS_LIB_DECL void addLegion(std::unique_ptr<Legion> legion);
+  TIBERIUS_LIB_DECL Legion * legionAt(int32_t index);
+  TIBERIUS_LIB_DECL const Legion * legionAt(int32_t index) const;
+  TIBERIUS_LIB_DECL bool removeLegion(Legion * legion);
   TIBERIUS_LIB_DECL int32_t totalLegions() const;
 
 private:

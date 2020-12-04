@@ -114,8 +114,14 @@ void MainWindow::handleAboutToShowOptions()
 void MainWindow::handleAdvisorWindowClosed()
 {
   mUi->menuBar->show();
+  mUi->cSidebarWidget->show();
   mGameWindow->show();
   mAdvisorsWindow->hide();
+}
+
+void MainWindow::handleAdvisorsRequested()
+{
+  showAdvisorsWindow(mCurrentAdvisor);
 }
 
 void MainWindow::handleChiefAdvisor()
@@ -210,6 +216,7 @@ void MainWindow::handleEmpire()
 void MainWindow::handleEmpireWindowClosed()
 {
   mUi->menuBar->show();
+  mUi->cSidebarWidget->show();
   mGameWindow->show();
   mEmpireWindow->hide();
 }
@@ -287,6 +294,7 @@ void MainWindow::handleLoadGame(const QString & fileName)
   mMenuWindow->hide();
   mUi->menuBar->show();
   mGameWindow->show();
+  mUi->cSidebarWidget->setVisible(true);
 }
 
 void MainWindow::handleMilitaryAdvisor()
@@ -360,6 +368,11 @@ void MainWindow::handleScreenResolution(ScreenResolution resolution)
   Application::settings().setScreenResolution(resolution);
 }
 
+void MainWindow::handleShowAdvisors()
+{
+  showAdvisorsWindow(mCurrentAdvisor);
+}
+
 void MainWindow::handleSoundSettings()
 {
   Settings & settings = mApplication.settings();
@@ -411,6 +424,7 @@ void MainWindow::handleStartMission(int missionNumber)
 {
   mMissionWindow->hide();
   mUi->menuBar->show();
+  mUi->cSidebarWidget->show();
   mGameWindow->show();
 }
 
@@ -536,11 +550,15 @@ void MainWindow::init()
 {
   mUi->setupUi(this);
 
+  mCurrentAdvisor = Advisor::Type::Labor;
+  mSidebarWidth = 162;
+
   mAdvisorsWindow.reset(new AdvisorsWindow(centralWidget()));
   mEmpireWindow.reset(new EmpireWindow(centralWidget()));
   mGameWindow.reset(new GameWindow(centralWidget()));
   mMenuWindow.reset(new MenuWindow(centralWidget()));
   mTitleWindow.reset(new TitleWindow(centralWidget()));
+  mGameWindow->lower();
 
   mAdvisorsWindow->hide();
   mEmpireWindow->hide();
@@ -548,6 +566,7 @@ void MainWindow::init()
   mMenuWindow->hide();
   mMissionWindow->hide();
   mUi->menuBar->hide();
+  mUi->cSidebarWidget->hide();
 
   mUi->menuOptions->installEventFilter(this);
   mUi->menuHelp->installEventFilter(this);
@@ -557,6 +576,8 @@ void MainWindow::init()
 
   connect(mAdvisorsWindow.get(), SIGNAL(closed()), SLOT(handleAdvisorWindowClosed()));
   connect(mEmpireWindow.get(), SIGNAL(closed()), SLOT(handleEmpireWindowClosed()));
+  connect(mEmpireWindow.get(), SIGNAL(tradeRequested()), SLOT(handleTradeAdvisor()));
+
   connect(mTitleWindow.get(), SIGNAL(closed()), SLOT(handleTitleWindowClosed()));
   connect(mMissionWindow.get(), SIGNAL(startMission(int)), SLOT(handleStartMission(int)));
   connect(mMenuWindow.get(), SIGNAL(loadGame(const QString &)), SLOT(handleLoadGame(const QString &)));
@@ -592,6 +613,18 @@ void MainWindow::init()
   connect(mUi->actionTrade, SIGNAL(triggered()), SLOT(handleTradeAdvisor()));
   connect(mUi->actionHealth, SIGNAL(triggered()), SLOT(handleHealthAdvisor()));
   connect(mUi->actionFinances, SIGNAL(triggered()), SLOT(handleGovernmentAdvisor()));
+
+  connect(mUi->cSidebarWidget, SIGNAL(advisorsRequested()), SLOT(handleAdvisorsRequested()));
+  connect(mUi->cSidebarWidget, SIGNAL(empireRequested()), SLOT(handleEmpire()));
+  //connect(mUi->cSidebarWidget, SIGNAL(collapsed()), SLOT(update()));
+  //connect(mUi->cSidebarWidget, SIGNAL(expanded()), SLOT(update()));
+  //connect(mUi->cSidebarWidget, SIGNAL(orientNorth()), mUi->cCity, SLOT(orientNorth()));
+  //connect(mUi->cSidebarWidget, SIGNAL(rotateLeft()), mUi->cCity, SLOT(rotateLeft()));
+  //connect(mUi->cSidebarWidget, SIGNAL(rotateRight()), mUi->cCity, SLOT(rotateRight()));
+  //connect(mUi->cSidebarWidget, SIGNAL(showAdvisors()), SLOT(showAdvisors()));
+  //connect(mUi->cSidebarWidget, SIGNAL(showEmpire()), SLOT(showEmpire()));
+  //connect(mUi->cSidebarWidget, SIGNAL(showMessages()), SLOT(showMessages()));
+  //connect(mUi->cSidebarWidget, SIGNAL(undoLastAction()), SLOT(undoLastAction()));
 }
 
 void MainWindow::resizeEvent(QResizeEvent *)
@@ -601,11 +634,16 @@ void MainWindow::resizeEvent(QResizeEvent *)
   mGameWindow->resize(width(), height());
   mMenuWindow->resize(width(), height());
   mTitleWindow->resize(width(), height());
+  mUi->cSidebarWidget->resize(mSidebarWidth, height());
+  mUi->cSidebarWidget->move(rect().right()-mSidebarWidth, 0);
 }
 
 void MainWindow::showAdvisorsWindow(Advisor::Type type)
 {
+  mCurrentAdvisor = type;
   mUi->menuBar->hide();
+  mUi->cSidebarWidget->hide();
+  mEmpireWindow->hide();
   mGameWindow->hide();
   mAdvisorsWindow->setActiveAdvisor(type);
   mAdvisorsWindow->show();

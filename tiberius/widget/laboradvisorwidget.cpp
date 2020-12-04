@@ -126,6 +126,13 @@ void LaborAdvisorWidget::decreaseWages()
   updateWages();
 }
 
+void LaborAdvisorWidget::doUpdate()
+{
+  updateWages();
+  updateLabor();
+  updateEmployment();
+}
+
 void LaborAdvisorWidget::increaseWages()
 {
   if (game() != nullptr)
@@ -139,6 +146,7 @@ void LaborAdvisorWidget::init()
   const SgImageData * imageData = Application::climateImages();
   const StringData * stringData = Application::language()->stringData();
   uint32_t advisorsId = imageData->getGroupBaseImageId(GROUP_ADVISOR_ICONS);
+  int32_t baseImageId = imageData->getGroupBaseImageId(GROUP_LABOR_PRIORITY_LOCK);
 
   mUi->setupUi(this);
 
@@ -219,59 +227,15 @@ void LaborAdvisorWidget::init()
   mUi->cWagesUp->setImage(imageData->getImageRecord(15)->createImage());
   mUi->cWagesUp->setPressedImage(imageData->getImageRecord(16)->createImage());
 
-  mUi->cIndustryButton->setTextFont(normalWhite);
-  mUi->cIndustryButton->setHave(0);
-  mUi->cIndustryButton->setNeed(0);
-  mUi->cIndustryButton->setSector(stringData->getString(50, 1));
-  mUi->cIndustryButton->setPriority(0);
-
-  mUi->cFoodButton->setTextFont(normalWhite);
-  mUi->cFoodButton->setHave(0);
-  mUi->cFoodButton->setNeed(0);
-  mUi->cFoodButton->setSector(stringData->getString(50, 2));
-  mUi->cFoodButton->setPriority(0);
-
-  mUi->cEngineeringButton->setTextFont(normalWhite);
-  mUi->cEngineeringButton->setHave(0);
-  mUi->cEngineeringButton->setNeed(0);
-  mUi->cEngineeringButton->setSector(stringData->getString(50, 3));
-  mUi->cEngineeringButton->setPriority(0);
-
-  mUi->cWaterButton->setTextFont(normalWhite);
-  mUi->cWaterButton->setHave(0);
-  mUi->cWaterButton->setNeed(0);
-  mUi->cWaterButton->setSector(stringData->getString(50, 4));
-  mUi->cWaterButton->setPriority(0);
-
-  mUi->cPrefectureButton->setTextFont(normalWhite);
-  mUi->cPrefectureButton->setHave(0);
-  mUi->cPrefectureButton->setNeed(0);
-  mUi->cPrefectureButton->setSector(stringData->getString(50, 5));
-  mUi->cPrefectureButton->setPriority(0);
-
-  mUi->cMilitaryButton->setTextFont(normalWhite);
-  mUi->cMilitaryButton->setHave(0);
-  mUi->cMilitaryButton->setNeed(0);
-  mUi->cMilitaryButton->setSector(stringData->getString(50, 6));
-  mUi->cMilitaryButton->setPriority(0);
-
-  mUi->cEntertainmentButton->setTextFont(normalWhite);
-  mUi->cEntertainmentButton->setHave(0);
-  mUi->cEntertainmentButton->setNeed(0);
-  mUi->cEntertainmentButton->setSector(stringData->getString(50, 7));
-  mUi->cEntertainmentButton->setPriority(0);
-
-  mUi->cHealthButton->setTextFont(normalWhite);
-  mUi->cHealthButton->setHave(0);
-  mUi->cHealthButton->setNeed(0);
-  mUi->cHealthButton->setSector(stringData->getString(50, 8));
-  mUi->cHealthButton->setPriority(0);
-
-  mUi->cGovernanceButton->setTextFont(normalWhite);
-  mUi->cGovernanceButton->setHave(0);
-  mUi->cGovernanceButton->setNeed(0);
-  mUi->cGovernanceButton->setSector(stringData->getString(50, 9));
-  mUi->cGovernanceButton->setPriority(0);
+  initLaborButton(mUi->cIndustryButton, stringData->getString(50, 1));
+  initLaborButton(mUi->cFoodButton, stringData->getString(50, 2));
+  initLaborButton(mUi->cEngineeringButton, stringData->getString(50, 3));
+  initLaborButton(mUi->cWaterButton, stringData->getString(50, 4));
+  initLaborButton(mUi->cPrefectureButton, stringData->getString(50, 5));
+  initLaborButton(mUi->cMilitaryButton, stringData->getString(50, 6));
+  initLaborButton(mUi->cEntertainmentButton, stringData->getString(50, 7));
+  initLaborButton(mUi->cHealthButton, stringData->getString(50, 8));
+  initLaborButton(mUi->cGovernanceButton, stringData->getString(50, 9));
 
   connect(mUi->cIndustryButton, SIGNAL(clicked()), SLOT(changeIndustry()));
   connect(mUi->cFoodButton, SIGNAL(clicked()), SLOT(changeFood()));
@@ -286,11 +250,12 @@ void LaborAdvisorWidget::init()
   connect(mUi->cWagesUp, SIGNAL(clicked()), SLOT(increaseWages()));
 }
 
-void LaborAdvisorWidget::doUpdate()
+void LaborAdvisorWidget::initLaborButton(LaborAdvisorButton * button, const QString & text)
 {
-  updateWages();
-  updateLabor();
-  updateEmployment();
+  button->setHave(0);
+  button->setNeed(0);
+  button->setSector(text);
+  button->setPriority(0);
 }
 
 int LaborAdvisorWidget::showPriorityDialog()
@@ -412,4 +377,85 @@ void LaborAdvisorWidget::updateWages()
 
   textWidth = f.calculateTextWidth(mUi->cBill->text() + " ");
   mUi->cBill->setGeometry(64, 390, textWidth, 20);
+}
+
+LaborAdvisorButton::LaborAdvisorButton(QWidget * widget)
+  : Button(widget)
+{
+  init();
+}
+
+void LaborAdvisorButton::init()
+{
+  const SgImageData * imageData = Application::climateImages();
+
+  setEnableBorder(true);
+  setEnableFocusBorder(true);
+
+  mLock.reset(new QLabel(this));
+  mPriority.reset(new Label(this));
+  mSector.reset(new Label(this));
+  mHave.reset(new Label(this));
+  mNeed.reset(new Label(this));
+
+  mPriority->setTextFont(Font::Type::NormalWhite);
+  mSector->setTextFont(Font::Type::NormalWhite);
+  mHave->setTextFont(Font::Type::NormalWhite);
+  mNeed->setTextFont(Font::Type::NormalWhite);
+
+  mLock->move(24, 4);
+  mPriority->move(52, 2);
+  mSector->move(130, 5);
+  mHave->move(360, 2);
+  mNeed->move(452, 2);
+
+  mPriority->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
+  mSector->setAlignment(Qt::AlignLeft|Qt::AlignTop);
+  mHave->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
+  mNeed->setAlignment(Qt::AlignHCenter|Qt::AlignVCenter);
+
+  mSector->resize(210, 22);
+  mLock->resize(11, 17);
+  mPriority->resize(24, 20);
+  mHave->resize(48, 20);
+  mNeed->resize(48, 20);
+
+  int32_t baseImageId = imageData->getGroupBaseImageId(GROUP_LABOR_PRIORITY_LOCK);
+  QPixmap p = QPixmap::fromImage(imageData->getImageRecord(baseImageId)->createImage());
+  mLock->setPixmap(p);
+}
+
+void LaborAdvisorButton::setPriority(int level)
+{
+  if (level == 0) {
+    mLock->setVisible(false);
+    mPriority->setVisible(false);
+    update();
+    return;
+  }
+
+  mLock->setVisible(true);
+  mPriority->setVisible(true);
+  QString s = QString::number(level);
+  mPriority->setText(s);
+  update();
+}
+
+void LaborAdvisorButton::setSector(const QString & text)
+{
+  mSector->setText(text);
+  update();
+}
+
+void LaborAdvisorButton::setHave(int value)
+{
+  QString s = QString::number(value);
+  mHave->setText(s);
+}
+
+void LaborAdvisorButton::setNeed(int value)
+{
+  QString s = QString::number(value);
+  mNeed->setText(s);
+  update();
 }

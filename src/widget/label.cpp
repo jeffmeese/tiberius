@@ -15,6 +15,7 @@
 
 Label::Label(QWidget * parentWidget)
   : QLabel(parentWidget)
+  , mEnableBorder(false)
   , mEnableHover(false)
   , mHoverFont(Font::Type::NormalRed)
 {
@@ -22,8 +23,6 @@ Label::Label(QWidget * parentWidget)
 
 void Label::drawMultilineText(Painter & painter)
 {
-  qDebug() << QObject::tr(__FUNCTION__);
-
   Font f = textFont();
   QString text = this->text();
   int32_t lineHeight = f.lineHeight();
@@ -96,6 +95,11 @@ void Label::drawText(Painter & painter)
   painter.drawText(xOffset, yOffset, textString, f);
 }
 
+bool Label::enableBorder() const
+{
+  return mEnableBorder;
+}
+
 bool Label::enableHover() const
 {
   return mEnableHover;
@@ -132,10 +136,23 @@ void Label::mouseReleaseEvent(QMouseEvent * event)
   QLabel::mouseReleaseEvent(event);
 }
 
-void Label::paintEvent(QPaintEvent *)
+void Label::paintEvent(QPaintEvent * event)
 {
+  QPixmap pixmap = this->pixmap(Qt::ReturnByValue);
+  if (!pixmap.isNull()) {
+    QLabel::paintEvent(event);
+  }
+
   Painter painter(this);
+  if (mEnableBorder)
+    painter.drawBorder(0, 0, width(), height(), false);
+
   drawText(painter);
+}
+
+void Label::setEnableBorder(bool value)
+{
+  mEnableBorder = value;
 }
 
 void Label::setEnableHover(bool enable)

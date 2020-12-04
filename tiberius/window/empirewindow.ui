@@ -13,6 +13,22 @@
   <property name="windowTitle">
    <string>Tiberius</string>
   </property>
+  <widget class="QLabel" name="cBackground">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>2000</width>
+     <height>1000</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

@@ -68,7 +68,7 @@
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
    </property>
   </widget>
-  <widget class="BorderedButton" name="cDispatch">
+  <widget class="Button" name="cDispatch">
    <property name="geometry">
     <rect>
      <x>32</x>
@@ -81,7 +81,7 @@
     <string>PushButton</string>
    </property>
   </widget>
-  <widget class="BorderedButton" name="cCancel">
+  <widget class="Button" name="cCancel">
    <property name="geometry">
     <rect>
      <x>304</x>
@@ -223,11 +223,6 @@
    <extends>QWidget</extends>
    <header>widget/messagewidget.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>BorderedButton</class>
-   <extends>QPushButton</extends>
-   <header>widget/borderedbutton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

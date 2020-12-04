@@ -3,6 +3,8 @@
 
 #include "advisorwidget.h"
 
+#include "religion/god.h"
+
 namespace Ui {
   class EntertainmentAdvisorWidget;
 }
@@ -22,8 +24,12 @@ protected:
 private:
   void init();
 
+private slots:
+  void handleCreateFestival();
+
 private:
   Ui::EntertainmentAdvisorWidget *mUi;
+  God::Type mFestivalGod;
 };
 
 #endif // ENTERTAINMENTADVISORWIDGET_H

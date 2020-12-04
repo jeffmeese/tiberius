@@ -42,6 +42,542 @@
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
    </property>
   </widget>
+  <widget class="MessageWidget" name="cEntertainmentArea" native="true">
+   <property name="geometry">
+    <rect>
+     <x>32</x>
+     <y>60</y>
+     <width>576</width>
+     <height>80</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="MessageWidget" name="cFestivalArea" native="true">
+   <property name="geometry">
+    <rect>
+     <x>48</x>
+     <y>252</y>
+     <width>544</width>
+     <height>96</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="Label" name="cWorking">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>46</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cShows">
+   <property name="geometry">
+    <rect>
+     <x>260</x>
+     <y>46</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cCanEntertain">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>46</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cCoverage">
+   <property name="geometry">
+    <rect>
+     <x>480</x>
+     <y>46</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cFestivals">
+   <property name="geometry">
+    <rect>
+     <x>52</x>
+     <y>224</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cTheatersTotal">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>64</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cTheatersWorking">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>64</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cTheaterShows">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>64</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cTheaterCanEntertain">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>64</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cTheaterCoverage">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>64</y>
+     <width>104</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cAmpitheaterTotal">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>84</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cAmpitheaterWorking">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>84</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cAmpitheaterShows">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>84</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cAmpitheaterCanEntertain">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>84</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cAmpitheaterCoverage">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>84</y>
+     <width>104</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cColosseumTotal">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>104</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cColosseumWorking">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>104</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cColosseumShows">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>104</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cColosseumCanEntertain">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>104</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cColosseumCoverage">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>104</y>
+     <width>104</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cHippodromeTotal">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>124</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cHippodromeWorking">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>124</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cHippodromeShows">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>124</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cHippodromeCanEntertain">
+   <property name="geometry">
+    <rect>
+     <x>340</x>
+     <y>124</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cHippodromeCoverage">
+   <property name="geometry">
+    <rect>
+     <x>470</x>
+     <y>124</y>
+     <width>104</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cMonthsSinceFestival">
+   <property name="geometry">
+    <rect>
+     <x>112</x>
+     <y>260</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cSentiment">
+   <property name="geometry">
+    <rect>
+     <x>56</x>
+     <y>305</y>
+     <width>380</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="Button" name="cCreateFestival">
+   <property name="geometry">
+    <rect>
+     <x>102</x>
+     <y>280</y>
+     <width>300</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>PushButton</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cMessage">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>148</y>
+     <width>512</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="cFestivalImage">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>255</y>
+     <width>126</width>
+     <height>88</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cPreparing">
+   <property name="geometry">
+    <rect>
+     <x>102</x>
+     <y>284</y>
+     <width>300</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <zorder>cIconButton</zorder>
+  <zorder>cTitle</zorder>
+  <zorder>cEntertainmentArea</zorder>
+  <zorder>cFestivalArea</zorder>
+  <zorder>cWorking</zorder>
+  <zorder>cShows</zorder>
+  <zorder>cCanEntertain</zorder>
+  <zorder>cCoverage</zorder>
+  <zorder>cFestivals</zorder>
+  <zorder>cTheatersTotal</zorder>
+  <zorder>cTheatersWorking</zorder>
+  <zorder>cTheaterShows</zorder>
+  <zorder>cTheaterCanEntertain</zorder>
+  <zorder>cTheaterCoverage</zorder>
+  <zorder>cAmpitheaterTotal</zorder>
+  <zorder>cAmpitheaterWorking</zorder>
+  <zorder>cAmpitheaterShows</zorder>
+  <zorder>cAmpitheaterCanEntertain</zorder>
+  <zorder>cAmpitheaterCoverage</zorder>
+  <zorder>cColosseumTotal</zorder>
+  <zorder>cColosseumWorking</zorder>
+  <zorder>cColosseumShows</zorder>
+  <zorder>cColosseumCanEntertain</zorder>
+  <zorder>cColosseumCoverage</zorder>
+  <zorder>cHippodromeTotal</zorder>
+  <zorder>cHippodromeWorking</zorder>
+  <zorder>cHippodromeShows</zorder>
+  <zorder>cHippodromeCanEntertain</zorder>
+  <zorder>cHippodromeCoverage</zorder>
+  <zorder>cMonthsSinceFestival</zorder>
+  <zorder>cSentiment</zorder>
+  <zorder>cMessage</zorder>
+  <zorder>cFestivalImage</zorder>
+  <zorder>cPreparing</zorder>
+  <zorder>cCreateFestival</zorder>
  </widget>
  <customwidgets>
   <customwidget>
@@ -53,6 +589,12 @@
    <class>Label</class>
    <extends>QLabel</extends>
    <header>widget/label.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MessageWidget</class>
+   <extends>QWidget</extends>
+   <header>widget/messagewidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

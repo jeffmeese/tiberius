@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>640</width>
-    <height>416</height>
+    <height>432</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,12 +31,135 @@
     <rect>
      <x>60</x>
      <y>12</y>
-     <width>545</width>
+     <width>127</width>
      <height>35</height>
     </rect>
    </property>
    <property name="text">
     <string>Title</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cTargetPopulation">
+   <property name="geometry">
+    <rect>
+     <x>196</x>
+     <y>17</y>
+     <width>123</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Target Population</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="cBackground">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>48</y>
+     <width>520</width>
+     <height>235</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="RatingsButton" name="cCultureButton">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>286</y>
+     <width>110</width>
+     <height>66</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="RatingsButton" name="cProsperityButton">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>286</y>
+     <width>110</width>
+     <height>66</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="RatingsButton" name="cPeaceButton">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>286</y>
+     <width>110</width>
+     <height>66</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="RatingsButton" name="cFavorButton">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>286</y>
+     <width>110</width>
+     <height>66</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="MessageWidget" name="cInfo" native="true">
+   <property name="geometry">
+    <rect>
+     <x>64</x>
+     <y>356</y>
+     <width>512</width>
+     <height>64</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="Label" name="cMessageTitle">
+   <property name="geometry">
+    <rect>
+     <x>72</x>
+     <y>359</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cMessage">
+   <property name="geometry">
+    <rect>
+     <x>72</x>
+     <y>374</y>
+     <width>496</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -53,6 +176,17 @@
    <class>Label</class>
    <extends>QLabel</extends>
    <header>widget/label.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MessageWidget</class>
+   <extends>QWidget</extends>
+   <header>widget/messagewidget.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>RatingsButton</class>
+   <extends>QPushButton</extends>
+   <header>widget/ratingsadvisorwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

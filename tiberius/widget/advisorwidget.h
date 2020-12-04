@@ -17,7 +17,7 @@ public:
   Game * game();
   void setGame(Game * game);
 
-public:
+public slots:
   void update();
 
 protected:
@@ -28,6 +28,9 @@ protected:
 
 private:
   void drawBorder(QPainter & painter);
+
+signals:
+  void changed();
 
 private:
   Game * mGame;

@@ -3,6 +3,9 @@
 
 #include "advisorwidget.h"
 
+#include "religion/god.h"
+
+class Label;
 namespace Ui {
   class ReligionAdvisorWidget;
 }
@@ -21,6 +24,7 @@ protected:
 
 private:
   void init();
+  void initGodRow(Label * label, God::Type type);
 
 private:
   Ui::ReligionAdvisorWidget *mUi;

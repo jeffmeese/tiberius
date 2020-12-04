@@ -29,7 +29,6 @@ public:
 protected:
   void mousePressEvent(QMouseEvent *event) override;
   void paintEvent(QPaintEvent *event) override;
-  void resizeEvent(QResizeEvent *event) override;
 
 private:
   void init(Game * game);

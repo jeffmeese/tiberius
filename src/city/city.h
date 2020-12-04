@@ -17,6 +17,7 @@ class MilitaryData;
 class PopulationData;
 class RatingsData;
 class ReligionData;
+class ResourceData;
 class TradeData;
 
 class City
@@ -50,6 +51,8 @@ public:
   TIBERIUS_LIB_DECL const RatingsData * ratingsData() const;
   TIBERIUS_LIB_DECL ReligionData * religionData();
   TIBERIUS_LIB_DECL const ReligionData * religionData() const;
+  TIBERIUS_LIB_DECL ResourceData * resourceData();
+  TIBERIUS_LIB_DECL const ResourceData * resourceData() const;
   TIBERIUS_LIB_DECL TradeData * tradeData();
   TIBERIUS_LIB_DECL const TradeData * tradeData() const;
 
@@ -66,6 +69,7 @@ private:
   std::unique_ptr<PopulationData> mPopulationData;
   std::unique_ptr<RatingsData> mRatingsData;
   std::unique_ptr<ReligionData> mReligionData;
+  std::unique_ptr<ResourceData> mResourceData;
   std::unique_ptr<TradeData> mTradeData;
 };
 
@@ -187,6 +191,16 @@ inline ReligionData * City::religionData()
 inline const ReligionData * City::religionData() const
 {
   return mReligionData.get();
+}
+
+inline ResourceData * City::resourceData()
+{
+  return mResourceData.get();
+}
+
+inline const ResourceData * City::resourceData() const
+{
+  return mResourceData.get();
 }
 
 inline TradeData * City::tradeData()

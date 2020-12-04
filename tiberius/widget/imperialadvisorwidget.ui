@@ -42,7 +42,7 @@
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
    </property>
   </widget>
-  <widget class="BorderedButton" name="cDonate">
+  <widget class="Button" name="cDonate">
    <property name="geometry">
     <rect>
      <x>320</x>
@@ -55,7 +55,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="BorderedButton" name="cGiveGift">
+  <widget class="Button" name="cGiveGift">
    <property name="geometry">
     <rect>
      <x>320</x>
@@ -68,7 +68,7 @@
     <string/>
    </property>
   </widget>
-  <widget class="BorderedButton" name="cSetSalary">
+  <widget class="Button" name="cSetSalary">
    <property name="geometry">
     <rect>
      <x>70</x>
@@ -198,11 +198,6 @@
    <extends>QWidget</extends>
    <header>widget/messagewidget.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>BorderedButton</class>
-   <extends>QPushButton</extends>
-   <header>widget/borderedbutton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

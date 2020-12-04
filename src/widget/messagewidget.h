@@ -25,7 +25,6 @@ protected:
   void resizeEvent(QResizeEvent *event) override;
 
 private:
-  void drawBackground(Painter & painter);
   void drawForeground(Painter & painter);
 
 private:

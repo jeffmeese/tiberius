@@ -126,8 +126,8 @@ void MenuWindow::initButton(Button *button, const QString &text)
   button->setText(text);
   button->setTextFont(Font::Type::NormalGreen);
 
-  QImage image(width(), height(), QImage::Format_ARGB32);
-  QImage hoverImage(width(), height(), QImage::Format_ARGB32);
+  QImage image(width(), height(), QImage::Format_RGB32);
+  QImage hoverImage(width(), height(), QImage::Format_RGB32);
   QPainter normalPainter(&image);
   QPainter hoverPainter(&hoverImage);
 

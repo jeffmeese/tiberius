@@ -46,6 +46,7 @@ private slots:
   void handleAbout();
   void handleAboutToShowHelp();
   void handleAboutToShowOptions();
+  void handleAdvisorsRequested();
   void handleAdvisorWindowClosed();
   void handleChiefAdvisor();
   void handleDeleteGame();
@@ -75,6 +76,7 @@ private slots:
   void handleReligionAdvisor();
   void handleReplayMap();
   void handleSaveGame();
+  void handleShowAdvisors();
   void handleScreenResolution(ScreenResolution resolution);
   void handleSoundSettings();
   void handleSoundSettingsChanged();
@@ -92,6 +94,8 @@ private:
 
 private:
   Application & mApplication;
+  Advisor::Type mCurrentAdvisor;
+  int32_t mSidebarWidth;
   std::unique_ptr<Ui::MainWindow> mUi;
   std::unique_ptr<AdvisorsWindow> mAdvisorsWindow;
   std::unique_ptr<EmpireWindow> mEmpireWindow;

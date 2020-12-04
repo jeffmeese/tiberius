@@ -71,6 +71,22 @@
     <string/>
    </property>
   </widget>
+  <widget class="Label" name="cExitLabel">
+   <property name="geometry">
+    <rect>
+     <x>66</x>
+     <y>110</y>
+     <width>361</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
  </widget>
  <customwidgets>
   <customwidget>

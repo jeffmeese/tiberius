@@ -35,20 +35,16 @@
    <property name="autoFillBackground">
     <bool>true</bool>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <property name="leftMargin">
-     <number>0</number>
+   <widget class="SidebarWidget" name="cSidebarWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>666</x>
+      <y>0</y>
+      <width>162</width>
+      <height>509</height>
+     </rect>
     </property>
-    <property name="topMargin">
-     <number>0</number>
-    </property>
-    <property name="rightMargin">
-     <number>0</number>
-    </property>
-    <property name="bottomMargin">
-     <number>0</number>
-    </property>
-   </layout>
+   </widget>
   </widget>
   <widget class="MenuBar" name="menuBar">
    <property name="geometry">
@@ -56,7 +52,7 @@
      <x>0</x>
      <y>0</y>
      <width>829</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="font">
@@ -265,6 +261,12 @@
    <class>Menu</class>
    <extends>QMenu</extends>
    <header>widget/menu.h</header>
+  </customwidget>
+  <customwidget>
+   <class>SidebarWidget</class>
+   <extends>QWidget</extends>
+   <header>widget/sidebarwidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

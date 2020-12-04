@@ -5,11 +5,40 @@
 
 #include "city/labordata.h"
 
+#include "widget/button.h"
+
+#include <QLabel>
+
 class City;
 class LaborAdvisorButton;
 namespace Ui {
   class LaborAdvisorWidget;
 }
+
+class Label;
+
+class LaborAdvisorButton
+    : public Button
+{
+public:
+  LaborAdvisorButton(QWidget * parentWidget = nullptr);
+
+public:
+  void setHave(int value);
+  void setNeed(int value);
+  void setPriority(int level);
+  void setSector(const QString & text);
+
+private:
+  void init();
+
+private:
+  std::unique_ptr<QLabel> mLock;
+  std::unique_ptr<Label> mPriority;
+  std::unique_ptr<Label> mSector;
+  std::unique_ptr<Label> mHave;
+  std::unique_ptr<Label> mNeed;
+};
 
 class LaborAdvisorWidget
     : public AdvisorWidget
@@ -25,6 +54,7 @@ protected:
 
 private:
   void init();
+  void initLaborButton(LaborAdvisorButton * button, const QString & text);
   int showPriorityDialog();
   void updateEmployment();
   void updateLabor();

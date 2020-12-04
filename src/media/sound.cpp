@@ -7,11 +7,13 @@ Sound::Sound(int id, const QString & fileName)
   , mFileName(fileName)
   , mLoaded(false)
 {
+  mSoundEffect = new QSoundEffect;
 }
 
 Sound::~Sound()
 {
-
+  // For some unknown reason this is causing a crash
+  //delete mSoundEffect;
 }
 
 int Sound::id() const
@@ -27,7 +29,6 @@ QString Sound::fileName() const
 void Sound::play()
 {
   if (!mLoaded) {
-    mSoundEffect.reset(new QSoundEffect);
     mSoundEffect->setSource(QUrl::fromLocalFile(mFileName));
     mLoaded = true;
   }

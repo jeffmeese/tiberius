@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ResourceTradeDialog</class>
+ <widget class="QDialog" name="ResourceTradeDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>544</width>
+    <height>240</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QLabel" name="cIcon">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>8</y>
+     <width>22</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Label" name="cName">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>9</y>
+     <width>501</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Button" name="cTradeStatusButton">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>84</y>
+     <width>432</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cIndustryOnButton">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>122</y>
+     <width>432</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cStockpilingButton">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>160</y>
+     <width>432</width>
+     <height>50</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Label" name="cTotalIndustries">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>44</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cUnitsStored">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>64</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="Label" name="cNoTradeRoutes">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>84</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="Button" name="cExit">
+   <property name="geometry">
+    <rect>
+     <x>510</x>
+     <y>207</y>
+     <width>24</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cDown">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>48</y>
+     <width>24</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Button" name="cUp">
+   <property name="geometry">
+    <rect>
+     <x>406</x>
+     <y>48</y>
+     <width>24</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="Label" name="cExportLabel">
+   <property name="geometry">
+    <rect>
+     <x>120</x>
+     <y>46</y>
+     <width>200</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Export</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cUnitsLabel">
+   <property name="geometry">
+    <rect>
+     <x>442</x>
+     <y>52</y>
+     <width>63</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Units</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cUsingTradingLabel">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>190</y>
+     <width>400</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Using and Trading</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cStockpileLabel">
+   <property name="geometry">
+    <rect>
+     <x>112</x>
+     <y>214</y>
+     <width>400</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Stockpile</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cStockpiledLabel">
+   <property name="geometry">
+    <rect>
+     <x>64</x>
+     <y>160</y>
+     <width>400</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Stockpiled</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cUseTradeLabel">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>172</y>
+     <width>400</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Use and Trade</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cImportingLabel">
+   <property name="geometry">
+    <rect>
+     <x>128</x>
+     <y>24</y>
+     <width>400</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Importing</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+  <widget class="Label" name="cNotTradingLabel">
+   <property name="geometry">
+    <rect>
+     <x>126</x>
+     <y>2</y>
+     <width>400</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Not Trading</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignHCenter|Qt::AlignTop</set>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Button</class>
+   <extends>QPushButton</extends>
+   <header>widget/button.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Label</class>
+   <extends>QLabel</extends>
+   <header>widget/label.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
