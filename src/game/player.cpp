@@ -1,5 +1,15 @@
 #include "player.h"
 
+#include "application/tiberiusapplication.h"
+
+#include "language/language.h"
+#include "language/stringdata.h"
+
+static const int32_t RANK_SALARY[] =
+{
+  0, 2, 5, 8, 12, 20, 30, 40, 60, 80, 100
+};
+
 Player::Player()
 {
   mRank = Rank::Citizen;
@@ -37,9 +47,25 @@ Player::Rank Player::rank() const
   return mRank;
 }
 
+int32_t Player::rankSalary(Rank rank)
+{
+  return RANK_SALARY[static_cast<int32_t>(rank)];
+}
+
+QString Player::rankString() const
+{
+  return rankString(mRank);
+}
+
+QString Player::rankString(Rank rank)
+{
+  const StringData * stringData = TiberiusApplication::language()->stringData();
+  return stringData->getString(32, static_cast<int32_t>(rank));
+}
+
 int32_t Player::salary() const
 {
-  return salaryForRank(mSalaryRank);
+  return rankSalary(mSalaryRank);
 }
 
 Player::Rank Player::salaryRank() const
@@ -47,33 +73,10 @@ Player::Rank Player::salaryRank() const
   return mSalaryRank;
 }
 
-int32_t Player::salaryForRank(Rank rank)
+QString Player::salaryString() const
 {
-  switch (rank)
-  {
-  case Rank::Citizen:
-    return 0;
-  case Rank::Clerk:
-    return 2;
-  case Rank::Engineer:
-    return 5;
-  case Rank::Architect:
-    return 8;
-  case Rank::Quaestor:
-    return 12;
-  case Rank::Procurator:
-    return 20;
-  case Rank::Aedile:
-    return 30;
-  case Rank::Praetor:
-    return 40;
-  case Rank::Consul:
-    return 60;
-  case Rank::Proconsul:
-    return 80;
-  case Rank::Caesar:
-    return 100;
-  }
+  const StringData * stringData = TiberiusApplication::language()->stringData();
+  return stringData->getString(52, static_cast<int32_t>(mSalaryRank)+4) + " " + QString::number(rankSalary(mSalaryRank));
 }
 
 void Player::setName(const QString & name)
