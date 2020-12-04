@@ -87,7 +87,22 @@ public:
   TIBERIUS_LIB_DECL bool survivalTimeEnabled() const;
   TIBERIUS_LIB_DECL bool waterContamination() const;
 
+  // Grids
+public:
+  TIBERIUS_LIB_DECL UnsignedByteGrid * edgeGrid();
+  TIBERIUS_LIB_DECL const UnsignedByteGrid * edgeGrid() const;
+  TIBERIUS_LIB_DECL UnsignedByteGrid * elevationGrid();
+  TIBERIUS_LIB_DECL const UnsignedByteGrid * elevationGrid() const;
+  TIBERIUS_LIB_DECL UnsignedShortGrid * graphicGrid();
+  TIBERIUS_LIB_DECL const UnsignedShortGrid * graphicGrid() const;
+  TIBERIUS_LIB_DECL UnsignedByteGrid * randomGrid();
+  TIBERIUS_LIB_DECL const UnsignedByteGrid * randomGrid() const;
+  TIBERIUS_LIB_DECL UnsignedShortGrid * terrainGrid();
+  TIBERIUS_LIB_DECL const UnsignedShortGrid * terrainGrid() const;
+  TIBERIUS_LIB_DECL UnsignedByteGrid * terrainRandomGrid();
+  TIBERIUS_LIB_DECL const UnsignedByteGrid * terrainRandomGrid() const;
 
+public:
   TIBERIUS_LIB_DECL void setBriefDescription(const QString & value);
   TIBERIUS_LIB_DECL void setCampaignMission(int32_t value);
   TIBERIUS_LIB_DECL void setCampaignRank(int32_t value);
@@ -118,7 +133,7 @@ public:
   static const int MAX_REQUESTS = 20;
 
 private:
-  using ByteGridPtr = std::unique_ptr<UnsigedByteGrid>;
+  using ByteGridPtr = std::unique_ptr<UnsignedByteGrid>;
   using DemandChangePtr = std::unique_ptr<DemandChange>;
   using EarthquakePtr = std::unique_ptr<Earthquake>;
   using EmperorRequestPtr = std::unique_ptr<EmperorRequest>;

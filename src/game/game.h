@@ -24,11 +24,12 @@ public:
 public:
   TIBERIUS_LIB_DECL City * city();
   TIBERIUS_LIB_DECL const City * city() const;
+  TIBERIUS_LIB_DECL Map * map();
+  TIBERIUS_LIB_DECL const Map * map() const;
   TIBERIUS_LIB_DECL Mission * mission();
   TIBERIUS_LIB_DECL const Mission * mission() const;
   TIBERIUS_LIB_DECL Player * player();
   TIBERIUS_LIB_DECL const Player * player() const;
-  TIBERIUS_LIB_DECL void setMission(std::unique_ptr<Mission> mission);
 
 public:
   TIBERIUS_LIB_DECL void loadFromFile(const QString & fileName);
@@ -64,6 +65,16 @@ inline City * Game::city()
 inline const City * Game::city() const
 {
   return mCity.get();
+}
+
+inline Map * Game::map()
+{
+  return mMap.get();
+}
+
+inline const Map * Game::map() const
+{
+  return mMap.get();
 }
 
 inline Mission * Game::mission()

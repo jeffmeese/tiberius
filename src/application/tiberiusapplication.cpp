@@ -16,6 +16,7 @@
 
 #include <QDebug>
 #include <QDir>
+#include <stdexcept>
 
 static const QString C3_DIR_SETTING("c3Dir");
 QSettings TiberiusApplication::mSettings("JaMSoft", "Tiberius");

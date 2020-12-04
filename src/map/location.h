@@ -5,6 +5,8 @@
 
 #include "tiberius.h"
 
+#include <QDataStream>
+
 class Location
 {
 public:
@@ -16,6 +18,10 @@ public:
   TIBERIUS_LIB_DECL int32_t y() const;
   TIBERIUS_LIB_DECL void setX(int32_t value);
   TIBERIUS_LIB_DECL void setY(int32_t value);
+
+public:
+  TIBERIUS_LIB_DECL void loadFromDataStream(QDataStream & dataStream);
+  TIBERIUS_LIB_DECL void saveToDataStream(QDataStream & dataStream) const;
 
 private:
   int32_t mX;

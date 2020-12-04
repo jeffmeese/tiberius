@@ -70,10 +70,10 @@ Mission::Mission()
   mEnemyArmyTravelMonths = 0;
   mEmpireExpansionYear = 0;
 
-  mEdgeGrid.reset(new UnsigedByteGrid);
-  mElevationGrid.reset(new UnsigedByteGrid);
-  mRandomGrid.reset(new UnsigedByteGrid);
-  mTerrainRandomGrid.reset(new UnsigedByteGrid);
+  mEdgeGrid.reset(new UnsignedByteGrid);
+  mElevationGrid.reset(new UnsignedByteGrid);
+  mRandomGrid.reset(new UnsignedByteGrid);
+  mTerrainRandomGrid.reset(new UnsignedByteGrid);
   mGraphicGrid.reset(new UnsignedShortGrid);
   mTerrainGrid.reset(new UnsignedShortGrid);
   mEarthquake.reset(new Earthquake);
@@ -131,6 +131,36 @@ Mission::Mission()
 Mission::~Mission()
 {
 
+}
+
+UnsignedByteGrid * Mission::edgeGrid()
+{
+  return mEdgeGrid.get();
+}
+
+const UnsignedByteGrid * Mission::edgeGrid() const
+{
+  return mEdgeGrid.get();
+}
+
+UnsignedByteGrid * Mission::elevationGrid()
+{
+  return mElevationGrid.get();
+}
+
+const UnsignedByteGrid * Mission::elevationGrid() const
+{
+  return mElevationGrid.get();
+}
+
+UnsignedShortGrid * Mission::graphicGrid()
+{
+  return mGraphicGrid.get();
+}
+
+const UnsignedShortGrid * Mission::graphicGrid() const
+{
+  return mGraphicGrid.get();
 }
 
 void Mission::loadFromFile(const QString &fileName)
@@ -431,6 +461,36 @@ void Mission::saveToFile(const QString &fileName) const
 
   QDataStream dataStream(&file);
   saveToStream(dataStream, false);
+}
+
+UnsignedByteGrid * Mission::randomGrid()
+{
+  return mRandomGrid.get();
+}
+
+const UnsignedByteGrid * Mission::randomGrid() const
+{
+  return mRandomGrid.get();
+}
+
+UnsignedShortGrid * Mission::terrainGrid()
+{
+  return mTerrainGrid.get();
+}
+
+const UnsignedShortGrid * Mission::terrainGrid() const
+{
+  return mTerrainGrid.get();
+}
+
+UnsignedByteGrid * Mission::terrainRandomGrid()
+{
+  return mTerrainRandomGrid.get();
+}
+
+const UnsignedByteGrid * Mission::terrainRandomGrid() const
+{
+  return mTerrainRandomGrid.get();
 }
 
 void Mission::saveToStream(QDataStream & dataStream, bool compressedGrids) const

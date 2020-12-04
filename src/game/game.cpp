@@ -19,6 +19,7 @@
 Game::Game()
   : mCity(new City)
   , mDifficulty(Difficulty::Type::Hard)
+  , mMap(new Map)
   , mMission(new Mission)
   , mPlayer(new Player)
 {
@@ -49,6 +50,22 @@ void Game::loadFromStream(QDataStream &dataStream)
   mMission.reset(new Mission);
   mFileVersion = streamio::readInt32(dataStream);
   mMission->setCampaignMission(streamio::readInt32(dataStream));
+
+  // Read grids
+  mMap->graphicGrid()->loadFromDataStream(dataStream, 52488, true);
+  mMap->edgeGrid()->loadFromDataStream(dataStream, 26244, true);
+  mMap->buildingGrid()->loadFromDataStream(dataStream, 52488, true);
+  mMap->terrainGrid()->loadFromDataStream(dataStream, 52488, true);
+  mMap->aqueductGrid()->loadFromDataStream(dataStream, 26244, true);
+  mMap->figureGrid()->loadFromDataStream(dataStream, 52488, true);
+  mMap->bitfieldsGrid()->loadFromDataStream(dataStream, 26244, true);
+  mMap->spriteGrid()->loadFromDataStream(dataStream, 26244, true);
+  mMap->randomGrid()->loadFromDataStream(dataStream, 26244, false);
+  mMap->desirabilityGrid()->loadFromDataStream(dataStream, 26244, true);
+  mMap->elevationGrid()->loadFromDataStream(dataStream, 26244, true);
+  mMap->buildingDamageGrid()->loadFromDataStream(dataStream, 26244, true);
+  mMap->aqueductBackupGrid()->loadFromDataStream(dataStream, 26244, true);
+  mMap->spriteBackupGrid()->loadFromDataStream(dataStream, 26244, true);
 }
 
 void Game::saveToFile(const QString &fileName) const
@@ -67,9 +84,4 @@ void Game::saveToFile(const QString &fileName) const
 void Game::saveToStream(QDataStream &dataStream) const
 {
   dataStream.setByteOrder(QDataStream::LittleEndian);
-}
-
-void Game::setMission(std::unique_ptr<Mission> mission)
-{
-  mMission = std::move(mission);
 }

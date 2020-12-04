@@ -53,7 +53,7 @@ private:
 };
 
 using UnsignedShortGrid = Grid<uint16_t>;
-using UnsigedByteGrid = Grid<uint8_t>;
+using UnsignedByteGrid = Grid<uint8_t>;
 using ByteGrid = Grid<int8_t>;
 
 #endif // GRID_H
