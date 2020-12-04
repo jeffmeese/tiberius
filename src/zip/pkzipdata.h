@@ -14,6 +14,7 @@ public:
   TIBERIUS_LIB_DECL ~PkZipData();
 
 public:
+  TIBERIUS_LIB_DECL QByteArray compress(QByteArray & byteArray, int32_t compressedSize);
   TIBERIUS_LIB_DECL QByteArray decompress(QByteArray & byteArray);
 
 private:
@@ -24,9 +25,9 @@ private:
   void processBits(uint16_t & value, int32_t numBits);
 
 private:
-  uint8_t mLiteralEncoding;
-  uint8_t mWindowSize;
-  int32_t mDictionarySize;
+  uint8_t mLiteralEncoding;        // Determines whether this chunk is a literal byte
+  uint8_t mWindowSize;             // Determines the window size of sliding dictionary
+  int32_t mDictionarySize;         // The size of the sliding dictionary
   int32_t mBitsRemaining;
   int32_t mNextBufferPos;
   uint8_t * mDataBuffer;

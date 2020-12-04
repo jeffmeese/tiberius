@@ -16,14 +16,14 @@ class DifficultyDialog
   Q_OBJECT
 
 public:
-  TIBERIUS_LIB_DECL explicit DifficultyDialog(QWidget *parent = nullptr);
-  TIBERIUS_LIB_DECL ~DifficultyDialog();
+  explicit DifficultyDialog(QWidget *parent = nullptr);
+  ~DifficultyDialog();
 
 public:
-  TIBERIUS_LIB_DECL Difficulty::Type difficulty() const;
-  TIBERIUS_LIB_DECL bool godsEffectsOn() const;
-  TIBERIUS_LIB_DECL void setDifficulty(Difficulty::Type value);
-  TIBERIUS_LIB_DECL void setGodsEffectsOn(bool value);
+  Difficulty::Type difficulty() const;
+  bool godsEffectsOn() const;
+  void setDifficulty(Difficulty::Type value);
+  void setGodsEffectsOn(bool value);
 
 protected:
   void mousePressEvent(QMouseEvent * event) override;

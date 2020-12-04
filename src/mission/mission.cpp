@@ -23,10 +23,10 @@ Mission::Mission()
 {
   mEmperorChange = false;
   mEmpireExpanded = false;
+  mGladiatorRevolt = false;
   mOpenPlay = false;
   mFloodedClayPits = false;
   mFlotsam = false;
-  mGladiatorRevolt = false;
   mPeaceful = false;
   mIronMineCollapse = false;
   mLandTradeProblem = false;
@@ -48,7 +48,6 @@ Mission::Mission()
   mEmpireLocation = 0;
   mEmperorChangeYear = 0;
   mEnemyId = 0;
-  mGladiatorRevoltYear = 0;
   mImageId = 0;
   mInitialRank = 0;
   mLosingTime = 0;

@@ -27,6 +27,10 @@ public:
   TIBERIUS_LIB_DECL Figure();
 
 public:
+  TIBERIUS_LIB_DECL Type type() const;
+  TIBERIUS_LIB_DECL void setType(Type type);
+
+public:
   TIBERIUS_LIB_DECL void loadFromDataStream(QDataStream & dataStream);
   TIBERIUS_LIB_DECL void saveToDataStream(QDataStream & dataStream) const;
 

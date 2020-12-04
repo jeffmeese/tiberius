@@ -6,6 +6,8 @@
 class BuildMenuItem
     : public Button
 {
+  Q_OBJECT
+
 public:
   TIBERIUS_LIB_DECL explicit BuildMenuItem(QWidget * parentWidget = nullptr);
 

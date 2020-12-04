@@ -20,6 +20,8 @@ class Label;
 class LaborAdvisorButton
     : public Button
 {
+  Q_OBJECT
+
 public:
   LaborAdvisorButton(QWidget * parentWidget = nullptr);
 

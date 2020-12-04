@@ -16,3 +16,13 @@ void Figure::saveToDataStream(QDataStream & dataStream) const
 {
   streamio::writeUInt8(dataStream, mAlternativeLocation);
 }
+
+void Figure::setType(Type type)
+{
+  mType = type;
+}
+
+Figure::Type Figure::type() const
+{
+  return mType;
+}

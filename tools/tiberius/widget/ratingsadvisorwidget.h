@@ -15,6 +15,8 @@ namespace Ui {
 class RatingsButton
     : public Button
 {
+  Q_OBJECT
+
 public:
   RatingsButton(QWidget * parentWidget = nullptr);
 

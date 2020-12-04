@@ -284,11 +284,7 @@ void MainWindow::handleLoadGame(const QString & fileName)
   mission->loadFromFile(filePath);
 
   mGame.reset(new Game);
-  mGame->setMission(std::move(mission));
   mGameWindow->setGame(mGame.get());
-
-  mGame->player()->setName("Player");
-
   mAdvisorsWindow->setGame(mGame.get());
 
   mMenuWindow->hide();

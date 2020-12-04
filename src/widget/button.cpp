@@ -65,7 +65,7 @@ void Button::drawText(Painter &painter)
 
 void Button::enterEvent(QEvent * e)
 {
-  QAbstractButton::enterEvent(e);
+  QPushButton::enterEvent(e);
   update();
 }
 
@@ -83,7 +83,7 @@ bool Button::isHover() const
 
 void Button::leaveEvent(QEvent * e)
 {
-  QAbstractButton::leaveEvent(e);
+  QPushButton::leaveEvent(e);
   update();
 }
 

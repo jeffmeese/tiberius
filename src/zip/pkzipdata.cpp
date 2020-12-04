@@ -89,6 +89,17 @@ void PkZipData::buildLookupTables()
   }
 }
 
+QByteArray PkZipData::compress(QByteArray &byteArray, int32_t compressedSize)
+{
+  QByteArray output;
+  QDataStream dataStream(&output, QIODevice::WriteOnly);
+
+  uint8_t windowSize = 6;
+  int32_t dictionarySize = 4096;
+
+  return output;
+}
+
 QByteArray PkZipData::decompress(QByteArray &byteArray)
 {
   QDataStream dataStream(&byteArray, QIODevice::ReadOnly);

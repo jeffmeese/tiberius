@@ -16,7 +16,6 @@ class Earthquake;
 class EmperorChange;
 class EmperorRequest;
 class Goal;
-class GladiatorRevolt;
 class Invasion;
 class Location;
 class PriceChange;

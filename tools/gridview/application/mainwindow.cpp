@@ -167,7 +167,7 @@ void MainWindow::handleSelectionChanged()
 
 void MainWindow::loadGame(const QString & fileName)
 {
-  std::unique_ptr<Game> game(new Game) ;
+  std::unique_ptr<Game> game(new Game);
   game->loadFromFile(fileName);
 
   QFileInfo fileInfo(fileName);

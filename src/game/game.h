@@ -11,6 +11,7 @@
 #include <vector>
 
 class City;
+class GladiatorRevolt;
 class Map;
 class Mission;
 class Player;
@@ -24,6 +25,8 @@ public:
 public:
   TIBERIUS_LIB_DECL City * city();
   TIBERIUS_LIB_DECL const City * city() const;
+  TIBERIUS_LIB_DECL GladiatorRevolt * gladiatorRevolt();
+  TIBERIUS_LIB_DECL const GladiatorRevolt * gladiatorRevolt() const;
   TIBERIUS_LIB_DECL Map * map();
   TIBERIUS_LIB_DECL const Map * map() const;
   TIBERIUS_LIB_DECL Mission * mission();
@@ -38,19 +41,27 @@ public:
   TIBERIUS_LIB_DECL void saveToStream(QDataStream & dataStream) const;
 
 private:
+  void readGameTime(QDataStream & dataStream);
+  void readPlayerName(QDataStream & dataStream);
+
+private:
   using CityPtr = std::unique_ptr<City>;
+  using GladiatorRevoltPtr = std::unique_ptr<GladiatorRevolt>;
   using MapPtr = std::unique_ptr<Map>;
   using MissionPtr = std::unique_ptr<Mission>;
   using PlayerPtr = std::unique_ptr<Player>;
 
 private:
+  int32_t mEmperorChangeState;
   int32_t mFileVersion;
   int32_t mGameDay;
   int32_t mGameTick;
   int32_t mGameMonth;
   int32_t mGameYear;
+  int32_t mMaxGameYear;
   int32_t mTotalGameDays;
   CityPtr mCity;
+  GladiatorRevoltPtr mGladiatorRevolt;
   Difficulty mDifficulty;
   MapPtr mMap;
   MissionPtr mMission;
@@ -65,6 +76,16 @@ inline City * Game::city()
 inline const City * Game::city() const
 {
   return mCity.get();
+}
+
+inline GladiatorRevolt * Game::gladiatorRevolt()
+{
+  return mGladiatorRevolt.get();
+}
+
+inline const GladiatorRevolt * Game::gladiatorRevolt() const
+{
+  return mGladiatorRevolt.get();
 }
 
 inline Map * Game::map()

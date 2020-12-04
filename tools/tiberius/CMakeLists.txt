@@ -143,7 +143,7 @@ endif()
 
 if (MSVC)
   target_compile_definitions(${TARGET_NAME} PRIVATE -D_CRT_SECURE_NO_WARNINGS)
-  target_compile_definitions(${TARGET_NAME} PUBLIC -DTIBERIUS_IMPORT)
+  target_compile_definitions(${TARGET_NAME} PRIVATE -DTIBERIUS_IMPORT)
 endif()
 
 target_link_libraries(${TARGET_NAME} tiberius)

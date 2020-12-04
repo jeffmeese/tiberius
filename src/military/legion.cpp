@@ -11,10 +11,10 @@
 
 #include "soldier.h"
 
-Legion::Legion(Type type, int32_t id)
-  : mId(id)
-  , mType(type)
+Legion::Legion()
 {
+  mType = Type::Legionnaires;
+  mId = 0;
   mAcademyTrained = false;
   mEmpireService = false;
   mMorale = Morale::Average;
@@ -43,6 +43,11 @@ bool Legion::empireService() const
 int32_t Legion::id() const
 {
   return mId;
+}
+
+void Legion::loadFromDataStream(QDataStream &dataStream)
+{
+
 }
 
 Legion::Morale Legion::morale() const
@@ -85,6 +90,11 @@ void Legion::removeSolider(const QString & name)
       return;
     }
   }
+}
+
+void Legion::saveToDataStream(QDataStream &dataStream) const
+{
+
 }
 
 void Legion::setAcademyTrained(bool value)

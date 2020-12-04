@@ -93,7 +93,7 @@ void LegionAdvisorWidget::init()
 void LegionAdvisorWidget::doUpdate()
 {
   MilitaryData * data = game()->city()->militaryData();
-  int32_t numLegions = data->totalLegions();
+  int32_t numLegions = data->total();
 
   mUi->cNoLegions->setVisible(false);
   for (int32_t i = 0; i < 5; i++) {
@@ -105,8 +105,8 @@ void LegionAdvisorWidget::doUpdate()
     mUi->cNoLegions->setVisible(true);
   }
   else {
-    for (int32_t i = 0; i < data->totalLegions(); i++) {
-      Legion * legion = data->legionAt(i);
+    for (int32_t i = 0; i < data->total(); i++) {
+      Legion * legion = data->get(i);
       mLegionButtons[i]->setVisible(true);
       mLegionButtons[i]->setLegion(legion);
       mLegions[i] = legion;

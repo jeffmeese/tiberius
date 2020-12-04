@@ -1,6 +1,7 @@
 #include "city.h"
 
 #include "buildingdata.h"
+#include "camera.h"
 #include "educationdata.h"
 #include "entertainmentdata.h"
 #include "figuredata.h"
@@ -13,6 +14,7 @@
 #include "ratingsdata.h"
 #include "religiondata.h"
 #include "resourcedata.h"
+#include "routedata.h"
 #include "tradedata.h"
 
 #include "imperial/request.h"
@@ -22,6 +24,7 @@
 City::City()
 {
   mBuildingData.reset(new BuildingData);
+  mCamera.reset(new Camera);
   mEducationData.reset(new EducationData);
   mEntertainmentData.reset(new EntertainmentData);
   mFigureData.reset(new FigureData);
@@ -34,6 +37,7 @@ City::City()
   mRatingsData.reset(new RatingsData);
   mReligionData.reset(new ReligionData);
   mResourceData.reset(new ResourceData);
+  mRouteData.reset(new RouteData);
   mTradeData.reset(new TradeData);
 
   for (int i = 0; i < 1; i++) {
@@ -57,5 +61,16 @@ City::City()
 
 City::~City()
 {
-
+  mOrientation = Orientation::North;
 }
+
+City::Orientation City::orientation() const
+{
+  return mOrientation;
+}
+
+void City::setOrientation(Orientation value)
+{
+  mOrientation = value;
+}
+

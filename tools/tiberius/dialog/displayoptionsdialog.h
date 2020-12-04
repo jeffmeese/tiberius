@@ -18,14 +18,14 @@ class DisplayOptionsDialog
   Q_OBJECT
 
 public:
-  TIBERIUS_LIB_DECL explicit DisplayOptionsDialog(QWidget *parent = nullptr);
-  TIBERIUS_LIB_DECL ~DisplayOptionsDialog();
+  explicit DisplayOptionsDialog(QWidget *parent = nullptr);
+  ~DisplayOptionsDialog();
 
 public:
-  TIBERIUS_LIB_DECL bool fullscreen() const;
-  TIBERIUS_LIB_DECL ScreenResolution resolution() const;
-  TIBERIUS_LIB_DECL void setFullscreen(bool value);
-  TIBERIUS_LIB_DECL void setScreenResolution(ScreenResolution value);
+  bool fullscreen() const;
+  ScreenResolution resolution() const;
+  void setFullscreen(bool value);
+  void setScreenResolution(ScreenResolution value);
 
 private slots:
   void handleFullscreen();

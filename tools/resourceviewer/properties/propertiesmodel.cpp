@@ -56,5 +56,5 @@ QModelIndex PropertiesModel::parent(const QModelIndex &) const
 
 int32_t PropertiesModel::rowCount(const QModelIndex &) const
 {
-  return mProperties.size();
+  return static_cast<int32_t>(mProperties.size());
 }

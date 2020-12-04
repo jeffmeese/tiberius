@@ -24,8 +24,10 @@ set(HDR_FILES
   advisor/advisor.h
   building/building.h
   city/buildingdata.h
+  city/camera.h
   city/city.h
   city/datamodel.h
+  city/datavector.h
   city/educationdata.h
   city/entertainmentdata.h
   city/figuredata.h
@@ -38,6 +40,7 @@ set(HDR_FILES
   city/ratingsdata.h
   city/resourcedata.h
   city/religiondata.h
+  city/routedata.h
   city/tradedata.h
   core/abstractfactory.h
   core/painter.h
@@ -91,6 +94,7 @@ set(HDR_FILES
   mission/pricechange.h
   religion/god.h
   resource/resource.h
+  route/route.h
   widget/buildmenu.h
   widget/buildmenuitem.h
   widget/button.h
@@ -114,6 +118,7 @@ set(SRC_FILES
   advisor/advisor.cpp
   building/building.cpp
   city/buildingdata.cpp
+  city/camera.cpp
   city/city.cpp
   city/datamodel.cpp
   city/educationdata.cpp
@@ -128,6 +133,7 @@ set(SRC_FILES
   city/ratingsdata.cpp
   city/religiondata.cpp
   city/resourcedata.cpp
+  city/routedata.cpp
   city/tradedata.cpp
   core/painter.cpp
   core/streamio.cpp
@@ -178,6 +184,7 @@ set(SRC_FILES
   mission/pricechange.cpp
   religion/god.cpp
   resource/resource.cpp
+  route/route.cpp
   widget/buildmenu.cpp
   widget/buildmenuitem.cpp
   widget/button.cpp
@@ -211,7 +218,7 @@ add_library(${TARGET_NAME} ${BUILD_TYPE} ${HDR_FILES} ${SRC_FILES} ${UI_FILES} $
 if (MSVC)
   target_compile_definitions(${TARGET_NAME} PUBLIC -D_CRT_SECURE_NO_WARNINGS)
   if (TIBERIUS_BUILD_SHARED)
-    target_compile_definitions(${TARGET_NAME} PUBLIC -DTIBERIUS_EXPORT)
+    target_compile_definitions(${TARGET_NAME} PRIVATE -DTIBERIUS_EXPORT)
   endif()
 endif()
 

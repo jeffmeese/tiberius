@@ -16,26 +16,26 @@ class SoundOptionsDialog
   Q_OBJECT
 
 public:
-  TIBERIUS_LIB_DECL explicit SoundOptionsDialog(QWidget *parent = nullptr);
-  TIBERIUS_LIB_DECL ~SoundOptionsDialog();
+  explicit SoundOptionsDialog(QWidget *parent = nullptr);
+  ~SoundOptionsDialog();
 
 public:
-  TIBERIUS_LIB_DECL bool citySoundsOn() const;
-  TIBERIUS_LIB_DECL int citySoundsVolume() const;
-  TIBERIUS_LIB_DECL bool musicOn() const;
-  TIBERIUS_LIB_DECL int musicVolume() const;
-  TIBERIUS_LIB_DECL bool soundEffectsOn() const;
-  TIBERIUS_LIB_DECL int soundEffectsVolume() const;
-  TIBERIUS_LIB_DECL bool speechOn() const;
-  TIBERIUS_LIB_DECL int speechVolume() const;
-  TIBERIUS_LIB_DECL void setCitySoundsOn(bool value);
-  TIBERIUS_LIB_DECL void setCitySoundsVolume(int value);
-  TIBERIUS_LIB_DECL void setMusicOn(bool value);
-  TIBERIUS_LIB_DECL void setMusicVolume(int value);
-  TIBERIUS_LIB_DECL void setSoundEffectsOn(bool value);
-  TIBERIUS_LIB_DECL void setSoundEffectsVolume(int value);
-  TIBERIUS_LIB_DECL void setSpeechOn(bool value);
-  TIBERIUS_LIB_DECL void setSpeechVolume(int value);
+  bool citySoundsOn() const;
+  int citySoundsVolume() const;
+  bool musicOn() const;
+  int musicVolume() const;
+  bool soundEffectsOn() const;
+  int soundEffectsVolume() const;
+  bool speechOn() const;
+  int speechVolume() const;
+  void setCitySoundsOn(bool value);
+  void setCitySoundsVolume(int value);
+  void setMusicOn(bool value);
+  void setMusicVolume(int value);
+  void setSoundEffectsOn(bool value);
+  void setSoundEffectsVolume(int value);
+  void setSpeechOn(bool value);
+  void setSpeechVolume(int value);
 
 private slots:
   void handleCity();

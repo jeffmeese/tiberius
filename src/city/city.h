@@ -6,6 +6,7 @@
 #include <memory>
 
 class BuildingData;
+class Camera;
 class EducationData;
 class EntertainmentData;
 class FigureData;
@@ -18,13 +19,29 @@ class PopulationData;
 class RatingsData;
 class ReligionData;
 class ResourceData;
+class RouteData;
 class TradeData;
 
 class City
 {
 public:
+  enum class Orientation
+  {
+    North = 0,
+    South = 1,
+    East = 2,
+    West = 3
+  };
+
+public:
   TIBERIUS_LIB_DECL City();
   TIBERIUS_LIB_DECL ~City();
+
+public:
+  TIBERIUS_LIB_DECL Camera * camera();
+  TIBERIUS_LIB_DECL const Camera * camera() const;
+  TIBERIUS_LIB_DECL Orientation orientation() const;
+  TIBERIUS_LIB_DECL void setOrientation(Orientation value);
 
 public:
   TIBERIUS_LIB_DECL BuildingData * buildingData();
@@ -53,11 +70,15 @@ public:
   TIBERIUS_LIB_DECL const ReligionData * religionData() const;
   TIBERIUS_LIB_DECL ResourceData * resourceData();
   TIBERIUS_LIB_DECL const ResourceData * resourceData() const;
+  TIBERIUS_LIB_DECL RouteData * routeData();
+  TIBERIUS_LIB_DECL const RouteData * routeData() const;
   TIBERIUS_LIB_DECL TradeData * tradeData();
   TIBERIUS_LIB_DECL const TradeData * tradeData() const;
 
 private:
+  Orientation mOrientation;
   std::unique_ptr<BuildingData> mBuildingData;
+  std::unique_ptr<Camera> mCamera;
   std::unique_ptr<EducationData> mEducationData;
   std::unique_ptr<EntertainmentData> mEntertainmentData;
   std::unique_ptr<FigureData> mFigureData;
@@ -70,6 +91,7 @@ private:
   std::unique_ptr<RatingsData> mRatingsData;
   std::unique_ptr<ReligionData> mReligionData;
   std::unique_ptr<ResourceData> mResourceData;
+  std::unique_ptr<RouteData> mRouteData;
   std::unique_ptr<TradeData> mTradeData;
 };
 
@@ -81,6 +103,16 @@ inline BuildingData * City::buildingData()
 inline const BuildingData * City::buildingData() const
 {
   return mBuildingData.get();
+}
+
+inline Camera * City::camera()
+{
+  return mCamera.get();
+}
+
+inline const Camera * City::camera() const
+{
+  return mCamera.get();
 }
 
 inline EducationData * City::educationData()
@@ -201,6 +233,16 @@ inline ResourceData * City::resourceData()
 inline const ResourceData * City::resourceData() const
 {
   return mResourceData.get();
+}
+
+inline RouteData * City::routeData()
+{
+  return mRouteData.get();
+}
+
+inline const RouteData * City::routeData() const
+{
+  return mRouteData.get();
 }
 
 inline TradeData * City::tradeData()

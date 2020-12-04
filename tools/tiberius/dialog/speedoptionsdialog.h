@@ -14,14 +14,14 @@ class SpeedOptionsDialog : public Dialog
   Q_OBJECT
 
 public:
-  TIBERIUS_LIB_DECL explicit SpeedOptionsDialog(QWidget *parent = nullptr);
-  TIBERIUS_LIB_DECL ~SpeedOptionsDialog();
+  explicit SpeedOptionsDialog(QWidget *parent = nullptr);
+  ~SpeedOptionsDialog();
 
 public:
-  TIBERIUS_LIB_DECL int gameSpeed() const;
-  TIBERIUS_LIB_DECL int scrollSpeed() const;
-  TIBERIUS_LIB_DECL void setGameSpeed(int value);
-  TIBERIUS_LIB_DECL void setScrollSpeed(int value);
+  int gameSpeed() const;
+  int scrollSpeed() const;
+  void setGameSpeed(int value);
+  void setScrollSpeed(int value);
 
 private:
   void initButton(Button *button, const Font &font, const QString &text);

@@ -10,22 +10,22 @@
 
 #include <QLabel>
 
-class Label
+class TIBERIUS_LIB_DECL Label
     : public QLabel
     , public TiberiusWidget
 {
   Q_OBJECT
 
 public:
-  TIBERIUS_LIB_DECL explicit Label(QWidget * parentWidget = nullptr);
+  explicit Label(QWidget * parentWidget = nullptr);
 
 public:
-  TIBERIUS_LIB_DECL bool enableBorder() const;
-  TIBERIUS_LIB_DECL bool enableHover() const;
-  TIBERIUS_LIB_DECL Font hoverFont() const;
-  TIBERIUS_LIB_DECL void setEnableBorder(bool value);
-  TIBERIUS_LIB_DECL void setEnableHover(bool enable);
-  TIBERIUS_LIB_DECL void setHoverFont(Font font);
+  bool enableBorder() const;
+  bool enableHover() const;
+  Font hoverFont() const;
+  void setEnableBorder(bool value);
+  void setEnableHover(bool enable);
+  void setHoverFont(Font font);
 
 protected:
   void enterEvent(QEvent * event) override;

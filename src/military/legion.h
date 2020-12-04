@@ -51,7 +51,7 @@ public:
   };
 
 public:
-  TIBERIUS_LIB_DECL Legion(Type type, int32_t id);
+  TIBERIUS_LIB_DECL Legion();
   TIBERIUS_LIB_DECL ~Legion();
 
 public:
@@ -70,7 +70,9 @@ public:
   TIBERIUS_LIB_DECL void addSolider(std::unique_ptr<Soldier> soldier);
   TIBERIUS_LIB_DECL QString moraleString() const;
   TIBERIUS_LIB_DECL QString name() const;
+  TIBERIUS_LIB_DECL void loadFromDataStream(QDataStream & dataStream);
   TIBERIUS_LIB_DECL void removeSolider(const QString & name);
+  TIBERIUS_LIB_DECL void saveToDataStream(QDataStream & dataStream) const;
   TIBERIUS_LIB_DECL QString typeString() const;
 
 public:
