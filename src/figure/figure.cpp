@@ -61,9 +61,9 @@ int16_t Figure::imageId() const
 
 void Figure::loadFromDataStream(QDataStream & dataStream)
 {
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
+  mFields.push_back(streamio::readInt8(dataStream));  // Unknown
+  mFields.push_back(streamio::readInt8(dataStream));  // Unknown
+  mFields.push_back(streamio::readInt8(dataStream));  // Unknown
   mFields.push_back(streamio::readInt8(dataStream));
   mFields.push_back(streamio::readInt16(dataStream));
   mFields.push_back(streamio::readInt16(dataStream));

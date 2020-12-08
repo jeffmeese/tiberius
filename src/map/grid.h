@@ -52,7 +52,7 @@ public:
   {
     if (!compressed) {
       for (int i = 0; i < MapSize; i++) {
-        dataSize << mData[i];
+        dataStream << mData[i];
       }
     }
     else {

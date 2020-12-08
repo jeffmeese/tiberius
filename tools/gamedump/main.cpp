@@ -32,7 +32,7 @@ void initHeaders(QStringList & headers)
 
 int main(int argc, char *argv[])
 {
-  //QString fileName = argv[1];
+  QString dirName = argv[1];
 
   QStringList headers;
   initHeaders(headers);
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 
   QStringList filters;
   filters << "*.sav";
-  QDir dir("/data/caesar3");
+  QDir dir(dirName);
   QFileInfoList list = dir.entryInfoList(filters, QDir::Files);
   for (int i = 0; i < list.size(); i++) {
     QFileInfo fileInfo = list.at(i);
@@ -61,14 +61,22 @@ int main(int argc, char *argv[])
         }
       }
     }
+
+    QString outputFileName = fileInfo.baseName() + ".csv";
+    std::ofstream output(outputFileName.toStdString());
+    output << "Type, Image\n";
+    for (std::map<int32_t, int32_t>::iterator itr = typeMap.begin(); itr != typeMap.end(); ++itr)
+    {
+      output << itr->first << "," << itr->second << "\n";
+    }
   }
 
-  std::ofstream output("figures.csv");
-  output << "Type, Image\n";
-  for (std::map<int32_t, int32_t>::iterator itr = typeMap.begin(); itr != typeMap.end(); ++itr)
-  {
-    output << itr->first << "," << itr->second << "\n";
-  }
+//  std::ofstream output("figures.csv");
+//  output << "Type, Image\n";
+//  for (std::map<int32_t, int32_t>::iterator itr = typeMap.begin(); itr != typeMap.end(); ++itr)
+//  {
+//    output << itr->first << "," << itr->second << "\n";
+//  }
 
 //  std::ofstream output("figures.csv");
 //  output << headers[0].toStdString();

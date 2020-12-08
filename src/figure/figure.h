@@ -58,24 +58,23 @@ public:
     Patrician = 40,
     Native = 41,
     Sentry = 42,
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    EnemyNative1 = 43,
+    EnemySword1 = 44,
+    EnemySword2 = 45,
+    EnemyCamel = 46,
+    EnemyElephant = 47,
+    EnemyChariot = 48,
+    EnemySword3 = 49,
+    EnemySword4 = 50,
+    EnemyNative2 = 51,
+    EnemyArcher = 52,
+    EnemyAxe = 53,
+    EnemyGladiator = 54,
+    EnemyCasearJaveling = 55,
+    EnemyCasearCavalry = 56,
+    EnemyCasearLegionnarie = 57,
+    NativeTrader = 58,
+    Arrow = 59,
     Javelin = 60,
     Bolt = 61,
     Crossbow = 62,
