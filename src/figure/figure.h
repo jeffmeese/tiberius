@@ -97,7 +97,6 @@ public:
 public:
   TIBERIUS_LIB_DECL int32_t id() const;
   TIBERIUS_LIB_DECL int16_t cartImageId() const;
-  TIBERIUS_LIB_DECL int32_t id() const;
   TIBERIUS_LIB_DECL int16_t imageId() const;
   TIBERIUS_LIB_DECL Type type() const;
   TIBERIUS_LIB_DECL void setCartImageId(int16_t value);

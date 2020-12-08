@@ -21,11 +21,6 @@ Figure::Figure(int32_t id)
   mType = Figure::Type::None;
 }
 
-int32_t Figure::id() const
-{
-  return mId;
-}
-
 int16_t Figure::cartImageId() const
 {
   return mCartImageId;
