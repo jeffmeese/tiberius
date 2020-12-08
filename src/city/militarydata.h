@@ -33,7 +33,7 @@ public:
 
 public:
   TIBERIUS_LIB_DECL void loadFromDataStream(QDataStream & dataStream);
-  TIBERIUS_LIB_DECL void saveToDataStream(QDataStream & dataStream) const;
+  TIBERIUS_LIB_DECL void saveToDataStream(QDataStream & dataStream, bool compressed = true) const;
 
 private:
   int32_t mLastUsed;

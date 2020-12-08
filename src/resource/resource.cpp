@@ -28,7 +28,7 @@ Resource::Resource(Type type)
   mStockpiling = false;
   mCanImport = true;
   mCanExport = true;
-  mAmountStored = 10;
+  mAmountStored = 8;
   mExportUnits = 0;
   mActiveIndustries = 0;
   mTotalIndustries = 0;

@@ -1,8 +1,13 @@
 #include "route.h"
 
-Route::Route()
+Route::Route(int32_t id)
 {
+  mId = id;
+}
 
+int32_t Route::id() const
+{
+  return mId;
 }
 
 void Route::loadFromDataStream(QDataStream & dataStream)

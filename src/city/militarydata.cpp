@@ -34,12 +34,13 @@ void MilitaryData::loadFromDataStream(QDataStream & dataStream)
   byteStream.setByteOrder(QDataStream::LittleEndian);
 
   for (int32_t i = 0; i < MAX_LEGIONS; i++) {
-    get(i)->loadFromDataStream(dataStream);
+    get(i)->loadFromDataStream(byteStream);
   }
 
   mLastUsed = streamio::readInt32(dataStream);
   mLastLegion = streamio::readInt32(dataStream);
   mNumActive = streamio::readInt32(dataStream);
+  return;
 }
 
 int32_t MilitaryData::numActive() const
@@ -47,7 +48,7 @@ int32_t MilitaryData::numActive() const
   return mNumActive;
 }
 
-void MilitaryData::saveToDataStream(QDataStream & dataStream) const
+void MilitaryData::saveToDataStream(QDataStream & dataStream, bool compressed) const
 {
   QDataStream byteStream;
   byteStream.setByteOrder(QDataStream::LittleEndian);
@@ -57,7 +58,7 @@ void MilitaryData::saveToDataStream(QDataStream & dataStream) const
   }
 
   QByteArray byteArray;
-  streamio::writeCompressedData(byteStream, byteArray, DATA_SIZE);
+  streamio::writeCompressedData(byteStream, byteArray);
   dataStream.device()->write(byteArray);
 
   dataStream << mLastUsed << mLastLegion << mNumActive;

@@ -105,7 +105,7 @@ void LegionAdvisorWidget::doUpdate()
     mUi->cNoLegions->setVisible(true);
   }
   else {
-    for (int32_t i = 0; i < data->total(); i++) {
+    for (int32_t i = 0; i < data->numActive(); i++) {
       Legion * legion = data->get(i);
       mLegionButtons[i]->setVisible(true);
       mLegionButtons[i]->setLegion(legion);

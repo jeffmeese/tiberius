@@ -13,21 +13,165 @@ GridView::GridView(QWidget *parent)
   }
 }
 
+void GridView::displayAnimationGrid(const UnsignedByteGrid * grid)
+{
+  int32_t index = 0;
+  for (int i = 0; i < GridSize; i++) {
+    for (int j = 0; j < GridSize; j++) {
+      mRed[index] = 0;
+      mGreen[index] = 0;
+      mBlue[index] = grid->getData(index)*255;
+      index++;
+    }
+  }
+  update();
+}
+
+void GridView::displayAqueductGrid(const UnsignedByteGrid * grid)
+{
+  int32_t index = 0;
+  for (int i = 0; i < GridSize; i++) {
+    for (int j = 0; j < GridSize; j++) {
+      mRed[index] = 0;
+      mGreen[index] = 0;
+      mBlue[index] = grid->getData(index)*255;
+      index++;
+    }
+  }
+  update();
+}
+
+void GridView::displayBitfieldGrid(const UnsignedByteGrid * grid)
+{
+  int index = 0;
+  for (int i = 0; i < GridSize; i++) {
+    for (int j = 0; j < GridSize; j++) {
+      mRed[index] = 0;
+      mBlue[index] = 0;
+      mGreen[index] = 0;
+
+      uint32_t value = grid->getData(index);
+      if (value & 0x01) {
+        mRed[index] = 255;
+      }
+      else if (value & 0x02) {
+        mBlue[index] = 255;
+      }
+      else if (value & 0x04) {
+        mGreen[index] = 255;
+      }
+      else if (value & 0x08) {
+        mRed[index] = 255;
+        mGreen[index] = 255;
+      }
+
+      index++;
+    }
+  }
+  update();
+}
+
+void GridView::displayBuildingGrid(const UnsignedShortGrid * grid)
+{
+  int index = 0;
+  for (int i = 0; i < GridSize; i++) {
+    for (int j = 0; j < GridSize; j++) {
+      mRed[index] = 0;
+      mBlue[index] = 0;
+      mGreen[index] = 0;
+
+      int value = grid->getData(index);
+      if (value > 1) {
+        mRed[index] = 255;
+      }
+      index++;
+    }
+  }
+  update();
+}
+
+void GridView::displayDamageGrid(const UnsignedByteGrid * grid)
+{
+  int index = 0;
+  for (int i = 0; i < GridSize; i++) {
+    for (int j = 0; j < GridSize; j++) {
+      mRed[index] = 0;
+      mBlue[index] = 0;
+      mGreen[index] = 0;
+
+      int value = grid->getData(index);
+      if (value > 1) {
+        mRed[index] = 255;
+      }
+      index++;
+    }
+  }
+  update();
+}
+
+void GridView::displayDesirabilityGrid(const ByteGrid * grid)
+{
+  int32_t min = 1000;
+  int32_t max = -1000;
+  for (int i = 0; i < MapSize; i++) {
+    int value = grid->getData(i);
+    if (value > max)
+      max = value;
+    if (value < min)
+      min = value;
+
+    if (value != 0) {
+      qDebug() << value;
+    }
+  }
+
+  qDebug() << min << " " << max;
+
+  int index = 0;
+  for (int i = 0; i < GridSize; i++) {
+    for (int j = 0; j < GridSize; j++) {
+      mRed[index] = 0;
+      mBlue[index] = 0;
+      mGreen[index] = 0;
+
+      int value = grid->getData(index);
+      if (value != 0) {
+        if (value < -50) {
+          mRed[index] = (value * 255) / 100;
+        }
+        else if (value >= -50 && value < 0) {
+          mRed[index] = (value * 255) / 100;
+          mGreen[index] = (value * 255) / 100;
+        }
+        else if (value > 0 && value < 20) {
+          mGreen[index] = (value * 255) / 100;
+        }
+        else if (value >= 20 && value < 40) {
+          mGreen[index] = (value * 255) / 100;
+          mBlue[index] = (value * 255) / 100;
+        }
+        else {
+          mBlue[index] = (value * 255) / 100;
+        }
+      }
+      index++;
+    }
+  }
+  update();
+}
+
 void GridView::displayEdgeGrid(const UnsignedByteGrid * grid)
 {
   int index = 0;
   for (int i = 0; i < GridSize; i++) {
     for (int j = 0; j < GridSize; j++) {
+      mRed[index] = 0;
+      mBlue[index] = 0;
+      mGreen[index] = 0;
+
       int value = grid->getData(index);
-      if (value == 64) {
+      if (value > 1) {
         mRed[index] = 255;
-        mGreen[index] = 0;
-        mBlue[index] = 0;
-      }
-      else {
-        mRed[index] = 0;
-        mBlue[index] = 255;
-        mGreen[index] = 0;
       }
       index++;
     }
@@ -80,22 +224,15 @@ void GridView::displayGraphicGrid(const UnsignedShortGrid * grid)
   update();
 }
 
-void GridView::displayRandomGrid(const UnsignedByteGrid * grid)
+void GridView::displayMergingGrid(const UnsignedByteGrid * grid)
 {
   int index = 0;
   for (int i = 0; i < GridSize; i++) {
     for (int j = 0; j < GridSize; j++) {
       int value = grid->getData(index);
-      if (value == 64) {
-        mRed[index] = 255;
-        mGreen[index] = 0;
-        mBlue[index] = 0;
-      }
-      else {
-        mRed[index] = 0;
-        mBlue[index] = 255;
-        mGreen[index] = 0;
-      }
+      mRed[index] = value;
+      mBlue[index] = value;
+      mGreen[index] = value;
       index++;
     }
   }
@@ -130,138 +267,30 @@ void GridView::displayTerrainGrid(const UnsignedShortGrid * grid)
     }
   }
   update();
-
-//  static const int r[] = {0, 0, 0, 0, 127, 127, 127, 127, 0, 0, 0, 0, 255, 255, 255, 255};
-//  static const int g[] = {0, 0, 127, 127, 0, 0, 127, 127, 0, 0, 127, 127, 0, 0, 127, 127};
-//  static const int b[] = {0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255};
-
-//  int index = 0;
-//  for (int i = 0; i < GridSize; i++) {
-//    for (int j = 0; j < GridSize; j++) {
-//      int value = grid->getData(index);
-//      qDebug() << value;
-//      switch (value) {
-//      case 1:
-//        mRed[index] = r[0];
-//        mGreen[index] = g[0];
-//        mBlue[index] = b[0];
-//        break;;
-//      case 2:
-//        mRed[index] = r[1];
-//        mGreen[index] = g[1];
-//        mBlue[index] = b[1];
-//        break;
-//      case 4:
-//        mRed[index] = r[2];
-//        mGreen[index] = g[2];
-//        mBlue[index] = b[2];
-//        break;
-//      case 8:
-//        mRed[index] = r[3];
-//        mGreen[index] = g[3];
-//        mBlue[index] = b[3];
-//        break;
-//      case 16:
-//        mRed[index] = r[4];
-//        mGreen[index] = g[4];
-//        mBlue[index] = b[4];
-//        break;
-//      case 32:
-//        mRed[index] = r[5];
-//        mGreen[index] = g[5];
-//        mBlue[index] = b[5];
-//        break;
-//      case 64:
-//        mRed[index] = r[6];
-//        mGreen[index] = g[6];
-//        mBlue[index] = b[6];
-//        break;
-//      case 128:
-//        mRed[index] = r[7];
-//        mGreen[index] = g[7];
-//        mBlue[index] = b[7];
-//        break;
-//      case 256:
-//        mRed[index] = r[8];
-//        mGreen[index] = g[8];
-//        mBlue[index] = b[8];
-//        break;
-//      case 512:
-//        mRed[index] = r[9];
-//        mGreen[index] = g[9];
-//        mBlue[index] = b[9];
-//        break;
-//      case 1024:
-//        mRed[index] = r[10];
-//        mGreen[index] = g[10];
-//        mBlue[index] = b[10];
-//        break;
-//      case 2048:
-//        mRed[index] = r[11];
-//        mGreen[index] = g[11];
-//        mBlue[index] = b[11];
-//        break;
-//      case 4096:
-//        mRed[index] = r[12];
-//        mGreen[index] = g[12];
-//        mBlue[index] = b[12];
-//        break;
-//      case 8192:
-//        mRed[index] = r[13];
-//        mGreen[index] = g[13];
-//        mBlue[index] = b[13];
-//        break;
-//      case 16384:
-//        mRed[index] = r[14];
-//        mGreen[index] = g[14];
-//        mBlue[index] = b[14];
-//        break;
-//      case 32768:
-//        mRed[index] = r[15];
-//        mGreen[index] = g[15];
-//        mBlue[index] = b[15];
-//        break;
-//      }
-//      index++;
-//    }
-//  }
-//  update();
-
-  //      if (value == 1) {
-  //        mRed[index] = r[0];
-  //        mGreen[index] = g[0];
-  //        mBlue[index] = b[0];
-  //      }
-  //      else
-  //      for (int k = 0; k < 16; k++) {
-  //        if (((value >> k) & 0x0001) == 1) {
-  //          mRed[index] = r[k];
-  //          mGreen[index] = g[k];
-  //          mBlue[index] = b[k];
-  //        }
-  //      }
 }
 
-void GridView::displayRandomTerrainGrid(const UnsignedByteGrid * grid)
+void GridView::displayWalkerGrid(const UnsignedShortGrid * grid)
 {
   int index = 0;
   for (int i = 0; i < GridSize; i++) {
     for (int j = 0; j < GridSize; j++) {
+      mRed[index] = 0;
+      mBlue[index] = 0;
+      mGreen[index] = 0;
+
       int value = grid->getData(index);
-      if (value == 64) {
+      if (value > 1) {
         mRed[index] = 255;
-        mGreen[index] = 0;
-        mBlue[index] = 0;
-      }
-      else {
-        mRed[index] = 0;
-        mBlue[index] = 255;
-        mGreen[index] = 0;
       }
       index++;
     }
   }
   update();
+
+    for (int i = 0; i < MapSize; i++) {
+      if (grid->getData(i) > 255)
+        qDebug() << grid->getData(i);
+    }
 }
 
 void GridView::paintEvent(QPaintEvent *)

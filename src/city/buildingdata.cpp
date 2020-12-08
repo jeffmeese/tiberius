@@ -9,11 +9,22 @@ static const int32_t DATA_SIZE = 256000;
 BuildingData::BuildingData()
   : DataVector<Building>(MAX_BUILDINGS)
 {
+  mHighestId = mHighestIdInUse = 0;
 }
 
 BuildingData::~BuildingData()
 {
 
+}
+
+int32_t BuildingData::highestIdInUse() const
+{
+  return mHighestIdInUse;
+}
+
+int32_t BuildingData::highestIdUsed() const
+{
+  return mHighestId;
 }
 
 void BuildingData::loadFromDataStream(QDataStream & dataStream)
@@ -27,7 +38,6 @@ void BuildingData::loadFromDataStream(QDataStream & dataStream)
   }
 }
 
-
 void BuildingData::saveToDataStream(QDataStream & dataStream) const
 {
   QDataStream byteStream;
@@ -38,6 +48,16 @@ void BuildingData::saveToDataStream(QDataStream & dataStream) const
   }
 
   QByteArray byteArray;
-  streamio::writeCompressedData(byteStream, byteArray, DATA_SIZE);
+  streamio::writeCompressedData(byteStream, byteArray);
   dataStream.device()->write(byteArray);
+}
+
+void BuildingData::setHighestIdInUse(int32_t value)
+{
+  mHighestIdInUse = value;
+}
+
+void BuildingData::setHighestIdUsed(int32_t value)
+{
+  mHighestId = value;
 }

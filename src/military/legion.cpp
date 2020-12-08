@@ -2,6 +2,8 @@
 
 #include "application/tiberiusapplication.h"
 
+#include "core/streamio.h"
+
 #include "graphics/imagegroups.h"
 #include "graphics/sgimagedata.h"
 #include "graphics/sgimagerecord.h"
@@ -11,10 +13,12 @@
 
 #include "soldier.h"
 
-Legion::Legion()
+#include <QDebug>
+
+Legion::Legion(int32_t id)
 {
   mType = Type::Legionnaires;
-  mId = 0;
+  mId = id;
   mAcademyTrained = false;
   mEmpireService = false;
   mMorale = Morale::Average;
@@ -47,7 +51,15 @@ int32_t Legion::id() const
 
 void Legion::loadFromDataStream(QDataStream &dataStream)
 {
+  uint8_t value = streamio::readUInt8(dataStream);
+  dataStream.skipRawData(127);
 
+  qDebug() << value;
+
+  //for (int32_t i = 0; i < 32; i++) {
+  //  int32_t value = streamio::readInt32(dataStream);
+  //  qDebug() << value;
+  //}
 }
 
 Legion::Morale Legion::morale() const

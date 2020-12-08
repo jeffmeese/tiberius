@@ -115,9 +115,9 @@ public:
 
 public:
   TIBERIUS_LIB_DECL void loadFromFile(const QString & fileName);
-  TIBERIUS_LIB_DECL void loadFromStream(QDataStream & dataStream, bool compressedGrids);
-  TIBERIUS_LIB_DECL void saveToFile(const QString & fileName) const;
-  TIBERIUS_LIB_DECL void saveToStream(QDataStream & dataStream, bool compressedGrids) const;
+  TIBERIUS_LIB_DECL void loadFromStream(QDataStream & dataStream, bool compressed);
+  TIBERIUS_LIB_DECL void saveToFile(const QString & fileName, bool compressed = true) const;
+  TIBERIUS_LIB_DECL void saveToStream(QDataStream & dataStream, bool compressed = true) const;
 
 public:
   static const int MAX_ALLOWED_BUILDINGS = 50;
@@ -130,6 +130,9 @@ public:
   static const int MAX_MISSION_DESCRIPTION = 64;
   static const int MAX_PRICE_CHANGES = 20;
   static const int MAX_REQUESTS = 20;
+
+private:
+  void init();
 
 private:
   using ByteGridPtr = std::unique_ptr<UnsignedByteGrid>;
@@ -236,10 +239,5 @@ private:
   QString mPlayerName;
   QString mScenarioName;
 };
-
-inline void Mission::setCampaignMission(int32_t value)
-{
-  mCampaignMission = value;
-}
 
 #endif // MISSION_H

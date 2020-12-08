@@ -37,12 +37,14 @@ public:
 public:
   TIBERIUS_LIB_DECL void loadFromFile(const QString & fileName);
   TIBERIUS_LIB_DECL void loadFromStream(QDataStream & dataStream);
-  TIBERIUS_LIB_DECL void saveToFile(const QString & fileName) const;
-  TIBERIUS_LIB_DECL void saveToStream(QDataStream & dataStream) const;
+  TIBERIUS_LIB_DECL void saveToFile(const QString & fileName, bool compressed = true) const;
+  TIBERIUS_LIB_DECL void saveToStream(QDataStream & dataStream, bool compressed = true) const;
 
 private:
+  void init();
   void readGameTime(QDataStream & dataStream);
   void readPlayerName(QDataStream & dataStream);
+  void writePlayerName(QDataStream & dataStream) const;
 
 private:
   using CityPtr = std::unique_ptr<City>;
@@ -60,6 +62,8 @@ private:
   int32_t mGameYear;
   int32_t mMaxGameYear;
   int32_t mTotalGameDays;
+  uint32_t mRandom1;
+  uint32_t mRandom2;
   CityPtr mCity;
   GladiatorRevoltPtr mGladiatorRevolt;
   Difficulty mDifficulty;

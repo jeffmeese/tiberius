@@ -34,7 +34,7 @@ inline DataVector<T>::DataVector(int32_t maxObjects)
 {
   mMaxObjects = maxObjects;
   for (int32_t i = 0; i < maxObjects; i++) {
-    Ptr p(new T());
+    Ptr p(new T(i));
     mData.push_back(std::move(p));
   }
 }

@@ -16,7 +16,7 @@ QByteArray streamio::readCompressedData(QDataStream &dataStream, int32_t size)
   PkZipData zipData;
   QByteArray compressedData = dataStream.device()->read(dataSize);
   byteArray = zipData.decompress(compressedData);
-
+  int sz = byteArray.size();
   return byteArray;
 }
 
@@ -67,12 +67,12 @@ QByteArray streamio::readUncompressedData(QDataStream &dataStream, int32_t size)
   return dataStream.device()->read(size);
 }
 
-void streamio::writeCompressedData(QDataStream & dataStream, QByteArray & byteArray, int32_t compressedSize)
+void streamio::writeCompressedData(QDataStream & dataStream, QByteArray & byteArray)
 {
-  dataStream << compressedSize;
-
   PkZipData zipData;
-  QByteArray compressedData = zipData.compress(byteArray, compressedSize);
+  QByteArray compressedData = zipData.compress(byteArray);
+  int32_t dataSize = compressedData.size();
+  dataStream << dataSize;
   dataStream.device()->write(compressedData);
 }
 

@@ -1,22 +1,6 @@
 #include "map.h"
 #include "bookmark.h"
 
-//UnsignedByteGridPtr mAqueductGrid;
-//UnsignedByteGridPtr mAqueductBackupGrid;
-//UnsignedByteGridPtr mBitfieldsGrid;
-//UnsignedShortGridPtr mBuildingGrid;
-//UnsignedByteGridPtr mBuildingDamageGrid;
-//UnsignedByteGridPtr mDesirabilityGrid;
-//UnsignedByteGridPtr mEdgeGrid;
-//UnsignedByteGridPtr mElevationGrid;
-//UnsignedShortGridPtr mFigureGrid;
-//UnsignedShortGridPtr mGraphicGrid;
-//UnsignedByteGridPtr mRandomGrid;
-//UnsignedByteGridPtr mSpriteGrid;
-//UnsignedByteGridPtr mSpriteGridBackup;
-//UnsignedShortGridPtr mTerrainGrid;
-//UnsignedByteGridPtr mTerrainRandomGrid;
-
 Map::Map()
 {
   mBookmarks.resize(MAX_BOOKMARKS);
@@ -29,7 +13,7 @@ Map::Map()
   mBitfieldsGrid.reset(new UnsignedByteGrid);
   mBuildingGrid.reset(new UnsignedShortGrid);
   mBuildingDamageGrid.reset(new UnsignedByteGrid);
-  mDesirabilityGrid.reset(new UnsignedByteGrid);
+  mDesirabilityGrid.reset(new ByteGrid);
   mEdgeGrid.reset(new UnsignedByteGrid);
   mElevationGrid.reset(new UnsignedByteGrid);
   mFigureGrid.reset(new UnsignedShortGrid);
@@ -95,14 +79,14 @@ const UnsignedByteGrid * Map::buildingDamageGrid() const
   return mBuildingDamageGrid.get();
 }
 
-UnsignedByteGrid * Map::desirabilityGrid()
+ByteGrid * Map::desirabilityGrid()
 {
   return mDesirabilityGrid.get();
 }
 
-const UnsignedByteGrid * Map::desirabilityGrid() const
+const ByteGrid * Map::desirabilityGrid() const
 {
-  return mEdgeGrid.get();
+  return mDesirabilityGrid.get();
 }
 
 UnsignedByteGrid * Map::edgeGrid()

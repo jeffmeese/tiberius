@@ -1,5 +1,5 @@
-#ifndef FIGUREDATA_H
-#define FIGUREDATA_H
+#ifndef WALKERDATA_H
+#define WALKERDATA_H
 
 #include "datamodel.h"
 #include "datavector.h"
@@ -12,21 +12,20 @@
 
 #include <QDataStream>
 
-class Figure;
-class FigureData
+class WalkerData
     : public DataModel
     , public DataVector<Figure>
 {
 public:
-  static const int32_t MAX_CHARACTERS = 10000;
+  static const int32_t MAX_FIGURES = 1000;
 
 public:
-  TIBERIUS_LIB_DECL FigureData();
-  TIBERIUS_LIB_DECL ~FigureData();
+  TIBERIUS_LIB_DECL WalkerData();
+  TIBERIUS_LIB_DECL ~WalkerData();
 
 public:
   TIBERIUS_LIB_DECL void loadFromDataStream(QDataStream & dataStream);
-  TIBERIUS_LIB_DECL void saveToDataStream(QDataStream & dataStream) const;
+  TIBERIUS_LIB_DECL void saveToDataStream(QDataStream & dataStream, bool compressed = true) const;
 };
 
-#endif // FIGUREDATA_H
+#endif // WALKERDATA_H
