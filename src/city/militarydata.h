@@ -16,8 +16,8 @@ class MilitaryData
     , public DataVector<Legion>
 {
 public:
-  static const int32_t MAX_LEGIONS = 6;
   static const int32_t MAX_FORMATIONS = 50;
+  static const int32_t MAX_ACTIVE_LEGIONS = 6;
 
 public:
   TIBERIUS_LIB_DECL MilitaryData();

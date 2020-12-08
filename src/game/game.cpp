@@ -81,10 +81,12 @@ void Game::loadFromStream(QDataStream &dataStream)
   mMap->spriteBackupGrid()->loadFromDataStream(dataStream, 26244, true);      // 15 Animation Grid 2
   mCity->walkerData()->loadFromDataStream(dataStream);                        // 16 Walker data (12800 compressed)
 
-//  mCity->routeData()->loadFromDataStream(dataStream);                         // 17 & 18 Route data (1200 and 300000 compressed)
-//  mCity->militaryData()->loadFromDataStream(dataStream);                      // 19&20 Formation Data
-//  streamio::readCompressedData(dataStream, 36136);                            // 21 Unknown
-//  readPlayerName(dataStream);                                                 // 22 Player name (70 uncompressed)
+  mCity->routeData()->loadFromDataStream(dataStream);                         // 17 & 18 Route data (1200 and 300000 compressed)
+  mCity->militaryData()->loadFromDataStream(dataStream);                      // 19&20 Formation Data
+  streamio::readCompressedData(dataStream, 36136);                            // 21 Unknown
+  //readPlayerName(dataStream);                                                 // 22 Player name (70 uncompressed)
+  dataStream.skipRawData(70);
+  mCity->buildingData()->loadFromDataStream(dataStream);                      // 23 Building data
 
   //streamio::readCompressedData(dataStream, 6400);
   //mCity->figureData()->loadFromDataStream(dataStream);

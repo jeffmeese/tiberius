@@ -6,7 +6,7 @@
 static const int32_t DATA_SIZE = 6400;
 
 MilitaryData::MilitaryData()
-  : DataVector<Legion>(MAX_LEGIONS)
+  : DataVector<Legion>(MAX_FORMATIONS)
 {
   mLastLegion = 0;
   mLastUsed = 0;
@@ -33,14 +33,13 @@ void MilitaryData::loadFromDataStream(QDataStream & dataStream)
   QDataStream byteStream(&byteArray, QIODevice::ReadOnly);
   byteStream.setByteOrder(QDataStream::LittleEndian);
 
-  for (int32_t i = 0; i < MAX_LEGIONS; i++) {
+  for (int32_t i = 0; i < MAX_FORMATIONS; i++) {
     get(i)->loadFromDataStream(byteStream);
   }
 
   mLastUsed = streamio::readInt32(dataStream);
   mLastLegion = streamio::readInt32(dataStream);
   mNumActive = streamio::readInt32(dataStream);
-  return;
 }
 
 int32_t MilitaryData::numActive() const
@@ -53,7 +52,7 @@ void MilitaryData::saveToDataStream(QDataStream & dataStream, bool compressed) c
   QDataStream byteStream;
   byteStream.setByteOrder(QDataStream::LittleEndian);
 
-  for (int i = 0; i < MAX_LEGIONS; i++) {
+  for (int i = 0; i < MAX_FORMATIONS; i++) {
     get(i)->saveToDataStream(byteStream);
   }
 

@@ -22,6 +22,9 @@ public:
   TIBERIUS_LIB_DECL Type type() const;
   TIBERIUS_LIB_DECL void setType(Type type);
 
+  TIBERIUS_LIB_DECL int32_t getField(int32_t index) const { return mFields[index]; }
+  TIBERIUS_LIB_DECL int32_t totalFields() const { return static_cast<int32_t>(mFields.size()); }
+
 public:
   TIBERIUS_LIB_DECL QPixmap getImage() const;
   TIBERIUS_LIB_DECL QString getName() const;
@@ -31,6 +34,7 @@ public:
 private:
   int32_t mId;
   Type mType;
+  std::vector<int32_t> mFields;
 };
 
 #endif // BUILDING_H
