@@ -61,125 +61,125 @@ int16_t Figure::imageId() const
 
 void Figure::loadFromDataStream(QDataStream & dataStream)
 {
-  mFields.push_back(streamio::readInt8(dataStream));  // Unknown
-  mFields.push_back(streamio::readInt8(dataStream));  // Unknown
-  mFields.push_back(streamio::readInt8(dataStream));  // Unknown
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt16(dataStream));
-  mFields.push_back(streamio::readInt16(dataStream));
-  mFields.push_back(streamio::readInt16(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt16(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt16(dataStream));
-  mFields.push_back(streamio::readInt16(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt16(dataStream));
-  mFields.push_back(streamio::readInt16(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt16(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
-  mFields.push_back(streamio::readInt8(dataStream));
+  mFields.push_back(streamio::readUInt8(dataStream));  // 1
+  mFields.push_back(streamio::readUInt8(dataStream));  // 2
+  mFields.push_back(streamio::readUInt8(dataStream));  // 3
+  mFields.push_back(streamio::readUInt8(dataStream));  // 4
+  mFields.push_back(streamio::readInt16(dataStream));  // 6
+  mFields.push_back(streamio::readInt16(dataStream));  // 8
+  mFields.push_back(streamio::readInt16(dataStream));  // 10
+  mFields.push_back(streamio::readUInt8(dataStream));  // 5
+  mFields.push_back(streamio::readUInt8(dataStream));  // 5
+  mFields.push_back(streamio::readUInt8(dataStream));  // 5
+  mFields.push_back(streamio::readUInt8(dataStream));  // 5
+  mFields.push_back(streamio::readUInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readUInt8(dataStream));  // 5
+  mFields.push_back(streamio::readUInt8(dataStream));  // 5
+  mFields.push_back(streamio::readUInt8(dataStream));  // 5
+  mFields.push_back(streamio::readUInt8(dataStream));  // 5
+  mFields.push_back(streamio::readUInt8(dataStream));  // 5
+  mFields.push_back(streamio::readUInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt16(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt16(dataStream));  // 5
+  mFields.push_back(streamio::readInt16(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt16(dataStream));  // 5
+  mFields.push_back(streamio::readInt16(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));   // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt16(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
+  mFields.push_back(streamio::readInt8(dataStream));  // 5
 }
 
 void Figure::saveToDataStream(QDataStream & dataStream) const
