@@ -1,4 +1,4 @@
-#include "figuredata.h"
+#include "walkerdata.h"
 
 #include "core/streamio.h"
 
@@ -6,37 +6,37 @@
 
 static const int32_t DATA_SIZE = 128000;
 
-FigureData::FigureData()
-  : DataVector<Figure>(MAX_CHARACTERS)
+WalkerData::WalkerData()
+  : DataVector<Figure>(MAX_FIGURES)
 {
 }
 
-FigureData::~FigureData()
+WalkerData::~WalkerData()
 {
 
 }
 
-void FigureData::loadFromDataStream(QDataStream & dataStream)
+void WalkerData::loadFromDataStream(QDataStream & dataStream)
 {
   QByteArray byteArray = streamio::readCompressedData(dataStream, DATA_SIZE);
   QDataStream byteStream(&byteArray, QIODevice::ReadOnly);
   byteStream.setByteOrder(QDataStream::LittleEndian);
 
-  for (int32_t i = 0; i < MAX_CHARACTERS; i++) {
-    get(i)->loadFromDataStream(dataStream);
+  for (int32_t i = 0; i < MAX_FIGURES; i++) {
+    get(i)->loadFromDataStream(byteStream);
   }
 }
 
-void FigureData::saveToDataStream(QDataStream & dataStream) const
+void WalkerData::saveToDataStream(QDataStream & dataStream, bool compressed) const
 {
   QDataStream byteStream;
   byteStream.setByteOrder(QDataStream::LittleEndian);
 
-  for (int i = 0; i < MAX_CHARACTERS; i++) {
+  for (int i = 0; i < MAX_FIGURES; i++) {
     get(i)->saveToDataStream(byteStream);
   }
 
   QByteArray byteArray;
-  streamio::writeCompressedData(byteStream, byteArray, DATA_SIZE);
+  streamio::writeCompressedData(byteStream, byteArray);
   dataStream.device()->write(byteArray);
 }

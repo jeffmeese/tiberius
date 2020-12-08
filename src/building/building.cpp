@@ -1,10 +1,11 @@
 #include "building.h"
 
-Building::Building()
+#include "core/streamio.h"
+
+Building::Building(int32_t id)
 {
+  mId = id;
   mType = Type::None;
-  mWorkers = 0;
-  mWorkersNeeded = 0;
 }
 
 QPixmap Building::getImage() const
@@ -17,8 +18,142 @@ QString Building::getName() const
   return "";
 }
 
+int32_t Building::id() const
+{
+  return mId;
+}
+
 void Building::loadFromDataStream(QDataStream & dataStream)
 {
+  int8_t c;
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
+  c = streamio::readInt8(dataStream);
 }
 
 void Building::saveToDataStream(QDataStream & dataStream) const

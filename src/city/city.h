@@ -9,7 +9,6 @@ class BuildingData;
 class Camera;
 class EducationData;
 class EntertainmentData;
-class FigureData;
 class FinanceData;
 class HealthData;
 class ImperialData;
@@ -21,6 +20,7 @@ class ReligionData;
 class ResourceData;
 class RouteData;
 class TradeData;
+class WalkerData;
 
 class City
 {
@@ -50,8 +50,6 @@ public:
   TIBERIUS_LIB_DECL const EducationData * educationData() const;
   TIBERIUS_LIB_DECL EntertainmentData * entertainmentData();
   TIBERIUS_LIB_DECL const EntertainmentData * entertainmentData() const;
-  TIBERIUS_LIB_DECL FigureData * figureData();
-  TIBERIUS_LIB_DECL const FigureData * figureData() const;
   TIBERIUS_LIB_DECL FinanceData * financeData();
   TIBERIUS_LIB_DECL const FinanceData * financeData() const;
   TIBERIUS_LIB_DECL HealthData * healthData();
@@ -74,6 +72,8 @@ public:
   TIBERIUS_LIB_DECL const RouteData * routeData() const;
   TIBERIUS_LIB_DECL TradeData * tradeData();
   TIBERIUS_LIB_DECL const TradeData * tradeData() const;
+  TIBERIUS_LIB_DECL WalkerData * walkerData();
+  TIBERIUS_LIB_DECL const WalkerData * walkerData() const;
 
 private:
   Orientation mOrientation;
@@ -81,7 +81,6 @@ private:
   std::unique_ptr<Camera> mCamera;
   std::unique_ptr<EducationData> mEducationData;
   std::unique_ptr<EntertainmentData> mEntertainmentData;
-  std::unique_ptr<FigureData> mFigureData;
   std::unique_ptr<FinanceData> mFinanceData;
   std::unique_ptr<HealthData> mHealthData;
   std::unique_ptr<ImperialData> mImperialData;
@@ -93,6 +92,7 @@ private:
   std::unique_ptr<ResourceData> mResourceData;
   std::unique_ptr<RouteData> mRouteData;
   std::unique_ptr<TradeData> mTradeData;
+  std::unique_ptr<WalkerData> mWalkerData;
 };
 
 inline BuildingData * City::buildingData()
@@ -133,16 +133,6 @@ inline EntertainmentData * City::entertainmentData()
 inline const EntertainmentData * City::entertainmentData() const
 {
   return mEntertainmentData.get();
-}
-
-inline FigureData * City::figureData()
-{
-  return mFigureData.get();
-}
-
-inline const FigureData * City::figureData() const
-{
-  return mFigureData.get();
 }
 
 inline FinanceData * City::financeData()
@@ -253,6 +243,16 @@ inline TradeData * City::tradeData()
 inline const TradeData * City::tradeData() const
 {
   return mTradeData.get();
+}
+
+inline WalkerData * City::walkerData()
+{
+  return mWalkerData.get();
+}
+
+inline const WalkerData * City::walkerData() const
+{
+  return mWalkerData.get();
 }
 
 #endif // CITY_H

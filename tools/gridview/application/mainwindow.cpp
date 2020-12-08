@@ -45,29 +45,79 @@ QStandardItem * MainWindow::createFileItem(QStandardItem * parentItem, const QSt
   QStandardItem * fileItem = new QStandardItem(text);
   fileItem->setData(type);
 
-  QStandardItem * graphicItem = new QStandardItem("Graphic");
-  graphicItem->setData(GraphicGrid);
-  fileItem->appendRow(graphicItem);
+  if (type == GameItem) {
+    QStandardItem * animationGrid = new QStandardItem("Animation");
+    animationGrid->setData(AnimationGrid);
+    fileItem->appendRow(animationGrid);
+  }
+
+  if (type == GameItem) {
+    QStandardItem * aqueductItem = new QStandardItem("Aqueduct");
+    aqueductItem->setData(AqueductGrid);
+    fileItem->appendRow(aqueductItem);
+  }
+
+  if (type == GameItem) {
+    QStandardItem * backupAnimationItem = new QStandardItem("Backup Animation");
+    backupAnimationItem->setData(BackpuAnimationGrid);
+    fileItem->appendRow(backupAnimationItem);
+  }
+
+  if (type == GameItem) {
+    QStandardItem * backupAqueductItem = new QStandardItem("Backup Aqueduct");
+    backupAqueductItem->setData(BackupAqueductGrid);
+    fileItem->appendRow(backupAqueductItem);
+  }
+
+  if (type == GameItem) {
+    QStandardItem * bitfieldItem = new QStandardItem("Bitfields");
+    bitfieldItem->setData(BitfieldGrid);
+    fileItem->appendRow(bitfieldItem);
+  }
+
+  if (type == GameItem) {
+    QStandardItem * buildingItem = new QStandardItem("Building");
+    buildingItem->setData(BuildingGrid);
+    fileItem->appendRow(buildingItem);
+  }
+
+  if (type == GameItem) {
+    QStandardItem * damageGrid = new QStandardItem("Damage");
+    damageGrid->setData(DamageGrid);
+    fileItem->appendRow(damageGrid);
+  }
+
+  if (type == GameItem) {
+    QStandardItem * desirabilityItem = new QStandardItem("Desirability");
+    desirabilityItem->setData(DesirabilityGrid);
+    fileItem->appendRow(desirabilityItem);
+  }
 
   QStandardItem * edgeItem = new QStandardItem("Edge");
   edgeItem->setData(EdgeGrid);
   fileItem->appendRow(edgeItem);
 
-  QStandardItem * terrainItem = new QStandardItem("Terrain");
-  terrainItem->setData(TerrainGrid);
-  fileItem->appendRow(terrainItem);
-
-  QStandardItem * randomTerrainItem = new QStandardItem("TerrainRandom");
-  randomTerrainItem->setData(RandomTerrainGrid);
-  fileItem->appendRow(randomTerrainItem);
-
-  QStandardItem * randomItem = new QStandardItem("Random");
-  randomItem->setData(RandomGrid);
-  fileItem->appendRow(randomItem);
-
   QStandardItem * elevationItem = new QStandardItem("Elevation");
   elevationItem->setData(ElevationGrid);
   fileItem->appendRow(elevationItem);
+
+  QStandardItem * graphicItem = new QStandardItem("Graphic");
+  graphicItem->setData(GraphicGrid);
+  fileItem->appendRow(graphicItem);
+
+  QStandardItem * mergingGrid = new QStandardItem("Merging");
+  mergingGrid->setData(MergingGrid);
+  fileItem->appendRow(mergingGrid);
+
+  if (type == GameItem) {
+    QStandardItem * walkerItem = new QStandardItem("Walkers");
+    walkerItem->setData(WalkerGrid);
+    fileItem->appendRow(walkerItem);
+  }
+
+  QStandardItem * terrainItem = new QStandardItem("Terrain");
+  terrainItem->setData(TerrainGrid);
+  fileItem->appendRow(terrainItem);
 
   parentItem->appendRow(fileItem);
 
@@ -128,11 +178,8 @@ void MainWindow::handleSelectionChanged()
     else if (gridType == TerrainGrid) {
       mUi->cGridView->displayTerrainGrid(mission->graphicGrid());
     }
-    else if (gridType == RandomTerrainGrid) {
-      mUi->cGridView->displayRandomTerrainGrid(mission->terrainRandomGrid());
-    }
-    else if (gridType == RandomGrid) {
-      mUi->cGridView->displayRandomGrid(mission->randomGrid());
+    else if (gridType == MergingGrid) {
+      mUi->cGridView->displayMergingGrid(mission->randomGrid());
     }
     else if (gridType == ElevationGrid) {
       mUi->cGridView->displayElevationGrid(mission->elevationGrid());
@@ -143,24 +190,47 @@ void MainWindow::handleSelectionChanged()
   if (gameItr != mGameMap.end()) {
     const Game * game = gameItr->second;
     GridType gridType = GridType(item->data().toInt());
-
     if (gridType == GraphicGrid) {
-       mUi->cGridView->displayGraphicGrid(game->map()->graphicGrid());
+      mUi->cGridView->displayGraphicGrid(game->map()->graphicGrid());
     }
     else if (gridType == EdgeGrid) {
       mUi->cGridView->displayEdgeGrid(game->map()->edgeGrid());
     }
+    else if (gridType == BuildingGrid) {
+      mUi->cGridView->displayBuildingGrid(game->map()->buildingGrid());
+    }
     else if (gridType == TerrainGrid) {
       mUi->cGridView->displayTerrainGrid(game->map()->terrainGrid());
     }
-    else if (gridType == RandomTerrainGrid) {
-      mUi->cGridView->displayRandomTerrainGrid(game->map()->terrainRandomGrid());
+    else if (gridType == AqueductGrid) {
+      mUi->cGridView->displayAqueductGrid(game->map()->aqueductGrid());
     }
-    else if (gridType == RandomGrid) {
-      mUi->cGridView->displayRandomGrid(game->map()->randomGrid());
+    else if (gridType == WalkerGrid) {
+      mUi->cGridView->displayWalkerGrid(game->map()->figureGrid());
+    }
+    else if (gridType == BitfieldGrid) {
+      mUi->cGridView->displayBitfieldGrid(game->map()->bitfieldsGrid());
+    }
+    else if (gridType == AnimationGrid) {
+      mUi->cGridView->displayAnimationGrid(game->map()->spriteGrid());
+    }
+    else if (gridType == MergingGrid) {
+      mUi->cGridView->displayMergingGrid(game->map()->randomGrid());
+    }
+    else if (gridType == DesirabilityGrid) {
+      mUi->cGridView->displayDesirabilityGrid(game->map()->desirabilityGrid());
     }
     else if (gridType == ElevationGrid) {
       mUi->cGridView->displayElevationGrid(game->map()->elevationGrid());
+    }
+    else if (gridType == DamageGrid) {
+      mUi->cGridView->displayDamageGrid(game->map()->buildingDamageGrid());
+    }
+    else if (gridType == BackupAqueductGrid) {
+      mUi->cGridView->displayAqueductGrid(game->map()->aqueductBackupGrid());
+    }
+    else if (gridType == BackpuAnimationGrid) {
+      mUi->cGridView->displayAnimationGrid(game->map()->spriteBackupGrid());
     }
   }
 }

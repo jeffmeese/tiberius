@@ -22,7 +22,7 @@ void RouteData::loadFromDataStream(QDataStream &dataStream)
   QByteArray routePaths = streamio::readCompressedData(dataStream, PATH_SIZE); // Route paths
 }
 
-void RouteData::saveToDataStream(QDataStream &dataStream) const
+void RouteData::saveToDataStream(QDataStream &dataStream, bool compressed) const
 {
 
 }

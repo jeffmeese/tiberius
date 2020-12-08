@@ -21,6 +21,51 @@
 
 Mission::Mission()
 {
+  init();
+}
+
+Mission::~Mission()
+{
+
+}
+
+int32_t Mission::campaignMission() const
+{
+  return mCampaignMission;
+}
+
+UnsignedByteGrid * Mission::edgeGrid()
+{
+  return mEdgeGrid.get();
+}
+
+const UnsignedByteGrid * Mission::edgeGrid() const
+{
+  return mEdgeGrid.get();
+}
+
+UnsignedByteGrid * Mission::elevationGrid()
+{
+  return mElevationGrid.get();
+}
+
+const UnsignedByteGrid * Mission::elevationGrid() const
+{
+  return mElevationGrid.get();
+}
+
+UnsignedShortGrid * Mission::graphicGrid()
+{
+  return mGraphicGrid.get();
+}
+
+const UnsignedShortGrid * Mission::graphicGrid() const
+{
+  return mGraphicGrid.get();
+}
+
+void Mission::init()
+{
   mEmperorChange = false;
   mEmpireExpanded = false;
   mGladiatorRevolt = false;
@@ -125,41 +170,6 @@ Mission::Mission()
   for (int i = 0; i < MAX_INVASION_POINTS; i++) {
     mInvasionPoints[i].reset(new Location);
   }
-}
-
-Mission::~Mission()
-{
-
-}
-
-UnsignedByteGrid * Mission::edgeGrid()
-{
-  return mEdgeGrid.get();
-}
-
-const UnsignedByteGrid * Mission::edgeGrid() const
-{
-  return mEdgeGrid.get();
-}
-
-UnsignedByteGrid * Mission::elevationGrid()
-{
-  return mElevationGrid.get();
-}
-
-const UnsignedByteGrid * Mission::elevationGrid() const
-{
-  return mElevationGrid.get();
-}
-
-UnsignedShortGrid * Mission::graphicGrid()
-{
-  return mGraphicGrid.get();
-}
-
-const UnsignedShortGrid * Mission::graphicGrid() const
-{
-  return mGraphicGrid.get();
 }
 
 void Mission::loadFromFile(const QString &fileName)
@@ -449,7 +459,17 @@ void Mission::loadFromStream(QDataStream &dataStream, bool compressedGrids)
   mSaved = true;
 }
 
-void Mission::saveToFile(const QString &fileName) const
+UnsignedByteGrid * Mission::randomGrid()
+{
+  return mRandomGrid.get();
+}
+
+const UnsignedByteGrid * Mission::randomGrid() const
+{
+  return mRandomGrid.get();
+}
+
+void Mission::saveToFile(const QString &fileName, bool compressed) const
 {
   QFile file(fileName);
   if (!file.open(QIODevice::WriteOnly)) {
@@ -459,17 +479,17 @@ void Mission::saveToFile(const QString &fileName) const
   }
 
   QDataStream dataStream(&file);
-  saveToStream(dataStream, false);
+  saveToStream(dataStream, compressed);
 }
 
-UnsignedByteGrid * Mission::randomGrid()
+void Mission::saveToStream(QDataStream & dataStream, bool compressed) const
 {
-  return mRandomGrid.get();
+  dataStream.setByteOrder(QDataStream::LittleEndian);
 }
 
-const UnsignedByteGrid * Mission::randomGrid() const
+void Mission::setCampaignMission(int32_t value)
 {
-  return mRandomGrid.get();
+  mCampaignMission = value;
 }
 
 UnsignedShortGrid * Mission::terrainGrid()
@@ -492,7 +512,3 @@ const UnsignedByteGrid * Mission::terrainRandomGrid() const
   return mTerrainRandomGrid.get();
 }
 
-void Mission::saveToStream(QDataStream & dataStream, bool compressedGrids) const
-{
-  dataStream.setByteOrder(QDataStream::LittleEndian);
-}

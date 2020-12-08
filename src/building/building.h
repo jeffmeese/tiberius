@@ -15,9 +15,10 @@ public:
   };
 
 public:
-  TIBERIUS_LIB_DECL Building();
+  TIBERIUS_LIB_DECL Building(int32_t id);
 
 public:
+  TIBERIUS_LIB_DECL int32_t id() const;
   TIBERIUS_LIB_DECL Type type() const;
   TIBERIUS_LIB_DECL void setType(Type type);
 
@@ -28,8 +29,7 @@ public:
   TIBERIUS_LIB_DECL void saveToDataStream(QDataStream & dataStream) const;
 
 private:
-  int32_t mWorkers;
-  int32_t mWorkersNeeded;
+  int32_t mId;
   Type mType;
 };
 

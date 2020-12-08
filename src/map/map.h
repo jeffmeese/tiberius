@@ -29,8 +29,8 @@ public:
   TIBERIUS_LIB_DECL const UnsignedShortGrid * buildingGrid() const;
   TIBERIUS_LIB_DECL UnsignedByteGrid * buildingDamageGrid();
   TIBERIUS_LIB_DECL const UnsignedByteGrid * buildingDamageGrid() const;
-  TIBERIUS_LIB_DECL UnsignedByteGrid * desirabilityGrid();
-  TIBERIUS_LIB_DECL const UnsignedByteGrid * desirabilityGrid() const;
+  TIBERIUS_LIB_DECL ByteGrid * desirabilityGrid();
+  TIBERIUS_LIB_DECL const ByteGrid * desirabilityGrid() const;
   TIBERIUS_LIB_DECL UnsignedByteGrid * edgeGrid();
   TIBERIUS_LIB_DECL const UnsignedByteGrid * edgeGrid() const;
   TIBERIUS_LIB_DECL UnsignedByteGrid * elevationGrid();
@@ -64,7 +64,7 @@ private:
   UnsignedByteGridPtr mBitfieldsGrid;
   UnsignedShortGridPtr mBuildingGrid;
   UnsignedByteGridPtr mBuildingDamageGrid;
-  UnsignedByteGridPtr mDesirabilityGrid;
+  ByteGridPtr mDesirabilityGrid;
   UnsignedByteGridPtr mEdgeGrid;
   UnsignedByteGridPtr mElevationGrid;
   UnsignedShortGridPtr mFigureGrid;

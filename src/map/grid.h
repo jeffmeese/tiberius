@@ -48,6 +48,22 @@ public:
     }
   }
 
+  void saveToDataStream(QDataStream & dataStream, int32_t dataSize, bool compressed)
+  {
+    if (!compressed) {
+      for (int i = 0; i < MapSize; i++) {
+        dataSize << mData[i];
+      }
+    }
+    else {
+      QByteArray byteArray;
+      for (int32_t i = 0; i < MapSize; i++)
+        byteArray.append(mData[i]);
+
+      streamio::writeCompressedData(dataStream, byteArray);
+    }
+  }
+
 private:
   T mData[MapSize];
 };

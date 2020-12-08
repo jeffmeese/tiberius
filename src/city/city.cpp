@@ -4,7 +4,6 @@
 #include "camera.h"
 #include "educationdata.h"
 #include "entertainmentdata.h"
-#include "figuredata.h"
 #include "financedata.h"
 #include "healthdata.h"
 #include "imperialdata.h"
@@ -16,6 +15,7 @@
 #include "resourcedata.h"
 #include "routedata.h"
 #include "tradedata.h"
+#include "walkerdata.h"
 
 #include "imperial/request.h"
 #include "military/legion.h"
@@ -27,7 +27,7 @@ City::City()
   mCamera.reset(new Camera);
   mEducationData.reset(new EducationData);
   mEntertainmentData.reset(new EntertainmentData);
-  mFigureData.reset(new FigureData);
+  mWalkerData.reset(new WalkerData);
   mFinanceData.reset(new FinanceData);
   mHealthData.reset(new HealthData);
   mImperialData.reset(new ImperialData);

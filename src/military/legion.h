@@ -51,7 +51,7 @@ public:
   };
 
 public:
-  TIBERIUS_LIB_DECL Legion();
+  TIBERIUS_LIB_DECL Legion(int32_t id);
   TIBERIUS_LIB_DECL ~Legion();
 
 public:

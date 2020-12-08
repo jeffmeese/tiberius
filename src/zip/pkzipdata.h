@@ -14,7 +14,7 @@ public:
   TIBERIUS_LIB_DECL ~PkZipData();
 
 public:
-  TIBERIUS_LIB_DECL QByteArray compress(QByteArray & byteArray, int32_t compressedSize);
+  TIBERIUS_LIB_DECL QByteArray compress(const QByteArray & byteArray);
   TIBERIUS_LIB_DECL QByteArray decompress(QByteArray & byteArray);
 
 private:
@@ -23,6 +23,7 @@ private:
   QString binaryString(uint16_t value);
   QString binaryString(uint8_t *buffer, int length);
   void processBits(uint16_t & value, int32_t numBits);
+  void writeLiteralByte(QString & bitString, uint8_t value);
 
 private:
   uint8_t mLiteralEncoding;        // Determines whether this chunk is a literal byte

@@ -37,10 +37,18 @@ private:
   {
     GraphicGrid = 0,
     EdgeGrid = 1,
-    TerrainGrid = 2,
-    RandomTerrainGrid = 3,
-    RandomGrid = 4,
-    ElevationGrid = 5
+    BuildingGrid = 2,
+    TerrainGrid = 3,
+    AqueductGrid = 4,
+    WalkerGrid = 5,
+    BitfieldGrid = 6,
+    AnimationGrid = 7,
+    MergingGrid = 8,
+    DesirabilityGrid = 9,
+    ElevationGrid = 10,
+    DamageGrid = 11,
+    BackupAqueductGrid = 12,
+    BackpuAnimationGrid = 13
   };
 
 public:

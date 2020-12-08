@@ -280,8 +280,8 @@ void MainWindow::handleLoadGame(const QString & fileName)
   QString c3Dir = mApplication.c3Dir();
   QString filePath = c3Dir + QDir::separator() + fileName;
 
-  std::unique_ptr<Mission> mission(new Mission);
-  mission->loadFromFile(filePath);
+  //std::unique_ptr<Mission> mission(new Mission);
+  //mission->loadFromFile(filePath);
 
   mGame.reset(new Game);
   mGameWindow->setGame(mGame.get());

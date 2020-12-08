@@ -30,7 +30,6 @@ set(HDR_FILES
   city/datavector.h
   city/educationdata.h
   city/entertainmentdata.h
-  city/figuredata.h
   city/financedata.h
   city/healthdata.h
   city/imperialdata.h
@@ -42,6 +41,7 @@ set(HDR_FILES
   city/religiondata.h
   city/routedata.h
   city/tradedata.h
+  city/walkerdata.h
   core/abstractfactory.h
   core/painter.h
   core/streamio.h
@@ -51,6 +51,7 @@ set(HDR_FILES
   entertainment/festival.h
   figure/figure.h
   game/difficulty.h
+  game/direction.h
   game/game.h
   game/player.h
   graphics/font.h
@@ -123,7 +124,6 @@ set(SRC_FILES
   city/datamodel.cpp
   city/educationdata.cpp
   city/entertainmentdata.cpp
-  city/figuredata.cpp
   city/financedata.cpp
   city/healthdata.cpp
   city/imperialdata.cpp
@@ -135,6 +135,7 @@ set(SRC_FILES
   city/resourcedata.cpp
   city/routedata.cpp
   city/tradedata.cpp
+  city/walkerdata.cpp
   core/painter.cpp
   core/streamio.cpp
   dialog/dialog.cpp
