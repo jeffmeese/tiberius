@@ -248,12 +248,11 @@ QByteArray PkZipData::decompress(QByteArray &byteArray)
       // Length-Offset pair
 
       processBits(currentByteValue, 1);
-
       int32_t lengthIndex = mLengthIndexTable[currentByteValue & 0xff];
       int32_t numLengthBits = lengthBits[lengthIndex];
       processBits(currentByteValue, numLengthBits);
-      int length = lengthBaseValue[lengthIndex];
 
+      int length = lengthBaseValue[lengthIndex];
       int32_t numPadBits = lengthFillBits[lengthIndex];
       if (numPadBits > 0) {
         int padValue = currentByteValue & ((1 << numPadBits) - 1);
@@ -264,6 +263,7 @@ QByteArray PkZipData::decompress(QByteArray &byteArray)
         }
         processBits(currentByteValue, numPadBits);
         length = lengthBaseValue[lengthIndex] + padValue;
+
       }
 
       int32_t offsetIndex = mOffsetIndexTable[currentByteValue & 0xff];
@@ -337,6 +337,7 @@ void PkZipData::writeCopyOffset(QString & bitString, int32_t offset, int32_t len
 
   int bits = lengthToBits[length];
 
+  bitString += "1";
   QString lengthString = QStringLiteral("%1").arg(length, bits, 2, QChar('0'));
   std::cout << length << " " << lengthString.toStdString() << "\n";
 }

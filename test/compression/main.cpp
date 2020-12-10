@@ -17,46 +17,31 @@
 
 int main(int argc, char ** argv)
 {
-  std::unique_ptr<Game> game(new Game);
+  QString bitString;
+  bitString += "00000000";
+  bitString += "00000100";
+  bitString += "10000010";
+  bitString += "00100100";
+  bitString += "00100101";
+  bitString += "10000110";
+  bitString += "10000000";
+  bitString += "01111111";
 
-  QString inputFileName("/data/caesar3/das-miletus-finish.sav");
-  QString outputFile("/home/jmeese/temp.sav");
-
-  QFile file(inputFileName);
-  if (!file.open(QIODevice::ReadOnly)) {
-    std::ostringstream oss;
-    oss << "Could not open file " << inputFileName.toStdString();
-    std::cout << oss.str() << "\n";
-    return -1;
+  QByteArray byteArray;
+  for (int i = 0; i < bitString.size() / 8; i++) {
+    QString s = bitString.mid(i*8, 8);
+    uint8_t value = s.toUInt(nullptr, 2);
+    std::cout << QStringLiteral("%1").arg(value, 2, 16, QChar('0')).toStdString() << "\n";
+    byteArray.append(value);
   }
 
-  QDataStream dataStream(&file);
-  dataStream.skipRawData(8);
-
   PkZipData zipData;
-  int32_t dataSize;
-  dataStream >> dataSize;
-  QByteArray originalCompressed = dataStream.device()->read(dataSize);
-  QByteArray uncompressed = zipData.decompress(originalCompressed);
-  QByteArray newCompressed = zipData.compress(uncompressed);
-
-//  if (newCompressed.size() != uncompressed.size()) {
-//    std::cout << "Sizes do not match\n";
-//    std::cout << "Original " << originalCompressed.size() << "\n";
-//    std::cout << "New " << newCompressed.size() << "\n";
-//    return -1;
-//  }
-
-//  for (int i = 0; i < newCompressed.size(); i++) {
-//    if (newCompressed[i] != uncompressed[i]) {
-//      std::cout << "Error at index " << i << "\n";
-//      return -1;
-//    }
-//  }
-
-  //std::cout << "Compression test passed\n";
-
-  //game->saveToFile(outputFile);
+  QByteArray decompressed = zipData.decompress(byteArray);
+  for (int i = 0; i < decompressed.size(); i++) {
+    uint8_t data = decompressed.at(i);
+    QString s = QStringLiteral("%1").arg(data, 2, 16, QChar('0'));
+    std::cout << char(data) << "\n";
+  }
 
   return 0;
 }
