@@ -23,6 +23,7 @@ private:
   QString binaryString(uint16_t value);
   QString binaryString(uint8_t *buffer, int length);
   void processBits(uint16_t & value, int32_t numBits);
+  void writeCopyOffset(QString & bitString, int32_t offset, int32_t length);
   void writeLiteralByte(QString & bitString, uint8_t value);
 
 private:

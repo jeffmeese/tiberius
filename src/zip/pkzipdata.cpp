@@ -9,7 +9,9 @@
 #include <cmath>
 #include <iostream>
 #include <map>
+#include <set>
 #include <string.h>
+#include <vector>
 
 // The number of bits for each copy length range
 static const int lengthBits[16] = {
@@ -129,46 +131,93 @@ QByteArray PkZipData::compress(const QByteArray &byteArray)
 
   dataStream << literalEncoding << dictionarySize;
 
+  QString bitString;
+  std::map<char, int> indexMap;
+  for (int i = 0; i < byteArray.size(); i++) {
+    char byte = byteArray.at(i);
+    if (indexMap.find(byte) == indexMap.end()) {
+      indexMap[byte] = indexMap.size();
+      writeLiteralByte(bitString, byte);
+    }
+    else {
+      int numBytesMatched = 1;
+      int offset = indexMap[byte];
+      while (true) {
+        if (++i == byteArray.size())
+          break;
+
+        char byte2 = byteArray.at(i);
+        if (byte2 != byte)
+          break;
+
+        numBytesMatched++;
+        if (numBytesMatched == 518)
+          break;
+      }
+
+      if (numBytesMatched == 1) {
+        writeLiteralByte(bitString, byte);
+      }
+      else {
+        writeCopyOffset(bitString, offset, numBytesMatched);
+      }
+    }
+  }
+
+//  std::cout << byteTable.size() << "\n";
+//  for (int i = 0; i < byteArray.size(); i++) {
+//    char byte = byteArray.at(i);
+//    int index = indexMap[byte];
+//    std::list<int> & posList = byteTable[index];
+//    std::cout << (int)byte << " " << posList.size() << "\n";
+//    //std::cout << (int)byte;
+//    for (std::list<int>::iterator itr = posList.begin(); itr != posList.end(); ++itr) {
+//    //  std::cout << " " << *itr;
+//    }
+//    //std::cout << "\n";
+//  }
+
   // I'm lazy so I'm going to create a string of bits that I can
   // translate into a set of bytes at the end. This is going
   // to be hella slow but I'm not worried about it.
-  QString bitString;
-  std::map<uint8_t, int32_t> dictionary;
-  uint8_t * dataBuffer = new uint8_t[4096];
-  uint8_t * inputBuffer = (uint8_t *)byteArray.data();
-  int32_t startIndex = 0;
-  bool endOfStream = false;
-  while (!endOfStream) {
-    int32_t length = 4096;
-    if (startIndex + length >= byteArray.size()) {
-      length = byteArray.size() - startIndex;
-      endOfStream = true;
-    }
+//  QString bitString;
+//  std::map<uint8_t, int32_t> dictionary;
+//  uint8_t * dataBuffer = new uint8_t[4096];
+//  uint8_t * inputBuffer = (uint8_t *)byteArray.data();
+//  int32_t startIndex = 0;
+//  bool endOfStream = false;
+//  while (!endOfStream) {
+//    int32_t length = 4096;
+//    if (startIndex + length >= byteArray.size()) {
+//      length = byteArray.size() - startIndex;
+//      endOfStream = true;
+//    }
 
-    memcpy(dataBuffer, &inputBuffer[startIndex], length);
-    for (int i = 0; i < length; i++) {
-      uint8_t byteValue = dataBuffer[i];
-      writeLiteralByte(bitString, byteValue);
-    }
+//    memcpy(dataBuffer, &inputBuffer[startIndex], length);
+//    for (int i = 0; i < length; i++) {
+//      uint8_t byteValue = dataBuffer[i];
+//      writeLiteralByte(bitString, byteValue);
+//    }
 
-    startIndex += length;
-  }
+//    startIndex += length;
+//  }
 
-  delete [] dataBuffer;
+//  delete [] dataBuffer;
 
-  // Make the bit string a multiple of 8
-  while (bitString.size() % 8) {
-    bitString += "0";
-  }
+//  // Make the bit string a multiple of 8
+//  while (bitString.size() % 8) {
+//    bitString += "0";
+//  }
 
-  while (bitString.size() > 0) {
-    QString byteString = bitString.mid(0, 8);
-    uint8_t value = byteString.toUInt();
-    dataStream << value;
-    bitString.remove(0, 8);
-  }
+//  while (bitString.size() > 0) {
+//    QString byteString = bitString.mid(0, 8);
+//    uint8_t value = byteString.toUInt();
+//    dataStream << value;
+//    bitString.remove(0, 8);
+//  }
 
-  return output;
+//  return output;
+  return QByteArray();
 }
 
 QByteArray PkZipData::decompress(QByteArray &byteArray)
@@ -267,6 +316,29 @@ void PkZipData::processBits(uint16_t &value, int32_t numBits)
   value |= (mDataBuffer[mNextBufferPos++] << 8);
   value >>= (numBits - mBitsRemaining);
   mBitsRemaining += 8 - numBits;
+}
+
+void PkZipData::writeCopyOffset(QString & bitString, int32_t offset, int32_t length)
+{
+  std::map<int32_t, int32_t> lengthToBits;
+  lengthToBits[2] = 3;
+  lengthToBits[3] = 2;
+  for (int i = 4; i < 6; i++) lengthToBits[i] = 3;
+  for (int i = 6; i < 9; i++) lengthToBits[i] = 4;
+  for (int i = 9; i < 10; i++) lengthToBits[i] = 5;
+  for (int i = 10; i < 12; i++) lengthToBits[i] = 6;
+  for (int i = 12; i < 16; i++) lengthToBits[i] = 7;
+  for (int i = 16; i < 24; i++) lengthToBits[i] = 8;
+  for (int i = 24; i < 40; i++) lengthToBits[i] = 9;
+  for (int i = 40; i < 72; i++) lengthToBits[i] = 0;
+  for (int i = 72; i < 136; i++) lengthToBits[i] = 11;
+  for (int i = 136; i < 264; i++) lengthToBits[i] = 12;
+  for (int i = 264; i < 519; i++) lengthToBits[i] = 13;
+
+  int bits = lengthToBits[length];
+
+  QString lengthString = QStringLiteral("%1").arg(length, bits, 2, QChar('0'));
+  std::cout << length << " " << lengthString.toStdString() << "\n";
 }
 
 void PkZipData::writeLiteralByte(QString & bitString, uint8_t value)
