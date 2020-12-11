@@ -43,5 +43,34 @@ int main(int argc, char ** argv)
     std::cout << char(data) << "\n";
   }
 
+  QByteArray compressed = zipData.compress(decompressed);
+  for (int i = 0; i < compressed.size(); i++) {
+    uint8_t data = compressed.at(i);
+    QString s = QStringLiteral("%1").arg(data, 2, 16, QChar('0'));
+    std::cout << s.toStdString() << "\n";
+  }
+
+//  std::cout << "\n";
+//  QByteArray newDecompressed = zipData.decompress(compressed);
+//  for (int i = 0; i < newDecompressed.size(); i++) {
+//    uint8_t data = newDecompressed.at(i);
+//    QString s = QStringLiteral("%1").arg(data, 2, 16, QChar('0'));
+//    std::cout << char(data) << "\n";
+//  }
+
+//  QString fileName("/home/jmeese/applications/caesar3/das-miletus-finish.sav");
+//  QFile file(fileName);
+//  if (!file.open(QIODevice::ReadOnly)) {
+//    std::ostringstream oss;
+//    oss << "Could not open file " << fileName.toStdString();
+//    throw std::invalid_argument(oss.str());
+//  }
+
+//  PkZipData zipData;
+//  QDataStream dataStream(&file);
+//  dataStream.skipRawData(8);
+//  QByteArray byteArray = streamio::readCompressedData(dataStream, 52488);
+//  QByteArray compressed = zipData.compress(byteArray);
+
   return 0;
 }

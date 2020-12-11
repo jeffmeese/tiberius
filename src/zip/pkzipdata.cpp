@@ -7,9 +7,11 @@
 #include <QString>
 
 #include <cmath>
+#include <iomanip>
 #include <iostream>
 #include <map>
 #include <set>
+#include <sstream>
 #include <string.h>
 #include <vector>
 
@@ -56,21 +58,12 @@ static const int offsetRepr[64] = {
 };
 
 PkZipData::PkZipData()
-  : mLiteralEncoding(0)
-  , mWindowSize(0)
-  , mDictionarySize(0)
-  , mBitsRemaining(0)
-  , mNextBufferPos(0)
-  , mDataBuffer(0)
 {  
   buildLookupTables();
 }
 
 PkZipData::~PkZipData()
 {
-  if (mDataBuffer != nullptr) {
-    delete [] mDataBuffer;
-  }
 }
 
 QString PkZipData::binaryString(uint8_t *buffer, int length)
@@ -121,27 +114,30 @@ void PkZipData::buildLookupTables()
   }
 }
 
-QByteArray PkZipData::compress(const QByteArray &byteArray)
+QByteArray PkZipData::compress(const QByteArray &byteArray, uint8_t literalEncoding, uint8_t windowSize)
 {
   QByteArray output;
   QDataStream dataStream(&output, QIODevice::WriteOnly);
+  dataStream.setByteOrder(QDataStream::LittleEndian);
 
-  uint8_t literalEncoding = 0;
-  int32_t dictionarySize = 4096;
-
-  dataStream << literalEncoding << dictionarySize;
+  //int32_t dictionarySize = pow(2, windowSize) - 1;
+  dataStream << literalEncoding << windowSize;
 
   QString bitString;
+  //bitString += QStringLiteral("%1").arg(literalEncoding, 8, 2, QChar('0'));
+  //bitString += QStringLiteral("%1").arg(windowSize, 8, 2, QChar('0'));
+
   std::map<char, int> indexMap;
   for (int i = 0; i < byteArray.size(); i++) {
+
     char byte = byteArray.at(i);
     if (indexMap.find(byte) == indexMap.end()) {
       indexMap[byte] = indexMap.size();
       writeLiteralByte(bitString, byte);
     }
     else {
+      int byteOffset = indexMap.size() - 1 - indexMap[byte];
       int numBytesMatched = 1;
-      int offset = indexMap[byte];
       while (true) {
         if (++i == byteArray.size())
           break;
@@ -159,55 +155,41 @@ QByteArray PkZipData::compress(const QByteArray &byteArray)
         writeLiteralByte(bitString, byte);
       }
       else {
+        int32_t offset = byteOffset;
         writeCopyOffset(bitString, offset, numBytesMatched);
+        //indexMap[byte] = i;
       }
     }
   }
 
-//  std::cout << byteTable.size() << "\n";
-//  for (int i = 0; i < byteArray.size(); i++) {
-//    char byte = byteArray.at(i);
-//    int index = indexMap[byte];
-//    std::list<int> & posList = byteTable[index];
-//    std::cout << (int)byte << " " << posList.size() << "\n";
-//    //std::cout << (int)byte;
-//    for (std::list<int>::iterator itr = posList.begin(); itr != posList.end(); ++itr) {
-//    //  std::cout << " " << *itr;
-//    }
-//    //std::cout << "\n";
+  bitString += "1000000011111111";
+
+  // Make the bit string a multiple of 8
+  while (bitString.size() % 8) {
+    bitString += "0";
+  }
+
+  //output = bitString.toUtf8();
+  int numBytes = bitString.size() / 16;
+  for (int i = 0; i < numBytes; i++) {
+    int index = i*16;
+    QString s = bitString.mid(index, 16);
+    uint16_t v = (s.toUInt(nullptr, 2) & 0xff);
+    dataStream << v;
+  }
+
+//  QByteArray arr = bitString.toUtf8();
+//  for (int i = 0; i < arr.size(); i++) {
+//    unsigned char v = arr[i];
+//    QString s(v);
+//    uint8_t value = s.toUInt();
+//    //uint8_t value = ;
+//    dataStream << value;
 //  }
-
-  // I'm lazy so I'm going to create a string of bits that I can
-  // translate into a set of bytes at the end. This is going
-  // to be hella slow but I'm not worried about it.
-//  QString bitString;
-//  std::map<uint8_t, int32_t> dictionary;
-//  uint8_t * dataBuffer = new uint8_t[4096];
-//  uint8_t * inputBuffer = (uint8_t *)byteArray.data();
-//  int32_t startIndex = 0;
-//  bool endOfStream = false;
-//  while (!endOfStream) {
-//    int32_t length = 4096;
-//    if (startIndex + length >= byteArray.size()) {
-//      length = byteArray.size() - startIndex;
-//      endOfStream = true;
-//    }
-
-//    memcpy(dataBuffer, &inputBuffer[startIndex], length);
-//    for (int i = 0; i < length; i++) {
-//      uint8_t byteValue = dataBuffer[i];
-//      writeLiteralByte(bitString, byteValue);
-//    }
-
-//    startIndex += length;
-//  }
-
-//  delete [] dataBuffer;
-
-//  // Make the bit string a multiple of 8
-//  while (bitString.size() % 8) {
-//    bitString += "0";
-//  }
+  return output;
+  //return arr;
+  //dataStream.writeBytes(arr.data(), arr.size());
+  //dataStream << outputArray;
 
 //  while (bitString.size() > 0) {
 //    QString byteString = bitString.mid(0, 8);
@@ -216,8 +198,7 @@ QByteArray PkZipData::compress(const QByteArray &byteArray)
 //    bitString.remove(0, 8);
 //  }
 
-//  return output;
-  return QByteArray();
+  //return output;
 }
 
 QByteArray PkZipData::decompress(QByteArray &byteArray)
@@ -226,62 +207,80 @@ QByteArray PkZipData::decompress(QByteArray &byteArray)
   dataStream.setByteOrder(QDataStream::LittleEndian);
 
   // Read the header
-  dataStream >> mLiteralEncoding >> mWindowSize;
-
-  // Delete any current data
-  if (mDataBuffer != nullptr) {
-    delete [] mDataBuffer;
-  }
+  uint8_t literalEncoding = 0;
+  uint8_t windowSize = 0;
+  dataStream >> literalEncoding >> windowSize;
 
   int32_t bufferLength = byteArray.size()-2;
-  mDataBuffer = new uint8_t[bufferLength];
-  mDictionarySize = pow(2, mWindowSize) - 1;
-  dataStream.readRawData((char*)mDataBuffer, bufferLength);
+  uint8_t * dataBuffer = new uint8_t[bufferLength];
+  int32_t dictionarySize = pow(2, windowSize) - 1;
+  dataStream.readRawData((char*)dataBuffer, bufferLength);
 
-  mNextBufferPos = 1;
-  mBitsRemaining = 0;
+  int32_t nextBufferPos = 1;
+  int32_t bitsRemaining = 0;
   QByteArray output;
-  uint16_t currentByteValue = static_cast<uint16_t>(mDataBuffer[0]);
+  uint16_t currentByteValue = static_cast<uint16_t>(dataBuffer[0]);
   while (true) {
 
     if (currentByteValue & 1) {
       // Length-Offset pair
 
-      processBits(currentByteValue, 1);
+      qDebug() << QStringLiteral("%1").arg( (currentByteValue & 0xff), 16, 2, QChar('0'));
+      processBits(currentByteValue, 1, dataBuffer, nextBufferPos, bitsRemaining);
       int32_t lengthIndex = mLengthIndexTable[currentByteValue & 0xff];
       int32_t numLengthBits = lengthBits[lengthIndex];
-      processBits(currentByteValue, numLengthBits);
+      qDebug() << QStringLiteral("%1").arg( (currentByteValue & 0xff), 16, 2, QChar('0'));
+      processBits(currentByteValue, numLengthBits, dataBuffer, nextBufferPos, bitsRemaining);
+      qDebug() << QStringLiteral("%1").arg( (currentByteValue & 0xff), 16, 2, QChar('0'));
 
-      int length = lengthBaseValue[lengthIndex];
+      int32_t length = lengthBaseValue[lengthIndex];
       int32_t numPadBits = lengthFillBits[lengthIndex];
       if (numPadBits > 0) {
-        int padValue = currentByteValue & ((1 << numPadBits) - 1);
+        int32_t padValue = currentByteValue & ((1 << numPadBits) - 1);
 
         // Check for the end of the data
         if (padValue == 0xff) {
           break;
         }
-        processBits(currentByteValue, numPadBits);
+        processBits(currentByteValue, numPadBits, dataBuffer, nextBufferPos, bitsRemaining);
+        qDebug() << QStringLiteral("%1").arg( (currentByteValue & 0xff), 16, 2, QChar('0'));
         length = lengthBaseValue[lengthIndex] + padValue;
-
       }
 
-      int32_t offsetIndex = mOffsetIndexTable[currentByteValue & 0xff];
+      qDebug() << QStringLiteral("%1").arg( (currentByteValue & 0x3f), 16, 2, QChar('0'));
+      qDebug() << QStringLiteral("%1").arg( (currentByteValue & 0xff), 16, 2, QChar('0'));
+      uint8_t offsetIndex = mOffsetIndexTable[currentByteValue & 0xff];
       int32_t numOffsetBits = offsetBits[offsetIndex];
-      processBits(currentByteValue, numOffsetBits);
+      processBits(currentByteValue, numOffsetBits, dataBuffer, nextBufferPos, bitsRemaining);
+      //qDebug() << QStringLiteral("%1").arg( (currentByteValue & 0xff), 16, 2, QChar('0'));
 
-      int offset = 0;
+      int32_t offset = 0;
+      uint16_t byteVal = (currentByteValue & dictionarySize);
+      uint16_t offsetWin = (offsetIndex << windowSize);
       if (length == 2) {
         offset = (currentByteValue & 3) | (offsetIndex << 2);
-        processBits(currentByteValue, 2);
+        processBits(currentByteValue, 2, dataBuffer, nextBufferPos, bitsRemaining);
+        qDebug() << QStringLiteral("%1").arg( (currentByteValue & 0xff), 16, 2, QChar('0'));
       }
       else {
-        offset = (currentByteValue & mDictionarySize) | (offsetIndex << mWindowSize);
-        processBits(currentByteValue, mWindowSize);
+        offset = (currentByteValue & dictionarySize) | (offsetIndex << windowSize);
+        processBits(currentByteValue, windowSize, dataBuffer, nextBufferPos, bitsRemaining);
+        qDebug() << QStringLiteral("%1").arg( (currentByteValue & 0xff), 16, 2, QChar('0'));
       }
+      qDebug() << "\n";
 
       // Copy the data
-      int outputPos = output.size()-1-offset;
+      int32_t outputPos = output.size()-1-offset;
+//      std::ostringstream oss;
+//      oss << std::setw(4) << (int)offsetIndex << " ";
+//      oss << std::setw(18) << QStringLiteral("%1").arg(byteVal, 12, 2, QChar('0')).toStdString() << " ";
+//      oss << std::setw(18) <<  QStringLiteral("%1").arg(offsetWin, 12, 2, QChar('0')).toStdString() << " ";
+//      oss << std::setw(18) << QStringLiteral("%1").arg(offset, 12, 2, QChar('0')).toStdString() << " ";
+//      oss << std::setw(18) << QStringLiteral("%1").arg(length, 16, 2, QChar('0')).toStdString() << " ";
+//      oss << std::setw(6) << length << " ";
+//      oss << std::setw(6) << offset << " ";
+//      qDebug() << QString::fromStdString(oss.str());
+
       for (int32_t i = 0; i < length; i++) {
         output.push_back(output[outputPos+i]);
       }
@@ -289,57 +288,47 @@ QByteArray PkZipData::decompress(QByteArray &byteArray)
     else {
 
       // Literal Byte
-      processBits(currentByteValue, 1);
+      processBits(currentByteValue, 1, dataBuffer, nextBufferPos, bitsRemaining);
       output += currentByteValue & 0xff;
-      processBits(currentByteValue, 8);
+      processBits(currentByteValue, 8, dataBuffer, nextBufferPos, bitsRemaining);
     }
   }
 
-  // Delete any current data
-  if (mDataBuffer != nullptr) {
-    delete [] mDataBuffer;
-    mDataBuffer = nullptr;
-  }
+  // Delete the data buffer
+  delete [] dataBuffer;
 
   return output;
 }
 
-void PkZipData::processBits(uint16_t &value, int32_t numBits)
+void PkZipData::processBits(uint16_t &value, int32_t numBits, uint8_t * dataBuffer, int32_t & nextBufferPos, int32_t & bitsRemaining)
 {
-  if (mBitsRemaining >= numBits) {
-    mBitsRemaining -= numBits;
+  if (bitsRemaining >= numBits) {
+    bitsRemaining -= numBits;
     value >>= numBits;
     return;
   }
 
-  value >>= mBitsRemaining;
-  value |= (mDataBuffer[mNextBufferPos++] << 8);
-  value >>= (numBits - mBitsRemaining);
-  mBitsRemaining += 8 - numBits;
+  value >>= bitsRemaining;
+  value |= (dataBuffer[nextBufferPos++] << 8);
+  value >>= (numBits - bitsRemaining);
+  bitsRemaining += 8 - numBits;
 }
 
 void PkZipData::writeCopyOffset(QString & bitString, int32_t offset, int32_t length)
 {
-  std::map<int32_t, int32_t> lengthToBits;
-  lengthToBits[2] = 3;
-  lengthToBits[3] = 2;
-  for (int i = 4; i < 6; i++) lengthToBits[i] = 3;
-  for (int i = 6; i < 9; i++) lengthToBits[i] = 4;
-  for (int i = 9; i < 10; i++) lengthToBits[i] = 5;
-  for (int i = 10; i < 12; i++) lengthToBits[i] = 6;
-  for (int i = 12; i < 16; i++) lengthToBits[i] = 7;
-  for (int i = 16; i < 24; i++) lengthToBits[i] = 8;
-  for (int i = 24; i < 40; i++) lengthToBits[i] = 9;
-  for (int i = 40; i < 72; i++) lengthToBits[i] = 0;
-  for (int i = 72; i < 136; i++) lengthToBits[i] = 11;
-  for (int i = 136; i < 264; i++) lengthToBits[i] = 12;
-  for (int i = 264; i < 519; i++) lengthToBits[i] = 13;
+  int32_t offsetIndex = 0;//mOffsetIndexTable[offset];
+  int32_t numOffsetBits = offsetBits[offsetIndex];
+  int32_t offsetValue = offsetRepr[offsetIndex];
+  uint8_t lengthIndex = 8;// mLengthIndexTable[length];
+  int32_t numLengthBits = lengthBits[lengthIndex];
+  int32_t numPadBits = lengthFillBits[lengthIndex];
+  int32_t lengthValue = lengthRepr[lengthIndex];
 
-  int bits = lengthToBits[length];
-
-  bitString += "1";
-  QString lengthString = QStringLiteral("%1").arg(length, bits, 2, QChar('0'));
-  std::cout << length << " " << lengthString.toStdString() << "\n";
+  QString s = "1";
+  s += QStringLiteral("%1").arg(lengthValue, numLengthBits+numPadBits, 2, QChar('0'));
+  s += QStringLiteral("%1").arg(offsetValue, numOffsetBits, 2, QChar('0'));
+  s += QStringLiteral("%1").arg( (offset & 0x3f), 6, 2, QChar('0')); // Assuming a window size of 6 right now
+  bitString += s;
 }
 
 void PkZipData::writeLiteralByte(QString & bitString, uint8_t value)

@@ -14,7 +14,7 @@ public:
   TIBERIUS_LIB_DECL ~PkZipData();
 
 public:
-  TIBERIUS_LIB_DECL QByteArray compress(const QByteArray & byteArray);
+  TIBERIUS_LIB_DECL QByteArray compress(const QByteArray & byteArray, uint8_t literalEncoding = 0, uint8_t windowSize = 6);
   TIBERIUS_LIB_DECL QByteArray decompress(QByteArray & byteArray);
 
 private:
@@ -22,17 +22,11 @@ private:
   QString binaryString(uint8_t value);
   QString binaryString(uint16_t value);
   QString binaryString(uint8_t *buffer, int length);
-  void processBits(uint16_t & value, int32_t numBits);
+  void processBits(uint16_t & value, int32_t numBits, uint8_t * dataBuffer, int32_t & nextBufferPos, int32_t & bitsRemaining);
   void writeCopyOffset(QString & bitString, int32_t offset, int32_t length);
   void writeLiteralByte(QString & bitString, uint8_t value);
 
 private:
-  uint8_t mLiteralEncoding;        // Determines whether this chunk is a literal byte
-  uint8_t mWindowSize;             // Determines the window size of sliding dictionary
-  int32_t mDictionarySize;         // The size of the sliding dictionary
-  int32_t mBitsRemaining;
-  int32_t mNextBufferPos;
-  uint8_t * mDataBuffer;
   uint8_t mLengthIndexTable[256];
   uint8_t mOffsetIndexTable[256];
 };
