@@ -3,6 +3,7 @@
 #include <sstream>
 
 #include <QDataStream>
+#include <QDebug>
 #include <QFile>
 #include <QString>
 
@@ -17,60 +18,37 @@
 
 int main(int argc, char ** argv)
 {
-  QString bitString;
-  bitString += "00000000";
-  bitString += "00000100";
-  bitString += "10000010";
-  bitString += "00100100";
-  bitString += "00100101";
-  bitString += "10000110";
-  bitString += "10000000";
-  bitString += "01111111";
+  PkZipData zipData;
 
   QByteArray byteArray;
-  for (int i = 0; i < bitString.size() / 8; i++) {
-    QString s = bitString.mid(i*8, 8);
-    uint8_t value = s.toUInt(nullptr, 2);
-    std::cout << QStringLiteral("%1").arg(value, 2, 16, QChar('0')).toStdString() << "\n";
-    byteArray.append(value);
+  byteArray.append((int8_t)65);
+  byteArray.append((int8_t)73);
+
+  QByteArray c = zipData.compress(byteArray, 0, 4);
+  for (int i = 0; i < c.size(); i++) {
+    qDebug() << QStringLiteral("%1").arg((uint8_t)c.at(i), 2, 16, QChar('0'));
   }
 
-  PkZipData zipData;
-  QByteArray decompressed = zipData.decompress(byteArray);
-  for (int i = 0; i < decompressed.size(); i++) {
-    uint8_t data = decompressed.at(i);
-    QString s = QStringLiteral("%1").arg(data, 2, 16, QChar('0'));
-    std::cout << char(data) << "\n";
+  QByteArray d = zipData.decompress(c);
+  for (int i = 0; i < d.size(); i++) {
+    qDebug() << QStringLiteral("%1").arg((uint8_t)d.at(i), 2, 16, QChar('0'));
   }
-
-  QByteArray compressed = zipData.compress(decompressed);
-  for (int i = 0; i < compressed.size(); i++) {
-    uint8_t data = compressed.at(i);
-    QString s = QStringLiteral("%1").arg(data, 2, 16, QChar('0'));
-    std::cout << s.toStdString() << "\n";
-  }
-
-//  std::cout << "\n";
-//  QByteArray newDecompressed = zipData.decompress(compressed);
-//  for (int i = 0; i < newDecompressed.size(); i++) {
-//    uint8_t data = newDecompressed.at(i);
-//    QString s = QStringLiteral("%1").arg(data, 2, 16, QChar('0'));
-//    std::cout << char(data) << "\n";
-//  }
 
 //  QString fileName("/home/jmeese/applications/caesar3/das-miletus-finish.sav");
-//  QFile file(fileName);
-//  if (!file.open(QIODevice::ReadOnly)) {
-//    std::ostringstream oss;
-//    oss << "Could not open file " << fileName.toStdString();
-//    throw std::invalid_argument(oss.str());
-//  }
+//  QFile inputFile(fileName);
+//  inputFile.open(QIODevice::ReadOnly);
 
-//  PkZipData zipData;
-//  QDataStream dataStream(&file);
-//  dataStream.skipRawData(8);
-//  QByteArray byteArray = streamio::readCompressedData(dataStream, 52488);
-//  QByteArray compressed = zipData.compress(byteArray);
+//  int32_t fileVersion;
+//  int32_t missionId;
+//  int32_t dataSize;
+//  QDataStream dataStream(&inputFile);
+//  dataStream >> fileVersion >> missionId;
+//  dataStream >> dataSize;
+//  QByteArray byteData = dataStream.device()->read(dataSize);
+
+//  PkZipData zip;
+//  QByteArray gridData = zip.decompress(byteData);
+//  QByteArray compressedGridData = zip.compress(gridData);
 
   return 0;
 }
