@@ -12,8 +12,16 @@ FinanceData::FinanceData()
   mCurrentYearTaxes = 0;
   mCurrentYearTribute = 0;
   mCurrentYearWages = 0;
+  mNumberOfTaxedPatricians = 0;
+  mNumberOfTaxedPlebians = 0;
+  mNumberOfUntaxedPatricians = 0;
+  mNumberOfUntaxedPlebians = 0;
   mEstimatedTaxes = 0;
+  mPatricianTaxesCollected = 0;
+  mPatricianTaxesUncollected = 0;
   mPercentRegistered = 0;
+  mPlebianTaxesCollected = 0;
+  mPlebianTaxesUncollected = 0;
   mPreviousYearBalance = 4159;
   mPreviousYearConstruction = 0;
   mPreviousYearDonated = 0;
@@ -25,6 +33,7 @@ FinanceData::FinanceData()
   mPreviousYearTaxes = 0;
   mPreviousYearTribute = 0;
   mPreviousYearWages = 0;
+  mRomeWages = 0;
   mTaxRate = 7;
   mTotalDenarii = 0;
 
@@ -39,6 +48,7 @@ FinanceData::FinanceData()
   mPreviousYearSundries = 9;
   mPreviousYearTribute = 10;
 
+  mCurrentMonthInterest = 0;
   mCurrentYearTaxes = 11;
   mCurrentYearExports = 12;
   mCurrentYearDonated = 13;
@@ -50,9 +60,21 @@ FinanceData::FinanceData()
   mCurrentYearSundries = 19;
   mCurrentYearTribute = 20;
 
+  mLastDonationAmount = 0;
+
   mTotalDenarii = 2000;
   mEstimatedTaxes = 109;
   mPercentRegistered = 45;
+
+  mYearlyPatricianTaxCollected = 0;
+  mYearlyPatricianTaxUncollected = 0;
+  mYearlyPlebianTaxCollected = 0;
+  mYearlyPlebianTaxUncollected = 0;
+}
+
+int32_t FinanceData::currentMonthInterest() const
+{
+  return mCurrentMonthInterest;
 }
 
 int32_t FinanceData::currentYearConstruction() const
@@ -164,9 +186,54 @@ void FinanceData::increaseTaxes(int32_t value)
   emit changed();
 }
 
+int32_t FinanceData::lastDonationAmount() const
+{
+  return mLastDonationAmount;
+}
+
+int32_t FinanceData::numberOfTaxedPatricians() const
+{
+  return mNumberOfTaxedPatricians;
+}
+
+int32_t FinanceData::numberOfTaxedPlebians() const
+{
+  return mNumberOfTaxedPlebians;
+}
+
+int32_t FinanceData::numberOfUntaxedPatricians() const
+{
+  return mNumberOfUntaxedPatricians;
+}
+
+int32_t FinanceData::numberOfUntaxedPlebians() const
+{
+  return mNumberOfUntaxedPlebians;
+}
+
+int32_t FinanceData::patricianTaxesCollected() const
+{
+  return mPatricianTaxesCollected;
+}
+
+int32_t FinanceData::patricianTaxesUncollected() const
+{
+  return mPatricianTaxesUncollected;
+}
+
 int32_t FinanceData::percentRegistered() const
 {
   return mPercentRegistered;
+}
+
+int32_t FinanceData::plebianTaxesCollected() const
+{
+  return mPlebianTaxesCollected;
+}
+
+int32_t FinanceData::plebianTaxesUncollected() const
+{
+  return mPlebianTaxesUncollected;
 }
 
 int32_t FinanceData::previousYearBalance() const
@@ -248,39 +315,56 @@ int32_t FinanceData::previousYearWages() const
   return mPreviousYearWages;
 }
 
+int32_t FinanceData::romeWages() const
+{
+  return mRomeWages;
+}
+
+void FinanceData::setCurrentMonthInterest(int32_t value)
+{
+  mCurrentMonthInterest = 0;
+}
+
 void FinanceData::setCurrentYearConstruction(int32_t value)
 {
   mCurrentYearConstruction = value;
+  emit changed();
 }
 
 void FinanceData::setCurrentYearDonated(int32_t value)
 {
   mCurrentYearDonated = value;
+  emit changed();
 }
 
 void FinanceData::setCurrentYearExports(int32_t value)
 {
   mCurrentYearExports = value;
+  emit changed();
 }
 
 void FinanceData::setCurrentYearImports(int32_t value)
 {
   mCurrentYearImports = value;
+  emit changed();
 }
 
 void FinanceData::setCurrentYearInterest(int32_t value)
 {
   mCurrentYearInterest = value;
+  emit changed();
 }
 
 void FinanceData::setCurrentYearSalary(int32_t value)
 {
   mCurrentYearSalary = value;
+  emit changed();
 }
 
 void FinanceData::setCurrentYearSundries(int32_t value)
 {
   mCurrentYearSundries = value;
+  emit changed();
 }
 
 void FinanceData::setCurrentYearTaxes(int32_t value)
@@ -291,11 +375,13 @@ void FinanceData::setCurrentYearTaxes(int32_t value)
 void FinanceData::setCurrentYearTribute(int32_t value)
 {
   mCurrentYearTribute = value;
+  emit changed();
 }
 
 void FinanceData::setCurrentYearWages(int32_t value)
 {
   mCurrentYearWages = value;
+  emit changed();
 }
 
 void FinanceData::setEstimatedTaxes(int32_t value)
@@ -304,9 +390,63 @@ void FinanceData::setEstimatedTaxes(int32_t value)
   emit changed();
 }
 
+void FinanceData::setLastDonationAmount(int32_t value)
+{
+  mLastDonationAmount = value;
+  emit changed();
+}
+
+void FinanceData::setNumberOfTaxedPatricians(int32_t value)
+{
+  mNumberOfTaxedPatricians = value;
+  emit changed();
+}
+
+void FinanceData::setNumberOfTaxedPlebians(int32_t value)
+{
+  mNumberOfTaxedPlebians = value;
+  emit changed();
+}
+
+void FinanceData::setNumberOfUntaxedPatricians(int32_t value)
+{
+  mNumberOfUntaxedPatricians = value;
+  emit changed();
+}
+
+void FinanceData::setNumberOfUntaxedPlebians(int32_t value)
+{
+  mNumberOfUntaxedPlebians = value;
+  emit changed();
+}
+
+void FinanceData::setPatricianTaxesCollected(int32_t value)
+{
+  mPatricianTaxesCollected = value;
+  emit changed();
+}
+
+void FinanceData::setPatricianTaxesUncollected(int32_t value)
+{
+  mPatricianTaxesUncollected = value;
+  emit changed();
+}
+
 void FinanceData::setPercentRegistered(int32_t value)
 {
   mPercentRegistered = value;
+  emit changed();
+}
+
+void FinanceData::setPlebianTaxesCollected(int32_t value)
+{
+  mPlebianTaxesCollected = value;
+  emit changed();
+}
+
+void FinanceData::setPlebianTaxesUncollected(int32_t value)
+{
+  mPlebianTaxesUncollected = value;
   emit changed();
 }
 
@@ -376,7 +516,13 @@ void FinanceData::setPreviousYearWages(int32_t value)
   emit changed();
 }
 
-void FinanceData::setTextRate(int32_t value)
+void FinanceData::setRomeWages(int32_t value)
+{
+  mRomeWages = value;
+  emit changed();
+}
+
+void FinanceData::setTaxRate(int32_t value)
 {
   mTaxRate = value;
   emit changed();
@@ -388,11 +534,52 @@ void FinanceData::setTotalDenarii(int32_t value)
   emit changed();
 }
 
+void FinanceData::setYearlyPatricianTaxCollected(int32_t value)
+{
+  mYearlyPatricianTaxCollected = value;
+}
+
+void FinanceData::setYearlyPatricianTaxUncollected(int32_t value)
+{
+  mYearlyPatricianTaxUncollected = value;
+}
+
+void FinanceData::setYearlyPlebianTaxCollected(int32_t value)
+{
+  mYearlyPlebianTaxCollected = value;
+}
+
+void FinanceData::setYearlyPlebianTaxUncollected(int32_t value)
+{
+  mYearlyPlebianTaxUncollected = value;
+}
+
 int32_t FinanceData::taxRate() const
 {
   return mTaxRate;
 }
+
 int32_t FinanceData::totalDenarii() const
 {
   return mTotalDenarii;
+}
+
+int32_t FinanceData::yearlyPatricianTaxCollected() const
+{
+  return mYearlyPatricianTaxCollected;
+}
+
+int32_t FinanceData::yearlyPatricianTaxUncollected() const
+{
+  return mYearlyPatricianTaxUncollected;
+}
+
+int32_t FinanceData::yearlyPlebianTaxCollected() const
+{
+  return mYearlyPlebianTaxCollected;
+}
+
+int32_t FinanceData::yearlyPlebianTaxUncollected() const
+{
+  return mYearlyPlebianTaxUncollected;
 }

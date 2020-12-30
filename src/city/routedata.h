@@ -16,7 +16,6 @@ class RouteData
 {
 public:
   static const int32_t MAX_ROUTES = 600;
-  static const int32_t MAX_PATH_LENGTH = 500;
 
 public:
   TIBERIUS_LIB_DECL RouteData();

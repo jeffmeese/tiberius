@@ -43,7 +43,9 @@ public:
 public:
   TIBERIUS_LIB_DECL void decreaseSavings(int32_t value);
   TIBERIUS_LIB_DECL void increaseSavings(int32_t value);
+  TIBERIUS_LIB_DECL void loadFromStream(QDataStream & dataStream);
   TIBERIUS_LIB_DECL QString rankString() const;
+  TIBERIUS_LIB_DECL void saveToStream(QDataStream & dataStream) const;
 
 public:
   TIBERIUS_LIB_DECL static QString rankString(Rank rank);

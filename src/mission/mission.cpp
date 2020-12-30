@@ -34,6 +34,31 @@ int32_t Mission::campaignMission() const
   return mCampaignMission;
 }
 
+int32_t Mission::cameraX() const
+{
+  return mCameraX;
+}
+
+int32_t Mission::cameraY() const
+{
+  return mCameraY;
+}
+
+Goal * Mission::cultureGoal()
+{
+  return mCultureGoal.get();
+}
+
+const Goal * Mission::cultureGoal() const
+{
+  return mCultureGoal.get();
+}
+
+QString Mission::description() const
+{
+  return mDescription;
+}
+
 UnsignedByteGrid * Mission::edgeGrid()
 {
   return mEdgeGrid.get();
@@ -54,6 +79,126 @@ const UnsignedByteGrid * Mission::elevationGrid() const
   return mElevationGrid.get();
 }
 
+bool Mission::emperorChange() const
+{
+  return mEmperorChange;
+}
+
+int16_t Mission::emperorChangeYear() const
+{
+  return mEmperorChangeYear;
+}
+
+uint8_t Mission::empireLocation() const
+{
+  return mEmpireLocation;
+}
+
+int32_t Mission::enemyId() const
+{
+  return mEnemyId;
+}
+
+Goal * Mission::favorGoal()
+{
+  return mFavorGoal.get();
+}
+
+const Goal * Mission::favorGoal() const
+{
+  return mFavorGoal.get();
+}
+
+bool Mission::floodedClayPits() const
+{
+  return mFloodedClayPits;
+}
+
+bool Mission::flotsam() const
+{
+  return mFlotsam;
+}
+
+DemandChange * Mission::getDemandChange(int index)
+{
+  return mDemandChanges[index].get();
+}
+
+const DemandChange * Mission::getDemandChange(int index) const
+{
+  return mDemandChanges[index].get();
+}
+
+Location * Mission::getFishingPoint(int index)
+{
+  return mFishingPoints[index].get();
+}
+
+const Location * Mission::getFishingPoint(int index) const
+{
+  return mFishingPoints[index].get();
+}
+
+Location * Mission::getHerdPoint(int index)
+{
+  return mHerdPoints[index].get();
+}
+
+const Location * Mission::getHerdPoint(int index) const
+{
+  return mHerdPoints[index].get();
+}
+
+Invasion * Mission::getInvasion(int index)
+{
+  return mInvasions[index].get();
+}
+
+const Invasion * Mission::getInvasion(int index) const
+{
+  return mInvasions[index].get();
+}
+
+Location * Mission::getInvasionPoint(int index)
+{
+  return mInvasionPoints[index].get();
+}
+
+const Location * Mission::getInvasionPoint(int index) const
+{
+  return mInvasionPoints[index].get();
+}
+
+PriceChange * Mission::getPriceChange(int index)
+{
+  return mPriceChanges[index].get();
+}
+
+const PriceChange * Mission::getPriceChange(int index) const
+{
+  return mPriceChanges[index].get();
+}
+
+EmperorRequest * Mission::getRequest(int index)
+{
+  return mEmperorRequests[index].get();
+}
+
+const EmperorRequest * Mission::getRequest(int index) const
+{
+  return mEmperorRequests[index].get();
+}
+
+bool Mission::gladiatorRevolt() const
+{
+  return mGladiatorRevolt;
+}
+
+int16_t Mission::gladiatorRevoltYear() const
+{
+  return mGladiatorRevoltYear;
+}
+
 UnsignedShortGrid * Mission::graphicGrid()
 {
   return mGraphicGrid.get();
@@ -62,6 +207,11 @@ UnsignedShortGrid * Mission::graphicGrid()
 const UnsignedShortGrid * Mission::graphicGrid() const
 {
   return mGraphicGrid.get();
+}
+
+int16_t Mission::imageId() const
+{
+  return mImageId;
 }
 
 void Mission::init()
@@ -141,9 +291,9 @@ void Mission::init()
     mDemandChanges[i].reset(new DemandChange);
   }
 
-  mEmpeorRequests.resize(MAX_REQUESTS);
+  mEmperorRequests.resize(MAX_REQUESTS);
   for (int i = 0; i < MAX_REQUESTS; i++) {
-    mEmpeorRequests[i].reset(new EmperorRequest);
+    mEmperorRequests[i].reset(new EmperorRequest);
   }
 
   mInvasions.resize(MAX_INVASIONS);
@@ -172,6 +322,26 @@ void Mission::init()
   }
 }
 
+int32_t Mission::initialFunds() const
+{
+  return mInitialFunds;
+}
+
+int8_t Mission::initialRank() const
+{
+  return mInitialRank;
+}
+
+bool Mission::ironMineCollapse() const
+{
+  return mIronMineCollapse;
+}
+
+bool Mission::landTradeProblem() const
+{
+  return mLandTradeProblem;
+}
+
 void Mission::loadFromFile(const QString &fileName)
 {
   QFile file(fileName);
@@ -196,63 +366,55 @@ void Mission::loadFromStream(QDataStream &dataStream, bool compressedGrids)
   mRandomGrid->loadFromDataStream(dataStream, 26244, compressedGrids);
   mElevationGrid->loadFromDataStream(dataStream, 26244, compressedGrids);
 
-  // Map size
-  dataStream.skipRawData(8);
-
+  mRandomSeed1 = streamio::readInt32(dataStream);
+  mRandomSeed2 = streamio::readInt32(dataStream);
   mCameraX = streamio::readInt32(dataStream);
   mCameraY = streamio::readInt32(dataStream);
   mStartYear = streamio::readInt16(dataStream);
-  mEmpireLocation = streamio::readInt8(dataStream);
+  dataStream.skipRawData(2);
+  mEmpireLocation = streamio::readUInt16(dataStream);
+  dataStream.skipRawData(8);
 
   for (int i = 0; i < MAX_REQUESTS; i++) {
-    int16_t year = streamio::readInt16(dataStream);
-    mEmpeorRequests[i]->setYear(year);
-  }
-
-  for (int i = 0; i < MAX_REQUESTS; i++) {
-    int16_t resourceId = streamio::readInt16(dataStream);
-    mEmpeorRequests[i]->setResourceId(resourceId);
+    mEmperorRequests[i]->setYear(streamio::readInt16(dataStream));
   }
 
   for (int i = 0; i < MAX_REQUESTS; i++) {
-    int16_t amount = streamio::readInt16(dataStream);
-    mEmpeorRequests[i]->setAmount(amount);
+    mEmperorRequests[i]->setResourceId(streamio::readInt16(dataStream));
   }
 
   for (int i = 0; i < MAX_REQUESTS; i++) {
-    int16_t timeToFulfill = streamio::readInt16(dataStream);
-    mEmpeorRequests[i]->setMonthsLeft(timeToFulfill);
+    mEmperorRequests[i]->setAmount(streamio::readInt16(dataStream));
+  }
+
+  for (int i = 0; i < MAX_REQUESTS; i++) {
+    mEmperorRequests[i]->setMonthsLeft(streamio::readInt16(dataStream));
   }
 
   for (int i = 0; i < MAX_INVASIONS; i++) {
-    int16_t year = streamio::readInt16(dataStream);
-    mInvasions[i]->setYear(year);
+    mInvasions[i]->setYear(streamio::readInt16(dataStream));
   }
 
   for (int i = 0; i < MAX_INVASIONS; i++) {
-    int16_t invasionType = streamio::readInt16(dataStream);
-    mInvasions[i]->setType(invasionType);
+    mInvasions[i]->setType(streamio::readInt16(dataStream));
   }
 
   for (int i = 0; i < MAX_INVASIONS; i++) {
-    int16_t numberOfInvaders = streamio::readInt16(dataStream);
-    mInvasions[i]->setAmount(numberOfInvaders);
+    mInvasions[i]->setAmount(streamio::readInt16(dataStream));
   }
 
   for (int i = 0; i < MAX_INVASIONS; i++) {
-    int16_t attackPoint = streamio::readInt16(dataStream);
-    mInvasions[i]->setAttackPoint(attackPoint);
+    mInvasions[i]->setAttackPoint(streamio::readInt16(dataStream));
   }
 
   for (int i = 0; i < MAX_INVASIONS; i++) {
-    int16_t attackType = streamio::readInt16(dataStream);
-    mInvasions[i]->setAttackType(attackType);
+    mInvasions[i]->setAttackType(streamio::readInt16(dataStream));
   }
 
+  dataStream.skipRawData(2);
   mInitialFunds = streamio::readInt32(dataStream);
-  mEnemyId = streamio::readInt16(dataStream);
-
-  dataStream.skipRawData(6);
+  mEnemyId = streamio::readInt32(dataStream);
+  dataStream.skipRawData(4);
 
   mMapWidth = streamio::readInt32(dataStream);
   mMapHeight = streamio::readInt32(dataStream);
@@ -268,8 +430,7 @@ void Mission::loadFromStream(QDataStream &dataStream, bool compressedGrids)
   mBriefing = briefing;
 
   for (int i = 0; i < MAX_REQUESTS; i++) {
-    int8_t value = streamio::readInt8(dataStream);
-    mEmpeorRequests[i]->setCanComply(value == 1);
+    mEmperorRequests[i]->setCanComply(streamio::readInt8(dataStream) == 1);
   }
 
   mImageId = streamio::readInt16(dataStream);
@@ -349,50 +510,41 @@ void Mission::loadFromStream(QDataStream &dataStream, bool compressedGrids)
   mFloodedClayPits = streamio::readInt32(dataStream);
 
   for (int i = 0; i < MAX_FISHING_POINTS; i++) {
-    int16_t value = streamio::readInt16(dataStream);
-    mFishingPoints[i]->setX(value);
+    mFishingPoints[i]->setX(streamio::readInt16(dataStream));
   }
 
   for (int i = 0; i < MAX_FISHING_POINTS; i++) {
-    int16_t value = streamio::readInt16(dataStream);
-    mFishingPoints[i]->setY(value);
+    mFishingPoints[i]->setY(streamio::readInt16(dataStream));
   }
 
   for (int i = 0; i < MAX_REQUESTS; i++) {
-    int8_t value = streamio::readInt8(dataStream);
-    mEmpeorRequests[i]->setFavor(value);
+    mEmperorRequests[i]->setFavor(streamio::readInt8(dataStream));
   }
 
   for (int i = 0; i < MAX_INVASIONS; i++) {
-    int8_t value = streamio::readInt8(dataStream);
-    mInvasions[i]->setMonth(value);
+    mInvasions[i]->setMonth(streamio::readInt8(dataStream));
   }
 
   for (int i = 0; i < MAX_REQUESTS; i++) {
-    int8_t value = streamio::readInt8(dataStream);
-    mEmpeorRequests[i]->setMonth(value);
+    mEmperorRequests[i]->setMonth(streamio::readInt8(dataStream));
   }
 
   for (int i = 0; i < MAX_REQUESTS; i++) {
-    int8_t value = streamio::readInt8(dataStream);
-    mEmpeorRequests[i]->setState(value);
+    mEmperorRequests[i]->setState(streamio::readInt8(dataStream));
   }
 
   for (int i = 0; i < MAX_REQUESTS; i++) {
-    int8_t value = streamio::readInt8(dataStream);
-    mEmpeorRequests[i]->setVisible(value);
+    mEmperorRequests[i]->setVisible(streamio::readInt8(dataStream));
   }
 
   for (int i = 0; i < MAX_REQUESTS; i++) {
-    int8_t value = streamio::readInt8(dataStream);
-    mEmpeorRequests[i]->setMonthsLeft(value);
+    mEmperorRequests[i]->setMonthsLeft(streamio::readInt8(dataStream));
   }
 
   mRomeSuppliesWheat = streamio::readInt32(dataStream);
 
   for (int i = 0; i < MAX_ALLOWED_BUILDINGS; i++) {
-    int16_t value = streamio::readInt16(dataStream);
-    mAllowedBuildings[i] = value;
+    mAllowedBuildings[i] = streamio::readInt16(dataStream);
   }
 
   mCultureGoal->setTarget(streamio::readInt32(dataStream));
@@ -459,6 +611,56 @@ void Mission::loadFromStream(QDataStream &dataStream, bool compressedGrids)
   mSaved = true;
 }
 
+int32_t Mission::mapHeight() const
+{
+  return mMapHeight;
+}
+
+int32_t Mission::mapWidth() const
+{
+  return mMapWidth;
+}
+
+bool Mission::openPlay() const
+{
+  return mOpenPlay;
+}
+
+int8_t Mission::openPlayId() const
+{
+  return mOpenPlayId;
+}
+
+Goal * Mission::peaceGoal()
+{
+  return mPeaceGoal.get();
+}
+
+const Goal * Mission::peaceGoal() const
+{
+  return mPeaceGoal.get();
+}
+
+Goal * Mission::populationGoal()
+{
+  return mPopulationGoal.get();
+}
+
+const Goal * Mission::populationGoal() const
+{
+  return mPopulationGoal.get();
+}
+
+Goal * Mission::prosperityGoal()
+{
+  return mProsperityGoal.get();
+}
+
+const Goal * Mission::prosperityGoal() const
+{
+  return mProsperityGoal.get();
+}
+
 UnsignedByteGrid * Mission::randomGrid()
 {
   return mRandomGrid.get();
@@ -467,6 +669,26 @@ UnsignedByteGrid * Mission::randomGrid()
 const UnsignedByteGrid * Mission::randomGrid() const
 {
   return mRandomGrid.get();
+}
+
+int32_t Mission::rescueLoan() const
+{
+  return mRescueLoan;
+}
+
+bool Mission::romeLowersWages() const
+{
+  return mRomeLowersWages;
+}
+
+bool Mission::romeRaisesWages() const
+{
+  return mRomeRaisesWages;
+}
+
+bool Mission::romeSuppliesWheat() const
+{
+  return mRomeSuppliesWheat;
 }
 
 void Mission::saveToFile(const QString &fileName, bool compressed) const
@@ -487,9 +709,19 @@ void Mission::saveToStream(QDataStream & dataStream, bool compressed) const
   dataStream.setByteOrder(QDataStream::LittleEndian);
 }
 
+bool Mission::seaTradeProblem() const
+{
+  return mSeaTradeProblem;
+}
+
 void Mission::setCampaignMission(int32_t value)
 {
   mCampaignMission = value;
+}
+
+int32_t Mission::startYear() const
+{
+  return mStartYear;
 }
 
 UnsignedShortGrid * Mission::terrainGrid()
@@ -512,3 +744,42 @@ const UnsignedByteGrid * Mission::terrainRandomGrid() const
   return mTerrainRandomGrid.get();
 }
 
+int Mission::totalDemandChanges() const
+{
+  return MAX_DEMAND_CHANGES;
+}
+
+int Mission::totalFishingPoints() const
+{
+  return MAX_FISHING_POINTS;
+}
+
+int Mission::totalHerdPoints() const
+{
+  return MAX_HERD_POINTS;
+}
+
+int Mission::totalInvasions() const
+{
+  return MAX_INVASIONS;
+}
+
+int Mission::totalInvasionPoints() const
+{
+  return MAX_INVASION_POINTS;
+}
+
+int Mission::totalPriceChanges() const
+{
+  return MAX_PRICE_CHANGES;
+}
+
+int Mission::totalRequests() const
+{
+  return MAX_REQUESTS;
+}
+
+bool Mission::waterContamination() const
+{
+  return mWaterContamination;
+}

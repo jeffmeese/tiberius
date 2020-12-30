@@ -32,6 +32,15 @@ void Player::increaseSavings(int32_t value)
     mPersonalSavings = 0;
 }
 
+void Player::loadFromStream(QDataStream & dataStream)
+{
+  char playerName[32];
+  dataStream.skipRawData(34);
+  dataStream.readRawData(playerName, 32);
+  dataStream.skipRawData(4);
+  mName = playerName;
+}
+
 QString Player::name() const
 {
   return mName;
@@ -77,6 +86,11 @@ QString Player::salaryString() const
 {
   const StringData * stringData = TiberiusApplication::language()->stringData();
   return stringData->getString(52, static_cast<int32_t>(mSalaryRank)+4) + " " + QString::number(rankSalary(mSalaryRank));
+}
+
+void Player::saveToStream(QDataStream & dataStream) const
+{
+
 }
 
 void Player::setName(const QString & name)

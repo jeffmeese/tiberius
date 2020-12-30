@@ -26,9 +26,11 @@ set(HDR_FILES
   city/buildingdata.h
   city/camera.h
   city/city.h
+  city/data.h
   city/datamodel.h
   city/datavector.h
   city/educationdata.h
+  city/empiredata.h
   city/entertainmentdata.h
   city/financedata.h
   city/healthdata.h
@@ -40,6 +42,8 @@ set(HDR_FILES
   city/resourcedata.h
   city/religiondata.h
   city/routedata.h
+  city/scenariodata.h
+  city/scribemessagedata.h
   city/tradedata.h
   city/walkerdata.h
   core/abstractfactory.h
@@ -49,6 +53,7 @@ set(HDR_FILES
   dialog/filedialog.h
   dialog/messagedialog.h
   entertainment/festival.h
+  empire/city.h
   figure/figure.h
   game/difficulty.h
   game/direction.h
@@ -121,8 +126,10 @@ set(SRC_FILES
   city/buildingdata.cpp
   city/camera.cpp
   city/city.cpp
+  city/data.cpp
   city/datamodel.cpp
   city/educationdata.cpp
+  city/empiredata.cpp
   city/entertainmentdata.cpp
   city/financedata.cpp
   city/healthdata.cpp
@@ -134,6 +141,8 @@ set(SRC_FILES
   city/religiondata.cpp
   city/resourcedata.cpp
   city/routedata.cpp
+  city/scenariodata.cpp
+  city/scribemessagedata.cpp
   city/tradedata.cpp
   city/walkerdata.cpp
   core/painter.cpp
@@ -141,6 +150,7 @@ set(SRC_FILES
   dialog/dialog.cpp
   dialog/filedialog.cpp
   dialog/messagedialog.cpp
+  empire/city.cpp
   entertainment/festival.cpp
   figure/figure.cpp
   game/difficulty.cpp

@@ -7,18 +7,22 @@
 
 class BuildingData;
 class Camera;
+class Data;
 class EducationData;
+class EmpireData;
 class EntertainmentData;
 class FinanceData;
 class HealthData;
 class ImperialData;
 class LaborData;
 class MilitaryData;
+class Player;
 class PopulationData;
 class RatingsData;
 class ReligionData;
 class ResourceData;
 class RouteData;
+class ScenarioData;
 class TradeData;
 class WalkerData;
 
@@ -46,8 +50,12 @@ public:
 public:
   TIBERIUS_LIB_DECL BuildingData * buildingData();
   TIBERIUS_LIB_DECL const BuildingData * buildingData() const;
+  TIBERIUS_LIB_DECL Data * data();
+  TIBERIUS_LIB_DECL const Data * data() const;
   TIBERIUS_LIB_DECL EducationData * educationData();
   TIBERIUS_LIB_DECL const EducationData * educationData() const;
+  TIBERIUS_LIB_DECL EmpireData * empireData();
+  TIBERIUS_LIB_DECL const EmpireData * empireData() const;
   TIBERIUS_LIB_DECL EntertainmentData * entertainmentData();
   TIBERIUS_LIB_DECL const EntertainmentData * entertainmentData() const;
   TIBERIUS_LIB_DECL FinanceData * financeData();
@@ -70,16 +78,24 @@ public:
   TIBERIUS_LIB_DECL const ResourceData * resourceData() const;
   TIBERIUS_LIB_DECL RouteData * routeData();
   TIBERIUS_LIB_DECL const RouteData * routeData() const;
+  TIBERIUS_LIB_DECL ScenarioData * scenarioData();
+  TIBERIUS_LIB_DECL const ScenarioData * scenarioData() const;
   TIBERIUS_LIB_DECL TradeData * tradeData();
   TIBERIUS_LIB_DECL const TradeData * tradeData() const;
   TIBERIUS_LIB_DECL WalkerData * walkerData();
   TIBERIUS_LIB_DECL const WalkerData * walkerData() const;
 
+public:
+  TIBERIUS_LIB_DECL void loadFromStream(QDataStream & dataStream, Player * player);
+  TIBERIUS_LIB_DECL void saveToStream(QDataStream & dataStream) const;
+
 private:
   Orientation mOrientation;
   std::unique_ptr<BuildingData> mBuildingData;
   std::unique_ptr<Camera> mCamera;
+  std::unique_ptr<Data> mData;
   std::unique_ptr<EducationData> mEducationData;
+  std::unique_ptr<EmpireData> mEmpireData;
   std::unique_ptr<EntertainmentData> mEntertainmentData;
   std::unique_ptr<FinanceData> mFinanceData;
   std::unique_ptr<HealthData> mHealthData;
@@ -91,168 +107,9 @@ private:
   std::unique_ptr<ReligionData> mReligionData;
   std::unique_ptr<ResourceData> mResourceData;
   std::unique_ptr<RouteData> mRouteData;
+  std::unique_ptr<ScenarioData> mScenarioData;
   std::unique_ptr<TradeData> mTradeData;
   std::unique_ptr<WalkerData> mWalkerData;
 };
-
-inline BuildingData * City::buildingData()
-{
-  return mBuildingData.get();
-}
-
-inline const BuildingData * City::buildingData() const
-{
-  return mBuildingData.get();
-}
-
-inline Camera * City::camera()
-{
-  return mCamera.get();
-}
-
-inline const Camera * City::camera() const
-{
-  return mCamera.get();
-}
-
-inline EducationData * City::educationData()
-{
-  return mEducationData.get();
-}
-
-inline const EducationData * City::educationData() const
-{
-  return mEducationData.get();
-}
-
-inline EntertainmentData * City::entertainmentData()
-{
-  return mEntertainmentData.get();
-}
-
-inline const EntertainmentData * City::entertainmentData() const
-{
-  return mEntertainmentData.get();
-}
-
-inline FinanceData * City::financeData()
-{
-  return mFinanceData.get();
-}
-
-inline const FinanceData * City::financeData() const
-{
-  return mFinanceData.get();
-}
-
-inline HealthData * City::healthData()
-{
-  return mHealthData.get();
-}
-
-inline const HealthData * City::healthData() const
-{
-  return mHealthData.get();
-}
-
-inline ImperialData * City::imperialData()
-{
-  return mImperialData.get();
-}
-
-inline const ImperialData * City::imperialData() const
-{
-  return mImperialData.get();
-}
-
-inline LaborData * City::laborData()
-{
-  return mLaborData.get();
-}
-
-inline const LaborData * City::laborData() const
-{
-  return mLaborData.get();
-}
-
-inline MilitaryData * City::militaryData()
-{
-  return mMilitaryData.get();
-}
-
-inline const MilitaryData * City::militaryData() const
-{
-  return mMilitaryData.get();
-}
-
-inline PopulationData * City::populationData()
-{
-  return mPopulationData.get();
-}
-
-inline const PopulationData * City::populationData() const
-{
-  return mPopulationData.get();
-}
-
-inline RatingsData * City::ratingsData()
-{
-  return mRatingsData.get();
-}
-
-inline const RatingsData * City::ratingsData() const
-{
-  return mRatingsData.get();
-}
-
-inline ReligionData * City::religionData()
-{
-  return mReligionData.get();
-}
-
-inline const ReligionData * City::religionData() const
-{
-  return mReligionData.get();
-}
-
-inline ResourceData * City::resourceData()
-{
-  return mResourceData.get();
-}
-
-inline const ResourceData * City::resourceData() const
-{
-  return mResourceData.get();
-}
-
-inline RouteData * City::routeData()
-{
-  return mRouteData.get();
-}
-
-inline const RouteData * City::routeData() const
-{
-  return mRouteData.get();
-}
-
-inline TradeData * City::tradeData()
-{
-  return mTradeData.get();
-}
-
-inline const TradeData * City::tradeData() const
-{
-  return mTradeData.get();
-}
-
-inline WalkerData * City::walkerData()
-{
-  return mWalkerData.get();
-}
-
-inline const WalkerData * City::walkerData() const
-{
-  return mWalkerData.get();
-}
 
 #endif // CITY_H

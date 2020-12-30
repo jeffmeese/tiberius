@@ -40,8 +40,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>629</width>
-         <height>556</height>
+         <width>372</width>
+         <height>548</height>
         </rect>
        </property>
       </widget>
@@ -55,7 +55,7 @@
      <x>0</x>
      <y>0</y>
      <width>888</width>
-     <height>20</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuProgram">
@@ -115,7 +115,7 @@
     <string>Properties</string>
    </property>
    <attribute name="dockWidgetArea">
-    <number>1</number>
+    <number>2</number>
    </attribute>
    <widget class="QWidget" name="dockWidgetContents_2">
     <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -146,6 +146,9 @@
         <enum>QAbstractItemView::SelectRows</enum>
        </property>
        <attribute name="horizontalHeaderVisible">
+        <bool>true</bool>
+       </attribute>
+       <attribute name="horizontalHeaderCascadingSectionResizes">
         <bool>true</bool>
        </attribute>
        <attribute name="horizontalHeaderStretchLastSection">

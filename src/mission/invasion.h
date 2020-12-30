@@ -4,8 +4,6 @@
 #include "tiberius.h"
 #include "event.h"
 
-//#include "empire/enemy.h"
-
 #include <QDataStream>
 
 class Invasion

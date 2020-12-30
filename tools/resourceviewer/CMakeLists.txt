@@ -17,19 +17,41 @@ set(HDR_FILES
   application/mainwindow.h
   graphics/imageindexgroup.h
   languages/stringtablemodel.h
+  model/demandchangegroup.h
+  model/demandchangeitem.h
+  model/edgegriditem.h
+  model/elevationgriditem.h
+  model/fishingpointgroup.h
+  model/fishingpointitem.h
+  model/herdpointgroup.h
+  model/herdpointitem.h
   model/gameitem.h
+  model/goalsitem.h
+  model/graphicgriditem.h
   model/graphicsitem.h
+  model/gridgroup.h
   model/imageitem.h
+  model/invasiongroup.h
+  model/invasionitem.h
+  model/invasionpointsgroup.h
+  model/invasionpointsitem.h
   model/languageitem.h
   model/mapitem.h
   model/messagedataitem.h
   model/messageitem.h
+  model/pricechangegroup.h
+  model/pricechangeitem.h
+  model/randomeventsitem.h
+  model/requestgroup.h
+  model/requestitem.h
   model/resourceitem.h
-  model/textdataitem.h
   model/savedgamesitem.h
   model/smkitem.h
+  model/terraingriditem.h
+  model/textdataitem.h
   properties/property.h
   properties/propertiesmodel.h
+  views/gridview.h
 )
 
 set(SRC_FILES
@@ -37,19 +59,41 @@ set(SRC_FILES
   application/mainwindow.cpp
   graphics/imageindexgroup.cpp
   languages/stringtablemodel.cpp
+  model/demandchangegroup.cpp
+  model/demandchangeitem.cpp
+  model/edgegriditem.cpp
+  model/elevationgriditem.cpp
+  model/fishingpointgroup.cpp
+  model/fishingpointitem.cpp
+  model/herdpointgroup.cpp
+  model/herdpointitem.cpp
   model/gameitem.cpp
+  model/goalsitem.cpp
+  model/gridgroup.cpp
+  model/graphicgriditem.cpp
   model/graphicsitem.cpp
   model/imageitem.cpp
+  model/invasiongroup.cpp
+  model/invasionitem.cpp
+  model/invasionpointsgroup.cpp
+  model/invasionpointsitem.cpp
   model/languageitem.cpp
   model/mapitem.cpp
   model/messagedataitem.cpp
   model/messageitem.cpp
+  model/pricechangegroup.cpp
+  model/pricechangeitem.cpp
+  model/randomeventsitem.cpp
+  model/requestgroup.cpp
+  model/requestitem.cpp
   model/resourceitem.cpp
-  model/textdataitem.cpp
+  model/terraingriditem.cpp
   model/savedgamesitem.cpp
   model/smkitem.cpp
+  model/textdataitem.cpp
   properties/property.cpp
   properties/propertiesmodel.cpp
+  views/gridview.cpp
 )
 
 set(UI_FILES

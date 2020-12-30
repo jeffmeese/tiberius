@@ -34,7 +34,7 @@ void BuildingData::loadFromDataStream(QDataStream & dataStream)
   byteStream.setByteOrder(QDataStream::LittleEndian);
 
   for (int32_t i = 0; i < MAX_BUILDINGS; i++) {
-    get(i)->loadFromDataStream(dataStream);
+    get(i)->loadFromDataStream(byteStream);
   }
 }
 

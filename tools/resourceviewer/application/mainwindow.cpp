@@ -125,6 +125,7 @@ void MainWindow::handleItemChanged()
 
   mUi->scrollArea->setWidget(currentWidget);
   mUi->cPropertiesView->setModel(mPropertiesModel.get());
+  mUi->cPropertiesView->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 }
 
 void MainWindow::initModel()
@@ -189,7 +190,7 @@ void MainWindow::loadMapFiles(const QString &dirName)
 
   QStringList fileList = dir.entryList(nameFilters, QDir::Files);
   for (int32_t i = 0; i < fileList.size(); i++) {
-    QString pathName = fileList.at(i);
+    QString pathName(dirName + QDir::separator() + fileList.at(i));
     MapItem * item = new MapItem(pathName);
     mMapsGroup->appendRow(item);
   }

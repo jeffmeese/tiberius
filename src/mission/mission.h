@@ -40,7 +40,7 @@ public:
   TIBERIUS_LIB_DECL int16_t emperorChangeYear() const;
   TIBERIUS_LIB_DECL bool empireExpanded() const;
   TIBERIUS_LIB_DECL int32_t empireExpansionYear() const;
-  TIBERIUS_LIB_DECL int8_t empireLocation() const;
+  TIBERIUS_LIB_DECL uint8_t empireLocation() const;
   TIBERIUS_LIB_DECL int32_t enemyId() const;
   TIBERIUS_LIB_DECL int8_t enemyTravelMonths() const;
   TIBERIUS_LIB_DECL bool floodedClayPits() const;
@@ -81,9 +81,16 @@ public:
   TIBERIUS_LIB_DECL bool saved() const;
   TIBERIUS_LIB_DECL QString scenarioName() const;
   TIBERIUS_LIB_DECL bool seaTradeProblem() const;
-  TIBERIUS_LIB_DECL int16_t startYear() const;
+  TIBERIUS_LIB_DECL int32_t startYear() const;
   TIBERIUS_LIB_DECL int32_t survivalTime() const;
   TIBERIUS_LIB_DECL bool survivalTimeEnabled() const;
+  TIBERIUS_LIB_DECL int totalDemandChanges() const;
+  TIBERIUS_LIB_DECL int totalFishingPoints() const;
+  TIBERIUS_LIB_DECL int totalHerdPoints() const;
+  TIBERIUS_LIB_DECL int totalInvasions() const;
+  TIBERIUS_LIB_DECL int totalInvasionPoints() const;
+  TIBERIUS_LIB_DECL int totalPriceChanges() const;
+  TIBERIUS_LIB_DECL int totalRequests() const;
   TIBERIUS_LIB_DECL bool waterContamination() const;
 
   // Grids
@@ -101,7 +108,34 @@ public:
   TIBERIUS_LIB_DECL UnsignedByteGrid * terrainRandomGrid();
   TIBERIUS_LIB_DECL const UnsignedByteGrid * terrainRandomGrid() const;
 
+  // Goals
 public:
+  TIBERIUS_LIB_DECL Goal * cultureGoal();
+  TIBERIUS_LIB_DECL const Goal * cultureGoal() const;
+  TIBERIUS_LIB_DECL Goal * favorGoal();
+  TIBERIUS_LIB_DECL const Goal * favorGoal() const;
+  TIBERIUS_LIB_DECL Goal * peaceGoal();
+  TIBERIUS_LIB_DECL const Goal * peaceGoal() const;
+  TIBERIUS_LIB_DECL Goal * prosperityGoal();
+  TIBERIUS_LIB_DECL const Goal * prosperityGoal() const;
+  TIBERIUS_LIB_DECL Goal * populationGoal();
+  TIBERIUS_LIB_DECL const Goal * populationGoal() const;
+
+public:
+  TIBERIUS_LIB_DECL DemandChange * getDemandChange(int index);
+  TIBERIUS_LIB_DECL const DemandChange * getDemandChange(int index) const;
+  TIBERIUS_LIB_DECL Location * getFishingPoint(int index);
+  TIBERIUS_LIB_DECL const Location * getFishingPoint(int index) const;
+  TIBERIUS_LIB_DECL Location * getHerdPoint(int index);
+  TIBERIUS_LIB_DECL const Location * getHerdPoint(int index) const;
+  TIBERIUS_LIB_DECL Invasion * getInvasion(int index);
+  TIBERIUS_LIB_DECL const Invasion * getInvasion(int index) const;
+  TIBERIUS_LIB_DECL Location * getInvasionPoint(int index);
+  TIBERIUS_LIB_DECL const Location * getInvasionPoint(int index) const;
+  TIBERIUS_LIB_DECL PriceChange * getPriceChange(int index);
+  TIBERIUS_LIB_DECL const PriceChange * getPriceChange(int index) const;
+  TIBERIUS_LIB_DECL EmperorRequest * getRequest(int index);
+  TIBERIUS_LIB_DECL const EmperorRequest * getRequest(int index) const;
   TIBERIUS_LIB_DECL void setBriefDescription(const QString & value);
   TIBERIUS_LIB_DECL void setCampaignMission(int32_t value);
   TIBERIUS_LIB_DECL void setCampaignRank(int32_t value);
@@ -175,7 +209,7 @@ private:
   bool mWaterContamination;
 
   int8_t mClimateId;
-  int8_t mEmpireLocation;
+  uint8_t mEmpireLocation;
   int8_t mEnemyArmyTravelMonths;
   int8_t mInitialRank;
   int8_t mOpenPlayId;
@@ -184,7 +218,7 @@ private:
   int16_t mEmperorChangeYear;
   int16_t mGladiatorRevoltYear;
   int16_t mImageId;
-  int16_t mStartYear;
+  int32_t mStartYear;
 
   int32_t mCameraX;
   int32_t mCameraY;
@@ -205,6 +239,8 @@ private:
   int32_t mNativeCropsId;
   int32_t mNativeMeetingId;
   int32_t mNativeHutId;
+  int32_t mRandomSeed1;
+  int32_t mRandomSeed2;
   int32_t mRescueLoan;
   int32_t mSurvivalTime;
 
@@ -226,7 +262,7 @@ private:
   ShortGridPtr mTerrainGrid;
   AllowedBuildingVector mAllowedBuildings;
   DemandChangeVector mDemandChanges;
-  EmperorRequestVector mEmpeorRequests;
+  EmperorRequestVector mEmperorRequests;
   InvasionVector mInvasions;
   PriceChangeVector mPriceChanges;
   LocationVector mHerdPoints;

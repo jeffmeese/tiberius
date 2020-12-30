@@ -43,8 +43,6 @@ public:
 private:
   void init();
   void readGameTime(QDataStream & dataStream);
-  void readPlayerName(QDataStream & dataStream);
-  void writePlayerName(QDataStream & dataStream) const;
 
 private:
   using CityPtr = std::unique_ptr<City>;

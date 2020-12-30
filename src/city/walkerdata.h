@@ -18,6 +18,7 @@ class WalkerData
 {
 public:
   static const int32_t MAX_FIGURES = 1000;
+  static const int32_t MAX_DESTINATION_WALKERS = 600;
 
 public:
   TIBERIUS_LIB_DECL WalkerData();

@@ -116,6 +116,8 @@ void exportWalkerData(const Game * game, const QFileInfo & fileInfo)
   }
 }
 
+#include<QDebug>
+
 int main(int argc, char *argv[])
 {
   QString dirName = argv[1];
@@ -125,9 +127,10 @@ int main(int argc, char *argv[])
 
   QDir dir(dirName);
   QFileInfoList list = dir.entryInfoList(filters, QDir::Files);
-  for (int i = 0; i < 10; i++) {
+  for (int i = 0; i < list.size(); i++) {
     QFileInfo fileInfo = list.at(i);
     QString pathName = fileInfo.absoluteFilePath();
+    qDebug() << pathName;
 
     Game game;
     game.loadFromFile(pathName);
