@@ -117,10 +117,14 @@ QByteArray PkZipData::compress(const QByteArray &byteArray, uint8_t literalEncod
   // Create the bit array
   // For now we just print out all literal bytes
   std::vector<bool> bits;
-  for (int i = 0; i < byteArray.size(); i++) {
-    uint8_t c = byteArray.at(i);
-    writeLiteralByte(bits, c);
-  }
+  writeLiteralByte(bits, 65);
+  writeLiteralByte(bits, 73);
+  writeCopyOffset(bits, 1, 11);
+
+  //for (int i = 0; i < byteArray.size(); i++) {
+  //  uint8_t c = byteArray.at(i);
+  //  writeLiteralByte(bits, c);
+  //}
 
   // Write the end of stream marker and pad
   // to a multiple of 8 bits
@@ -327,10 +331,30 @@ void PkZipData::writeCopyOffset(std::vector<bool> & bits, int32_t offset, int32_
   int32_t numPadBits = lengthFillBits[lengthIndex];
   int32_t lengthValue = lengthRepr[lengthIndex];
 
+  // Marker
   bits.push_back(1);
-  writeValue(bits, lengthValue, numLengthBits+numPadBits);
-  writeValue(bits, offsetValue, numOffsetBits);
-  writeValue(bits, (offset & 0x3f), 6);
+
+  // Length
+  bits.push_back(0);
+  bits.push_back(0);
+  bits.push_back(1);
+  bits.push_back(0);
+  bits.push_back(0);
+  bits.push_back(1);
+
+  // Offset repr
+  bits.push_back(1);
+  bits.push_back(1);
+
+  // Offset value
+  bits.push_back(1);
+  bits.push_back(0);
+  bits.push_back(0);
+  bits.push_back(0);
+
+  //writeValue(bits, lengthValue, numLengthBits+numPadBits);
+  //writeValue(bits, offsetValue, numOffsetBits);
+  //writeValue(bits, (offset & 0x3f), 6);
 }
 
 void PkZipData::writeLiteralByte(std::vector<bool> & bits, uint32_t byte)

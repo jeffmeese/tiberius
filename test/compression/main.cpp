@@ -63,9 +63,33 @@ static const DataSet gameData[] = {
   {1379, 0}             // 37 Unknown (1379 uncompressed)
 };
 
+void testByteStream()
+{
+  PkZipData zip;
+
+  QByteArray byteArray;
+  byteArray.append((uint8_t)0);
+  byteArray.append((uint8_t)4);
+  byteArray.append((uint8_t)130);
+  byteArray.append((uint8_t)36);
+  byteArray.append((uint8_t)37);
+  byteArray.append((uint8_t)143);
+  byteArray.append((uint8_t)128);
+  byteArray.append((uint8_t)127);
+
+  QByteArray decomp = zip.decompress(byteArray);
+  QByteArray comp = zip.compress(decomp, 0, 4);
+  QByteArray newDecomp = zip.decompress(comp);
+
+  std::cout << newDecomp.size() << "\n";
+}
+
 int main(int argc, char ** argv)
 {
   PkZipData zipData;
+
+  testByteStream();
+  return 0;
 
   if (argc < 2) {
     std::cout << "Usage: test_compression <save-file-name>\n";
