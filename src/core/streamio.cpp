@@ -76,6 +76,11 @@ void streamio::writeCompressedData(QDataStream & dataStream, QByteArray & byteAr
   dataStream.device()->write(compressedData);
 }
 
+void streamio::writeUncompressedData(QDataStream & dataStream, QByteArray & byteArray)
+{
+  dataStream.device()->write(byteArray);
+}
+
 void streamio::writeInt32(QDataStream & dataStream, int32_t value)
 {
   dataStream << value;

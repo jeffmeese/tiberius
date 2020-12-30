@@ -17,6 +17,7 @@ namespace streamio
   QByteArray readUncompressedData(QDataStream & dataStream, int32_t size);
 
   void writeCompressedData(QDataStream & dataStream, QByteArray & byteArray);
+  void writeUncompressedData(QDataStream & dataStream, QByteArray & byteArray);
   void writeInt32(QDataStream & dataStream, int32_t value);
   void writeUInt8(QDataStream & dataStream, uint8_t value);
 }

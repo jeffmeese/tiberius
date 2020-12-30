@@ -115,14 +115,16 @@ void PkZipData::buildLookupTables()
 QByteArray PkZipData::compress(const QByteArray &byteArray, uint8_t literalEncoding, uint8_t windowSize)
 {
   // Create the bit array
+  // For now we just print out all literal bytes
   std::vector<bool> bits;
   for (int i = 0; i < byteArray.size(); i++) {
     uint8_t c = byteArray.at(i);
     writeLiteralByte(bits, c);
   }
 
-  // Write end marker and pad the data to a multiple of 8 bits
-  writeValue(bits, 128, 8);
+  // Write the end of stream marker and pad
+  // to a multiple of 8 bits
+  writeValue(bits, 1, 8);
   writeValue(bits, 255, 8);
   while (bits.size() % 8)
     bits.push_back(0);
@@ -132,8 +134,6 @@ QByteArray PkZipData::compress(const QByteArray &byteArray, uint8_t literalEncod
   compressedArray.append(literalEncoding);
   compressedArray.append(windowSize);
   writeCompressedArray(bits, compressedArray);
-
-  qDebug() << QStringLiteral("%1").arg((uint8_t)compressedArray.at(compressedArray.size() - 1), 8, 2, QChar('0'));
 
   return compressedArray;
 
@@ -304,16 +304,16 @@ void PkZipData::processBits(uint16_t &value, int32_t numBits, uint8_t * dataBuff
 
 void PkZipData::writeCompressedArray(std::vector<bool> & bits, QByteArray & byteArray)
 {
+  int bitIndex = 7;
   int totalBytes = bits.size() / 8;
-  int bitIndex = 8;
-  for (int i = 0; i < totalBytes; i++) {
+  for (int j = 0; j < totalBytes; j++) {
     uint8_t byte = 0;
-    for (int j = 0; j < 8; j++) {
-      int bit = bits[--bitIndex];
-      byte |= (bit << (7-j));
+    for (int i = 0; i < 8; i++) {
+      int bit = bits.at(bitIndex-i);
+      byte |= (bit << (7-i));
     }
+    bitIndex += 8;
     byteArray.append(byte);
-    bitIndex += 16;
   }
 }
 
@@ -346,32 +346,3 @@ void PkZipData::writeValue(std::vector<bool> & bits, uint32_t byte, int32_t leng
     bits.push_back(bit);
   }
 }
-
-//void PkZipData::writeCopyOffset(QString & bitString, int32_t offset, int32_t length, uint8_t windowSize)
-//{
-//  int32_t lengthReprValue = mLengthToRepr[length];
-//  int32_t lengthReprBits = mLengthBits[length];
-//  int32_t numPadBits = mLengthPadBits[length];
-//  int32_t offsetBitsValue = (offset >> windowSize);
-//  int32_t offsetReprValue = offsetToRepr[offsetBitsValue];
-//  int32_t offsetValue = offset & 0x3f;
-//  int32_t numOffsetBits = offsetBits[offsetBitsValue];
-
-//  QString sLength = QStringLiteral("%1").arg(lengthReprValue, lengthReprBits, 2, QChar('0'));
-//  while (sLength.size() < lengthReprBits+numPadBits)
-//    sLength += "0";
-
-//  QString sOffsetBits = QStringLiteral("%1").arg(offsetReprValue, numOffsetBits, 2, QChar('0'));
-//  QString sOffsetValue = QStringLiteral("%1").arg(offsetValue, windowSize, 2, QChar('0'));
-//  bitString += "1" + sLength + sOffsetBits + sOffsetValue;
-//}
-
-//void PkZipData::writeLiteralByte(QString & bitString, uint8_t value)
-//{
-//  QString s = "0";
-//  s += QStringLiteral("%1").arg(value, 0, 2, QChar('0'));
-//  while (s.size() < 9)
-//    s += "0";
-
-//  bitString += s;
-//}

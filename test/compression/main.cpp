@@ -23,7 +23,7 @@ struct DataSet
   int compressed;
 };
 
-static const DataSet data[] = {
+static const DataSet gameData[] = {
   {8, 0},               // 1 Mission number
   {52488, 1},           // 2 Graphic ID grid (52488 compressed)
   {26244, 1},           // 3 Edge grid  (26244 compressed)
@@ -65,37 +65,79 @@ static const DataSet data[] = {
 
 int main(int argc, char ** argv)
 {
-  QString inputFileName("/data/caesar3/das-tarsus-2.sav");
+  PkZipData zipData;
+
+  if (argc < 2) {
+    std::cout << "Usage: test_compression <save-file-name>\n";
+    return -1;
+  }
+
+  QString inputFileName(argv[1]);
   QFile inputFile(inputFileName);
   if (!inputFile.open(QIODevice::ReadOnly)) {
     std::ostringstream oss;
     oss << "Could not open file " << inputFileName.toStdString();
+    std::cerr << oss.str() << "\n";
     return -1;
   }
 
   QDataStream inputStream(&inputFile);
   inputStream.setByteOrder(QDataStream::LittleEndian);
 
-  // Read the original data
-  QByteArray originalData[37];
+  // Decompress the original data
+  QByteArray origDecompData[37];
   for (int i = 0; i < 37; i++) {
-    originalData[i] = data[i].compressed ? streamio::readCompressedData(inputStream, data[i].sz) : streamio::readUncompressedData(inputStream, data[i].sz);
+    origDecompData[i] = gameData[i].compressed ? streamio::readCompressedData(inputStream, gameData[i].sz) : streamio::readUncompressedData(inputStream, gameData[i].sz);
   }
 
-  // Compress the data
-  PkZipData zipData;
-  QByteArray saveData[37];
+  // Compress the data using our algorithm
+  QByteArray compData[37];
   for (int i = 0; i < 37; i++) {
-    saveData[i] = data[i].compressed ? zipData.compress(originalData[i]) : originalData[i];
-    //saveData[i] = originalData[i];
+    compData[i] = gameData[i].compressed ? zipData.compress(origDecompData[i]) : origDecompData[i];
   }
 
-  zipData.decompress(saveData[15]);
-
-  QByteArray compressedData[37];
+  // Decompress the newly compressed data
+  QByteArray newDecompData[37];
   for (int i = 0; i < 37; i++) {
-    compressedData[i] = data[i].compressed ? zipData.decompress(saveData[i]) : saveData[i];
+    newDecompData[i] = gameData[i].compressed ? zipData.decompress(compData[i]) : compData[i];
   }
+
+  // Check that the original decompressed data is equal to the newly compressed data
+  for (int i = 0; i < 37; i++) {
+    if (newDecompData[i].size() != origDecompData[i].size()) {
+      std::cerr << "Sizes do not match for section " << i + 1 << "\n";
+      return -1;
+    }
+    for (int j = 0; j < newDecompData[i].size(); j++) {
+      if (origDecompData[i][j] != newDecompData[i][j]) {
+        std::cerr << "Byte Mismatch for section : " << i+1 << " at byte " << j+1 << "\n";
+        std::cerr << "Original Data             : " << (int)origDecompData[i][j] << "\n";
+        std::cerr << "New Data                  : " << (int)newDecompData[i][j] << "\n";
+        return -1;
+      }
+    }
+  }
+  std::cout << "Test Passed\n";
+
+//  QString outputFileName("/home/jmeese/applications/caesar3/augustus-tarraco-finish-decomp.sav");
+//  QFile outputFile(outputFileName);
+//  if (!outputFile.open(QIODevice::WriteOnly)) {
+//    std::ostringstream oss;
+//    oss << "Could not open file " << outputFileName.toStdString();
+//    std::cerr << oss.str() << "\n";
+//    return -1;
+//  }
+
+//  QDataStream outputStream(&outputFile);
+//  outputStream.setByteOrder(QDataStream::LittleEndian);
+
+//  for (int i = 0; i < 37; i++) {
+//    if (data[i].compressed) {
+//      int32_t dataSize = saveData[i].size();
+//      outputStream << dataSize;
+//    }
+//    outputStream.device()->write(saveData[i]);
+//  }
 
   return 0;
 }
