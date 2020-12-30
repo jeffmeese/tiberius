@@ -17,36 +17,6 @@
 
 #include "zip/pkzipdata.h"
 
-QString createBitString(const QByteArray & byteArray)
-{
-  QString bitString;
-  for (int i = 0; i < byteArray.size(); i++) {
-    uint8_t data = byteArray.at(i);
-    QString s = QStringLiteral("%1").arg(data, 8, 2, QChar('0'));
-    bitString += s;
-  }
-  return bitString;
-}
-
-void writeBytes(const QString & fileName, const QByteArray & byteArray)
-{
-  std::ofstream file(fileName.toStdString().c_str());
-
-  for (int i = 0; i < byteArray.size(); i++) {
-    uint8_t data = byteArray.at(i);
-    QString s = QStringLiteral("%1").arg(data, 8, 2, QChar('0'));
-    file << s.toStdString() << "\n";
-  }
-}
-
-void writeArray(QDataStream & dataStream, const QByteArray & array)
-{
-  std::cout << array.size() << "\n";
-  for (int i = 0; i < array.size(); i++) {
-    dataStream << (uint8_t)array.at(i);
-  }
-}
-
 struct DataSet
 {
   int sz;
@@ -126,21 +96,6 @@ int main(int argc, char ** argv)
   for (int i = 0; i < 37; i++) {
     compressedData[i] = data[i].compressed ? zipData.decompress(saveData[i]) : saveData[i];
   }
-
-  // Write output file
-//  QString outputFileName("/data/caesar3/das-tarsus-2-unc.sav");
-//  QFile outputFile(outputFileName);
-//  if (!outputFile.open(QIODevice::WriteOnly)) {
-//    std::ostringstream oss;
-//    oss << "Could not open file " << outputFileName.toStdString();
-//    return -1;
-//  }
-
-//  QDataStream outputStream(&outputFile);
-//  outputStream.setByteOrder(QDataStream::LittleEndian);
-//  for (int i = 0; i < 37; i++) {
-//    writeArray(outputStream, saveData[i]);
-//  }
 
   return 0;
 }
