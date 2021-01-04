@@ -68,28 +68,44 @@ void testByteStream()
   PkZipData zip;
 
   QByteArray byteArray;
-  byteArray.append((uint8_t)0);
-  byteArray.append((uint8_t)4);
-  byteArray.append((uint8_t)130);
-  byteArray.append((uint8_t)36);
-  byteArray.append((uint8_t)37);
-  byteArray.append((uint8_t)143);
-  byteArray.append((uint8_t)128);
-  byteArray.append((uint8_t)127);
+  for (int i = 0; i < 535; i++)
+    byteArray.append((uint8_t)65);
 
-  QByteArray decomp = zip.decompress(byteArray);
-  QByteArray comp = zip.compress(decomp, 0, 4);
-  QByteArray newDecomp = zip.decompress(comp);
+//  for (int i = 0; i < 294; i++)
+//    byteArray.append((uint8_t)73);
 
-  std::cout << newDecomp.size() << "\n";
+//  byteArray.append((uint8_t)0);
+//  byteArray.append((uint8_t)4);
+//  byteArray.append((uint8_t)130);
+//  byteArray.append((uint8_t)36);
+//  byteArray.append((uint8_t)37);
+//  byteArray.append((uint8_t)143);
+//  byteArray.append((uint8_t)128);
+//  byteArray.append((uint8_t)127);
+
+//  byteArray.append((uint8_t)0);
+//  byteArray.append((uint8_t)6);
+//  byteArray.append((uint8_t)130);
+//  byteArray.append((uint8_t)2);
+//  byteArray.append((uint8_t)252);
+//  byteArray.append((uint8_t)7);
+//  byteArray.append((uint8_t)2);
+//  byteArray.append((uint8_t)254);
+//  byteArray.append((uint8_t)1);
+
+  //QByteArray decomp = zip.decompress(byteArray);
+  //QByteArray comp = zip.compress(byteArray, 0, 6);
+  //QByteArray newDecomp = zip.decompress(comp);
+
+  //std::cout << newDecomp.size() << "\n";
 }
 
 int main(int argc, char ** argv)
 {
   PkZipData zipData;
 
-  testByteStream();
-  return 0;
+  //testByteStream();
+  //return 0;
 
   if (argc < 2) {
     std::cout << "Usage: test_compression <save-file-name>\n";
@@ -109,20 +125,26 @@ int main(int argc, char ** argv)
   inputStream.setByteOrder(QDataStream::LittleEndian);
 
   // Decompress the original data
+  std::cout << "Decompress original\n";
   QByteArray origDecompData[37];
   for (int i = 0; i < 37; i++) {
     origDecompData[i] = gameData[i].compressed ? streamio::readCompressedData(inputStream, gameData[i].sz) : streamio::readUncompressedData(inputStream, gameData[i].sz);
   }
 
   // Compress the data using our algorithm
+  std::cout << "Compress\n";
   QByteArray compData[37];
   for (int i = 0; i < 37; i++) {
+    std::cout << i << "\n";
     compData[i] = gameData[i].compressed ? zipData.compress(origDecompData[i]) : origDecompData[i];
   }
+  //return 0;
 
   // Decompress the newly compressed data
+  std::cout << "Decompress new\n";
   QByteArray newDecompData[37];
-  for (int i = 0; i < 37; i++) {
+  for (int i = 0; i < 15; i++) {
+    std::cout << i << std::endl;
     newDecompData[i] = gameData[i].compressed ? zipData.decompress(compData[i]) : compData[i];
   }
 
@@ -130,6 +152,8 @@ int main(int argc, char ** argv)
   for (int i = 0; i < 37; i++) {
     if (newDecompData[i].size() != origDecompData[i].size()) {
       std::cerr << "Sizes do not match for section " << i + 1 << "\n";
+      std::cerr << "Original Size : " << origDecompData[i].size() << "\n";
+      std::cerr << "New Size      : " << newDecompData[i].size() << "\n";
       return -1;
     }
     for (int j = 0; j < newDecompData[i].size(); j++) {

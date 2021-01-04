@@ -2,6 +2,7 @@
 #define PKZIPDATA_H
 
 #include <QByteArray>
+#include <QString>
 
 #include <string>
 #include <vector>
@@ -31,12 +32,9 @@ private:
 private:
   uint8_t mLengthToIndex[256];
   uint8_t mOffsetToIndex[256];
-  uint16_t mLengthToRepr[519];
-  uint16_t mLengthBits[519];
-  uint16_t mLengthPadBits[519];
-  uint16_t mOffsetToRepr[519];
-  uint16_t mOffsetBits[519];
   int8_t mLengthToBase[519];
+  QString mLengthReprString[519];
+  QString mBaseOffset[64];
 };
 
 #endif // PKZIPDATA_H

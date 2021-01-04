@@ -36,7 +36,7 @@ static const int lengthFillBits[16] = {
 };
 
 static const int baseRepr[16] = {
-  5, 3, 4, 3, 5, 4, 3, 5, 8, 12, 16, 48, 64, 64, 128, 0
+  5, 3, 4, 3, 5, 4, 3, 5, 4, 3, 2, 3, 2, 1, 1, 0
 };
 
 static const int offsetBits[64] = {
@@ -83,8 +83,6 @@ PkZipData::~PkZipData()
 
 void PkZipData::buildLookupTables()
 {
-  static const uint16_t lengthValues[] = {1, 1, 1, 1, 1, 1, 1, 1, 2, 4, 8, 16, 32, 64, 128, 255};
-
   mLengthToBase[0] = -1;
   mLengthToBase[1] = -1;
   for (int i = 2; i < 519; i++) {
@@ -96,18 +94,6 @@ void PkZipData::buildLookupTables()
 
     if (i >= lengthBaseValue[15]) {
       mLengthToBase[i] = 15;
-    }
-  }
-
-  for (int i = 0; i < 16; i++) {
-    int offsetValue = lengthBaseValue[i];
-    int reprValue = lengthRepr[i];
-    for (int j = 1; j <= lengthValues[i]; j++) {
-      mLengthToRepr[offsetValue] = reprValue;
-      mLengthBits[offsetValue] = lengthBits[i];
-      mLengthPadBits[offsetValue] = lengthFillBits[i];
-      offsetValue++;
-      reprValue++;
     }
   }
 
@@ -128,26 +114,78 @@ void PkZipData::buildLookupTables()
       value += (1 << bits);
     }
   }
+
+  for (int length = 2; length < 519; length++) {
+    int8_t index = mLengthToBase[length];
+    QString sBase = QStringLiteral("%1").arg(baseRepr[index], lengthBits[index], 2, QChar('0'));
+    QString sFill;
+    if (lengthFillBits[index] > 0)  {
+      sFill = QStringLiteral("%1").arg(length - lengthBaseValue[index], lengthFillBits[index], 2, QChar('0'));
+      std::reverse(sFill.begin(), sFill.end());
+    }
+
+    QString sLength = sBase + sFill;
+    mLengthReprString[length] = sLength;
+  }
+
+  for (int i = 0; i < 64; i++) {
+    int32_t offsetReprValue = offsetToRepr[i];
+    QString sOffset = QStringLiteral("%1").arg(offsetReprValue, offsetBits[i], 2, QChar('0'));
+    mBaseOffset[i] = sOffset;
+  }
 }
 
 QByteArray PkZipData::compress(const QByteArray &byteArray, uint8_t literalEncoding, uint8_t windowSize)
 {
+  QByteArray compressedArray;
+  compressedArray.append(literalEncoding);
+  compressedArray.append(windowSize);
+
   // Create the bit array
   // For now we just print out all literal bytes
   std::vector<bool> bits;
+  std::map<uint8_t, int> dictionary;
+  using dictitr = std::map<uint8_t, int>::iterator;
+  int i = -1;
+  while (++i < byteArray.size()) {
+    uint8_t byte = byteArray.at(i);
+    dictitr itr = dictionary.find(byte);
+    if (itr == dictionary.end()) {
+      writeLiteralByte(bits, byte);
+      dictionary[byte] = i;
+    }
+    else {
+      int length = 1;
+      int index = itr->second;
+      int offset = i - index - 1;
+      while (++i < byteArray.size()) {
+        if (byteArray.at(i) != byte) {
+          break;
+        }
 
-  for (int i = 0; i < byteArray.size(); i++) {
-    uint8_t byte = byteArray.size();
+        if (++length >= 516) {
+          break;
+        }
+      }
+      if (length == 1) {
+        writeLiteralByte(bits, byte);
+        dictionary[byte] = i;
+      }
+      else {
+        if (offset > 4096) {
+          writeLiteralByte(bits, byte);
+          dictionary[byte] = i;
+        }
+        else {
+          writeCopyOffset(bits, offset, length, windowSize);
+          if (length >= 516) {
+            writeLiteralByte(bits, byte);
+            dictionary[byte] = i;
+          }
+        }
+      }
+    }
   }
-
-  //writeLiteralByte(bits, 65);
-  //writeLiteralByte(bits, 73);
-  //writeCopyOffset(bits, 1, 11, windowSize);
-
-  //for (int i = 0; i < byteArray.size(); i++) {
-  //  uint8_t c = byteArray.at(i);
-  //  writeLiteralByte(bits, c);
-  //}
 
   // Write the end of stream marker and pad
   // to a multiple of 8 bits
@@ -157,86 +195,9 @@ QByteArray PkZipData::compress(const QByteArray &byteArray, uint8_t literalEncod
     bits.push_back(0);
 
   // Write the compressed array
-  QByteArray compressedArray;
-  compressedArray.append(literalEncoding);
-  compressedArray.append(windowSize);
   writeCompressedArray(bits, compressedArray);
 
   return compressedArray;
-
-//  QByteArray output;
-//  QDataStream dataStream(&output, QIODevice::WriteOnly);
-//  dataStream.setByteOrder(QDataStream::LittleEndian);
-
-//  dataStream << literalEncoding << windowSize;
-
-//  std::vector<uint8_t> decodedBytes;
-//  QString bitString;
-//  writeLiteralByte(bitString, byteArray.at(0));
-//  decodedBytes.push_back(byteArray.at(0));
-//  writeLiteralByte(bitString, byteArray.at(1));
-//  decodedBytes.push_back(byteArray.at(1));
-//  int i = 2;
-//  while (i < byteArray.size()) {
-//    uint8_t byte = byteArray.at(i);
-//    int32_t j = decodedBytes.size();
-//    int32_t offset = -1;
-//    while (--j >= 0) {
-//      uint8_t decodedByte = decodedBytes.at(j);
-//      if (decodedByte == byte) {
-//        offset = decodedBytes.size()-j-1;
-//        break;
-//      }
-//    }
-
-//    if (offset == -1) {
-//      writeLiteralByte(bitString, byte);
-//      decodedBytes.push_back(byte);
-//      i++;
-//    }
-//    else {
-//      int matchedBytes = 0;
-//      while (matchedBytes <= 516) {
-//        matchedBytes++;
-
-//        if (++i == byteArray.size())
-//          break;
-
-//        uint8_t byte2 = byteArray.at(i);
-//        if (byte2 != byte)
-//          break;
-//      }
-
-//      if (matchedBytes == 1) {
-//        writeLiteralByte(bitString, byte);
-//        decodedBytes.push_back(byte);
-//      }
-//      else {
-//        writeCopyOffset(bitString, offset, matchedBytes, windowSize);
-//        for (int j = 0; j < matchedBytes; j++) {
-//          decodedBytes.push_back(byte);
-//        }
-//      }
-//    }
-//  }
-
-//  bitString += "1000000011111111";
-
-//  // Make the bit string a multiple of 8
-//  while (bitString.size() % 8) {
-//    bitString += "0";
-//  }
-
-//  i = 0;
-//  while (i < bitString.size()) {
-//    QString s = bitString.mid(i, 8);
-//    //std::reverse(s.begin(), s.end());
-//    uint8_t v = s.toUInt(nullptr, 2);
-//    dataStream << v;
-//    i += 8;
-//  }
-
-//  return output;
 }
 
 QByteArray PkZipData::decompress(QByteArray &byteArray, bool debug)
@@ -269,6 +230,7 @@ QByteArray PkZipData::decompress(QByteArray &byteArray, bool debug)
       int32_t numPadBits = lengthFillBits[lengthIndex];
       int32_t length = lengthBaseValue[lengthIndex];
       processBits(currentByteValue, numLengthBits, dataBuffer, nextBufferPos, bitsRemaining);
+      //qDebug() << QStringLiteral("%1").arg(currentByteValue & 0xff, 16, 2, QChar('0'));
       if (numPadBits > 0) {
         int32_t padValue = currentByteValue & ((1 << numPadBits) - 1);
 
@@ -344,36 +306,39 @@ void PkZipData::writeCompressedArray(std::vector<bool> & bits, QByteArray & byte
 
 void PkZipData::writeCopyOffset(std::vector<bool> & bits, int32_t offset, int32_t length, int32_t windowSize)
 {
-  int8_t index = mLengthToBase[length];
-  int32_t totalBits = lengthBits[index] + lengthFillBits[index];
-  int32_t lengthReprValue = baseRepr[index];
-  if (lengthFillBits[index] > 0)
-    lengthReprValue += length-lengthBaseValue[index];
-
-  // Marker
+  // Add marker
   bits.push_back(1);
 
-  // Length (Is this too slow?)
-  QString sLength = QStringLiteral("%1").arg(lengthReprValue, totalBits, 2, QChar('0'));
+  // Create the length bits
+  QString sLength = mLengthReprString[length];
   for (int i = 0; i < sLength.size(); i++) {
     bits.push_back(sLength.at(i) == '1');
   }
 
-  // Get the base index of the offset
+  // Create the offset bits
   int32_t windowValue = std::pow(2, windowSize);
   int32_t baseIndex = offset / windowValue;
   int32_t baseValue = baseIndex * windowValue;
-  int32_t offsetReprValue = offsetToRepr[baseIndex];
-  QString sOffset = QStringLiteral("%1").arg(offsetReprValue, offsetBits[baseIndex], 2, QChar('0'));
+
+  // Get the base offset representation
+  QString sOffset = mBaseOffset[baseIndex];
   for (int i = 0; i < sOffset.size(); i++) {
     bits.push_back(sOffset.at(i) == '1');
   }
 
-  // Add the offset difference
+  // Add the offset difference representation
   int32_t offsetDiff = offset - baseValue;
-  for (int i = 0; i < windowSize; i++) {
-    bool bit = offsetDiff & (1 << i);
-    bits.push_back(bit);
+  if (length == 2) {
+    for (int i = 0; i < 2; i++) {
+      bool bit = offsetDiff & (1 << i);
+      bits.push_back(bit);
+    }
+  }
+  else {
+    for (int i = 0; i < windowSize; i++) {
+      bool bit = offsetDiff & (1 << i);
+      bits.push_back(bit);
+    }
   }
 }
 
