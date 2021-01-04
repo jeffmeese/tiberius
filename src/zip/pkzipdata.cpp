@@ -35,6 +35,10 @@ static const int lengthFillBits[16] = {
   0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8
 };
 
+static const int baseRepr[16] = {
+  5, 3, 4, 3, 5, 4, 3, 5, 8, 12, 16, 48, 64, 64, 128, 0
+};
+
 static const int offsetBits[64] = {
   2, 4, 4, 5, 5, 5, 5, 6,
   6, 6, 6, 6, 6, 6, 6, 6,
@@ -81,6 +85,20 @@ void PkZipData::buildLookupTables()
 {
   static const uint16_t lengthValues[] = {1, 1, 1, 1, 1, 1, 1, 1, 2, 4, 8, 16, 32, 64, 128, 255};
 
+  mLengthToBase[0] = -1;
+  mLengthToBase[1] = -1;
+  for (int i = 2; i < 519; i++) {
+    for (int j = 0; j < 15; j++) {
+      if (i >= lengthBaseValue[j] && i < lengthBaseValue[j+1]) {
+        mLengthToBase[i] = j;
+      }
+    }
+
+    if (i >= lengthBaseValue[15]) {
+      mLengthToBase[i] = 15;
+    }
+  }
+
   for (int i = 0; i < 16; i++) {
     int offsetValue = lengthBaseValue[i];
     int reprValue = lengthRepr[i];
@@ -117,9 +135,14 @@ QByteArray PkZipData::compress(const QByteArray &byteArray, uint8_t literalEncod
   // Create the bit array
   // For now we just print out all literal bytes
   std::vector<bool> bits;
-  writeLiteralByte(bits, 65);
-  writeLiteralByte(bits, 73);
-  writeCopyOffset(bits, 1, 11);
+
+  for (int i = 0; i < byteArray.size(); i++) {
+    uint8_t byte = byteArray.size();
+  }
+
+  //writeLiteralByte(bits, 65);
+  //writeLiteralByte(bits, 73);
+  //writeCopyOffset(bits, 1, 11, windowSize);
 
   //for (int i = 0; i < byteArray.size(); i++) {
   //  uint8_t c = byteArray.at(i);
@@ -216,12 +239,10 @@ QByteArray PkZipData::compress(const QByteArray &byteArray, uint8_t literalEncod
 //  return output;
 }
 
-QByteArray PkZipData::decompress(QByteArray &byteArray)
+QByteArray PkZipData::decompress(QByteArray &byteArray, bool debug)
 {
   QDataStream dataStream(&byteArray, QIODevice::ReadOnly);
   dataStream.setByteOrder(QDataStream::LittleEndian);
-
-  int sz = byteArray.size();
 
   // Read the header
   uint8_t literalEncoding = 0;
@@ -321,40 +342,39 @@ void PkZipData::writeCompressedArray(std::vector<bool> & bits, QByteArray & byte
   }
 }
 
-void PkZipData::writeCopyOffset(std::vector<bool> & bits, int32_t offset, int32_t length)
+void PkZipData::writeCopyOffset(std::vector<bool> & bits, int32_t offset, int32_t length, int32_t windowSize)
 {
-  int32_t offsetIndex = 0;//mOffsetIndexTable[offset];
-  int32_t numOffsetBits = offsetBits[offsetIndex];
-  int32_t offsetValue = offsetRepr[offsetIndex];
-  uint8_t lengthIndex = 8;// mLengthIndexTable[length];
-  int32_t numLengthBits = lengthBits[lengthIndex];
-  int32_t numPadBits = lengthFillBits[lengthIndex];
-  int32_t lengthValue = lengthRepr[lengthIndex];
+  int8_t index = mLengthToBase[length];
+  int32_t totalBits = lengthBits[index] + lengthFillBits[index];
+  int32_t lengthReprValue = baseRepr[index];
+  if (lengthFillBits[index] > 0)
+    lengthReprValue += length-lengthBaseValue[index];
 
   // Marker
   bits.push_back(1);
 
-  // Length
-  bits.push_back(0);
-  bits.push_back(0);
-  bits.push_back(1);
-  bits.push_back(0);
-  bits.push_back(0);
-  bits.push_back(1);
+  // Length (Is this too slow?)
+  QString sLength = QStringLiteral("%1").arg(lengthReprValue, totalBits, 2, QChar('0'));
+  for (int i = 0; i < sLength.size(); i++) {
+    bits.push_back(sLength.at(i) == '1');
+  }
 
-  // Offset repr
-  bits.push_back(1);
-  bits.push_back(1);
+  // Get the base index of the offset
+  int32_t windowValue = std::pow(2, windowSize);
+  int32_t baseIndex = offset / windowValue;
+  int32_t baseValue = baseIndex * windowValue;
+  int32_t offsetReprValue = offsetToRepr[baseIndex];
+  QString sOffset = QStringLiteral("%1").arg(offsetReprValue, offsetBits[baseIndex], 2, QChar('0'));
+  for (int i = 0; i < sOffset.size(); i++) {
+    bits.push_back(sOffset.at(i) == '1');
+  }
 
-  // Offset value
-  bits.push_back(1);
-  bits.push_back(0);
-  bits.push_back(0);
-  bits.push_back(0);
-
-  //writeValue(bits, lengthValue, numLengthBits+numPadBits);
-  //writeValue(bits, offsetValue, numOffsetBits);
-  //writeValue(bits, (offset & 0x3f), 6);
+  // Add the offset difference
+  int32_t offsetDiff = offset - baseValue;
+  for (int i = 0; i < windowSize; i++) {
+    bool bit = offsetDiff & (1 << i);
+    bits.push_back(bit);
+  }
 }
 
 void PkZipData::writeLiteralByte(std::vector<bool> & bits, uint32_t byte)
