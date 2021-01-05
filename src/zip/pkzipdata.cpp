@@ -62,17 +62,6 @@ static const int offsetRepr[64] = {
  224,  96, 160,  32, 192,  64, 128,   0
 };
 
-static const int offsetToRepr[64] = {
-  3,  11, 10, 19, 18, 17, 16, 31,
-  30, 29, 28, 27, 26, 25, 24, 23,
-  22, 21, 20, 19, 18, 17, 33, 32,
-  31, 30, 29, 28, 27, 26, 25, 24,
-  23, 22, 21, 20, 19, 18, 17, 16,
-  15, 14, 13, 12, 11, 10,  9,  8,
-  15, 14, 13, 12, 11, 10,  9,  8,
-   7,  6,  5,  4,  3,  2,  1,  0
-};
-
 PkZipData::PkZipData()
 {  
   buildLookupTables();
@@ -84,20 +73,6 @@ PkZipData::~PkZipData()
 
 void PkZipData::buildLookupTables()
 {
-  mLengthToBase[0] = -1;
-  mLengthToBase[1] = -1;
-  for (int i = 2; i < 519; i++) {
-    for (int j = 0; j < 15; j++) {
-      if (i >= lengthBaseValue[j] && i < lengthBaseValue[j+1]) {
-        mLengthToBase[i] = j;
-      }
-    }
-
-    if (i >= lengthBaseValue[15]) {
-      mLengthToBase[i] = 15;
-    }
-  }
-
   for (int i = 0; i < 16; i++) {
     int bits = lengthBits[i];
     int value = lengthRepr[i];
@@ -116,8 +91,55 @@ void PkZipData::buildLookupTables()
     }
   }
 
+//  int code_index = 0;
+//  for (int copy = 0; copy < 16; copy++) {
+//    int base_bits = lengthBits[copy];
+//    int extra_bits = lengthFillBits[copy];
+//    int base_code = lengthRepr[copy];
+//    int max = 1 << extra_bits;
+//    for (int i = 0; i < max; i++) {
+//      int bits = (uint8_t) (1 + base_bits + extra_bits);
+//      int value = (uint16_t) (1 | (base_code << 1) | (i << (base_bits + 1)));
+//      qDebug() << value;
+//      code_index++;
+//    }
+//  }
+
+  //std::map<int32_t, int32_t> lenToRep;
+//  int index = 0;
+//  for (int i = 0; i < 16; i++) {
+//    int baseRep = lengthRepr[i];
+//    int baseValue = lengthBaseValue[i];
+//    int bits = lengthBits[i];
+//    int fillBits = lengthFillBits[i];
+//    //qDebug() << index++ << " " << baseRep;
+//    mLengthToRepr[baseValue] = baseRep;
+//    mLengthBits[baseValue] = bits + fillBits;
+//    for (int j = 1; j <= std::pow(2, fillBits)-1; j++) {
+//      //qDebug() << index++ << " " << (baseRep + j);
+//      mLengthToRepr[baseValue + j] = baseRep + j;
+//      mLengthBits[baseValue+j] = bits + fillBits;
+//    }
+//  }
+
+  // Would like to get rid of this section
+  int8_t lengthToBase[519];
+  lengthToBase[0] = -1;
+  lengthToBase[1] = -1;
+  for (int i = 2; i < 519; i++) {
+    for (int j = 0; j < 15; j++) {
+      if (i >= lengthBaseValue[j] && i < lengthBaseValue[j+1]) {
+        lengthToBase[i] = j;
+      }
+    }
+
+    if (i >= lengthBaseValue[15]) {
+      lengthToBase[i] = 15;
+    }
+  }
+
   for (int length = 2; length < 519; length++) {
-    int8_t index = mLengthToBase[length];
+    int8_t index = lengthToBase[length];
     QString sBase = QStringLiteral("%1").arg(baseRepr[index], lengthBits[index], 2, QChar('0'));
     QString sFill;
     if (lengthFillBits[index] > 0)  {
@@ -127,12 +149,6 @@ void PkZipData::buildLookupTables()
 
     QString sLength = sBase + sFill;
     mLengthReprString[length] = sLength;
-  }
-
-  for (int i = 0; i < 64; i++) {
-    int32_t offsetReprValue = offsetToRepr[i];
-    QString sOffset = QStringLiteral("%1").arg(offsetReprValue, offsetBits[i], 2, QChar('0'));
-    mBaseOffset[i] = sOffset;
   }
 }
 
@@ -319,6 +335,13 @@ void PkZipData::writeCopyOffset(std::vector<bool> & bits, int32_t offset, int32_
   bits.push_back(1);
 
   // Create the length bits
+//  int lengthRep = mLengthToRepr[length];
+//  int numLengthBits = mLengthBits[length];
+//  for (int i = 0; i < numLengthBits; i++) {
+//    bool bit = lengthRep & (1 << i);
+//    bits.push_back(bit);
+//  }
+
   QString sLength = mLengthReprString[length];
   for (int i = 0; i < sLength.size(); i++) {
     bits.push_back(sLength.at(i) == '1');
@@ -343,21 +366,19 @@ void PkZipData::writeCopyOffset(std::vector<bool> & bits, int32_t offset, int32_
     }
   }
   else {
-    // Create the offset bits
-    int32_t windowValue = std::pow(2, windowSize);
-    int32_t baseIndex = offset / windowValue;
-    int32_t baseValue = baseIndex * windowValue;
 
-    // Get the base offset representation
-    QString sOffset = mBaseOffset[baseIndex];
-    for (int i = 0; i < sOffset.size(); i++) {
-      bits.push_back(sOffset.at(i) == '1');
+    // Write the representation bits
+    int offsetValue = offsetRepr[offset >> windowSize];
+    int numBits = offsetBits[offset >> windowSize];
+    for (int i = 0; i < numBits; i++) {
+      bool bit = offsetValue & (1 << i);
+      bits.push_back(bit);
     }
 
-    // Add the difference value
-    int32_t offsetDiff = offset - baseValue;
+    // Write the offset bits
+    int diff = offset & 0x3f;
     for (int i = 0; i < windowSize; i++) {
-      bool bit = offsetDiff & (1 << i);
+      bool bit = diff & (1 << i);
       bits.push_back(bit);
     }
   }

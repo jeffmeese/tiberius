@@ -4,6 +4,7 @@
 #include <QByteArray>
 #include <QString>
 
+#include <map>
 #include <string>
 #include <vector>
 
@@ -30,9 +31,9 @@ private:
 private:
   uint8_t mLengthToIndex[256];
   uint8_t mOffsetToIndex[256];
-  int8_t mLengthToBase[519];
   QString mLengthReprString[519];
-  QString mBaseOffset[64];
+  std::map<uint16_t, uint8_t> mLengthToRepr;
+  std::map<uint16_t, uint8_t> mLengthBits;
 };
 
 #endif // PKZIPDATA_H
