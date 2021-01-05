@@ -26,8 +26,6 @@ private:
   void writeCopyOffset(std::vector<bool> & bits, int32_t offset, int32_t length, int32_t windowSize);
   void writeLiteralByte(std::vector<bool> & bits, uint32_t byte);
   void writeValue(std::vector<bool> & bits, uint32_t byte, int32_t length);
-  //void writeCopyOffset(QString & bitString, int32_t offset, int32_t length, uint8_t windowSize);
-  //void writeLiteralByte(QString & bitString, uint8_t value);
 
 private:
   uint8_t mLengthToIndex[256];

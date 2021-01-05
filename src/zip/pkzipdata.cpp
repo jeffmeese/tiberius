@@ -141,49 +141,56 @@ QByteArray PkZipData::compress(const QByteArray &byteArray, uint8_t literalEncod
   compressedArray.append(literalEncoding);
   compressedArray.append(windowSize);
 
+  int maxCopyLength = 516;
+  int dictionarySize = std::pow(2, windowSize);
+
   // Create the bit array
-  // For now we just print out all literal bytes
   std::vector<bool> bits;
   std::map<uint8_t, int> dictionary;
   using dictitr = std::map<uint8_t, int>::iterator;
-  int i = -1;
-  while (++i < byteArray.size()) {
+  int i = 0;
+  while (i < byteArray.size()) {
     uint8_t byte = byteArray.at(i);
+
+    bool writeLiteral = false;
+    int length = 0;
+    int offset = 0;
     dictitr itr = dictionary.find(byte);
-    if (itr == dictionary.end()) {
+    if (itr != dictionary.end()) {
+      int index = itr->second;
+      length = 1;
+      offset = i - index - 1;
+      while (i+1 < byteArray.size()) {
+        uint8_t newByte = byteArray.at(i+1);
+        uint8_t origByte = byteArray.at(index+1);
+        if (newByte != origByte) {
+          break;
+        }
+        if (++length >= maxCopyLength) {
+          dictionary[byte] = i++;
+          break;
+        }
+        i++;
+        index++;
+      }
+    }
+
+    if (length < 2) {
+      writeLiteral = true;
+    }
+
+    if (offset >= dictionarySize) {
+      writeLiteral = true;
+    }
+
+    if (writeLiteral) {
       writeLiteralByte(bits, byte);
       dictionary[byte] = i;
+      i++;
     }
     else {
-      int length = 1;
-      int index = itr->second;
-      int offset = i - index - 1;
-      while (++i < byteArray.size()) {
-        if (byteArray.at(i) != byte) {
-          break;
-        }
-
-        if (++length >= 516) {
-          break;
-        }
-      }
-      if (length == 1) {
-        writeLiteralByte(bits, byte);
-        dictionary[byte] = i;
-      }
-      else {
-        if (offset > 4096) {
-          writeLiteralByte(bits, byte);
-          dictionary[byte] = i;
-        }
-        else {
-          writeCopyOffset(bits, offset, length, windowSize);
-          if (length >= 516) {
-            writeLiteralByte(bits, byte);
-            dictionary[byte] = i;
-          }
-        }
-      }
+      writeCopyOffset(bits, offset, length, windowSize);
+      i++;
     }
   }
 

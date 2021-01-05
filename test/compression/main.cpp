@@ -68,50 +68,59 @@ void testByteStream()
   PkZipData zip;
 
   QByteArray byteArray;
-  for (int i = 0; i < 535; i++)
-    byteArray.append((uint8_t)65);
+  byteArray.append(static_cast<uint8_t>(0));
+  byteArray.append(static_cast<uint8_t>(45));
+  byteArray.append(static_cast<uint8_t>(15));
+  byteArray.append(static_cast<uint8_t>(15));
+  byteArray.append(static_cast<uint8_t>(35));
+  byteArray.append(static_cast<uint8_t>(35));
+  byteArray.append(static_cast<uint8_t>(35));
+  byteArray.append(static_cast<uint8_t>(35));
+  for (int i = 0; i < 100; i++)
+    byteArray.append(static_cast<uint8_t>(45));
 
-//  for (int i = 0; i < 294; i++)
-//    byteArray.append((uint8_t)73);
+  for (int i = 0; i < 100; i++)
+    byteArray.append(static_cast<uint8_t>(55));
 
-//  byteArray.append((uint8_t)0);
-//  byteArray.append((uint8_t)4);
-//  byteArray.append((uint8_t)130);
-//  byteArray.append((uint8_t)36);
-//  byteArray.append((uint8_t)37);
-//  byteArray.append((uint8_t)143);
-//  byteArray.append((uint8_t)128);
-//  byteArray.append((uint8_t)127);
+  for (int i = 0; i < 600; i++)
+    byteArray.append(static_cast<uint8_t>(0));
 
-//  byteArray.append((uint8_t)0);
-//  byteArray.append((uint8_t)6);
-//  byteArray.append((uint8_t)130);
-//  byteArray.append((uint8_t)2);
-//  byteArray.append((uint8_t)252);
-//  byteArray.append((uint8_t)7);
-//  byteArray.append((uint8_t)2);
-//  byteArray.append((uint8_t)254);
-//  byteArray.append((uint8_t)1);
+  for (int i = 0; i < 600; i++)
+    byteArray.append(static_cast<uint8_t>(25));
 
-  //QByteArray decomp = zip.decompress(byteArray);
-  //QByteArray comp = zip.compress(byteArray, 0, 6);
-  //QByteArray newDecomp = zip.decompress(comp);
+  byteArray.append(static_cast<uint8_t>(15));
+  byteArray.append(static_cast<uint8_t>(15));
+  byteArray.append(static_cast<uint8_t>(15));
 
-  //std::cout << newDecomp.size() << "\n";
+  QByteArray compressed = zip.compress(byteArray, 0, 6);
+  QByteArray decompressed = zip.decompress(compressed);
+  qDebug() << byteArray.size() << " " << compressed.size() << "\n";
+  qDebug() << byteArray.size() << " " << decompressed.size() << "\n";
+
+  if (byteArray.size() == decompressed.size()) {
+    for (int j = 0; j < decompressed.size(); j++) {
+      if (byteArray[j] != decompressed[j]) {
+        std::cerr << "Byte Mismatch for section at byte :" << j+1 << "\n";
+        std::cerr << "Original Data             : " << (int)byteArray[j] << "\n";
+        std::cerr << "New Data                  : " << (int)decompressed[j] << "\n";
+      }
+    }
+    std::cout << "Test Passed\n";
+  }
+
 }
 
 int main(int argc, char ** argv)
 {
-  PkZipData zipData;
-
-  //testByteStream();
-  //return 0;
+  testByteStream();
+  return 0;
 
   if (argc < 2) {
     std::cout << "Usage: test_compression <save-file-name>\n";
     return -1;
   }
 
+  PkZipData zipData;
   QString inputFileName(argv[1]);
   QFile inputFile(inputFileName);
   if (!inputFile.open(QIODevice::ReadOnly)) {
@@ -135,10 +144,8 @@ int main(int argc, char ** argv)
   std::cout << "Compress\n";
   QByteArray compData[37];
   for (int i = 0; i < 37; i++) {
-    std::cout << i << "\n";
     compData[i] = gameData[i].compressed ? zipData.compress(origDecompData[i]) : origDecompData[i];
   }
-  //return 0;
 
   // Decompress the newly compressed data
   std::cout << "Decompress new\n";
