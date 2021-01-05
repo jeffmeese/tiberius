@@ -13,6 +13,7 @@
 #include <set>
 #include <sstream>
 #include <string.h>
+#include <unordered_map>
 #include <vector>
 
 // The number of bits for each copy length range
@@ -142,36 +143,40 @@ QByteArray PkZipData::compress(const QByteArray &byteArray, uint8_t literalEncod
   compressedArray.append(windowSize);
 
   int maxCopyLength = 516;
-  int dictionarySize = std::pow(2, windowSize);
+  int dictionarySize = std::pow(2, 6+windowSize) - 1;
 
   // Create the bit array
+  // This algorithm does not represent an optimized compression
+  // Only single bytes are used the dictionary, adding more
+  // bits to the dictionary would improve the compression
   std::vector<bool> bits;
-  std::map<uint8_t, int> dictionary;
-  using dictitr = std::map<uint8_t, int>::iterator;
-  int i = 0;
+  std::unordered_map<uint8_t, int> dictionary;
+  int32_t i = 0;
   while (i < byteArray.size()) {
     uint8_t byte = byteArray.at(i);
-
     bool writeLiteral = false;
-    int length = 0;
-    int offset = 0;
-    dictitr itr = dictionary.find(byte);
+    int32_t length = 0;
+    int32_t offset = 0;
+    std::unordered_map<uint8_t, int>::iterator itr = dictionary.find(byte);
     if (itr != dictionary.end()) {
-      int index = itr->second;
-      length = 1;
-      offset = i - index - 1;
-      while (i+1 < byteArray.size()) {
-        uint8_t newByte = byteArray.at(i+1);
-        uint8_t origByte = byteArray.at(index+1);
-        if (newByte != origByte) {
-          break;
+      int32_t index = itr->second + 1;
+      offset = i - index;
+      if (offset >= dictionarySize) {
+        writeLiteral = true;
+      }
+      else {
+        length = 1;
+        int32_t j = i+1;
+        while (j < byteArray.size() && length < maxCopyLength) {
+          uint8_t newByte = byteArray.at(j);
+          uint8_t origByte = byteArray.at(index);
+          if (newByte != origByte) {
+            break;
+          }
+          j++;
+          index++;
+          length++;
         }
-        if (++length >= maxCopyLength) {
-          dictionary[byte] = i++;
-          break;
-        }
-        i++;
-        index++;
       }
     }
 
@@ -179,23 +184,21 @@ QByteArray PkZipData::compress(const QByteArray &byteArray, uint8_t literalEncod
       writeLiteral = true;
     }
 
-    if (offset >= dictionarySize) {
+    if (length == 2 && offset >= 256) {
       writeLiteral = true;
     }
 
     if (writeLiteral) {
       writeLiteralByte(bits, byte);
-      dictionary[byte] = i;
-      i++;
+      dictionary[byte] = i++;
     }
     else {
       writeCopyOffset(bits, offset, length, windowSize);
-      i++;
+      i += length;
     }
   }
 
-  // Write the end of stream marker and pad
-  // to a multiple of 8 bits
+  // Write the end of stream marker and pad to a multiple of 8 bits
   writeValue(bits, 1, 8);
   writeValue(bits, 255, 8);
   while (bits.size() % 8)
@@ -237,7 +240,6 @@ QByteArray PkZipData::decompress(QByteArray &byteArray, bool debug)
       int32_t numPadBits = lengthFillBits[lengthIndex];
       int32_t length = lengthBaseValue[lengthIndex];
       processBits(currentByteValue, numLengthBits, dataBuffer, nextBufferPos, bitsRemaining);
-      //qDebug() << QStringLiteral("%1").arg(currentByteValue & 0xff, 16, 2, QChar('0'));
       if (numPadBits > 0) {
         int32_t padValue = currentByteValue & ((1 << numPadBits) - 1);
 
@@ -322,26 +324,38 @@ void PkZipData::writeCopyOffset(std::vector<bool> & bits, int32_t offset, int32_
     bits.push_back(sLength.at(i) == '1');
   }
 
-  // Create the offset bits
-  int32_t windowValue = std::pow(2, windowSize);
-  int32_t baseIndex = offset / windowValue;
-  int32_t baseValue = baseIndex * windowValue;
-
-  // Get the base offset representation
-  QString sOffset = mBaseOffset[baseIndex];
-  for (int i = 0; i < sOffset.size(); i++) {
-    bits.push_back(sOffset.at(i) == '1');
-  }
-
   // Add the offset difference representation
-  int32_t offsetDiff = offset - baseValue;
   if (length == 2) {
+    int offsetValue = offsetRepr[offset >> 2];
+    int numBits = offsetBits[offset >> 2];
+
+    // Get the base offset representation
+    for (int i = 0; i < numBits; i++) {
+      bool bit = offsetValue & (1 << i);
+      bits.push_back(bit);
+    }
+
+    // Add the two lower order bits
+    int diff = offset & 3;
     for (int i = 0; i < 2; i++) {
-      bool bit = offsetDiff & (1 << i);
+      bool bit = diff & (1 << i);
       bits.push_back(bit);
     }
   }
   else {
+    // Create the offset bits
+    int32_t windowValue = std::pow(2, windowSize);
+    int32_t baseIndex = offset / windowValue;
+    int32_t baseValue = baseIndex * windowValue;
+
+    // Get the base offset representation
+    QString sOffset = mBaseOffset[baseIndex];
+    for (int i = 0; i < sOffset.size(); i++) {
+      bits.push_back(sOffset.at(i) == '1');
+    }
+
+    // Add the difference value
+    int32_t offsetDiff = offset - baseValue;
     for (int i = 0; i < windowSize; i++) {
       bool bit = offsetDiff & (1 << i);
       bits.push_back(bit);
