@@ -13,6 +13,8 @@ class BuildMenuItem;
 class BuildMenu
     : public QWidget
 {
+  Q_OBJECT
+
 public:
   TIBERIUS_LIB_DECL explicit BuildMenu(QWidget * parentWidget = nullptr);
 
@@ -26,12 +28,17 @@ public:
   TIBERIUS_LIB_DECL BuildMenuItem * itemAt(std::size_t index);
   TIBERIUS_LIB_DECL const BuildMenuItem * itemAt(std::size_t index) const;
   TIBERIUS_LIB_DECL std::size_t totalItems() const;
+  TIBERIUS_LIB_DECL std::size_t totalItemsAvailable() const;
 
 protected:
+  void mousePressEvent(QMouseEvent * event) override;
   void resizeEvent(QResizeEvent *event) override;
 
 private:
   void calcLayout();
+
+signals:
+  void clicked();
 
 private:
   typedef std::unique_ptr<BuildMenuItem> MenuItemPtr;

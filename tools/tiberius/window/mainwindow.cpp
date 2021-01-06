@@ -27,6 +27,7 @@
 
 #include <QDir>
 #include <QKeyEvent>
+#include <QMouseEvent>
 
 MainWindow::MainWindow(Application & application, QWidget * parentWidget)
   : QMainWindow(parentWidget)
@@ -72,6 +73,17 @@ bool MainWindow::eventFilter(QObject * object, QEvent * event)
       if (action == mUi->actionMouse_Help) {
         action->trigger();
         return true;
+      }
+    }
+  }
+
+  if (object == mGameWindow.get()) {
+    if (event->type() == QEvent::MouseButtonPress) {
+      QMouseEvent * mouseEvent = dynamic_cast<QMouseEvent*>(event);
+      if (mouseEvent != nullptr) {
+        if (mouseEvent->button() == Qt::RightButton) {
+          mUi->cSidebarWidget->cancelMenu();
+        }
       }
     }
   }
@@ -564,6 +576,7 @@ void MainWindow::init()
   mUi->menuBar->hide();
   mUi->cSidebarWidget->hide();
 
+  mGameWindow->installEventFilter(this);
   mUi->menuOptions->installEventFilter(this);
   mUi->menuHelp->installEventFilter(this);
 
@@ -621,6 +634,10 @@ void MainWindow::init()
   //connect(mUi->cSidebarWidget, SIGNAL(showEmpire()), SLOT(showEmpire()));
   //connect(mUi->cSidebarWidget, SIGNAL(showMessages()), SLOT(showMessages()));
   //connect(mUi->cSidebarWidget, SIGNAL(undoLastAction()), SLOT(undoLastAction()));
+}
+
+void MainWindow::mousePressEvent(QMouseEvent *)
+{
 }
 
 void MainWindow::resizeEvent(QResizeEvent *)

@@ -27,7 +27,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="CityWidget" name="cCityWidget" native="true">
+    <widget class="MapWidget" name="cMapWidget" native="true">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
@@ -40,9 +40,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>CityWidget</class>
+   <class>MapWidget</class>
    <extends>QWidget</extends>
-   <header>widget/citywidget.h</header>
+   <header>widget/mapwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

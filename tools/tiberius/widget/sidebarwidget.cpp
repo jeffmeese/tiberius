@@ -14,10 +14,11 @@
 #include "widget/buildmenu.h"
 #include "widget/buildmenuitem.h"
 
+#include <QDebug>
 #include <QMouseEvent>
 #include <QPainter>
 
-static const int BUTTON_WIDTH = 240;
+static const int BUTTON_WIDTH = 270;
 static const int BUTTON_HEIGHT = 20;
 
 SidebarWidget::SidebarWidget(QWidget *parent)
@@ -95,6 +96,13 @@ void SidebarWidget::connectActions()
   connect(mUi->cCollapse, SIGNAL(clicked()), SLOT(handleCollapseButton()));
   connect(mUi->cExpand, SIGNAL(clicked()), SLOT(handleExpandButton()));
   connect(mUi->cOverlay, SIGNAL(clicked()), SLOT(handleOverlaysButton()));
+
+  connect(mReligionMenu->itemAt(0), SIGNAL(clicked()), SLOT(handleSmallTempleMenu()));
+  connect(mReligionMenu->itemAt(1), SIGNAL(clicked()), SLOT(handleLargeTempleMenu()));
+  connect(mIndustryMenu->itemAt(0), SIGNAL(clicked()), SLOT(handleFarmMenu()));
+  connect(mIndustryMenu->itemAt(1), SIGNAL(clicked()), SLOT(handleRawMaterialsMenu()));
+  connect(mIndustryMenu->itemAt(2), SIGNAL(clicked()), SLOT(handleWorkshopMenu()));
+  connect(mSecurityMenu->itemAt(4), SIGNAL(clicked()), SLOT(handleFortMenu()));
 }
 
 void SidebarWidget::createMenus()
@@ -178,6 +186,10 @@ void SidebarWidget::createMenus()
   createMenuItem(mSecurityMenu.get(), stringData->getString(28, 59), 150);     // Tower
   createMenuItem(mSecurityMenu.get(), stringData->getString(28, 58), 100);     // Gatehouse
   createMenuItem(mSecurityMenu.get(), stringData->getString(28, 57), -1);      // Fort
+  //mSecurityMenu->itemAt(1)->setAvailable(false);
+  //mSecurityMenu->itemAt(2)->setAvailable(false);
+  //mSecurityMenu->itemAt(3)->setAvailable(false);
+  //mSecurityMenu->itemAt(4)->setAvailable(false);
   mSecurityMenu->setVisible(false);
   mSecurityMenu->resize(menuWidth, menuHeight);
 
@@ -345,6 +357,22 @@ void SidebarWidget::handleExpandButton()
   cancelMenu();
 }
 
+void SidebarWidget::handleFarmMenu()
+{
+  playClickSound();
+  cancelMenu();
+  startBuild();
+  showBuildMenu(mFarmMenu.get(), nullptr);
+}
+
+void SidebarWidget::handleFortMenu()
+{
+  playClickSound();
+  cancelMenu();
+  startBuild();
+  showBuildMenu(mFortMenu.get(), nullptr);
+}
+
 void SidebarWidget::handleGovernmentButton()
 {
   playClickSound();
@@ -375,6 +403,14 @@ void SidebarWidget::handleIndustryButton()
   showBuildMenu(mIndustryMenu.get(), mUi->cIndustry);
 }
 
+void SidebarWidget::handleLargeTempleMenu()
+{
+  playClickSound();
+  cancelMenu();
+  startBuild();
+  showBuildMenu(mLargeTempleMenu.get(), nullptr);
+}
+
 void SidebarWidget::handleMessagesButton()
 {
   playClickSound();
@@ -398,6 +434,14 @@ void SidebarWidget::handleOverlaysButton()
   playClickSound();
   cancelMenu();
   mUi->cOverlay->setDown(true);
+}
+
+void SidebarWidget::handleRawMaterialsMenu()
+{
+  playClickSound();
+  cancelMenu();
+  startBuild();
+  showBuildMenu(mRawMaterialsMenu.get(), nullptr);
 }
 
 void SidebarWidget::handleReligionButton()
@@ -434,12 +478,28 @@ void SidebarWidget::handleSecurityButton()
   showBuildMenu(mSecurityMenu.get(), mUi->cSecurity);
 }
 
+void SidebarWidget::handleSmallTempleMenu()
+{
+  playClickSound();
+  cancelMenu();
+  startBuild();
+  showBuildMenu(mSmallTempleMenu.get(), nullptr);
+}
+
 void SidebarWidget::handleWaterButton()
 {
   playClickSound();
   cancelMenu();
   startBuild();
   showBuildMenu(mWaterMenu.get(), mUi->cWater);
+}
+
+void SidebarWidget::handleWorkshopMenu()
+{
+  playClickSound();
+  cancelMenu();
+  startBuild();
+  showBuildMenu(mWorkshopMenu.get(), nullptr);
 }
 
 void SidebarWidget::handleUndoButton()
@@ -529,13 +589,20 @@ void SidebarWidget::playClickSound()
 
 void SidebarWidget::showBuildMenu(BuildMenu *menu, Button * button)
 {
+  std::size_t totalItems = menu->totalItemsAvailable();
+  bool isOdd = totalItems % 2;
+  int yOffset = 415 + BUTTON_HEIGHT / 2 - totalItems*(BUTTON_HEIGHT+5) + 5;
+  if (!isOdd)
+    yOffset += BUTTON_HEIGHT/2;
+
   QRect rect(this->rect());
   QPoint pt = this->mapToParent(rect.topLeft());
   int32_t xOffset = pt.x() - BUTTON_WIDTH - 10;
-  int32_t yOffset = height()/2;
+  //int32_t yOffset = height()/2;
   menu->move(xOffset, yOffset);
   menu->setVisible(true);
-  button->setDown(true);
+  if (button != nullptr)
+    button->setDown(true);
 }
 
 void SidebarWidget::startBuild()

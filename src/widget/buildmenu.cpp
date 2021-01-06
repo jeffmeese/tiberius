@@ -3,6 +3,7 @@
 #include "buildmenuitem.h"
 
 #include <QImage>
+#include <QMouseEvent>
 #include <QPainter>
 
 BuildMenu::BuildMenu(QWidget * parentWidget)
@@ -24,8 +25,7 @@ void BuildMenu::calcLayout()
   int32_t yOffset = mItemMargin;
   for (std::size_t i = 0; i < mItems.size(); i++) {
     BuildMenuItem * menuItem = mItems.at(i).get();
-    if (menuItem->isEnabled()) {
-      //menuItem->move(0, i*(menuItem->height() + mItemMargin));
+    if (menuItem->available()) {
       menuItem->move(0, yOffset);
       yOffset += menuItem->height() + mItemMargin;
     }
@@ -48,6 +48,12 @@ const BuildMenuItem * BuildMenu::itemAt(std::size_t index) const
   return mItems.at(index).get();
 }
 
+void BuildMenu::mousePressEvent(QMouseEvent * event)
+{
+  if (event->button() == Qt::LeftButton)
+    emit clicked();
+}
+
 void BuildMenu::resizeEvent(QResizeEvent *)
 {
   calcLayout();
@@ -56,4 +62,14 @@ void BuildMenu::resizeEvent(QResizeEvent *)
 std::size_t BuildMenu::totalItems() const
 {
   return mItems.size();
+}
+
+std::size_t BuildMenu::totalItemsAvailable() const
+{
+  std::size_t total = 0;
+  for (std::size_t i = 0; i < mItems.size(); i++) {
+    if (mItems.at(i)->available())
+      total++;
+  }
+  return total;
 }

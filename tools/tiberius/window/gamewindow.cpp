@@ -42,4 +42,10 @@ void GameWindow::paintEvent(QPaintEvent *)
 void GameWindow::setGame(Game *game)
 {
   mGame = game;
+  mUi->cMapWidget->setMap(nullptr);
+  mUi->cMapWidget->setCity(nullptr);
+  if (mGame != nullptr) {
+    mUi->cMapWidget->setMap(mGame->map());
+    mUi->cMapWidget->setCity(mGame->city());
+  }
 }

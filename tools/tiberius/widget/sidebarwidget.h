@@ -20,6 +20,9 @@ public:
   explicit SidebarWidget(QWidget *parent = nullptr);
   ~SidebarWidget();
 
+public slots:
+  void cancelMenu();
+
 protected:
   void mousePressEvent(QMouseEvent *event) override;
   void paintEvent(QPaintEvent *event) override;
@@ -29,7 +32,6 @@ private:
   using BuildMenuItemPtr = std::unique_ptr<BuildMenuItem>;
 
 private:
-  void cancelMenu();
   void connectActions();
   void createMenus();
   void createMenuItem(BuildMenu * menu, const QString & label, int32_t price = -1);
@@ -49,20 +51,26 @@ private slots:
   void handleEngineeringButton();
   void handleEntertainmentButton();
   void handleExpandButton();
+  void handleFarmMenu();
+  void handleFortMenu();
   void handleGovernmentButton();
   void handleHealthButton();
   void handleHouseButton();
   void handleIndustryButton();
+  void handleLargeTempleMenu();
   void handleMessagesButton();
   void handleMissionButton();
   void handleOrientNorthButton();
   void handleOverlaysButton();
+  void handleRawMaterialsMenu();
   void handleReligionButton();
   void handleRoadButton();
   void handleRotateLeftButton();
   void handleRotateRightButton();
   void handleSecurityButton();
+  void handleSmallTempleMenu();
   void handleWaterButton();
+  void handleWorkshopMenu();
   void handleUndoButton();
 
 signals:

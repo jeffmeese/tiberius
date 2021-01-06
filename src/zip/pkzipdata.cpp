@@ -91,64 +91,24 @@ void PkZipData::buildLookupTables()
     }
   }
 
-//  int code_index = 0;
-//  for (int copy = 0; copy < 16; copy++) {
-//    int base_bits = lengthBits[copy];
-//    int extra_bits = lengthFillBits[copy];
-//    int base_code = lengthRepr[copy];
-//    int max = 1 << extra_bits;
-//    for (int i = 0; i < max; i++) {
-//      int bits = (uint8_t) (1 + base_bits + extra_bits);
-//      int value = (uint16_t) (1 | (base_code << 1) | (i << (base_bits + 1)));
-//      qDebug() << value;
-//      code_index++;
-//    }
-//  }
+  for (int i = 0; i < 16; i++) {
+    int reprValue = baseRepr[i];
+    int baseValue = lengthBaseValue[i];
+    int fillBits = lengthFillBits[i];
+    int bits = lengthBits[i];
+    int numValues = std::pow(2, fillBits);
 
-  //std::map<int32_t, int32_t> lenToRep;
-//  int index = 0;
-//  for (int i = 0; i < 16; i++) {
-//    int baseRep = lengthRepr[i];
-//    int baseValue = lengthBaseValue[i];
-//    int bits = lengthBits[i];
-//    int fillBits = lengthFillBits[i];
-//    //qDebug() << index++ << " " << baseRep;
-//    mLengthToRepr[baseValue] = baseRep;
-//    mLengthBits[baseValue] = bits + fillBits;
-//    for (int j = 1; j <= std::pow(2, fillBits)-1; j++) {
-//      //qDebug() << index++ << " " << (baseRep + j);
-//      mLengthToRepr[baseValue + j] = baseRep + j;
-//      mLengthBits[baseValue+j] = bits + fillBits;
-//    }
-//  }
-
-  // Would like to get rid of this section
-  int8_t lengthToBase[519];
-  lengthToBase[0] = -1;
-  lengthToBase[1] = -1;
-  for (int i = 2; i < 519; i++) {
-    for (int j = 0; j < 15; j++) {
-      if (i >= lengthBaseValue[j] && i < lengthBaseValue[j+1]) {
-        lengthToBase[i] = j;
+    for (int j = 0; j < numValues; j++) {
+      int length = baseValue + j;
+      QString sLength = QStringLiteral("%1").arg(reprValue, bits, 2, QChar('0'));
+      if (fillBits > 0) {
+        QString sFill = QStringLiteral("%1").arg(j, fillBits, 2, QChar('0'));
+        std::reverse(sFill.begin(), sFill.end());
+        sLength += sFill;
       }
+      mLengthValues[length] = sLength.toUInt(nullptr, 2);
+      mLengthBits[length] = bits + fillBits;
     }
-
-    if (i >= lengthBaseValue[15]) {
-      lengthToBase[i] = 15;
-    }
-  }
-
-  for (int length = 2; length < 519; length++) {
-    int8_t index = lengthToBase[length];
-    QString sBase = QStringLiteral("%1").arg(baseRepr[index], lengthBits[index], 2, QChar('0'));
-    QString sFill;
-    if (lengthFillBits[index] > 0)  {
-      sFill = QStringLiteral("%1").arg(length - lengthBaseValue[index], lengthFillBits[index], 2, QChar('0'));
-      std::reverse(sFill.begin(), sFill.end());
-    }
-
-    QString sLength = sBase + sFill;
-    mLengthReprString[length] = sLength;
   }
 }
 
@@ -215,8 +175,8 @@ QByteArray PkZipData::compress(const QByteArray &byteArray, uint8_t literalEncod
   }
 
   // Write the end of stream marker and pad to a multiple of 8 bits
-  writeValue(bits, 1, 8);
-  writeValue(bits, 255, 8);
+  writeBits(bits, 1, 8);
+  writeBits(bits, 255, 8);
   while (bits.size() % 8)
     bits.push_back(0);
 
@@ -314,6 +274,14 @@ void PkZipData::processBits(uint16_t &value, int32_t numBits, uint8_t * dataBuff
   bitsRemaining += 8 - numBits;
 }
 
+void PkZipData::writeBits(std::vector<bool> & bits, int32_t value, int32_t numBits)
+{
+  for (int i = 0; i < numBits; i++) {
+    bool bit = value & (1 << i);
+    bits.push_back(bit);
+  }
+}
+
 void PkZipData::writeCompressedArray(std::vector<bool> & bits, QByteArray & byteArray)
 {
   int bitIndex = 7;
@@ -335,65 +303,34 @@ void PkZipData::writeCopyOffset(std::vector<bool> & bits, int32_t offset, int32_
   bits.push_back(1);
 
   // Create the length bits
-//  int lengthRep = mLengthToRepr[length];
-//  int numLengthBits = mLengthBits[length];
-//  for (int i = 0; i < numLengthBits; i++) {
-//    bool bit = lengthRep & (1 << i);
-//    bits.push_back(bit);
-//  }
-
-  QString sLength = mLengthReprString[length];
-  for (int i = 0; i < sLength.size(); i++) {
-    bits.push_back(sLength.at(i) == '1');
+  std::vector<bool> b;
+  int numLengthBits = mLengthBits[length];
+  int lengthRep = mLengthValues[length];
+  for (int i = numLengthBits - 1; i >= 0; i--) {
+    bool bit = lengthRep & (1 << i);
+    bits.push_back(bit);
   }
 
   // Add the offset difference representation
   if (length == 2) {
     int offsetValue = offsetRepr[offset >> 2];
     int numBits = offsetBits[offset >> 2];
-
-    // Get the base offset representation
-    for (int i = 0; i < numBits; i++) {
-      bool bit = offsetValue & (1 << i);
-      bits.push_back(bit);
-    }
-
-    // Add the two lower order bits
     int diff = offset & 3;
-    for (int i = 0; i < 2; i++) {
-      bool bit = diff & (1 << i);
-      bits.push_back(bit);
-    }
+    writeBits(bits, offsetValue, numBits);
+    writeBits(bits, diff, 2);
   }
   else {
-
-    // Write the representation bits
     int offsetValue = offsetRepr[offset >> windowSize];
     int numBits = offsetBits[offset >> windowSize];
-    for (int i = 0; i < numBits; i++) {
-      bool bit = offsetValue & (1 << i);
-      bits.push_back(bit);
-    }
-
-    // Write the offset bits
     int diff = offset & 0x3f;
-    for (int i = 0; i < windowSize; i++) {
-      bool bit = diff & (1 << i);
-      bits.push_back(bit);
-    }
+    writeBits(bits, offsetValue, numBits);
+    writeBits(bits, diff, windowSize);
   }
 }
 
 void PkZipData::writeLiteralByte(std::vector<bool> & bits, uint32_t byte)
 {
   bits.push_back(0);
-  writeValue(bits, byte, 8);
+  writeBits(bits, byte, 8);
 }
 
-void PkZipData::writeValue(std::vector<bool> & bits, uint32_t byte, int32_t length)
-{
-  for (int j = 0; j < length; j++) {
-    bool bit = byte & (1 << j);
-    bits.push_back(bit);
-  }
-}

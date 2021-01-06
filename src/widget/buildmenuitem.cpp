@@ -9,6 +9,7 @@
 
 BuildMenuItem::BuildMenuItem(QWidget * parentWidget)
   : Button(parentWidget)
+  , mAvailable(true)
   , mPrice(-1)
 {
 }
@@ -16,6 +17,9 @@ BuildMenuItem::BuildMenuItem(QWidget * parentWidget)
 void BuildMenuItem::paintEvent(QPaintEvent *)
 {
   static const int32_t RIGHT_MARGIN = 10;
+
+  if (!mAvailable)
+    return;
 
   const StringData * stringData = TiberiusApplication::language()->stringData();
   Font f = textFont();

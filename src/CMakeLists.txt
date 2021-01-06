@@ -108,6 +108,7 @@ set(HDR_FILES
   widget/label.h
   widget/lineedit.h
   widget/listwidget.h
+  widget/mapwidget.h
   widget/menu.h
   widget/menubar.h
   widget/messagewidget.h
@@ -203,6 +204,7 @@ set(SRC_FILES
   widget/label.cpp
   widget/lineedit.cpp
   widget/listwidget.cpp
+  widget/mapwidget.cpp
   widget/menu.cpp
   widget/menubar.cpp
   widget/messagewidget.cpp

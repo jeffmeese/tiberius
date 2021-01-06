@@ -40,6 +40,7 @@ public:
 protected:
   bool eventFilter(QObject * object, QEvent * event) override;
   void keyPressEvent(QKeyEvent * event) override;
+  void mousePressEvent(QMouseEvent * event) override;
   void resizeEvent(QResizeEvent * event) override;
 
 private slots:
