@@ -161,7 +161,7 @@ void Game::saveToStream(QDataStream &dataStream, bool compressed) const
   mMap->buildingDamageGrid()->saveToDataStream(dataStream, 26244, compressed);    // 13 Damage grid
   mMap->aqueductBackupGrid()->saveToDataStream(dataStream, 26244, compressed);    // 14 Aqueduct Grid 2
   mMap->spriteBackupGrid()->saveToDataStream(dataStream, 26244, compressed);      // 15 Animation Grid 2
-  mCity->walkerData()->saveToDataStream(dataStream, compressed);                  // 16 Walker data (12800 compressed)
+  mCity->walkerData()->saveToDataStream(dataStream);                              // 16 Walker data (12800 compressed)
   mCity->routeData()->saveToDataStream(dataStream, compressed);                   // 17 & 18 Route data (1200 and 300000 compressed)
   mCity->militaryData()->saveToDataStream(dataStream, compressed);                // 19&20 Formation Data
   mCity->saveToStream(dataStream);                                                // 21 City Data

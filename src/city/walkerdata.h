@@ -26,7 +26,7 @@ public:
 
 public:
   TIBERIUS_LIB_DECL void loadFromDataStream(QDataStream & dataStream);
-  TIBERIUS_LIB_DECL void saveToDataStream(QDataStream & dataStream, bool compressed = true) const;
+  TIBERIUS_LIB_DECL void saveToDataStream(QDataStream & dataStream) const;
 };
 
 #endif // WALKERDATA_H

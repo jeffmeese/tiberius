@@ -27,16 +27,15 @@ void WalkerData::loadFromDataStream(QDataStream & dataStream)
   }
 }
 
-void WalkerData::saveToDataStream(QDataStream & dataStream, bool compressed) const
+void WalkerData::saveToDataStream(QDataStream & dataStream) const
 {
-  QDataStream byteStream;
+  QByteArray byteArray;
+  QDataStream byteStream(&byteArray, QIODevice::WriteOnly);
   byteStream.setByteOrder(QDataStream::LittleEndian);
 
   for (int i = 0; i < MAX_FIGURES; i++) {
     get(i)->saveToDataStream(byteStream);
   }
 
-  QByteArray byteArray;
-  streamio::writeCompressedData(byteStream, byteArray);
-  dataStream.device()->write(byteArray);
+  streamio::writeCompressedData(dataStream, byteArray);
 }

@@ -18,11 +18,11 @@ void City::loadFromStream(QDataStream &dataStream)
   mNameId = streamio::readUInt8(dataStream);
   dataStream.skipRawData(2);
 
-  for (int32_t i = 0; i < Resource::MAX_RESOURCES; i++) {
+  for (int32_t i = 0; i < Resource::MAX_RESOURCES+1; i++) {
     mBuyFlags[i] = streamio::readUInt8(dataStream);
   }
 
-  for (int32_t i = 0; i < Resource::MAX_RESOURCES; i++) {
+  for (int32_t i = 0; i < Resource::MAX_RESOURCES+1; i++) {
     mSellFlags[i] = streamio::readUInt8(dataStream);
   }
 

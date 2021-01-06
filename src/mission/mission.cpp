@@ -281,45 +281,40 @@ void Mission::init()
   mRiverEntryPoint.reset(new Location);
   mRiverExitPoint.reset(new Location);
 
-  mAllowedBuildings.resize(MAX_ALLOWED_BUILDINGS);
-  for (int i = 0; i < MAX_ALLOWED_BUILDINGS; i++) {
+  mAllowedBuildings.resize(Mission::MAX_ALLOWED_BUILDINGS);
+  for (int i = 0; i < Mission::MAX_ALLOWED_BUILDINGS; i++) {
     mAllowedBuildings[i] = 0;
   }
 
-  mDemandChanges.resize(MAX_DEMAND_CHANGES);
-  for (int i = 0; i < MAX_DEMAND_CHANGES; i++) {
-    mDemandChanges[i].reset(new DemandChange);
-  }
-
-  mEmperorRequests.resize(MAX_REQUESTS);
-  for (int i = 0; i < MAX_REQUESTS; i++) {
+  mEmperorRequests.resize(Mission::MAX_REQUESTS);
+  for (int i = 0; i < Mission::MAX_REQUESTS; i++) {
     mEmperorRequests[i].reset(new EmperorRequest);
   }
 
-  mInvasions.resize(MAX_INVASIONS);
-  for (int i = 0; i < MAX_INVASIONS; i++) {
+  mInvasions.resize(Mission::MAX_INVASIONS);
+  for (int i = 0; i < Mission::MAX_INVASIONS; i++) {
     mInvasions[i].reset(new Invasion);
   }
 
-  mPriceChanges.resize(MAX_PRICE_CHANGES);
-  for (int i = 0; i < MAX_PRICE_CHANGES; i++) {
-    mPriceChanges[i].reset(new PriceChange);
-  }
+//  mPriceChanges.resize(Mission::MAX_PRICE_CHANGES);
+//  for (int i = 0; i < Mission::MAX_PRICE_CHANGES; i++) {
+//    mPriceChanges[i].reset(new PriceChange);
+//  }
 
-  mHerdPoints.resize(MAX_HERD_POINTS);
-  for (int i = 0; i < MAX_HERD_POINTS; i++) {
-    mHerdPoints[i].reset(new Location);
-  }
+//  mHerdPoints.resize(Mission::MAX_HERD_POINTS);
+//  for (int i = 0; i < Mission::MAX_HERD_POINTS; i++) {
+//    mHerdPoints[i].reset(new Location);
+//  }
 
-  mFishingPoints.resize(MAX_FISHING_POINTS);
-  for (int i = 0; i < MAX_FISHING_POINTS; i++) {
-    mFishingPoints[i].reset(new Location);
-  }
+//  mFishingPoints.resize(Mission::MAX_FISHING_POINTS);
+//  for (int i = 0; i < Mission::MAX_FISHING_POINTS; i++) {
+//    mFishingPoints[i].reset(new Location);
+//  }
 
-  mInvasionPoints.resize(MAX_INVASION_POINTS);
-  for (int i = 0; i < MAX_INVASION_POINTS; i++) {
-    mInvasionPoints[i].reset(new Location);
-  }
+//  mInvasionPoints.resize(Mission::MAX_INVASION_POINTS);
+//  for (int i = 0; i < Mission::MAX_INVASION_POINTS; i++) {
+//    mInvasion*Points[i].reset(new Location);
+//  }
 }
 
 int32_t Mission::initialFunds() const

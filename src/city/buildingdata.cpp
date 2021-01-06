@@ -40,16 +40,15 @@ void BuildingData::loadFromDataStream(QDataStream & dataStream)
 
 void BuildingData::saveToDataStream(QDataStream & dataStream) const
 {
-  QDataStream byteStream;
+  QByteArray byteArray;
+  QDataStream byteStream(&byteArray, QIODevice::WriteOnly);
   byteStream.setByteOrder(QDataStream::LittleEndian);
 
   for (int i = 0; i < MAX_BUILDINGS; i++) {
     get(i)->saveToDataStream(byteStream);
   }
 
-  QByteArray byteArray;
-  streamio::writeCompressedData(byteStream, byteArray);
-  dataStream.device()->write(byteArray);
+  streamio::writeCompressedData(dataStream, byteArray);
 }
 
 void BuildingData::setHighestIdInUse(int32_t value)
