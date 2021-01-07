@@ -43,6 +43,7 @@ set(HDR_FILES
   city/religiondata.h
   city/routedata.h
   city/scenariodata.h
+  city/scribemessage.h
   city/scribemessagedata.h
   city/tradedata.h
   city/walkerdata.h
@@ -143,6 +144,7 @@ set(SRC_FILES
   city/resourcedata.cpp
   city/routedata.cpp
   city/scenariodata.cpp
+  city/scribemessage.cpp
   city/scribemessagedata.cpp
   city/tradedata.cpp
   city/walkerdata.cpp
