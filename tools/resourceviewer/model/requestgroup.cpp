@@ -3,12 +3,12 @@
 
 #include "properties/property.h"
 
-#include "mission/emperorrequest.h"
-#include "mission/mission.h"
+#include "scenario/emperorrequest.h"
+#include "scenario/scenario.h"
 
 #include <QTableWidget>
 
-RequestGroup::RequestGroup(Mission * mission)
+RequestGroup::RequestGroup(Scenario * mission)
   : mMission(mission)
 {
   setText("Requests");

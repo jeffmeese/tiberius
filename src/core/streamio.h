@@ -18,8 +18,10 @@ namespace streamio
 
   void writeCompressedData(QDataStream & dataStream, QByteArray & byteArray);
   void writeUncompressedData(QDataStream & dataStream, QByteArray & byteArray);
+  void writeInt16(QDataStream & dataStream, int16_t value);
   void writeInt32(QDataStream & dataStream, int32_t value);
   void writeUInt8(QDataStream & dataStream, uint8_t value);
+  void writeUInt16(QDataStream & dataStream, uint16_t value);
 }
 
 #endif // STREAMIO_H

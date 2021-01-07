@@ -10,7 +10,7 @@ class GridGroup;
 class HerdPointGroup;
 class InvasionGroup;
 class InvasionPointsGroup;
-class Mission;
+class Scenario;
 class PriceChangeGroup;
 class RandomEventsItem;
 class RequestGroup;
@@ -26,7 +26,7 @@ public:
   QList<Property> getProperties() const override;
 
 private:
-  std::unique_ptr<Mission> mMission;
+  std::unique_ptr<Scenario> mMission;
   DemandChangeGroup * mDemandChangeGroup;
   FishingPointGroup * mFishingPointGroup;
   GoalsItem * mGoalsItem;

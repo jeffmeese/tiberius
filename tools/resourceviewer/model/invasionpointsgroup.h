@@ -3,20 +3,20 @@
 
 #include "resourceitem.h"
 
-class Mission;
+class Scenario;
 
 class InvasionPointsGroup
     : public ResourceItem
 {
 public:
-  InvasionPointsGroup(Mission * mission);
+  InvasionPointsGroup(Scenario * mission);
 
 public:
   QWidget * createView() const override;
   QList<Property> getProperties() const override;
 
 private:
-  Mission * mMission;
+  Scenario * mMission;
 };
 
 #endif // INVASIONPOINTSGROUP_H

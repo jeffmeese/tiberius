@@ -2,103 +2,52 @@
 
 #include "core/streamio.h"
 
-#include "map/location.h"
-#include "mission/earthquake.h"
-#include "mission/goal.h"
+#include "scenario/scenario.h"
+
 #include <QDataStream>
 
 ScenarioData::ScenarioData()
 {
-  mEmperorChange = false;
-  mGladiatorRevolt = false;
-  mFloodedClayPits = false;
-  mIronMineCollapse = false;
-  mLandTradeProblem = false;
-  mSeaTradeProblem = false;
-  mRomeLowersWages = false;
-  mRomeRaisesWages = false;
-  mSeaTradeProblem = false;
-  mWaterContamination = false;
-
-  mEmperorChangeYear = 0;
-  mEnemyId = 0;
-  mMilestone25Year = 0;
-  mMilestone50Year = 0;
-  mMilestone75Year = 0;
-  mRescueLoan = 0;
-  mMapWidth = 0;
-  mMapHeight = 0;
-
-  mEarthquake.reset(new Earthquake);
-  mPopulationGoal.reset(new Goal);
-  mProsperityGoal.reset(new Goal);
-  mCultureGoal.reset(new Goal);
-  mPeaceGoal.reset(new Goal);
-  mFavorGoal.reset(new Goal);
-  mEntryPoint.reset(new Location);
-  mExitPoint.reset(new Location);
-  mRiverEntryPoint.reset(new Location);
-  mRiverExitPoint.reset(new Location);
-
-  //mAllowedBuildings.resize(MAX_ALLOWED_BUILDINGS);
-  //for (int i = 0; i < MAX_ALLOWED_BUILDINGS; i++) {
-  //  mAllowedBuildings[i] = 0;
-  //}
-
-  //mDemandChanges.resize(MAX_DEMAND_CHANGES);
-  //for (int i = 0; i < MAX_DEMAND_CHANGES; i++) {
-  //  mDemandChanges[i].reset(new DemandChange);
-  //}
-
-  mEmperorRequests.resize(MAX_REQUESTS);
-  for (int i = 0; i < MAX_REQUESTS; i++) {
-    mEmperorRequests[i].reset(new EmperorRequest);
+  mMission.reset(new Scenario);
+  for (int i = 0; i < Resource::MAX_RESOURCES; i++) {
+    mBuyPrices[i] = 0;
+    mSellPrices[i] = 0;
   }
+}
 
-  mInvasions.resize(MAX_INVASIONS);
-  for (int i = 0; i < MAX_INVASIONS; i++) {
-    mInvasions[i].reset(new Invasion);
-  }
+ScenarioData::~ScenarioData()
+{
 
-  mPriceChanges.resize(MAX_PRICE_CHANGES);
-  for (int i = 0; i < MAX_PRICE_CHANGES; i++) {
-    mPriceChanges[i].reset(new PriceChange);
-  }
-
-  mHerdPoints.resize(MAX_HERD_POINTS);
-  for (int i = 0; i < MAX_HERD_POINTS; i++) {
-    mHerdPoints[i].reset(new Location);
-  }
-
-  mFishingPoints.resize(MAX_FISHING_POINTS);
-  for (int i = 0; i < MAX_FISHING_POINTS; i++) {
-    mFishingPoints[i].reset(new Location);
-  }
-
-  mInvasionPoints.resize(MAX_INVASION_POINTS);
-  for (int i = 0; i < MAX_INVASION_POINTS; i++) {
-    mInvasionPoints[i].reset(new Location);
-  }
 }
 
 void ScenarioData::loadFromStream(QDataStream &dataStream)
 {
-  dataStream.skipRawData(128); // Unknown
-  dataStream.skipRawData(8); // Unused trade price pair
+  // 128 bytes unused + 1 unused trade price pair
+  dataStream.skipRawData(130);
+
+  // Read trade prices
   for (int i = 0; i < Resource::MAX_RESOURCES; i++) {
     mBuyPrices[i] = streamio::readInt32(dataStream);
     mSellPrices[i] = streamio::readInt32(dataStream);
   }
 
-  mRandomSeed1 = streamio::readInt32(dataStream);
-  mRandomSeed2 = streamio::readInt32(dataStream);
-  mStartingDate = streamio::readInt32(dataStream);
-  dataStream.skipRawData(8); // Unknownz
-  mStartingDate = streamio::readInt32(dataStream);
-  dataStream.skipRawData(10); // Unknown
+  // The rest of the data is the same as the mission data without the grids
+  mMission->loadFromStream(dataStream, false);
 }
 
 void ScenarioData::saveToStream(QDataStream &dataStream) const
 {
+  // 128 bytes unused + 1 unused trade price pair
+  for (int i = 0; i < 130; i++) {
+    dataStream << static_cast<uint8_t>(0);
+  }
 
+  // Write trade prices
+  for (int i = 0; i < Resource::MAX_RESOURCES; i++) {
+    streamio::writeInt32(dataStream, mBuyPrices[i]);
+    streamio::writeInt32(dataStream, mSellPrices[i]);
+  }
+
+  // The rest of the data is the same as the mission data without the grids
+  mMission->saveToStream(dataStream, false);
 }

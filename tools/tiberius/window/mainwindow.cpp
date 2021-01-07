@@ -16,7 +16,7 @@
 #include "language/language.h"
 #include "language/stringdata.h"
 
-#include "mission/mission.h"
+#include "scenario/scenario.h"
 
 #include "window/advisorswindow.h"
 #include "window/empirewindow.h"

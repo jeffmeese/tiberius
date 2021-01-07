@@ -5,9 +5,9 @@
 #include "graphicgriditem.h"
 #include "terraingriditem.h"
 
-#include "mission/mission.h"
+#include "scenario/scenario.h"
 
-GridGroup::GridGroup(Mission * mission)
+GridGroup::GridGroup(Scenario * mission)
   : mMission(mission)
 {
   setText("Grids");

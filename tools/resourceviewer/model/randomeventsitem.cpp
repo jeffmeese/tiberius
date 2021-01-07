@@ -1,10 +1,10 @@
 #include "randomeventsitem.h"
 
-#include "mission/mission.h"
+#include "scenario/scenario.h"
 
 #include <QTableWidget>
 
-RandomEventsItem::RandomEventsItem(Mission * mission)
+RandomEventsItem::RandomEventsItem(Scenario * mission)
   : mMission(mission)
 {
   setText("Random Events");

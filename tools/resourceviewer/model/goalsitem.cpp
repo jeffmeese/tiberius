@@ -1,11 +1,11 @@
 #include "goalsitem.h"
 
-#include "mission/goal.h"
-#include "mission/mission.h"
+#include "scenario/goal.h"
+#include "scenario/scenario.h"
 
 #include <QTableWidget>
 
-GoalsItem::GoalsItem(Mission * mission)
+GoalsItem::GoalsItem(Scenario * mission)
   : mMission(mission)
 {
   setText("Goals");

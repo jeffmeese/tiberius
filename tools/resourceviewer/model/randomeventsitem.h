@@ -3,20 +3,20 @@
 
 #include "resourceitem.h"
 
-class Mission;
+class Scenario;
 
 class RandomEventsItem
     : public ResourceItem
 {
 public:
-  RandomEventsItem(Mission * mission);
+  RandomEventsItem(Scenario * mission);
 
 public:
   QWidget * createView() const override;
   QList<Property> getProperties() const override;
 
 private:
-  Mission * mMission;
+  Scenario * mMission;
 };
 
 #endif // RANDOMEVENTSITEM_H

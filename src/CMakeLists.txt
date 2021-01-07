@@ -87,20 +87,20 @@ set(HDR_FILES
   media/videodata.h
   military/legion.h
   military/soldier.h
-  mission/demandchange.h
-  mission/earthquake.h
-  mission/emperorchange.h
-  mission/emperorrequest.h
-  mission/empireexpansion.h
-  mission/event.h
-  mission/gladiatorrevolt.h
-  mission/goal.h
-  mission/invasion.h
-  mission/mission.h
-  mission/pricechange.h
   religion/god.h
   resource/resource.h
   route/route.h
+  scenario/demandchange.h
+  scenario/earthquake.h
+  scenario/emperorchange.h
+  scenario/emperorrequest.h
+  scenario/empireexpansion.h
+  scenario/event.h
+  scenario/gladiatorrevolt.h
+  scenario/goal.h
+  scenario/invasion.h
+  scenario/scenario.h
+  scenario/pricechange.h
   widget/buildmenu.h
   widget/buildmenuitem.h
   widget/button.h
@@ -183,20 +183,20 @@ set(SRC_FILES
   media/videodata.cpp
   military/legion.cpp
   military/soldier.cpp
-  mission/demandchange.cpp
-  mission/earthquake.cpp
-  mission/emperorchange.cpp
-  mission/emperorrequest.cpp
-  mission/empireexpansion.cpp
-  mission/event.cpp
-  mission/gladiatorrevolt.cpp
-  mission/goal.cpp
-  mission/invasion.cpp
-  mission/mission.cpp
-  mission/pricechange.cpp
   religion/god.cpp
   resource/resource.cpp
   route/route.cpp
+  scenario/demandchange.cpp
+  scenario/earthquake.cpp
+  scenario/emperorchange.cpp
+  scenario/emperorrequest.cpp
+  scenario/empireexpansion.cpp
+  scenario/event.cpp
+  scenario/gladiatorrevolt.cpp
+  scenario/goal.cpp
+  scenario/invasion.cpp
+  scenario/scenario.cpp
+  scenario/pricechange.cpp
   widget/buildmenu.cpp
   widget/buildmenuitem.cpp
   widget/button.cpp

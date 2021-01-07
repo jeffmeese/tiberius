@@ -20,11 +20,11 @@ class Invasion;
 class Location;
 class PriceChange;
 
-class Mission
+class Scenario
 {
 public:
-  TIBERIUS_LIB_DECL Mission();
-  TIBERIUS_LIB_DECL ~Mission();
+  TIBERIUS_LIB_DECL Scenario();
+  TIBERIUS_LIB_DECL ~Scenario();
 
 public:
   TIBERIUS_LIB_DECL QString briefing() const;
@@ -149,9 +149,9 @@ public:
 
 public:
   TIBERIUS_LIB_DECL void loadFromFile(const QString & fileName);
-  TIBERIUS_LIB_DECL void loadFromStream(QDataStream & dataStream, bool compressed);
-  TIBERIUS_LIB_DECL void saveToFile(const QString & fileName, bool compressed = true) const;
-  TIBERIUS_LIB_DECL void saveToStream(QDataStream & dataStream, bool compressed = true) const;
+  TIBERIUS_LIB_DECL void loadFromStream(QDataStream & dataStream, bool includeGrids = true);
+  TIBERIUS_LIB_DECL void saveToFile(const QString & fileName) const;
+  TIBERIUS_LIB_DECL void saveToStream(QDataStream & dataStream, bool includeGrids = true) const;
 
 public:
   static const int MAX_ALLOWED_BUILDINGS = 50;

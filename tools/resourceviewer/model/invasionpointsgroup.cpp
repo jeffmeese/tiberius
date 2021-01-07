@@ -3,11 +3,11 @@
 
 #include "map/location.h"
 
-#include "mission/mission.h"
+#include "scenario/scenario.h"
 
 #include <QTableWidget>
 
-InvasionPointsGroup::InvasionPointsGroup(Mission * mission)
+InvasionPointsGroup::InvasionPointsGroup(Scenario * mission)
   : mMission(mission)
 {
   setText("Invasion Points");

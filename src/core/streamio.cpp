@@ -81,12 +81,22 @@ void streamio::writeUncompressedData(QDataStream & dataStream, QByteArray & byte
   dataStream.device()->write(byteArray);
 }
 
+void streamio::writeInt16(QDataStream & dataStream, int16_t value)
+{
+  dataStream << value;
+}
+
 void streamio::writeInt32(QDataStream & dataStream, int32_t value)
 {
   dataStream << value;
 }
 
 void streamio::writeUInt8(QDataStream & dataStream, uint8_t value)
+{
+  dataStream << value;
+}
+
+void streamio::writeUInt16(QDataStream & dataStream, uint16_t value)
 {
   dataStream << value;
 }

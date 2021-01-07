@@ -1,12 +1,12 @@
 #include "pricechangegroup.h"
 #include "pricechangeitem.h"
 
-#include "mission/mission.h"
-#include "mission/pricechange.h"
+#include "scenario/pricechange.h"
+#include "scenario/scenario.h"
 
 #include <QTableWidget>
 
-PriceChangeGroup::PriceChangeGroup(Mission * mission)
+PriceChangeGroup::PriceChangeGroup(Scenario * mission)
   : mMission(mission)
 {
   setText("Price Changes");

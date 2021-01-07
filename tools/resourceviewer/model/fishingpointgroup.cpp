@@ -3,11 +3,11 @@
 
 #include "map/location.h"
 
-#include "mission/mission.h"
+#include "scenario/scenario.h"
 
 #include <QTableWidget>
 
-FishingPointGroup::FishingPointGroup(Mission * mission)
+FishingPointGroup::FishingPointGroup(Scenario * mission)
   : mMission(mission)
 {
   setText("Fishing Points");

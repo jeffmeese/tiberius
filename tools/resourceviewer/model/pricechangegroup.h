@@ -3,20 +3,20 @@
 
 #include "resourceitem.h"
 
-class Mission;
+class Scenario;
 
 class PriceChangeGroup
     : public ResourceItem
 {
 public:
-  PriceChangeGroup(Mission * mission);
+  PriceChangeGroup(Scenario * mission);
 
 public:
   QWidget * createView() const override;
   QList<Property> getProperties() const override;
 
 private:
-  Mission * mMission;
+  Scenario * mMission;
 };
 
 #endif // PRICECHANGEGROUP_H

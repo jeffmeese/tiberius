@@ -6,7 +6,7 @@
 #include "game/game.h"
 #include "map/grid.h"
 #include "map/map.h"
-#include "mission/mission.h"
+#include "scenario/scenario.h"
 
 #include <QFileDialog>
 #include <QItemSelectionModel>
@@ -166,7 +166,7 @@ void MainWindow::handleSelectionChanged()
   QStandardItem * item = mModel->itemFromIndex(index);
   MissionMap::iterator missionItr = mMissionMap.find(item);
   if (missionItr != mMissionMap.end()) {
-    const Mission * mission = missionItr->second;
+    const Scenario * mission = missionItr->second;
     int data = item->data().toInt();
     GridType gridType = GridType(data);
     if (gridType == GraphicGrid) {
@@ -251,7 +251,7 @@ void MainWindow::loadGame(const QString & fileName)
 
 void MainWindow::loadMission(const QString & fileName)
 {
-  std::unique_ptr<Mission> mission(new Mission);
+  std::unique_ptr<Scenario> mission(new Scenario);
   mission->loadFromFile(fileName);
 
   QFileInfo fileInfo(fileName);

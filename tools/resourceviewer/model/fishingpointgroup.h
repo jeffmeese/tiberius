@@ -3,20 +3,20 @@
 
 #include "resourceitem.h"
 
-class Mission;
+class Scenario;
 
 class FishingPointGroup
     : public ResourceItem
 {
 public:
-  FishingPointGroup(Mission * mission);
+  FishingPointGroup(Scenario * mission);
 
 public:
   QWidget * createView() const override;
   QList<Property> getProperties() const override;
 
 private:
-  Mission * mMission;
+  Scenario * mMission;
 };
 
 #endif // FISHINGPOINTGROUP_H

@@ -3,20 +3,20 @@
 
 #include "resourceitem.h"
 
-class Mission;
+class Scenario;
 
 class HerdPointGroup
     : public ResourceItem
 {
 public:
-  HerdPointGroup(Mission * mission);
+  HerdPointGroup(Scenario * mission);
 
 public:
   QWidget * createView() const override;
   QList<Property> getProperties() const override;
 
 private:
-  Mission * mMission;
+  Scenario * mMission;
 };
 
 #endif // HERDPOINTGROUP_H

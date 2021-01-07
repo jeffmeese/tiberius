@@ -13,8 +13,8 @@
 
 #include "game/player.h"
 
-#include "mission/emperorrequest.h"
-#include "mission/mission.h"
+#include "scenario/emperorrequest.h"
+#include "scenario/scenario.h"
 
 #include <QFileInfo>
 
@@ -23,7 +23,7 @@ MapItem::MapItem(const QString & pathName)
   QFileInfo fileInfo(pathName);
   setText(fileInfo.fileName());
 
-  mMission.reset(new Mission);
+  mMission.reset(new Scenario);
   mMission->loadFromFile(pathName);
 
   mDemandChangeGroup = new DemandChangeGroup(mMission.get());

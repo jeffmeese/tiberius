@@ -24,8 +24,8 @@
 
 #include "map/map.h"
 
-#include "mission/gladiatorrevolt.h"
-#include "mission/mission.h"
+#include "scenario/gladiatorrevolt.h"
+#include "scenario/scenario.h"
 
 #include <QDebug>
 #include <QDir>
@@ -106,7 +106,7 @@ void Game::init()
   mCity.reset(new City);
   mGladiatorRevolt.reset(new GladiatorRevolt);
   mMap.reset(new Map);
-  mMission.reset(new Mission);
+  mMission.reset(new Scenario);
   mPlayer.reset(new Player);
 
   mDifficulty = Difficulty::Type::Hard;

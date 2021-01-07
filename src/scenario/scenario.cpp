@@ -1,4 +1,4 @@
-#include "mission.h"
+#include "scenario.h"
 
 #include "demandchange.h"
 #include "earthquake.h"
@@ -19,202 +19,202 @@
 #include <sstream>
 #include <stdexcept>
 
-Mission::Mission()
+Scenario::Scenario()
 {
   init();
 }
 
-Mission::~Mission()
+Scenario::~Scenario()
 {
 
 }
 
-int32_t Mission::campaignMission() const
+int32_t Scenario::campaignMission() const
 {
   return mCampaignMission;
 }
 
-int32_t Mission::cameraX() const
+int32_t Scenario::cameraX() const
 {
   return mCameraX;
 }
 
-int32_t Mission::cameraY() const
+int32_t Scenario::cameraY() const
 {
   return mCameraY;
 }
 
-Goal * Mission::cultureGoal()
+Goal * Scenario::cultureGoal()
 {
   return mCultureGoal.get();
 }
 
-const Goal * Mission::cultureGoal() const
+const Goal * Scenario::cultureGoal() const
 {
   return mCultureGoal.get();
 }
 
-QString Mission::description() const
+QString Scenario::description() const
 {
   return mDescription;
 }
 
-UnsignedByteGrid * Mission::edgeGrid()
+UnsignedByteGrid * Scenario::edgeGrid()
 {
   return mEdgeGrid.get();
 }
 
-const UnsignedByteGrid * Mission::edgeGrid() const
+const UnsignedByteGrid * Scenario::edgeGrid() const
 {
   return mEdgeGrid.get();
 }
 
-UnsignedByteGrid * Mission::elevationGrid()
+UnsignedByteGrid * Scenario::elevationGrid()
 {
   return mElevationGrid.get();
 }
 
-const UnsignedByteGrid * Mission::elevationGrid() const
+const UnsignedByteGrid * Scenario::elevationGrid() const
 {
   return mElevationGrid.get();
 }
 
-bool Mission::emperorChange() const
+bool Scenario::emperorChange() const
 {
   return mEmperorChange;
 }
 
-int16_t Mission::emperorChangeYear() const
+int16_t Scenario::emperorChangeYear() const
 {
   return mEmperorChangeYear;
 }
 
-uint8_t Mission::empireLocation() const
+uint8_t Scenario::empireLocation() const
 {
   return mEmpireLocation;
 }
 
-int32_t Mission::enemyId() const
+int32_t Scenario::enemyId() const
 {
   return mEnemyId;
 }
 
-Goal * Mission::favorGoal()
+Goal * Scenario::favorGoal()
 {
   return mFavorGoal.get();
 }
 
-const Goal * Mission::favorGoal() const
+const Goal * Scenario::favorGoal() const
 {
   return mFavorGoal.get();
 }
 
-bool Mission::floodedClayPits() const
+bool Scenario::floodedClayPits() const
 {
   return mFloodedClayPits;
 }
 
-bool Mission::flotsam() const
+bool Scenario::flotsam() const
 {
   return mFlotsam;
 }
 
-DemandChange * Mission::getDemandChange(int index)
+DemandChange * Scenario::getDemandChange(int index)
 {
   return mDemandChanges[index].get();
 }
 
-const DemandChange * Mission::getDemandChange(int index) const
+const DemandChange * Scenario::getDemandChange(int index) const
 {
   return mDemandChanges[index].get();
 }
 
-Location * Mission::getFishingPoint(int index)
+Location * Scenario::getFishingPoint(int index)
 {
   return mFishingPoints[index].get();
 }
 
-const Location * Mission::getFishingPoint(int index) const
+const Location * Scenario::getFishingPoint(int index) const
 {
   return mFishingPoints[index].get();
 }
 
-Location * Mission::getHerdPoint(int index)
+Location * Scenario::getHerdPoint(int index)
 {
   return mHerdPoints[index].get();
 }
 
-const Location * Mission::getHerdPoint(int index) const
+const Location * Scenario::getHerdPoint(int index) const
 {
   return mHerdPoints[index].get();
 }
 
-Invasion * Mission::getInvasion(int index)
+Invasion * Scenario::getInvasion(int index)
 {
   return mInvasions[index].get();
 }
 
-const Invasion * Mission::getInvasion(int index) const
+const Invasion * Scenario::getInvasion(int index) const
 {
   return mInvasions[index].get();
 }
 
-Location * Mission::getInvasionPoint(int index)
+Location * Scenario::getInvasionPoint(int index)
 {
   return mInvasionPoints[index].get();
 }
 
-const Location * Mission::getInvasionPoint(int index) const
+const Location * Scenario::getInvasionPoint(int index) const
 {
   return mInvasionPoints[index].get();
 }
 
-PriceChange * Mission::getPriceChange(int index)
+PriceChange * Scenario::getPriceChange(int index)
 {
   return mPriceChanges[index].get();
 }
 
-const PriceChange * Mission::getPriceChange(int index) const
+const PriceChange * Scenario::getPriceChange(int index) const
 {
   return mPriceChanges[index].get();
 }
 
-EmperorRequest * Mission::getRequest(int index)
+EmperorRequest * Scenario::getRequest(int index)
 {
   return mEmperorRequests[index].get();
 }
 
-const EmperorRequest * Mission::getRequest(int index) const
+const EmperorRequest * Scenario::getRequest(int index) const
 {
   return mEmperorRequests[index].get();
 }
 
-bool Mission::gladiatorRevolt() const
+bool Scenario::gladiatorRevolt() const
 {
   return mGladiatorRevolt;
 }
 
-int16_t Mission::gladiatorRevoltYear() const
+int16_t Scenario::gladiatorRevoltYear() const
 {
   return mGladiatorRevoltYear;
 }
 
-UnsignedShortGrid * Mission::graphicGrid()
+UnsignedShortGrid * Scenario::graphicGrid()
 {
   return mGraphicGrid.get();
 }
 
-const UnsignedShortGrid * Mission::graphicGrid() const
+const UnsignedShortGrid * Scenario::graphicGrid() const
 {
   return mGraphicGrid.get();
 }
 
-int16_t Mission::imageId() const
+int16_t Scenario::imageId() const
 {
   return mImageId;
 }
 
-void Mission::init()
+void Scenario::init()
 {
   mEmperorChange = false;
   mEmpireExpanded = false;
@@ -281,63 +281,68 @@ void Mission::init()
   mRiverEntryPoint.reset(new Location);
   mRiverExitPoint.reset(new Location);
 
-  mAllowedBuildings.resize(Mission::MAX_ALLOWED_BUILDINGS);
-  for (int i = 0; i < Mission::MAX_ALLOWED_BUILDINGS; i++) {
+  mAllowedBuildings.resize(Scenario::MAX_ALLOWED_BUILDINGS);
+  for (int i = 0; i < Scenario::MAX_ALLOWED_BUILDINGS; i++) {
     mAllowedBuildings[i] = 0;
   }
 
-  mEmperorRequests.resize(Mission::MAX_REQUESTS);
-  for (int i = 0; i < Mission::MAX_REQUESTS; i++) {
+  mDemandChanges.resize(Scenario::MAX_DEMAND_CHANGES);
+  for (int i = 0; i < Scenario::MAX_DEMAND_CHANGES; i++) {
+    mDemandChanges[i].reset(new DemandChange);
+  }
+
+  mEmperorRequests.resize(Scenario::MAX_REQUESTS);
+  for (int i = 0; i < Scenario::MAX_REQUESTS; i++) {
     mEmperorRequests[i].reset(new EmperorRequest);
   }
 
-  mInvasions.resize(Mission::MAX_INVASIONS);
-  for (int i = 0; i < Mission::MAX_INVASIONS; i++) {
+  mInvasions.resize(Scenario::MAX_INVASIONS);
+  for (int i = 0; i < Scenario::MAX_INVASIONS; i++) {
     mInvasions[i].reset(new Invasion);
   }
 
-//  mPriceChanges.resize(Mission::MAX_PRICE_CHANGES);
-//  for (int i = 0; i < Mission::MAX_PRICE_CHANGES; i++) {
-//    mPriceChanges[i].reset(new PriceChange);
-//  }
+  mPriceChanges.resize(Scenario::MAX_PRICE_CHANGES);
+  for (int i = 0; i < Scenario::MAX_PRICE_CHANGES; i++) {
+    mPriceChanges[i].reset(new PriceChange);
+  }
 
-//  mHerdPoints.resize(Mission::MAX_HERD_POINTS);
-//  for (int i = 0; i < Mission::MAX_HERD_POINTS; i++) {
-//    mHerdPoints[i].reset(new Location);
-//  }
+  mHerdPoints.resize(Scenario::MAX_HERD_POINTS);
+  for (int i = 0; i < Scenario::MAX_HERD_POINTS; i++) {
+    mHerdPoints[i].reset(new Location);
+  }
 
-//  mFishingPoints.resize(Mission::MAX_FISHING_POINTS);
-//  for (int i = 0; i < Mission::MAX_FISHING_POINTS; i++) {
-//    mFishingPoints[i].reset(new Location);
-//  }
+  mFishingPoints.resize(Scenario::MAX_FISHING_POINTS);
+  for (int i = 0; i < Scenario::MAX_FISHING_POINTS; i++) {
+    mFishingPoints[i].reset(new Location);
+  }
 
-//  mInvasionPoints.resize(Mission::MAX_INVASION_POINTS);
-//  for (int i = 0; i < Mission::MAX_INVASION_POINTS; i++) {
-//    mInvasion*Points[i].reset(new Location);
-//  }
+  mInvasionPoints.resize(Scenario::MAX_INVASION_POINTS);
+  for (int i = 0; i < Scenario::MAX_INVASION_POINTS; i++) {
+    mInvasionPoints[i].reset(new Location);
+  }
 }
 
-int32_t Mission::initialFunds() const
+int32_t Scenario::initialFunds() const
 {
   return mInitialFunds;
 }
 
-int8_t Mission::initialRank() const
+int8_t Scenario::initialRank() const
 {
   return mInitialRank;
 }
 
-bool Mission::ironMineCollapse() const
+bool Scenario::ironMineCollapse() const
 {
   return mIronMineCollapse;
 }
 
-bool Mission::landTradeProblem() const
+bool Scenario::landTradeProblem() const
 {
   return mLandTradeProblem;
 }
 
-void Mission::loadFromFile(const QString &fileName)
+void Scenario::loadFromFile(const QString &fileName)
 {
   QFile file(fileName);
   if (!file.open(QIODevice::ReadOnly)) {
@@ -347,19 +352,21 @@ void Mission::loadFromFile(const QString &fileName)
   }
 
   QDataStream dataStream(&file);
-  loadFromStream(dataStream, false);
+  loadFromStream(dataStream, true);
 }
 
-void Mission::loadFromStream(QDataStream &dataStream, bool compressedGrids)
+void Scenario::loadFromStream(QDataStream &dataStream, bool includeGrids)
 {
   dataStream.setByteOrder(QDataStream::LittleEndian);
 
-  mGraphicGrid->loadFromDataStream(dataStream, 52488, compressedGrids);
-  mEdgeGrid->loadFromDataStream(dataStream, 26244, compressedGrids);
-  mTerrainGrid->loadFromDataStream(dataStream, 52488, compressedGrids);
-  mTerrainRandomGrid->loadFromDataStream(dataStream, 26244, compressedGrids);
-  mRandomGrid->loadFromDataStream(dataStream, 26244, compressedGrids);
-  mElevationGrid->loadFromDataStream(dataStream, 26244, compressedGrids);
+  if (includeGrids) {
+    mGraphicGrid->loadFromDataStream(dataStream, 52488, false);
+    mEdgeGrid->loadFromDataStream(dataStream, 26244, false);
+    mTerrainGrid->loadFromDataStream(dataStream, 52488, false);
+    mTerrainRandomGrid->loadFromDataStream(dataStream, 26244, false);
+    mRandomGrid->loadFromDataStream(dataStream, 26244, false);
+    mElevationGrid->loadFromDataStream(dataStream, 26244, false);
+  }
 
   mRandomSeed1 = streamio::readInt32(dataStream);
   mRandomSeed2 = streamio::readInt32(dataStream);
@@ -606,87 +613,87 @@ void Mission::loadFromStream(QDataStream &dataStream, bool compressedGrids)
   mSaved = true;
 }
 
-int32_t Mission::mapHeight() const
+int32_t Scenario::mapHeight() const
 {
   return mMapHeight;
 }
 
-int32_t Mission::mapWidth() const
+int32_t Scenario::mapWidth() const
 {
   return mMapWidth;
 }
 
-bool Mission::openPlay() const
+bool Scenario::openPlay() const
 {
   return mOpenPlay;
 }
 
-int8_t Mission::openPlayId() const
+int8_t Scenario::openPlayId() const
 {
   return mOpenPlayId;
 }
 
-Goal * Mission::peaceGoal()
+Goal * Scenario::peaceGoal()
 {
   return mPeaceGoal.get();
 }
 
-const Goal * Mission::peaceGoal() const
+const Goal * Scenario::peaceGoal() const
 {
   return mPeaceGoal.get();
 }
 
-Goal * Mission::populationGoal()
+Goal * Scenario::populationGoal()
 {
   return mPopulationGoal.get();
 }
 
-const Goal * Mission::populationGoal() const
+const Goal * Scenario::populationGoal() const
 {
   return mPopulationGoal.get();
 }
 
-Goal * Mission::prosperityGoal()
+Goal * Scenario::prosperityGoal()
 {
   return mProsperityGoal.get();
 }
 
-const Goal * Mission::prosperityGoal() const
+const Goal * Scenario::prosperityGoal() const
 {
   return mProsperityGoal.get();
 }
 
-UnsignedByteGrid * Mission::randomGrid()
+UnsignedByteGrid * Scenario::randomGrid()
 {
   return mRandomGrid.get();
 }
 
-const UnsignedByteGrid * Mission::randomGrid() const
+const UnsignedByteGrid * Scenario::randomGrid() const
 {
   return mRandomGrid.get();
 }
 
-int32_t Mission::rescueLoan() const
+int32_t Scenario::rescueLoan() const
 {
   return mRescueLoan;
 }
 
-bool Mission::romeLowersWages() const
+bool Scenario::romeLowersWages() const
 {
   return mRomeLowersWages;
 }
 
-bool Mission::romeRaisesWages() const
+bool Scenario::romeRaisesWages() const
 {
   return mRomeRaisesWages;
 }
 
-bool Mission::romeSuppliesWheat() const
+bool Scenario::romeSuppliesWheat() const
 {
   return mRomeSuppliesWheat;
 }
 
-void Mission::saveToFile(const QString &fileName, bool compressed) const
+void Scenario::saveToFile(const QString &fileName) const
 {
   QFile file(fileName);
   if (!file.open(QIODevice::WriteOnly)) {
@@ -696,85 +703,334 @@ void Mission::saveToFile(const QString &fileName, bool compressed) const
   }
 
   QDataStream dataStream(&file);
-  saveToStream(dataStream, compressed);
+  saveToStream(dataStream, true);
 }
 
-void Mission::saveToStream(QDataStream & dataStream, bool compressed) const
+void Scenario::saveToStream(QDataStream & dataStream, bool includeGrids) const
 {
   dataStream.setByteOrder(QDataStream::LittleEndian);
+
+  if (includeGrids) {
+    mGraphicGrid->saveToDataStream(dataStream, 52488, false);
+    mEdgeGrid->saveToDataStream(dataStream, 26244, false);
+    mTerrainGrid->saveToDataStream(dataStream, 52488, false);
+    mTerrainRandomGrid->saveToDataStream(dataStream, 26244, false);
+    mRandomGrid->saveToDataStream(dataStream, 26244, false);
+    mElevationGrid->saveToDataStream(dataStream, 26244, false);
+  }
+
+  streamio::writeInt32(dataStream, mRandomSeed1);
+  streamio::writeInt32(dataStream, mRandomSeed2);
+  streamio::writeInt32(dataStream, mCameraX);
+  streamio::writeInt32(dataStream, mCameraY);
+  streamio::writeInt16(dataStream, mStartYear);
+
+  for (int i = 0; i < 2; i++)
+    dataStream << static_cast<uint8_t>(0);
+
+  streamio::writeUInt16(dataStream, mEmpireLocation);
+
+  for (int i = 0; i < 8; i++)
+    dataStream << static_cast<uint8_t>(0);
+
+  for (int i = 0; i < MAX_REQUESTS; i++) {
+    streamio::writeInt16(dataStream, mEmperorRequests[i]->year());
+  }
+
+  for (int i = 0; i < MAX_REQUESTS; i++) {
+    streamio::writeInt16(dataStream, mEmperorRequests[i]->resourceId());
+  }
+
+  for (int i = 0; i < MAX_REQUESTS; i++) {
+    streamio::writeInt16(dataStream, mEmperorRequests[i]->amount());
+  }
+
+  for (int i = 0; i < MAX_REQUESTS; i++) {
+    streamio::writeInt16(dataStream, mEmperorRequests[i]->monthsLeft());
+  }
+
+  for (int i = 0; i < MAX_INVASIONS; i++) {
+    streamio::writeInt16(dataStream, mInvasions[i]->year());
+  }
+
+  for (int i = 0; i < MAX_INVASIONS; i++) {
+    streamio::writeInt16(dataStream, mInvasions[i]->type());
+  }
+
+  for (int i = 0; i < MAX_INVASIONS; i++) {
+    streamio::writeInt16(dataStream, mInvasions[i]->amount());
+  }
+
+  for (int i = 0; i < MAX_INVASIONS; i++) {
+    streamio::writeInt16(dataStream, mInvasions[i]->attackPoint());
+  }
+
+  for (int i = 0; i < MAX_INVASIONS; i++) {
+    streamio::writeInt16(dataStream, mInvasions[i]->attackType());
+  }
+
+  for (int i = 0; i < 2; i++)
+    dataStream << static_cast<uint8_t>(0);
+
+  streamio::writeInt32(dataStream, mInitialFunds);
+  streamio::writeInt32(dataStream, mEnemyId);
+  for (int i = 0; i < 4; i++)
+    dataStream << static_cast<uint8_t>(0);
+
+  streamio::writeInt32(dataStream, mMapWidth);
+  streamio::writeInt32(dataStream, mMapHeight);
+  streamio::writeInt32(dataStream, mMapGridSize);
+  streamio::writeInt32(dataStream, mMapGridStart);
+
+  char description[MAX_MISSION_DESCRIPTION];
+  strcpy(description, mDescription.toStdString().c_str());
+  dataStream.writeRawData(description, MAX_MISSION_DESCRIPTION);
+
+  char briefing[MAX_MISSION_BRIEFING];
+  strcpy(briefing, mBriefing.toStdString().c_str());
+  dataStream.writeRawData(description, MAX_MISSION_BRIEFING);
+
+  for (int i = 0; i < MAX_REQUESTS; i++) {
+    streamio::writeUInt8(dataStream, mEmperorRequests[i]->canComply());
+  }
+
+  streamio::writeInt16(dataStream, mImageId);
+  streamio::writeInt16(dataStream, mOpenPlay);
+  streamio::writeInt16(dataStream, mInitialRank);
+
+  for (int i = 0; i < MAX_HERD_POINTS; i++) {
+    streamio::writeInt16(dataStream, mHerdPoints[i]->x());
+  }
+
+  for (int i = 0; i < MAX_HERD_POINTS; i++) {
+    streamio::writeInt16(dataStream, mHerdPoints[i]->y());
+  }
+
+  for (int i = 0; i < MAX_DEMAND_CHANGES; i++) {
+    streamio::writeInt16(dataStream, mDemandChanges[i]->year());
+  }
+
+  for (int i = 0; i < MAX_DEMAND_CHANGES; i++) {
+    streamio::writeUInt8(dataStream, mDemandChanges[i]->month());
+  }
+
+  for (int i = 0; i < MAX_DEMAND_CHANGES; i++) {
+    streamio::writeUInt8(dataStream, mDemandChanges[i]->resourceId());
+  }
+
+  for (int i = 0; i < MAX_DEMAND_CHANGES; i++) {
+    streamio::writeUInt8(dataStream, mDemandChanges[i]->routeId());
+  }
+
+  for (int i = 0; i < MAX_DEMAND_CHANGES; i++) {
+    streamio::writeUInt8(dataStream, mDemandChanges[i]->rise());
+  }
+
+  for (int i = 0; i < MAX_PRICE_CHANGES; i++) {
+    streamio::writeInt16(dataStream, mPriceChanges[i]->year());
+  }
+
+  for (int i = 0; i < MAX_PRICE_CHANGES; i++) {
+    streamio::writeUInt8(dataStream, mPriceChanges[i]->month());
+  }
+
+  for (int i = 0; i < MAX_PRICE_CHANGES; i++) {
+    streamio::writeUInt8(dataStream, mPriceChanges[i]->resourceId());
+  }
+
+  for (int i = 0; i < MAX_PRICE_CHANGES; i++) {
+    streamio::writeUInt8(dataStream, mPriceChanges[i]->amount());
+  }
+
+  for (int i = 0; i < MAX_PRICE_CHANGES; i++) {
+    streamio::writeUInt8(dataStream, mPriceChanges[i]->rise());
+  }
+
+  streamio::writeInt32(dataStream, mGladiatorRevolt);
+  streamio::writeInt32(dataStream, mGladiatorRevoltYear);
+  streamio::writeInt32(dataStream, mEmperorChange);
+  streamio::writeInt32(dataStream, mEmperorChangeYear);
+  streamio::writeInt32(dataStream, mSeaTradeProblem);
+  streamio::writeInt32(dataStream, mLandTradeProblem);
+  streamio::writeInt32(dataStream, mRomeRaisesWages);
+  streamio::writeInt32(dataStream, mRomeLowersWages);
+  streamio::writeInt32(dataStream, mWaterContamination);
+  streamio::writeInt32(dataStream, mIronMineCollapse);
+  streamio::writeInt32(dataStream, mFloodedClayPits);
+
+  for (int i = 0; i < MAX_FISHING_POINTS; i++) {
+    streamio::writeInt16(dataStream, mFishingPoints[i]->x());
+  }
+
+  for (int i = 0; i < MAX_FISHING_POINTS; i++) {
+    streamio::writeInt16(dataStream, mFishingPoints[i]->y());
+  }
+
+  for (int i = 0; i < MAX_REQUESTS; i++) {
+    streamio::writeUInt8(dataStream, mEmperorRequests[i]->favor());
+  }
+
+  for (int i = 0; i < MAX_INVASIONS; i++) {
+    streamio::writeUInt8(dataStream, mInvasions[i]->month());
+  }
+
+  for (int i = 0; i < MAX_REQUESTS; i++) {
+    streamio::writeUInt8(dataStream, mInvasions[i]->month());
+  }
+
+  for (int i = 0; i < MAX_REQUESTS; i++) {
+    streamio::writeUInt8(dataStream, mEmperorRequests[i]->state());
+  }
+
+  for (int i = 0; i < MAX_REQUESTS; i++) {
+    streamio::writeUInt8(dataStream, mEmperorRequests[i]->visible());
+  }
+
+  for (int i = 0; i < MAX_REQUESTS; i++) {
+    streamio::writeUInt8(dataStream, mEmperorRequests[i]->monthsLeft());
+  }
+
+  streamio::writeInt32(dataStream, mRomeSuppliesWheat);
+
+  for (int i = 0; i < MAX_ALLOWED_BUILDINGS; i++) {
+    streamio::writeInt16(dataStream, mAllowedBuildings[i]);
+  }
+
+  streamio::writeInt32(dataStream, mCultureGoal->target());
+  streamio::writeInt32(dataStream, mProsperityGoal->target());
+  streamio::writeInt32(dataStream, mPeaceGoal->target());
+  streamio::writeInt32(dataStream, mFavorGoal->target());
+  streamio::writeInt32(dataStream, mCultureGoal->enabled());
+  streamio::writeInt32(dataStream, mProsperityGoal->enabled());
+  streamio::writeInt32(dataStream, mPeaceGoal->enabled());
+  streamio::writeInt32(dataStream, mFavorGoal->enabled());
+
+  streamio::writeInt32(dataStream, mLosingTimeEnabled);
+  streamio::writeInt32(dataStream, mLosingTime);
+  streamio::writeInt32(dataStream, mSurvivalTimeEnabled);
+  streamio::writeInt32(dataStream, mSurvivalTime);
+
+  streamio::writeInt32(dataStream, mEarthquake->severity());
+  streamio::writeInt32(dataStream, mEarthquake->year());
+
+  streamio::writeInt32(dataStream, mPopulationGoal->enabled());
+  streamio::writeInt32(dataStream, mPopulationGoal->target());
+
+  streamio::writeInt16(dataStream, mEarthquake->x());
+  streamio::writeInt16(dataStream, mEarthquake->y());
+
+  streamio::writeInt16(dataStream, mEntryPoint->x());
+  streamio::writeInt16(dataStream, mEntryPoint->y());
+  streamio::writeInt16(dataStream, mExitPoint->x());
+  streamio::writeInt16(dataStream, mExitPoint->y());
+
+  for (int i = 0; i < MAX_INVASION_POINTS; i++) {
+    streamio::writeInt16(dataStream, mInvasionPoints[i]->x());
+    streamio::writeInt16(dataStream, mInvasionPoints[9]->y());
+  }
+
+  streamio::writeInt16(dataStream, mRiverEntryPoint->x());
+  streamio::writeInt16(dataStream, mRiverEntryPoint->y());
+  streamio::writeInt16(dataStream, mRiverExitPoint->x());
+  streamio::writeInt16(dataStream, mRiverExitPoint->y());
+
+  streamio::writeInt32(dataStream, mRescueLoan);
+  streamio::writeInt32(dataStream, mMilestone25Year);
+  streamio::writeInt32(dataStream, mMilestone50Year);
+  streamio::writeInt32(dataStream, mMilestone75Year);
+
+  streamio::writeInt32(dataStream, mNativeHutId);
+  streamio::writeInt32(dataStream, mNativeMeetingId);
+  streamio::writeInt32(dataStream, mNativeCropsId);
+
+  streamio::writeUInt8(dataStream, mClimateId);
+  streamio::writeUInt8(dataStream, mFlotsam);
+
+  for (int i = 0; i < 2; i++)
+    dataStream << static_cast<uint8_t>(0);
+
+  streamio::writeInt32(dataStream, mEmpireExpanded);
+  streamio::writeInt32(dataStream, mEmpireExpansionYear);
+
+  streamio::writeUInt8(dataStream, mRomanArmyTravelMonths);
+  streamio::writeUInt8(dataStream, mEnemyArmyTravelMonths);
+  streamio::writeUInt8(dataStream, mOpenPlayId);
+
+  for (int i = 0; i < 4; i++)
+    dataStream << static_cast<uint8_t>(0);
 }
 
-bool Mission::seaTradeProblem() const
+bool Scenario::seaTradeProblem() const
 {
   return mSeaTradeProblem;
 }
 
-void Mission::setCampaignMission(int32_t value)
+void Scenario::setCampaignMission(int32_t value)
 {
   mCampaignMission = value;
 }
 
-int32_t Mission::startYear() const
+int32_t Scenario::startYear() const
 {
   return mStartYear;
 }
 
-UnsignedShortGrid * Mission::terrainGrid()
+UnsignedShortGrid * Scenario::terrainGrid()
 {
   return mTerrainGrid.get();
 }
 
-const UnsignedShortGrid * Mission::terrainGrid() const
+const UnsignedShortGrid * Scenario::terrainGrid() const
 {
   return mTerrainGrid.get();
 }
 
-UnsignedByteGrid * Mission::terrainRandomGrid()
+UnsignedByteGrid * Scenario::terrainRandomGrid()
 {
   return mTerrainRandomGrid.get();
 }
 
-const UnsignedByteGrid * Mission::terrainRandomGrid() const
+const UnsignedByteGrid * Scenario::terrainRandomGrid() const
 {
   return mTerrainRandomGrid.get();
 }
 
-int Mission::totalDemandChanges() const
+int Scenario::totalDemandChanges() const
 {
   return MAX_DEMAND_CHANGES;
 }
 
-int Mission::totalFishingPoints() const
+int Scenario::totalFishingPoints() const
 {
   return MAX_FISHING_POINTS;
 }
 
-int Mission::totalHerdPoints() const
+int Scenario::totalHerdPoints() const
 {
   return MAX_HERD_POINTS;
 }
 
-int Mission::totalInvasions() const
+int Scenario::totalInvasions() const
 {
   return MAX_INVASIONS;
 }
 
-int Mission::totalInvasionPoints() const
+int Scenario::totalInvasionPoints() const
 {
   return MAX_INVASION_POINTS;
 }
 
-int Mission::totalPriceChanges() const
+int Scenario::totalPriceChanges() const
 {
   return MAX_PRICE_CHANGES;
 }
 
-int Mission::totalRequests() const
+int Scenario::totalRequests() const
 {
   return MAX_REQUESTS;
 }
 
-bool Mission::waterContamination() const
+bool Scenario::waterContamination() const
 {
   return mWaterContamination;
 }

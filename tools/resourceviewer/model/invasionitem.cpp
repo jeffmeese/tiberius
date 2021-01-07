@@ -1,6 +1,6 @@
 #include "invasionitem.h"
 
-#include "mission/invasion.h"
+#include "scenario/invasion.h"
 
 InvasionItem::InvasionItem(Invasion * invasion)
   : mInvasion(invasion)

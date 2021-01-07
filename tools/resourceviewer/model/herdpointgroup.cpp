@@ -3,11 +3,11 @@
 
 #include "map/location.h"
 
-#include "mission/mission.h"
+#include "scenario/scenario.h"
 
 #include <QTableWidget>
 
-HerdPointGroup::HerdPointGroup(Mission * mission)
+HerdPointGroup::HerdPointGroup(Scenario * mission)
   : mMission(mission)
 {
   setText("Herd Points");

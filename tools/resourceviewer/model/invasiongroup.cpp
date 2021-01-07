@@ -1,12 +1,12 @@
 #include "invasiongroup.h"
 #include "invasionitem.h"
 
-#include "mission/invasion.h"
-#include "mission/mission.h"
+#include "scenario/invasion.h"
+#include "scenario/scenario.h"
 
 #include <QTableWidget>
 
-InvasionGroup::InvasionGroup(Mission * mission)
+InvasionGroup::InvasionGroup(Scenario * mission)
   : mMission(mission)
 {
   setText("Invasions");

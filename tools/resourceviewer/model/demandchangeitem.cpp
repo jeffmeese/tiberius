@@ -1,6 +1,6 @@
 #include "demandchangeitem.h"
 
-#include "mission/demandchange.h"
+#include "scenario/demandchange.h"
 
 DemandChangeItem::DemandChangeItem(DemandChange * demandChange)
   : mDemandChange(demandChange)

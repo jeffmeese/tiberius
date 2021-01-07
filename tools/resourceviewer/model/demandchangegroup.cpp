@@ -1,12 +1,12 @@
 #include "demandchangegroup.h"
 #include "demandchangeitem.h"
 
-#include "mission/demandchange.h"
-#include "mission/mission.h"
+#include "scenario/demandchange.h"
+#include "scenario/scenario.h"
 
 #include <QTableWidget>
 
-DemandChangeGroup::DemandChangeGroup(Mission * mission)
+DemandChangeGroup::DemandChangeGroup(Scenario * mission)
   : mMission(mission)
 {
   setText("Demand Changes");

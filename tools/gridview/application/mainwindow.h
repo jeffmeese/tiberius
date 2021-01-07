@@ -15,7 +15,7 @@
 
 class Application;
 class Game;
-class Mission;
+class Scenario;
 namespace Ui
 {
   class MainWindow;
@@ -70,9 +70,9 @@ private:
   using GamePtr = std::unique_ptr<Game>;
   using GameVector = std::vector<GamePtr>;
   using GameMap = std::map<QStandardItem*, Game*>;
-  using MissionPtr = std::unique_ptr<Mission>;
+  using MissionPtr = std::unique_ptr<Scenario>;
   using MissionVector = std::vector<MissionPtr>;
-  using MissionMap = std::map<QStandardItem*, Mission*>;
+  using MissionMap = std::map<QStandardItem*, Scenario*>;
 
 private:
   Ui::MainWindow * mUi;

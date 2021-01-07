@@ -3,19 +3,19 @@
 
 #include "resourceitem.h"
 
-class Mission;
+class Scenario;
 
 class GoalsItem : public ResourceItem
 {
 public:
-  GoalsItem(Mission * mission);
+  GoalsItem(Scenario * mission);
 
 public:
   QWidget * createView() const override;
   QList<Property> getProperties() const override;
 
 private:
-  Mission * mMission;
+  Scenario * mMission;
 };
 
 #endif // GOALSITEM_H

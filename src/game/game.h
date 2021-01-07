@@ -13,7 +13,7 @@
 class City;
 class GladiatorRevolt;
 class Map;
-class Mission;
+class Scenario;
 class Player;
 
 class Game
@@ -29,8 +29,8 @@ public:
   TIBERIUS_LIB_DECL const GladiatorRevolt * gladiatorRevolt() const;
   TIBERIUS_LIB_DECL Map * map();
   TIBERIUS_LIB_DECL const Map * map() const;
-  TIBERIUS_LIB_DECL Mission * mission();
-  TIBERIUS_LIB_DECL const Mission * mission() const;
+  TIBERIUS_LIB_DECL Scenario * mission();
+  TIBERIUS_LIB_DECL const Scenario * mission() const;
   TIBERIUS_LIB_DECL Player * player();
   TIBERIUS_LIB_DECL const Player * player() const;
 
@@ -48,7 +48,7 @@ private:
   using CityPtr = std::unique_ptr<City>;
   using GladiatorRevoltPtr = std::unique_ptr<GladiatorRevolt>;
   using MapPtr = std::unique_ptr<Map>;
-  using MissionPtr = std::unique_ptr<Mission>;
+  using MissionPtr = std::unique_ptr<Scenario>;
   using PlayerPtr = std::unique_ptr<Player>;
 
 private:
@@ -100,12 +100,12 @@ inline const Map * Game::map() const
   return mMap.get();
 }
 
-inline Mission * Game::mission()
+inline Scenario * Game::mission()
 {
   return mMission.get();
 }
 
-inline const Mission * Game::mission() const
+inline const Scenario * Game::mission() const
 {
   return mMission.get();
 }
