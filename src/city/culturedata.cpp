@@ -37,7 +37,7 @@ CultureData::CultureData()
   mTotalOracles = 0;
 }
 
-void CultureData::loadFromStream(QDataStream & dataStream)
+void CultureData::loadFromDataStream(QDataStream & dataStream)
 {
   mTotalTheaters = streamio::readInt32(dataStream);
   mWorkingTheaters = streamio::readInt32(dataStream);
@@ -72,7 +72,7 @@ void CultureData::loadFromStream(QDataStream & dataStream)
   mTotalOracles = streamio::readInt32(dataStream);
 }
 
-void CultureData::saveToStream(QDataStream & dataStream) const
+void CultureData::saveToDataStream(QDataStream & dataStream) const
 {
 
 }

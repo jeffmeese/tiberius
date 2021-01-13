@@ -16,7 +16,7 @@ public:
   QList<Property> getProperties() const override;
 
 private:
-  Scenario * mMission;
+  Scenario * mScenario;
 };
 
 #endif // GRIDGROUP_H

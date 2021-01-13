@@ -6,17 +6,21 @@
 class Game;
 
 class GameItem
-    : public ResourceItem
+    : public QObject
+    , public ResourceItem
 {
+  Q_OBJECT
+
 public:
   GameItem(const QString & filePath);
+  ~GameItem();
 
 public:
   QWidget * createView() const override;
   QList<Property> getProperties() const override;
 
-private:
-  void loadBuildings();
+private slots:
+  void fileRead();
 
 private:
   std::unique_ptr<Game> mGame;

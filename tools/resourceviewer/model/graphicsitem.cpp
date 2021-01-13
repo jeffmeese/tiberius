@@ -1,6 +1,9 @@
 #include "graphicsitem.h"
 #include "imageitem.h"
 
+#include "application/tiberiusapplication.h"
+
+
 #include "graphics/imagedata.h"
 #include "graphics/imageindexgroup.h"
 #include "graphics/imageset.h"
@@ -29,10 +32,16 @@ GraphicsItem::GraphicsItem(const QString & imageFileName)
 {
   QFileInfo fileInfo(imageFileName);
   QString dirName = fileInfo.path();
-  QString fileTitle = fileInfo.baseName();
-  QString pixelFileName = dirName + QDir::separator() + fileTitle + ".555";
-  if (!QFile(pixelFileName).exists()) {
-    pixelFileName = dirName + QDir::separator() + "555" + QDir::separator() + fileTitle + ".555";
+  QString pixelFileName = TiberiusApplication::getPixelFileName(imageFileName, dirName);
+  if (pixelFileName.isEmpty()) {
+    dirName = dirName + QDir::separator() + "555";
+    pixelFileName = TiberiusApplication::getPixelFileName(imageFileName, dirName);
+  }
+
+  if (pixelFileName.isEmpty()) {
+    std::ostringstream oss;
+    oss << "Could not locate pixel file name for image file " << imageFileName.toStdString();
+    throw std::invalid_argument(oss.str());
   }
 
   mImageSet.reset(new ImageSet);

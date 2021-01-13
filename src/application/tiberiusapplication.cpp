@@ -16,6 +16,7 @@
 
 #include <QDebug>
 #include <QDir>
+#include <QFileInfo>
 #include <stdexcept>
 
 static const QString C3_DIR_SETTING("c3Dir");
@@ -66,6 +67,28 @@ SgImageData * TiberiusApplication::climateImages()
 SgImageData * TiberiusApplication::enemyImages()
 {
   return mEnemyImages;
+}
+
+// Returns the pixel file name associated with the SG file name without regarding case
+QString TiberiusApplication::getPixelFileName(const QString &sgFileName, const QString & dirName)
+{
+  QStringList nameFilters;
+  nameFilters << "*.555";
+
+  QFileInfo fileInfo(sgFileName);
+  QString fileTitle = fileInfo.baseName().toLower();
+  QString fileName = fileInfo.fileName().toLower();
+  QDir dir(dirName);
+  QFileInfoList fileList = dir.entryInfoList(nameFilters, QDir::Files);
+  for (int i = 0; i < fileList.size(); i++) {
+    QFileInfo info(fileList.at(i));
+    QString title = info.baseName().toLower();
+    if (title == fileTitle) {
+      return info.absoluteFilePath();
+    }
+  }
+
+  return QString("");
 }
 
 ImageData * TiberiusApplication::imageData()

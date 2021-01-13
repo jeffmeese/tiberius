@@ -74,7 +74,7 @@ void MainWindow::handleChooseDirectory()
   loadLanguageFiles(c3Dir);
   loadMapFiles(c3Dir);
   //loadSmkFiles(c3Dir);
-  //loadSavedGames(c3Dir);
+  loadSavedGames(c3Dir);
 
   QApplication::restoreOverrideCursor();
   setEnabled(true);

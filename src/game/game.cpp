@@ -90,32 +90,32 @@ void Game::loadFromStream(QDataStream &dataStream)
   mCity->militaryData()->loadFromDataStream(dataStream);                      // 19 & 20 Formation Data (6400 compressed and 12 uncompressed)
   mCity->loadFromStream(dataStream, mPlayer.get());                           // 21 City Data (36136 compressed)
   mPlayer->loadFromStream(dataStream);                                        // 22 Player name (70 uncompressed)
-  mCity->buildingData()->loadFromDataStream(dataStream);                      // 23 Building data (256000 compressed)
-  mCity->setOrientation(City::Orientation(streamio::readInt32(dataStream)));  // 24 City orientation
-  readGameTime(dataStream);                                                   // 24 Game data
-  dataStream.skipRawData(8);                                                  // 24 Unknown 8 bytes
-  mRandom1 = streamio::readInt32(dataStream);                                 // 24 Random Seed 1
-  mRandom2 = streamio::readInt32(dataStream);                                 // 24 Random Seed 2
-  mCity->cultureData()->loadFromDataStream(dataStream);                       // 24 Culture data 132 bytes
-  dataStream.skipRawData(4);                                                  // 24 Graph Order
-  dataStream.skipRawData(4);                                                  // 24 Unknown
-  dataStream.skipRawData(4);                                                  // 24 Emperor Change Year
-  dataStream.skipRawData(4);                                                  // 24 Emperor Change Month
-  dataStream.skipRawData(4);                                                  // 24 Empire Map X
-  dataStream.skipRawData(4);                                                  // 24 Empire Map Y
-  dataStream.skipRawData(4);                                                  // 24 Empire Map Selected ID
-  mCity->empireData()->loadFromDataStream(dataStream);                        // 25 Empire Cities (2706 compressed)
-  mCity->scenarioData()->loadFromDataStream(dataStream);                      // 26 Scenario Data (2188 uncompressed)
-  mCity->scribeMessageData()->loadFromDataStream(dataStream);                 // 27 Message data (16000 compressed)
-  streamio::readUncompressedData(dataStream, 206);                            // 28 Unknown (206 uncompressed)
-  streamio::readCompressedData(dataStream, 3232);                             // 29 Unknown (3232 compressed)
-  streamio::readUncompressedData(dataStream, 13772);                          // 30 Unknown (13772 uncompressed)
-  mCity->burningBuildingData()->loadFromDataStream(dataStream);               // 31 Burning buildings (1000 compressed)
-  streamio::readCompressedData(dataStream, 1000);                             // 32 Unknown (1000 compressed)
-  mCity->housingData()->loadFromDataStream(dataStream);                       // 33 Housing List (4000 compressed)
-  mCity->storageData()->loadFromDataStream(dataStream);                       // 34 Storage Facilities (6544 uncompressed)
-  mCity->tradeData()->loadFromDataStream(dataStream);                         // 35 Trade Quotas (1280 compressed), 36 Trade Volumes (1280 compressed)
-  streamio::readUncompressedData(dataStream, 1379);                           // 37 Unknown (1379 uncompressed)
+//  mCity->buildingData()->loadFromDataStream(dataStream);                      // 23 Building data (256000 compressed)
+//  mCity->setOrientation(City::Orientation(streamio::readInt32(dataStream)));  // 24 City orientation
+//  readGameTime(dataStream);                                                   // 24 Game data
+//  dataStream.skipRawData(8);                                                  // 24 Unknown 8 bytes
+//  mRandom1 = streamio::readInt32(dataStream);                                 // 24 Random Seed 1
+//  mRandom2 = streamio::readInt32(dataStream);                                 // 24 Random Seed 2
+//  mCity->cultureData()->loadFromDataStream(dataStream);                       // 24 Culture data 132 bytes
+//  dataStream.skipRawData(4);                                                  // 24 Graph Order
+//  dataStream.skipRawData(4);                                                  // 24 Unknown
+//  dataStream.skipRawData(4);                                                  // 24 Emperor Change Year
+//  dataStream.skipRawData(4);                                                  // 24 Emperor Change Month
+//  dataStream.skipRawData(4);                                                  // 24 Empire Map X
+//  dataStream.skipRawData(4);                                                  // 24 Empire Map Y
+//  dataStream.skipRawData(4);                                                  // 24 Empire Map Selected ID
+//  mCity->empireData()->loadFromDataStream(dataStream);                        // 25 Empire Cities (2706 compressed)
+//  mCity->scenarioData()->loadFromDataStream(dataStream);                      // 26 Scenario Data (2188 uncompressed)
+//  mCity->scribeMessageData()->loadFromDataStream(dataStream);                 // 27 Message data (16000 compressed)
+//  streamio::readUncompressedData(dataStream, 206);                            // 28 Unknown (206 uncompressed)
+//  streamio::readCompressedData(dataStream, 3232);                             // 29 Unknown (3232 compressed)
+//  streamio::readUncompressedData(dataStream, 13772);                          // 30 Unknown (13772 uncompressed)
+//  mCity->burningBuildingData()->loadFromDataStream(dataStream);               // 31 Burning buildings (1000 compressed)
+//  streamio::readCompressedData(dataStream, 1000);                             // 32 Unknown (1000 compressed)
+//  mCity->housingData()->loadFromDataStream(dataStream);                       // 33 Housing List (4000 compressed)
+//  mCity->storageData()->loadFromDataStream(dataStream);                       // 34 Storage Facilities (6544 uncompressed)
+//  mCity->tradeData()->loadFromDataStream(dataStream);                         // 35 Trade Quotas (1280 compressed), 36 Trade Volumes (1280 compressed)
+//  streamio::readUncompressedData(dataStream, 1379);                           // 37 Unknown (1379 uncompressed)
 }
 
 void Game::init()

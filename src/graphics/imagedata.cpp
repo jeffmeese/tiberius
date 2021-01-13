@@ -1,5 +1,7 @@
 #include "imagedata.h"
 
+#include "application/tiberiusapplication.h"
+
 #include "imageset.h"
 #include "sgimagedata.h"
 #include "sgimagegroup.h"
@@ -64,9 +66,17 @@ void ImageData::loadFromDir(const QString &dirName)
     QString fileName = fileInfo.fileName();
     QString key = fileTitle.toLower();
 
-    QString pixelFileName = dirName + QDir::separator() + fileTitle + ".555";
-    if (!QFile(pixelFileName).exists()) {
-      pixelFileName = dirName + QDir::separator() + "555" + QDir::separator() + fileTitle + ".555";
+    QString dirName(fileInfo.path());
+    QString pixelFileName = TiberiusApplication::getPixelFileName(pathName, dirName);
+    if (pixelFileName.isEmpty()) {
+      dirName = dirName + QDir::separator() + "555";
+      pixelFileName = TiberiusApplication::getPixelFileName(pathName, dirName);
+    }
+
+    if (pixelFileName.isEmpty()) {
+      std::ostringstream oss;
+      oss << "Could not locate pixel file name for image file " << pathName.toStdString();
+      throw std::invalid_argument(oss.str());
     }
 
     std::unique_ptr<ImageSet> imageSet(new ImageSet);

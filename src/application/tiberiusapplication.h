@@ -25,6 +25,7 @@ public:
 public:
   TIBERIUS_LIB_DECL static QString c3Dir();
   TIBERIUS_LIB_DECL static SgImageData * climateImages();
+  TIBERIUS_LIB_DECL static QString getPixelFileName(const QString & sgFileName, const QString & dirName);
   TIBERIUS_LIB_DECL static SgImageData * enemyImages();
   TIBERIUS_LIB_DECL static bool isPatched();
   TIBERIUS_LIB_DECL static ImageData * imageData();

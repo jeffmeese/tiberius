@@ -1,20 +1,61 @@
 #include "gameitem.h"
 
-//#include "buildings/building.h"
+#include "gamegridgroup.h"
 
 #include "game/game.h"
 
+#include <QDebug>
 #include <QFileInfo>
+#include <QThread>
+
+class GameReader : public QThread
+{
+  Q_OBJECT
+
+public:
+  GameReader(Game * game, const QString & filePath)
+    : mGame(game)
+    , mFilePath(filePath)
+  { }
+
+  void run() override
+  {
+    mGame->loadFromFile(mFilePath);
+    emit ready();
+  }
+
+signals:
+  void ready();
+
+private:
+  Game * mGame;
+  QString mFilePath;
+};
 
 GameItem::GameItem(const QString & filePath)
 {
-//  QFileInfo fileInfo(filePath);
-//  setText(fileInfo.fileName());
-//  QString dirName = fileInfo.path();
+  QFileInfo fileInfo(filePath);
+  setText(fileInfo.fileName());
+  QString dirName = fileInfo.path();
 
-//  mGame.reset(new Game(dirName));
-//  mGame->loadFromFile(filePath);
-//  loadBuildings();
+  mGame.reset(new Game);
+  setEnabled(false);
+
+  GameReader * gameReader = new GameReader(mGame.get(), filePath);
+  connect(gameReader, &GameReader::ready, this, &GameItem::fileRead);
+  connect(gameReader, &GameReader::finished, gameReader, &QObject::deleteLater);
+  gameReader->start();
+}
+
+GameItem::~GameItem()
+{
+
+}
+
+void GameItem::fileRead()
+{
+  setEnabled(true);
+  appendRow(new GameGridGroup(mGame.get()));
 }
 
 QWidget * GameItem::createView() const
@@ -28,19 +69,5 @@ QList<Property> GameItem::getProperties() const
   return propertyList;
 }
 
-void GameItem::loadBuildings()
-{
-  QStandardItem * buildingGroup = new QStandardItem;
-  buildingGroup->setText("Buildings");
+#include "gameitem.moc"
 
-//  for (int32_t i = 0; i < mGame->totalBuildings(); i++) {
-//    Building * building = mGame->getBuilding(i);
-//    QStandardItem * item = new QStandardItem;
-//    item->setText("Empty Slot");
-//    if (building != nullptr) {
-//      item->setText(building->name());
-//    }
-//    buildingGroup->appendRow(item);
-//  }
-//  appendRow(buildingGroup);
-}

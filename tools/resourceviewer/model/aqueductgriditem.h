@@ -1,15 +1,15 @@
-#ifndef ELEVATIONGRIDITEM_H
-#define ELEVATIONGRIDITEM_H
+#ifndef AQUEDUCTGRIDITEM_H
+#define AQUEDUCTGRIDITEM_H
 
 #include "resourceitem.h"
 
 #include "map/grid.h"
 
-class ElevationGridItem
+class AqueductGridItem
     : public ResourceItem
 {
 public:
-  ElevationGridItem(UnsignedByteGrid * grid);
+  AqueductGridItem(UnsignedByteGrid * grid);
 
 public:
   QWidget * createView() const override;
@@ -19,4 +19,4 @@ private:
   UnsignedByteGrid * mGrid;
 };
 
-#endif // ELEVATIONGRIDITEM_H
+#endif // AQUEDUCTGRIDITEM_H

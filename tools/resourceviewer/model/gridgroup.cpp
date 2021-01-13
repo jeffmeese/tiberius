@@ -7,14 +7,14 @@
 
 #include "scenario/scenario.h"
 
-GridGroup::GridGroup(Scenario * mission)
-  : mMission(mission)
+GridGroup::GridGroup(Scenario * sccenario)
+  : mScenario(sccenario)
 {
   setText("Grids");
-  appendRow(new EdgeGridItem(mMission->edgeGrid()));
-  appendRow(new ElevationGridItem(mMission->elevationGrid()));
-  appendRow(new GraphicGridItem(mMission->graphicGrid()));
-  appendRow(new TerrainGridItem(mMission->terrainGrid()));
+  appendRow(new EdgeGridItem(mScenario->edgeGrid()));
+  appendRow(new ElevationGridItem(mScenario->elevationGrid()));
+  appendRow(new GraphicGridItem(mScenario->graphicGrid()));
+  appendRow(new TerrainGridItem(mScenario->terrainGrid()));
 }
 
 QWidget * GridGroup::createView() const

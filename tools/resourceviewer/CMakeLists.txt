@@ -17,6 +17,10 @@ set(HDR_FILES
   application/mainwindow.h
   graphics/imageindexgroup.h
   languages/stringtablemodel.h
+  model/aqueductgriditem.h
+  model/buildinggriditem.h
+  model/damagegriditem.h
+  model/desirabilitygriditem.h
   model/demandchangegroup.h
   model/demandchangeitem.h
   model/edgegriditem.h
@@ -25,6 +29,7 @@ set(HDR_FILES
   model/fishingpointitem.h
   model/herdpointgroup.h
   model/herdpointitem.h
+  model/gamegridgroup.h
   model/gameitem.h
   model/goalsitem.h
   model/graphicgriditem.h
@@ -37,6 +42,7 @@ set(HDR_FILES
   model/invasionpointsitem.h
   model/languageitem.h
   model/mapitem.h
+  model/merginggriditem.h
   model/messagedataitem.h
   model/messageitem.h
   model/pricechangegroup.h
@@ -49,6 +55,7 @@ set(HDR_FILES
   model/smkitem.h
   model/terraingriditem.h
   model/textdataitem.h
+  model/walkergriditem.h
   properties/property.h
   properties/propertiesmodel.h
   views/gridview.h
@@ -59,6 +66,10 @@ set(SRC_FILES
   application/mainwindow.cpp
   graphics/imageindexgroup.cpp
   languages/stringtablemodel.cpp
+  model/aqueductgriditem.cpp
+  model/buildinggriditem.cpp
+  model/damagegriditem.cpp
+  model/desirabilitygriditem.cpp
   model/demandchangegroup.cpp
   model/demandchangeitem.cpp
   model/edgegriditem.cpp
@@ -67,6 +78,7 @@ set(SRC_FILES
   model/fishingpointitem.cpp
   model/herdpointgroup.cpp
   model/herdpointitem.cpp
+  model/gamegridgroup.cpp
   model/gameitem.cpp
   model/goalsitem.cpp
   model/gridgroup.cpp
@@ -81,6 +93,7 @@ set(SRC_FILES
   model/mapitem.cpp
   model/messagedataitem.cpp
   model/messageitem.cpp
+  model/merginggriditem.cpp
   model/pricechangegroup.cpp
   model/pricechangeitem.cpp
   model/randomeventsitem.cpp
@@ -91,6 +104,7 @@ set(SRC_FILES
   model/savedgamesitem.cpp
   model/smkitem.cpp
   model/textdataitem.cpp
+  model/walkergriditem.cpp
   properties/property.cpp
   properties/propertiesmodel.cpp
   views/gridview.cpp

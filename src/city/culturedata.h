@@ -10,7 +10,7 @@ public:
 
 public:
   TIBERIUS_LIB_DECL void loadFromDataStream(QDataStream & dataStream);
-  TIBERIUS_LIB_DECL void saveToStream(QDataStream & dataStream) const;
+  TIBERIUS_LIB_DECL void saveToDataStream(QDataStream & dataStream) const;
 
 private:
   int32_t mTotalAcademies;

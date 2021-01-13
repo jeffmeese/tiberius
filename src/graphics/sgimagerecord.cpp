@@ -3,6 +3,8 @@
 #include "sgimagegroup.h"
 #include "sgpixeldata.h"
 
+#include <sstream>
+
 #include <QDebug>
 
 enum {
@@ -60,6 +62,11 @@ QImage SgImageRecord::createImage() const
     break;
   }
 
+  for (int i = 0; i < mImageHeight; i++) {
+    for (int j = 0; j < mImageWidth; j++) {
+
+    }
+  }
   return image;
 }
 
