@@ -19,7 +19,7 @@ ScribeMessageData::~ScribeMessageData()
 
 }
 
-void ScribeMessageData::loadFromStream(QDataStream & dataStream)
+void ScribeMessageData::loadFromDataStream(QDataStream & dataStream)
 {
   QByteArray byteArray = streamio::readCompressedData(dataStream, DATA_SIZE);
   QDataStream byteStream(&byteArray, QIODevice::ReadOnly);
@@ -28,7 +28,7 @@ void ScribeMessageData::loadFromStream(QDataStream & dataStream)
   }
 }
 
-void ScribeMessageData::saveToStream(QDataStream & dataStream) const
+void ScribeMessageData::saveToDataStream(QDataStream & dataStream) const
 {
   QByteArray byteArray;
   QDataStream byteStream(&byteArray, QIODevice::WriteOnly);

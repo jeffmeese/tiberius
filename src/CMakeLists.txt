@@ -24,8 +24,10 @@ set(HDR_FILES
   advisor/advisor.h
   building/building.h
   city/buildingdata.h
+  city/burningbuildingdata.h
   city/camera.h
   city/city.h
+  city/culturedata.h
   city/data.h
   city/datamodel.h
   city/datavector.h
@@ -34,6 +36,7 @@ set(HDR_FILES
   city/entertainmentdata.h
   city/financedata.h
   city/healthdata.h
+  city/housingdata.h
   city/imperialdata.h
   city/labordata.h
   city/militarydata.h
@@ -45,6 +48,7 @@ set(HDR_FILES
   city/scenariodata.h
   city/scribemessage.h
   city/scribemessagedata.h
+  city/storagedata.h
   city/tradedata.h
   city/walkerdata.h
   core/abstractfactory.h
@@ -126,8 +130,10 @@ set(SRC_FILES
   advisor/advisor.cpp
   building/building.cpp
   city/buildingdata.cpp
+  city/burningbuildingdata.cpp
   city/camera.cpp
   city/city.cpp
+  city/culturedata.cpp
   city/data.cpp
   city/datamodel.cpp
   city/educationdata.cpp
@@ -135,6 +141,7 @@ set(SRC_FILES
   city/entertainmentdata.cpp
   city/financedata.cpp
   city/healthdata.cpp
+  city/housingdata.cpp
   city/imperialdata.cpp
   city/labordata.cpp
   city/militarydata.cpp
@@ -146,6 +153,7 @@ set(SRC_FILES
   city/scenariodata.cpp
   city/scribemessage.cpp
   city/scribemessagedata.cpp
+  city/storagedata.cpp
   city/tradedata.cpp
   city/walkerdata.cpp
   core/painter.cpp
