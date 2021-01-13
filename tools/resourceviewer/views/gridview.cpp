@@ -119,13 +119,7 @@ void GridView::displayDesirabilityGrid(const ByteGrid * grid)
       max = value;
     if (value < min)
       min = value;
-
-    if (value != 0) {
-      qDebug() << value;
-    }
   }
-
-  qDebug() << min << " " << max;
 
   int index = 0;
   for (int i = 0; i < GridSize; i++) {

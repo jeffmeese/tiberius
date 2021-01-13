@@ -66,7 +66,6 @@ bool MainWindow::eventFilter(QObject * object, QEvent * event)
     if (event->type() == QEvent::MouseButtonRelease) {
       QAction * action = menu->activeAction();
       if (action == mUi->actionWarnings) {
-        qDebug() << "Warnings";
         action->trigger();
         return true;
       }

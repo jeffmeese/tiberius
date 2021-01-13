@@ -4,8 +4,6 @@
 
 #include "core/streamio.h"
 
-#include <QDebug>
-
 #include "graphics/imagedata.h"
 #include "graphics/sgimagedata.h"
 #include "graphics/sgimagerecord.h"

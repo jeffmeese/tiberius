@@ -72,23 +72,14 @@ SgImageData * TiberiusApplication::enemyImages()
 // Returns the pixel file name associated with the SG file name without regarding case
 QString TiberiusApplication::getPixelFileName(const QString &sgFileName, const QString & dirName)
 {
-  QStringList nameFilters;
-  nameFilters << "*.555";
-
   QFileInfo fileInfo(sgFileName);
-  QString fileTitle = fileInfo.baseName().toLower();
-  QString fileName = fileInfo.fileName().toLower();
+  QString pixelName = fileInfo.baseName() + ".555";
   QDir dir(dirName);
-  QFileInfoList fileList = dir.entryInfoList(nameFilters, QDir::Files);
-  for (int i = 0; i < fileList.size(); i++) {
-    QFileInfo info(fileList.at(i));
-    QString title = info.baseName().toLower();
-    if (title == fileTitle) {
-      return info.absoluteFilePath();
-    }
-  }
+  QFileInfoList infoList = dir.entryInfoList(QStringList(pixelName), QDir::Files);
+  if (infoList.size() == 0)
+    return QString("");
 
-  return QString("");
+  return infoList.at(0).absoluteFilePath();
 }
 
 ImageData * TiberiusApplication::imageData()
