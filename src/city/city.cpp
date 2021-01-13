@@ -1,13 +1,16 @@
 #include "city.h"
 
 #include "buildingdata.h"
+#include "burningbuildingdata.h"
 #include "camera.h"
+#include "culturedata.h"
 #include "data.h"
 #include "educationdata.h"
 #include "empiredata.h"
 #include "entertainmentdata.h"
 #include "financedata.h"
 #include "healthdata.h"
+#include "housingdata.h"
 #include "imperialdata.h"
 #include "labordata.h"
 #include "militarydata.h"
@@ -17,6 +20,8 @@
 #include "resourcedata.h"
 #include "routedata.h"
 #include "scenariodata.h"
+#include "scribemessagedata.h"
+#include "storagedata.h"
 #include "tradedata.h"
 #include "walkerdata.h"
 
@@ -30,6 +35,8 @@ static const int32_t DATA_SIZE = 36136;
 City::City()
 {
   mBuildingData.reset(new BuildingData);
+  mBurningBuildingData.reset(new BurningBuildingData);
+  mCultureData.reset(new CultureData);
   mCamera.reset(new Camera);
   mData.reset(new Data);
   mEducationData.reset(new EducationData);
@@ -38,6 +45,7 @@ City::City()
   mWalkerData.reset(new WalkerData);
   mFinanceData.reset(new FinanceData);
   mHealthData.reset(new HealthData);
+  mHousingData.reset(new HousingData);
   mImperialData.reset(new ImperialData);
   mLaborData.reset(new LaborData);
   mMilitaryData.reset(new MilitaryData);
@@ -47,6 +55,8 @@ City::City()
   mResourceData.reset(new ResourceData);
   mRouteData.reset(new RouteData);
   mScenarioData.reset(new ScenarioData);
+  mScribeMessageData.reset(new ScribeMessageData);
+  mStorageData.reset(new StorageData);
   mTradeData.reset(new TradeData);
 
   for (int i = 0; i < 1; i++) {
@@ -83,6 +93,16 @@ const BuildingData * City::buildingData() const
   return mBuildingData.get();
 }
 
+BurningBuildingData * City::burningBuildingData()
+{
+  return mBurningBuildingData.get();
+}
+
+const BurningBuildingData * City::burningBuildingData() const
+{
+  return mBurningBuildingData.get();
+}
+
 Camera * City::camera()
 {
   return mCamera.get();
@@ -91,6 +111,16 @@ Camera * City::camera()
 const Camera * City::camera() const
 {
   return mCamera.get();
+}
+
+CultureData * City::cultureData()
+{
+  return mCultureData.get();
+}
+
+const CultureData * City::cultureData() const
+{
+  return mCultureData.get();
 }
 
 EducationData * City::educationData()
@@ -141,6 +171,16 @@ HealthData * City::healthData()
 const HealthData * City::healthData() const
 {
   return mHealthData.get();
+}
+
+HousingData * City::housingData()
+{
+  return mHousingData.get();
+}
+
+const HousingData * City::housingData() const
+{
+  return mHousingData.get();
 }
 
 ImperialData * City::imperialData()
@@ -381,6 +421,26 @@ ScenarioData * City::scenarioData()
 const ScenarioData * City::scenarioData() const
 {
   return mScenarioData.get();
+}
+
+ScribeMessageData * City::scribeMessageData()
+{
+  return mScribeMessageData.get();
+}
+
+const ScribeMessageData * City::scribeMessageData() const
+{
+  return mScribeMessageData.get();
+}
+
+StorageData * City::storageData()
+{
+  return mStorageData.get();
+}
+
+const StorageData * City::storageData() const
+{
+  return mStorageData.get();
 }
 
 TradeData * City::tradeData()

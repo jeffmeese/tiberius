@@ -20,7 +20,7 @@ ScenarioData::~ScenarioData()
 
 }
 
-void ScenarioData::loadFromStream(QDataStream &dataStream)
+void ScenarioData::loadFromDataStream(QDataStream &dataStream)
 {
   // 128 bytes unused + 1 unused trade price pair
   dataStream.skipRawData(130);
@@ -35,7 +35,7 @@ void ScenarioData::loadFromStream(QDataStream &dataStream)
   mMission->loadFromStream(dataStream, false);
 }
 
-void ScenarioData::saveToStream(QDataStream &dataStream) const
+void ScenarioData::saveToDataStream(QDataStream &dataStream) const
 {
   // 128 bytes unused + 1 unused trade price pair
   for (int i = 0; i < 130; i++) {

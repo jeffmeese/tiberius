@@ -11,7 +11,6 @@
 #include <vector>
 
 class City;
-class GladiatorRevolt;
 class Map;
 class Scenario;
 class Player;
@@ -25,8 +24,6 @@ public:
 public:
   TIBERIUS_LIB_DECL City * city();
   TIBERIUS_LIB_DECL const City * city() const;
-  TIBERIUS_LIB_DECL GladiatorRevolt * gladiatorRevolt();
-  TIBERIUS_LIB_DECL const GladiatorRevolt * gladiatorRevolt() const;
   TIBERIUS_LIB_DECL Map * map();
   TIBERIUS_LIB_DECL const Map * map() const;
   TIBERIUS_LIB_DECL Scenario * mission();
@@ -46,7 +43,6 @@ private:
 
 private:
   using CityPtr = std::unique_ptr<City>;
-  using GladiatorRevoltPtr = std::unique_ptr<GladiatorRevolt>;
   using MapPtr = std::unique_ptr<Map>;
   using MissionPtr = std::unique_ptr<Scenario>;
   using PlayerPtr = std::unique_ptr<Player>;
@@ -63,7 +59,6 @@ private:
   uint32_t mRandom1;
   uint32_t mRandom2;
   CityPtr mCity;
-  GladiatorRevoltPtr mGladiatorRevolt;
   Difficulty mDifficulty;
   MapPtr mMap;
   MissionPtr mMission;
@@ -78,16 +73,6 @@ inline City * Game::city()
 inline const City * Game::city() const
 {
   return mCity.get();
-}
-
-inline GladiatorRevolt * Game::gladiatorRevolt()
-{
-  return mGladiatorRevolt.get();
-}
-
-inline const GladiatorRevolt * Game::gladiatorRevolt() const
-{
-  return mGladiatorRevolt.get();
 }
 
 inline Map * Game::map()

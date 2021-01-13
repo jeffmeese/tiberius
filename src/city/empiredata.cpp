@@ -19,7 +19,7 @@ EmpireData::~EmpireData()
 
 }
 
-void EmpireData::loadFromStream(QDataStream & dataStream)
+void EmpireData::loadFromDataStream(QDataStream & dataStream)
 {
   QByteArray byteArray = streamio::readCompressedData(dataStream, DATA_SIZE);
   QDataStream byteStream(&byteArray, QIODevice::ReadOnly);
@@ -30,7 +30,7 @@ void EmpireData::loadFromStream(QDataStream & dataStream)
   }
 }
 
-void EmpireData::saveToStream(QDataStream & dataStream) const
+void EmpireData::saveToDataStream(QDataStream & dataStream) const
 {
   QByteArray byteArray;
   QDataStream byteStream(&byteArray, QIODevice::WriteOnly);

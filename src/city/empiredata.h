@@ -24,8 +24,8 @@ public:
   TIBERIUS_LIB_DECL ~EmpireData();
 
 public:
-  TIBERIUS_LIB_DECL void loadFromStream(QDataStream & dataStream);
-  TIBERIUS_LIB_DECL void saveToStream(QDataStream & dataStream) const;
+  TIBERIUS_LIB_DECL void loadFromDataStream(QDataStream & dataStream);
+  TIBERIUS_LIB_DECL void saveToDataStream(QDataStream & dataStream) const;
 
 private:
   using CityPtr = std::unique_ptr<Empire::City>;

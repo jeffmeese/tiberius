@@ -17,6 +17,10 @@ public:
   TIBERIUS_LIB_DECL void setBuyPrice(Resource::Type type, int32_t value);
   TIBERIUS_LIB_DECL void setSellPrice(Resource::Type type, int32_t value);
 
+public:
+  TIBERIUS_LIB_DECL void loadFromDataStream(QDataStream & dataStream);
+  TIBERIUS_LIB_DECL void saveToDataStream(QDataStream & dataStream) const;
+
 private:
 
 };
