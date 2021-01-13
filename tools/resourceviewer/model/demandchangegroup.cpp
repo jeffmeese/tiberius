@@ -1,7 +1,7 @@
 #include "demandchangegroup.h"
 #include "demandchangeitem.h"
 
-#include "scenario/demandchange.h"
+#include "event/demandchange.h"
 #include "scenario/scenario.h"
 
 #include <QTableWidget>

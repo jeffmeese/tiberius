@@ -24,7 +24,7 @@
 
 #include "map/map.h"
 
-#include "scenario/gladiatorrevolt.h"
+#include "event/gladiatorrevolt.h"
 #include "scenario/scenario.h"
 
 #include <QDebug>

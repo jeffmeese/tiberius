@@ -3,7 +3,7 @@
 
 #include "properties/property.h"
 
-#include "scenario/emperorrequest.h"
+#include "event/emperorrequest.h"
 #include "scenario/scenario.h"
 
 #include <QTableWidget>

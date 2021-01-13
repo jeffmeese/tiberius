@@ -11,9 +11,10 @@
 #include "randomeventsitem.h"
 #include "requestgroup.h"
 
+#include "event/emperorrequest.h"
+
 #include "game/player.h"
 
-#include "scenario/emperorrequest.h"
 #include "scenario/scenario.h"
 
 #include <QFileInfo>

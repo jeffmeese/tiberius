@@ -1,7 +1,7 @@
 #include "pricechangegroup.h"
 #include "pricechangeitem.h"
 
-#include "scenario/pricechange.h"
+#include "event/pricechange.h"
 #include "scenario/scenario.h"
 
 #include <QTableWidget>

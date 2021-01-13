@@ -2,7 +2,7 @@
 #define INVASION_H
 
 #include "tiberius.h"
-#include "event.h"
+#include "event/event.h"
 
 #include <QDataStream>
 

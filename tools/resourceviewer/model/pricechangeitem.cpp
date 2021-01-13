@@ -1,6 +1,6 @@
 #include "pricechangeitem.h"
 
-#include "scenario/pricechange.h"
+#include "event/pricechange.h"
 
 PriceChangeItem::PriceChangeItem(PriceChange * priceChange)
   : mPriceChange(priceChange)

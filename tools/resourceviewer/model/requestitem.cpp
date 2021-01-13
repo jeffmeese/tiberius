@@ -1,6 +1,6 @@
 #include "requestitem.h"
 
-#include "scenario/emperorrequest.h"
+#include "event/emperorrequest.h"
 
 RequestItem::RequestItem(EmperorRequest * request)
   : mRequest(request)

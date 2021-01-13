@@ -1,7 +1,7 @@
 #include "invasiongroup.h"
 #include "invasionitem.h"
 
-#include "scenario/invasion.h"
+#include "military/invasion.h"
 #include "scenario/scenario.h"
 
 #include <QTableWidget>

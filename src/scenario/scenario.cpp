@@ -1,21 +1,22 @@
 #include "scenario.h"
 
-#include "demandchange.h"
-#include "earthquake.h"
-#include "emperorchange.h"
-#include "emperorrequest.h"
-#include "empireexpansion.h"
-#include "gladiatorrevolt.h"
 #include "goal.h"
-#include "invasion.h"
-#include "pricechange.h"
 
 #include "core/streamio.h"
 
+#include "event/demandchange.h"
+#include "event/earthquake.h"
+#include "event/emperorchange.h"
+#include "event/emperorrequest.h"
+#include "event/empireexpansion.h"
+#include "event/gladiatorrevolt.h"
+#include "event/pricechange.h"
+
 #include "map/location.h"
 
-#include <QFile>
+#include "military/invasion.h"
 
+#include <QFile>
 #include <sstream>
 #include <stdexcept>
 

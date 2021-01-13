@@ -55,6 +55,14 @@ set(HDR_FILES
   dialog/messagedialog.h
   entertainment/festival.h
   empire/city.h
+  event/demandchange.h
+  event/earthquake.h
+  event/emperorchange.h
+  event/emperorrequest.h
+  event/empireexpansion.h
+  event/event.h
+  event/gladiatorrevolt.h
+  event/pricechange.h
   figure/figure.h
   game/difficulty.h
   game/direction.h
@@ -86,22 +94,14 @@ set(HDR_FILES
   media/video.h
   media/videos.h
   media/videodata.h
+  military/invasion.h
   military/legion.h
   military/soldier.h
   religion/god.h
   resource/resource.h
   route/route.h
-  scenario/demandchange.h
-  scenario/earthquake.h
-  scenario/emperorchange.h
-  scenario/emperorrequest.h
-  scenario/empireexpansion.h
-  scenario/event.h
-  scenario/gladiatorrevolt.h
   scenario/goal.h
-  scenario/invasion.h
-  scenario/scenario.h
-  scenario/pricechange.h
+  scenario//scenario.h
   widget/buildmenu.h
   widget/buildmenuitem.h
   widget/button.h
@@ -155,6 +155,14 @@ set(SRC_FILES
   dialog/messagedialog.cpp
   empire/city.cpp
   entertainment/festival.cpp
+  event/demandchange.cpp
+  event/earthquake.cpp
+  event/emperorchange.cpp
+  event/emperorrequest.cpp
+  event/empireexpansion.cpp
+  event/event.cpp
+  event/gladiatorrevolt.cpp
+  event/pricechange.cpp
   figure/figure.cpp
   game/difficulty.cpp
   game/game.cpp
@@ -183,22 +191,14 @@ set(SRC_FILES
   media/video.cpp
   media/videos.cpp
   media/videodata.cpp
+  military/invasion.cpp
   military/legion.cpp
   military/soldier.cpp
   religion/god.cpp
   resource/resource.cpp
   route/route.cpp
-  scenario/demandchange.cpp
-  scenario/earthquake.cpp
-  scenario/emperorchange.cpp
-  scenario/emperorrequest.cpp
-  scenario/empireexpansion.cpp
-  scenario/event.cpp
-  scenario/gladiatorrevolt.cpp
   scenario/goal.cpp
-  scenario/invasion.cpp
   scenario/scenario.cpp
-  scenario/pricechange.cpp
   widget/buildmenu.cpp
   widget/buildmenuitem.cpp
   widget/button.cpp
