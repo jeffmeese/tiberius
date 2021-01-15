@@ -20,6 +20,7 @@ add_subdirectory(3rdparty/tinyfiledialogs)
 
 set(HDR_FILES
   tiberius.h
+  application/c3data.h
   application/tiberiusapplication.h
   advisor/advisor.h
   building/building.h
@@ -126,6 +127,7 @@ set(HDR_FILES
 )
 
 set(SRC_FILES
+  application/c3data.cpp
   application/tiberiusapplication.cpp
   advisor/advisor.cpp
   building/building.cpp

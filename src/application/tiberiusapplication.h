@@ -9,6 +9,7 @@
 
 #include "tiberius.h"
 
+class C3Data;
 class ImageData;
 class Language;
 class SgImageData;
@@ -32,21 +33,12 @@ public:
   TIBERIUS_LIB_DECL static Language * language();
   TIBERIUS_LIB_DECL static SoundData * soundData();
   TIBERIUS_LIB_DECL static VideoData * videoData();
-
-private:
-  void loadImageData(const QString & dirName);
-  void loadLanguage(const QString & dirName);
-  void loadSoundData(const QString & dirName);
-  void loadVideoData(const QString & dirName);
+  TIBERIUS_LIB_DECL void setC3Dir(const QString & dirName);
 
 private:
   static QSettings mSettings;
-  static std::unique_ptr<ImageData> mImageData;
-  static std::unique_ptr<Language> mLanguage;
-  static std::unique_ptr<SoundData> mSoundData;
-  static std::unique_ptr<VideoData> mVideoData;
-  static SgImageData * mClimateImages;
-  static SgImageData * mEnemyImages;
+  static std::unique_ptr<C3Data> mC3Data;
+  static QString mC3Dir;
 };
 
 #endif // TIBERIUSAPPLICATION_H

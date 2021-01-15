@@ -70,18 +70,33 @@ public:
   };
 
 public:
-  TIBERIUS_LIB_DECL City();
+  TIBERIUS_LIB_DECL City(int32_t id);
 
 public:
+  TIBERIUS_LIB_DECL uint8_t buyFlag(int32_t resourceId) const;
+  TIBERIUS_LIB_DECL bool inUse() const;
+  TIBERIUS_LIB_DECL Name nameId() const;
+  TIBERIUS_LIB_DECL uint8_t sellFlag(int32_t resourceId) const;
+  TIBERIUS_LIB_DECL uint16_t tradeRouteCode() const;
+  TIBERIUS_LIB_DECL Type type() const;
+
+public:
+  TIBERIUS_LIB_DECL QString getName() const;
+  TIBERIUS_LIB_DECL QString getType() const;
   TIBERIUS_LIB_DECL void loadFromStream(QDataStream & dataStream);
   TIBERIUS_LIB_DECL void saveToStream(QDataStream & dataStream) const;
 
+public:
+  TIBERIUS_LIB_DECL static QString getName(Name nameId);
+  TIBERIUS_LIB_DECL static QString getType(Type type);
+
 private:
   bool mInUse;
-  uint8_t mType;
-  uint8_t mNameId;
-  uint8_t mBuyFlags[Resource::MAX_RESOURCES];
-  uint8_t mSellFlags[Resource::MAX_RESOURCES];
+  int32_t mId;
+  Name mNameId;
+  Type mType;
+  uint8_t mBuyFlags[Resource::MAX_RESOURCES+1];
+  uint8_t mSellFlags[Resource::MAX_RESOURCES+1];
   uint16_t mTradeRouteCost;
 };
 

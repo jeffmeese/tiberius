@@ -16,7 +16,10 @@ class Scenario;
 class Player;
 
 class Game
+    : public QObject
 {
+  Q_OBJECT
+
 public:
   TIBERIUS_LIB_DECL Game();
   TIBERIUS_LIB_DECL ~Game();
@@ -46,6 +49,9 @@ private:
   using MapPtr = std::unique_ptr<Map>;
   using MissionPtr = std::unique_ptr<Scenario>;
   using PlayerPtr = std::unique_ptr<Player>;
+
+signals:
+  void changed();
 
 private:
   int32_t mEmperorChangeState;

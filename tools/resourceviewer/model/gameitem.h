@@ -12,7 +12,8 @@ class GameItem
   Q_OBJECT
 
 public:
-  GameItem(const QString & filePath);
+  //GameItem(const QString & filePath);
+  GameItem(std::unique_ptr<Game> game, const QString & filePath);
   ~GameItem();
 
 public:
@@ -24,6 +25,9 @@ private slots:
 
 private:
   std::unique_ptr<Game> mGame;
+  //QString mFilePath;
+  //mutable std::unique_ptr<Game> mGame;
+  //mutable bool mGameLoaded;
 };
 
 #endif // GAMEITEM_H

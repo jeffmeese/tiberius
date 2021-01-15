@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "application/tiberiusapplication.h"
+
 #include "game/game.h"
 
 #include "graphics/sgimagegroup.h"
@@ -26,9 +28,10 @@
 
 #include <sstream>
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(TiberiusApplication & application, QWidget *parent)
   : QMainWindow(parent)
   , mUi(new Ui::MainWindow)
+  , mApplication(application)
   , mResourceModel(new QStandardItemModel)
 {
   mUi->setupUi(this);
@@ -60,11 +63,11 @@ QWidget * MainWindow::createEmptyView()
 void MainWindow::handleChooseDirectory()
 {
   QString c3Dir = QFileDialog::getExistingDirectory(this, "Choose Caesar directory", QDir::currentPath());
-  //QString c3Dir = "C:\\applications\\Impressions Games\\Caesar3";
-  //QString c3Dir = "C:\\applications\\Caesar3\\SIERRA\\Caesar3";
   if (c3Dir.isEmpty()) {
     return;
   }
+
+  mApplication.setC3Dir(c3Dir);
 
   QApplication::setOverrideCursor(Qt::WaitCursor);
   setEnabled(false);
@@ -198,6 +201,8 @@ void MainWindow::loadMapFiles(const QString &dirName)
 
 void MainWindow::loadSavedGames(const QString &dirName)
 {
+  qDebug() << "loadSavedGames";
+
   QStringList nameFilters;
   nameFilters << "*.sav";
 
@@ -206,9 +211,12 @@ void MainWindow::loadSavedGames(const QString &dirName)
   for (int32_t i = 0; i < fileList.size(); i++) {
     QString fileName = fileList.at(i);
     QString pathName = dirName + QDir::separator() + fileName;
-    GameItem * item = new GameItem(pathName);
+    std::unique_ptr<Game> game(new Game);
+    GameItem * item = new GameItem(std::move(game), pathName);
     mSavedGamesGroup->appendRow(item);
   }
+
+  qDebug() << "loadSavedGames";
 }
 
 void MainWindow::loadSmkFiles(const QString & dirName)

@@ -25,6 +25,8 @@ set(HDR_FILES
   model/demandchangeitem.h
   model/edgegriditem.h
   model/elevationgriditem.h
+  model/empirecitygroup.h
+  model/empirecityitem.h
   model/fishingpointgroup.h
   model/fishingpointitem.h
   model/herdpointgroup.h
@@ -74,6 +76,8 @@ set(SRC_FILES
   model/demandchangeitem.cpp
   model/edgegriditem.cpp
   model/elevationgriditem.cpp
+  model/empirecitygroup.cpp
+  model/empirecityitem.cpp
   model/fishingpointgroup.cpp
   model/fishingpointitem.cpp
   model/herdpointgroup.cpp

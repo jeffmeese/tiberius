@@ -55,6 +55,8 @@ void CultureData::loadFromDataStream(QDataStream & dataStream)
   mWorkingAcademies = streamio::readInt32(dataStream);
   mTotalBarbers = streamio::readInt32(dataStream);
   mWorkingBarbers = streamio::readInt32(dataStream);
+  mTotalBaths = streamio::readInt32(dataStream);
+  mWorkingBaths = streamio::readInt32(dataStream);
   mTotalClinics = streamio::readInt32(dataStream);
   mWorkingClinics = streamio::readInt32(dataStream);
   mTotalHospitals = streamio::readInt32(dataStream);

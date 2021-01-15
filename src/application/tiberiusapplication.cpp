@@ -1,51 +1,32 @@
 #include "tiberiusapplication.h"
 
-#include "graphics/imagedata.h"
-#include "graphics/imageset.h"
-
-#include "language/language.h"
-
-#include "media/sound.h"
-#include "media/sounddata.h"
-#include "media/sounds.h"
-#include "media/video.h"
-#include "media/videodata.h"
-#include "media/videos.h"
+#include "c3data.h"
 
 #include "tinyfiledialogs/tinyfiledialogs.h"
 
-#include <QDebug>
 #include <QDir>
-#include <QFileInfo>
 #include <stdexcept>
 
 static const QString C3_DIR_SETTING("c3Dir");
-QSettings TiberiusApplication::mSettings("JaMSoft", "Tiberius");
-std::unique_ptr<ImageData> TiberiusApplication::mImageData;
-std::unique_ptr<Language> TiberiusApplication::mLanguage;
-std::unique_ptr<SoundData> TiberiusApplication::mSoundData;
-std::unique_ptr<VideoData> TiberiusApplication::mVideoData;
-SgImageData * TiberiusApplication::mClimateImages = nullptr;
-SgImageData * TiberiusApplication::mEnemyImages = nullptr;
+QString TiberiusApplication::mC3Dir;
+std::unique_ptr<C3Data> TiberiusApplication::mC3Data;
+QSettings TiberiusApplication::mSettings;
 
 TiberiusApplication::TiberiusApplication(int & argc, char ** argv)
   : QApplication(argc, argv)
 {
-  QString dirName = c3Dir();
-  loadImageData(dirName);
-  loadLanguage(dirName);
-  loadSoundData(dirName);
-  loadVideoData(dirName);
 }
 
 TiberiusApplication::~TiberiusApplication()
 {
-
 }
 
 QString TiberiusApplication::c3Dir()
 {
-  QString dirName = mSettings.value(C3_DIR_SETTING).toString();
+  QString dirName = mC3Dir;
+  if (dirName.isEmpty())
+    dirName = mSettings.value(C3_DIR_SETTING).toString();
+
   if (dirName.isEmpty()) {
     char title[] = {"Choose Caesar3 Directory"};
     const char * path = tinyfd_selectFolderDialog(title, QDir::currentPath().toStdString().c_str());
@@ -54,6 +35,7 @@ QString TiberiusApplication::c3Dir()
     }
 
     dirName = path;
+    mC3Data.reset(new C3Data(dirName));
     mSettings.setValue(C3_DIR_SETTING, dirName);
   }
   return dirName;
@@ -61,12 +43,14 @@ QString TiberiusApplication::c3Dir()
 
 SgImageData * TiberiusApplication::climateImages()
 {
-  return mClimateImages;
+  if (mC3Dir.isEmpty()) mC3Dir = c3Dir();
+  return mC3Data->climateImages();
 }
 
 SgImageData * TiberiusApplication::enemyImages()
 {
-  return mEnemyImages;
+  if (mC3Dir.isEmpty()) mC3Dir = c3Dir();
+  return mC3Data->enemyImages();
 }
 
 // Returns the pixel file name associated with the SG file name without regarding case
@@ -84,78 +68,30 @@ QString TiberiusApplication::getPixelFileName(const QString &sgFileName, const Q
 
 ImageData * TiberiusApplication::imageData()
 {
-  return mImageData.get();
+  if (mC3Dir.isEmpty()) mC3Dir = c3Dir();
+  return mC3Data->imageData();
 }
 
 Language * TiberiusApplication::language()
 {
-  return mLanguage.get();
+  if (mC3Dir.isEmpty()) mC3Dir = c3Dir();
+  return mC3Data->language();
 }
 
-void TiberiusApplication::loadImageData(const QString &dirName)
+void TiberiusApplication::setC3Dir(const QString &dirName)
 {
-  mImageData.reset(new ImageData);
-  mImageData->loadFromDir(dirName);
-
-  mClimateImages = mImageData->getImageSet("c3")->imageData();
-  mEnemyImages = mImageData->getImageSet("goths")->imageData();
-}
-
-void TiberiusApplication::loadLanguage(const QString &dirName)
-{
-  QDir dir(dirName);
-
-  QFileInfoList stringInfoList = dir.entryInfoList(QStringList() << "c3.eng", QDir::Files);
-  if (stringInfoList.size() == 0) {
-    throw std::invalid_argument("Could not locate language file");
-  }
-
-  QFileInfoList messageInfoList = dir.entryInfoList(QStringList() << "c3_mm.eng", QDir::Files);
-  if (messageInfoList.size() == 0) {
-    throw std::invalid_argument("Could locate message file");
-  }
-
-  QFileInfo stringFileInfo(stringInfoList.at(0));
-  QString stringFilePath = stringFileInfo.absoluteFilePath();
-  QFileInfo messageFileInfo(messageInfoList.at(0));
-  QString messageFilePath = messageFileInfo.absoluteFilePath();
-
-  mLanguage.reset(new Language);
-  mLanguage->load(stringFilePath, messageFilePath);
-}
-
-void TiberiusApplication::loadSoundData(const QString & dirName)
-{
-  mSoundData.reset(new SoundData);
-
-  for (int i = 0; i < MAX_SOUNDS; i++) {
-    int id = sounds[i].first;
-    QString fileName = sounds[i].second;
-    QString pathName = dirName + QDir::separator() + fileName;
-    std::unique_ptr<Sound> sound(new Sound(id, pathName));
-    mSoundData->addSound(std::move(sound));
-  }
-}
-
-void TiberiusApplication::loadVideoData(const QString &dirName)
-{
-  mVideoData.reset(new VideoData);
-
-  for (int i = 0; i < MAX_VIDEOS; i++) {
-    int id = videos[i].first;
-    QString fileName = videos[i].second;
-    QString pathName = dirName + QDir::separator() + fileName;
-    std::unique_ptr<Video> video(new Video(id, pathName));
-    mVideoData->addVideo(std::move(video));
-  }
+  mC3Dir = dirName;
+  mC3Data.reset(new C3Data(dirName));
 }
 
 SoundData * TiberiusApplication::soundData()
 {
-  return mSoundData.get();
+  if (mC3Dir.isEmpty()) mC3Dir = c3Dir();
+  return mC3Data->soundData();
 }
 
 VideoData * TiberiusApplication::videoData()
 {
-  return mVideoData.get();
+  if (mC3Dir.isEmpty()) mC3Dir = c3Dir();
+  return mC3Data->videoData();
 }

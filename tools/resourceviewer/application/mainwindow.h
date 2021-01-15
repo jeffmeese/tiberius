@@ -7,6 +7,7 @@
 #include <QStandardItem>
 #include <QStandardItemModel>
 
+class TiberiusApplication;
 class PropertiesModel;
 
 namespace Ui
@@ -20,7 +21,7 @@ class MainWindow
   Q_OBJECT
 
 public:
-  MainWindow(QWidget *parent = nullptr);
+  MainWindow(TiberiusApplication & application, QWidget *parent = nullptr);
   ~MainWindow();
 
 private:
@@ -39,6 +40,7 @@ private slots:
 
 private:
   Ui::MainWindow * mUi;
+  TiberiusApplication & mApplication;
   std::unique_ptr<QStandardItemModel> mResourceModel;
   std::unique_ptr<PropertiesModel> mPropertiesModel;
   QStandardItem * mGraphicsGroup;

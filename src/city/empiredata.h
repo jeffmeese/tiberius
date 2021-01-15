@@ -3,6 +3,8 @@
 
 #include "tiberius.h"
 
+#include "datavector.h"
+
 #include <cstdint>
 #include <memory>
 #include <vector>
@@ -15,6 +17,7 @@ namespace Empire
 }
 
 class EmpireData
+    : public DataVector<Empire::City>
 {
 public:
   static const int32_t MAX_CITIES = 41;
@@ -26,13 +29,6 @@ public:
 public:
   TIBERIUS_LIB_DECL void loadFromDataStream(QDataStream & dataStream);
   TIBERIUS_LIB_DECL void saveToDataStream(QDataStream & dataStream) const;
-
-private:
-  using CityPtr = std::unique_ptr<Empire::City>;
-  using CityVector = std::vector<CityPtr>;
-
-private:
-  CityVector mCities;
 };
 
 #endif // EMPIREDATA_H

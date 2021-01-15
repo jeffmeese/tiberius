@@ -7,11 +7,8 @@
 static const int32_t DATA_SIZE = 2706;
 
 EmpireData::EmpireData()
+  : DataVector<Empire::City>(MAX_CITIES)
 {
-  for (int32_t i = 0; i < MAX_CITIES; i++) {
-    CityPtr city(new Empire::City);
-    mCities.push_back(std::move(city));
-  }
 }
 
 EmpireData::~EmpireData()
@@ -26,7 +23,8 @@ void EmpireData::loadFromDataStream(QDataStream & dataStream)
   byteStream.setByteOrder(QDataStream::LittleEndian);
 
   for (int32_t i = 0; i < MAX_CITIES; i++) {
-    mCities.at(i)->loadFromStream(byteStream);
+    Empire::City * city = get(i);
+    city->loadFromStream(byteStream);
   }
 }
 
@@ -37,7 +35,7 @@ void EmpireData::saveToDataStream(QDataStream & dataStream) const
   byteStream.setByteOrder(QDataStream::LittleEndian);
 
   for (int32_t i = 0; i < MAX_CITIES; i++) {
-    mCities.at(i)->saveToStream(byteStream);
+    get(i)->saveToStream(byteStream);
   }
 
   streamio::writeCompressedData(dataStream, byteArray);

@@ -1,6 +1,7 @@
 #include "gameitem.h"
 
 #include "gamegridgroup.h"
+#include "empirecitygroup.h"
 
 #include "game/game.h"
 
@@ -32,14 +33,12 @@ private:
   QString mFilePath;
 };
 
-GameItem::GameItem(const QString & filePath)
+GameItem::GameItem(std::unique_ptr<Game> game, const QString & filePath)
+  : mGame(std::move(game))
 {
   QFileInfo fileInfo(filePath);
   setText(fileInfo.fileName());
   QString dirName = fileInfo.path();
-
-  mGame.reset(new Game);
-  setEnabled(false);
 
   GameReader * gameReader = new GameReader(mGame.get(), filePath);
   connect(gameReader, &GameReader::ready, this, &GameItem::fileRead);
@@ -56,15 +55,26 @@ void GameItem::fileRead()
 {
   setEnabled(true);
   appendRow(new GameGridGroup(mGame.get()));
+  appendRow(new EmpireCityGroup(mGame->city()));
 }
 
 QWidget * GameItem::createView() const
 {
+//  if (!mGameLoaded) {
+//    mGame->loadFromFile(mFilePath);
+//    mGameLoaded = true;
+//  }
+
   return nullptr;
 }
 
 QList<Property> GameItem::getProperties() const
 {
+//  if (!mGameLoaded) {
+//    mGame->loadFromFile(mFilePath);
+//    mGameLoaded = true;
+//  }
+
   QList<Property> propertyList;
   return propertyList;
 }

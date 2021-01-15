@@ -18,16 +18,7 @@ GameGridGroup::GameGridGroup(Game * game)
   : mGame(game)
 {
   setText("Grids");
-  appendRow(new AqueductGridItem(game->map()->aqueductGrid()));
-  appendRow(new BuildingGridItem(game->map()->buildingGrid()));
-  appendRow(new DamageGridItem(game->map()->buildingDamageGrid()));
-  appendRow(new DesirabilityGridItem(game->map()->desirabilityGrid()));
-  appendRow(new EdgeGridItem(game->map()->edgeGrid()));
-  appendRow(new ElevationGridItem(game->map()->elevationGrid()));
-  appendRow(new GraphicGridItem(game->map()->graphicGrid()));
-  appendRow(new MergingGridItem(game->map()->randomGrid()));
-  appendRow(new TerrainGridItem(game->map()->terrainGrid()));
-  appendRow(new WalkerGridItem(game->map()->figureGrid()));
+  handleGameChanged();
 }
 
 QWidget * GameGridGroup::createView() const
@@ -36,7 +27,23 @@ QWidget * GameGridGroup::createView() const
 }
 
 QList<Property> GameGridGroup::getProperties() const
+
 {
   QList<Property> propertyList;
   return propertyList;
+}
+
+void GameGridGroup::handleGameChanged()
+{
+  removeRows(0, rowCount());
+  appendRow(new AqueductGridItem(mGame->map()->aqueductGrid()));
+  appendRow(new BuildingGridItem(mGame->map()->buildingGrid()));
+  appendRow(new DamageGridItem(mGame->map()->buildingDamageGrid()));
+  appendRow(new DesirabilityGridItem(mGame->map()->desirabilityGrid()));
+  appendRow(new EdgeGridItem(mGame->map()->edgeGrid()));
+  appendRow(new ElevationGridItem(mGame->map()->elevationGrid()));
+  appendRow(new GraphicGridItem(mGame->map()->graphicGrid()));
+  appendRow(new MergingGridItem(mGame->map()->randomGrid()));
+  appendRow(new TerrainGridItem(mGame->map()->terrainGrid()));
+  appendRow(new WalkerGridItem(mGame->map()->figureGrid()));
 }
