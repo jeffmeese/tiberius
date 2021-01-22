@@ -61,6 +61,7 @@ set(HDR_FILES
   properties/property.h
   properties/propertiesmodel.h
   views/gridview.h
+  widgets/smkwidget.h
 )
 
 set(SRC_FILES
@@ -112,11 +113,12 @@ set(SRC_FILES
   properties/property.cpp
   properties/propertiesmodel.cpp
   views/gridview.cpp
+  widgets/smkwidget.cpp
 )
 
 set(UI_FILES
   application/mainwindow.ui
-  videos/smkwidget.ui
+  widgets/smkwidget.ui
 )
 
 if (WIN32)

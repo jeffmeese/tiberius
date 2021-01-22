@@ -149,9 +149,9 @@ public:
 
 public:
   TIBERIUS_LIB_DECL void loadFromFile(const QString & fileName);
-  TIBERIUS_LIB_DECL void loadFromStream(QDataStream & dataStream, bool includeGrids = true);
+  TIBERIUS_LIB_DECL void loadFromStream(QDataStream & dataStream, bool mapFile = true);
   TIBERIUS_LIB_DECL void saveToFile(const QString & fileName) const;
-  TIBERIUS_LIB_DECL void saveToStream(QDataStream & dataStream, bool includeGrids = true) const;
+  TIBERIUS_LIB_DECL void saveToStream(QDataStream & dataStream, bool mapFile = true) const;
 
 public:
   static const int MAX_ALLOWED_BUILDINGS = 50;

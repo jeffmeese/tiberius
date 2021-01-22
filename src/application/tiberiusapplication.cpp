@@ -15,6 +15,7 @@ QSettings TiberiusApplication::mSettings;
 TiberiusApplication::TiberiusApplication(int & argc, char ** argv)
   : QApplication(argc, argv)
 {
+  mC3Dir = c3Dir();
 }
 
 TiberiusApplication::~TiberiusApplication()
@@ -35,8 +36,8 @@ QString TiberiusApplication::c3Dir()
     }
 
     dirName = path;
-    mC3Data.reset(new C3Data(dirName));
     mSettings.setValue(C3_DIR_SETTING, dirName);
+    mC3Data.reset(new C3Data(dirName));
   }
   return dirName;
 }

@@ -356,23 +356,23 @@ void Scenario::loadFromFile(const QString &fileName)
   loadFromStream(dataStream, true);
 }
 
-void Scenario::loadFromStream(QDataStream &dataStream, bool includeGrids)
+void Scenario::loadFromStream(QDataStream &dataStream, bool mapFile)
 {
   dataStream.setByteOrder(QDataStream::LittleEndian);
 
-  if (includeGrids) {
+  if (mapFile) {
     mGraphicGrid->loadFromDataStream(dataStream, 52488, false);
     mEdgeGrid->loadFromDataStream(dataStream, 26244, false);
     mTerrainGrid->loadFromDataStream(dataStream, 52488, false);
     mTerrainRandomGrid->loadFromDataStream(dataStream, 26244, false);
     mRandomGrid->loadFromDataStream(dataStream, 26244, false);
     mElevationGrid->loadFromDataStream(dataStream, 26244, false);
+    mRandomSeed1 = streamio::readInt32(dataStream);
+    mRandomSeed2 = streamio::readInt32(dataStream);
+    mCameraX = streamio::readInt32(dataStream);
+    mCameraY = streamio::readInt32(dataStream);
   }
 
-  mRandomSeed1 = streamio::readInt32(dataStream);
-  mRandomSeed2 = streamio::readInt32(dataStream);
-  mCameraX = streamio::readInt32(dataStream);
-  mCameraY = streamio::readInt32(dataStream);
   mStartYear = streamio::readInt16(dataStream);
   dataStream.skipRawData(2);
   mEmpireLocation = streamio::readUInt16(dataStream);
@@ -707,23 +707,23 @@ void Scenario::saveToFile(const QString &fileName) const
   saveToStream(dataStream, true);
 }
 
-void Scenario::saveToStream(QDataStream & dataStream, bool includeGrids) const
+void Scenario::saveToStream(QDataStream & dataStream, bool mapFile) const
 {
   dataStream.setByteOrder(QDataStream::LittleEndian);
 
-  if (includeGrids) {
+  if (mapFile) {
     mGraphicGrid->saveToDataStream(dataStream, 52488, false);
     mEdgeGrid->saveToDataStream(dataStream, 26244, false);
     mTerrainGrid->saveToDataStream(dataStream, 52488, false);
     mTerrainRandomGrid->saveToDataStream(dataStream, 26244, false);
     mRandomGrid->saveToDataStream(dataStream, 26244, false);
     mElevationGrid->saveToDataStream(dataStream, 26244, false);
+    streamio::writeInt32(dataStream, mRandomSeed1);
+    streamio::writeInt32(dataStream, mRandomSeed2);
+    streamio::writeInt32(dataStream, mCameraX);
+    streamio::writeInt32(dataStream, mCameraY);
   }
 
-  streamio::writeInt32(dataStream, mRandomSeed1);
-  streamio::writeInt32(dataStream, mRandomSeed2);
-  streamio::writeInt32(dataStream, mCameraX);
-  streamio::writeInt32(dataStream, mCameraY);
   streamio::writeInt16(dataStream, mStartYear);
 
   for (int i = 0; i < 2; i++)

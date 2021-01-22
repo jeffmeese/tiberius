@@ -25,6 +25,7 @@
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QLabel>
+#include <QProgressDialog>
 
 #include <sstream>
 
@@ -67,20 +68,82 @@ void MainWindow::handleChooseDirectory()
     return;
   }
 
-  mApplication.setC3Dir(c3Dir);
-
   QApplication::setOverrideCursor(Qt::WaitCursor);
-  setEnabled(false);
-
   initModel();
-  loadGraphicsFiles(c3Dir);
-  loadLanguageFiles(c3Dir);
-  loadMapFiles(c3Dir);
-  //loadSmkFiles(c3Dir);
-  loadSavedGames(c3Dir);
-
+  mApplication.setC3Dir(c3Dir);
   QApplication::restoreOverrideCursor();
-  setEnabled(true);
+
+  QProgressDialog dialog("Reading directory", "Cancel", 0, 100, this);
+  dialog.setWindowTitle("Reading Caesar 3 Data");
+  dialog.setWindowModality(Qt::WindowModal);
+  dialog.setMinimumDuration(4);
+  dialog.setValue(0);
+
+  QDir dir(c3Dir);
+  QDir videoDir(c3Dir + QDir::separator() + "smk");
+  QDir soundDir(c3Dir + QDir::separator() + "wavs");
+  QStringList graphicsFiles = dir.entryList(QStringList("*.sg2"), QDir::Files);
+  QStringList languageFiles = dir.entryList(QStringList("c3.eng"), QDir::Files);
+  QStringList scenarioFiles = dir.entryList(QStringList("*.map"), QDir::Files);
+  QStringList videoFiles = videoDir.entryList(QStringList("*.smk"), QDir::Files);
+  QStringList soundFiles = soundDir.entryList(QStringList("*.wav"), QDir::Files);
+
+  int totalFiles = graphicsFiles.size() + languageFiles.size() + scenarioFiles.size() + videoFiles.size() + soundFiles.size();
+  dialog.setMaximum(totalFiles);
+
+  dialog.setLabelText("Reading Graphics Files");
+  int filesProcessed = 0;
+  for (int i = 0; i < graphicsFiles.size(); i++) {
+    QString pathName(c3Dir + QDir::separator() + graphicsFiles.at(i));
+    GraphicsItem * group = new GraphicsItem(pathName);
+    mGraphicsGroup->appendRow(group);
+    dialog.setValue(++filesProcessed);
+  }
+
+  dialog.setLabelText("Reading Language Files");
+  for (int i = 0; i < languageFiles.size(); i++) {
+    QString pathName(c3Dir + QDir::separator() + languageFiles.at(i));
+    LanguageItem * item = new LanguageItem(pathName);
+    mLanguagesGroup->appendRow(item);
+    dialog.setValue(++filesProcessed);
+  }
+
+  dialog.setLabelText("Reading Scenario Files");
+  for (int32_t i = 0; i < scenarioFiles.size(); i++) {
+    QString pathName(c3Dir + QDir::separator() + scenarioFiles.at(i));
+    MapItem * item = new MapItem(pathName);
+    mMapsGroup->appendRow(item);
+    dialog.setValue(++filesProcessed);
+  }
+
+  dialog.setLabelText("Reading Video Files");
+  for (int32_t i = 0; i < videoFiles.size(); i++) {
+    QString pathName(videoDir.path() + QDir::separator() + videoFiles.at(i));
+    SmkItem * item = new SmkItem(pathName);
+    mVideosGroup->appendRow(item);
+    dialog.setValue(++filesProcessed);
+  }
+
+  dialog.setLabelText("Reading Sound Files");
+  for (int32_t i = 0; i < soundFiles.size(); i++) {
+    QString pathName(soundDir.path() + QDir::separator() + soundFiles.at(i));
+    QFileInfo fileInfo(pathName);
+    QStandardItem * item = new QStandardItem(fileInfo.fileName());
+    mSoundsGroup->appendRow(item);
+    dialog.setValue(++filesProcessed);
+  }
+
+
+
+//  dialog.setLabelText("Reading Saved Game Files");
+//  for (int32_t i = 0; i < savedGameFiles.size(); i++) {
+//    QString fileName = savedGameFiles.at(i);
+//    QString pathName = c3Dir + QDir::separator() + fileName;
+//    std::unique_ptr<Game> game(new Game);
+//    GameItem * item = new GameItem(std::move(game), pathName);
+//    mSavedGamesGroup->appendRow(item);
+//    dialog.setValue(++filesProcessed);
+//  }
 }
 
 void MainWindow::handleExit()
@@ -137,86 +200,22 @@ void MainWindow::initModel()
 
   mGraphicsGroup = new QStandardItem("Graphics Files");
   mLanguagesGroup = new QStandardItem("Language Files");
-  mVideosGroup = new QStandardItem("Video Files");
   mMapsGroup = new QStandardItem("Map Files");
-  mSavedGamesGroup = new QStandardItem("Saved Games");
+  mSoundsGroup = new QStandardItem("Sound Files");
+  mVideosGroup = new QStandardItem("Video Files");
+  //mSavedGamesGroup = new QStandardItem("Saved Games");
 
   mResourceModel->appendRow(mGraphicsGroup);
   mResourceModel->appendRow(mLanguagesGroup);
-  mResourceModel->appendRow(mVideosGroup);
   mResourceModel->appendRow(mMapsGroup);
-  mResourceModel->appendRow(mSavedGamesGroup);
+  mResourceModel->appendRow(mVideosGroup);
+  mResourceModel->appendRow(mSoundsGroup);
+  //mResourceModel->appendRow(mSavedGamesGroup);
 
   mUi->cResourcesView->setModel(mResourceModel.get());
 
   QItemSelectionModel * selModel = mUi->cResourcesView->selectionModel();
   connect(selModel, SIGNAL(selectionChanged(QItemSelection, QItemSelection)), SLOT(handleItemChanged()));
-}
-
-void MainWindow::loadGraphicsFiles(const QString & dirName)
-{
-  QDir dir(dirName);
-
-  QStringList nameFilters;
-  nameFilters << "*.sg2";
-
-  QStringList fileList = dir.entryList(nameFilters, QDir::Files);
-  for (int32_t i = 0; i < fileList.size(); i++) {
-    QString pathName(dirName + QDir::separator() + fileList.at(i));
-    GraphicsItem * group = new GraphicsItem(pathName);
-    mGraphicsGroup->appendRow(group);
-  }
-}
-
-void MainWindow::loadLanguageFiles(const QString & dirName)
-{
-  QDir dir(dirName);
-
-  QStringList nameFilters;
-  nameFilters << "c3.eng";
-  nameFilters << "c3.rus";
-
-  QStringList fileList = dir.entryList(nameFilters, QDir::Files);
-  for (int32_t i = 0; i < fileList.size(); i++) {
-    QString pathName(dirName + QDir::separator() + fileList.at(i));
-    LanguageItem * item = new LanguageItem(pathName);
-    mLanguagesGroup->appendRow(item);
-  }
-}
-
-void MainWindow::loadMapFiles(const QString &dirName)
-{
-  QDir dir(dirName);
-
-  QStringList nameFilters;
-  nameFilters << "*.map";
-
-  QStringList fileList = dir.entryList(nameFilters, QDir::Files);
-  for (int32_t i = 0; i < fileList.size(); i++) {
-    QString pathName(dirName + QDir::separator() + fileList.at(i));
-    MapItem * item = new MapItem(pathName);
-    mMapsGroup->appendRow(item);
-  }
-}
-
-void MainWindow::loadSavedGames(const QString &dirName)
-{
-  qDebug() << "loadSavedGames";
-
-  QStringList nameFilters;
-  nameFilters << "*.sav";
-
-  QDir dir(dirName);
-  QStringList fileList = dir.entryList(nameFilters, QDir::Files);
-  for (int32_t i = 0; i < fileList.size(); i++) {
-    QString fileName = fileList.at(i);
-    QString pathName = dirName + QDir::separator() + fileName;
-    std::unique_ptr<Game> game(new Game);
-    GameItem * item = new GameItem(std::move(game), pathName);
-    mSavedGamesGroup->appendRow(item);
-  }
-
-  qDebug() << "loadSavedGames";
 }
 
 void MainWindow::loadSmkFiles(const QString & dirName)

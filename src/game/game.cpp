@@ -107,8 +107,8 @@ void Game::loadFromStream(QDataStream &dataStream)
   dataStream.skipRawData(4);                                                  // 24 Empire Map Y
   dataStream.skipRawData(4);                                                  // 24 Empire Map Selected ID
   mCity->empireData()->loadFromDataStream(dataStream);                        // 25 Empire Cities (2706 compressed)
-  //mCity->scenarioData()->loadFromDataStream(dataStream);                      // 26 Scenario Data (2188 uncompressed)
-//  mCity->scribeMessageData()->loadFromDataStream(dataStream);                 // 27 Message data (16000 compressed)
+  mCity->scenarioData()->loadFromDataStream(dataStream);                      // 26 Scenario Data (2188 uncompressed)
+  //mCity->scribeMessageData()->loadFromDataStream(dataStream);                 // 27 Message data (16000 compressed)
 //  streamio::readUncompressedData(dataStream, 206);                            // 28 Unknown (206 uncompressed)
 //  streamio::readCompressedData(dataStream, 3232);                             // 29 Unknown (3232 compressed)
 //  streamio::readUncompressedData(dataStream, 13772);                          // 30 Unknown (13772 uncompressed)

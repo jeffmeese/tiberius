@@ -48,5 +48,6 @@ private:
   QStandardItem * mMapsGroup;
   QStandardItem * mSavedGamesGroup;
   QStandardItem * mVideosGroup;
+  QStandardItem * mSoundsGroup;
 };
 #endif // MAINWINDOW_H

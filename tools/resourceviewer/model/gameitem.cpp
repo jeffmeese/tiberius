@@ -40,10 +40,12 @@ GameItem::GameItem(std::unique_ptr<Game> game, const QString & filePath)
   setText(fileInfo.fileName());
   QString dirName = fileInfo.path();
 
-  GameReader * gameReader = new GameReader(mGame.get(), filePath);
-  connect(gameReader, &GameReader::ready, this, &GameItem::fileRead);
-  connect(gameReader, &GameReader::finished, gameReader, &QObject::deleteLater);
-  gameReader->start();
+  mGame->loadFromFile(filePath);
+  fileRead();
+  //GameReader * gameReader = new GameReader(mGame.get(), filePath);
+  //connect(gameReader, &GameReader::ready, this, &GameItem::fileRead);
+  //connect(gameReader, &GameReader::finished, gameReader, &QObject::deleteLater);
+  //gameReader->start();
 }
 
 GameItem::~GameItem()
@@ -53,7 +55,6 @@ GameItem::~GameItem()
 
 void GameItem::fileRead()
 {
-  setEnabled(true);
   appendRow(new GameGridGroup(mGame.get()));
   appendRow(new EmpireCityGroup(mGame->city()));
 }

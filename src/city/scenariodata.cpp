@@ -5,6 +5,7 @@
 #include "scenario/scenario.h"
 
 #include <QDataStream>
+#include <QDebug>
 
 ScenarioData::ScenarioData()
 {
@@ -22,8 +23,10 @@ ScenarioData::~ScenarioData()
 
 void ScenarioData::loadFromDataStream(QDataStream &dataStream)
 {
-  // 128 bytes unused + 1 unused trade price pair
-  dataStream.skipRawData(130);
+  qDebug() << Resource::MAX_RESOURCES;
+
+  dataStream.skipRawData(128); // 128 bytes unused
+  dataStream.skipRawData(8); // Unused trade price pair
 
   // Read trade prices
   for (int i = 0; i < Resource::MAX_RESOURCES; i++) {
@@ -31,7 +34,10 @@ void ScenarioData::loadFromDataStream(QDataStream &dataStream)
     mSellPrices[i] = streamio::readInt32(dataStream);
   }
 
-  // The rest of the data is the same as the mission data without the grids
+  dataStream.skipRawData(84); // Figure names
+  dataStream.skipRawData(60); // Culture count
+
+  // The rest of the data is the same as the mission data without the grids and some of the initial data
   mMission->loadFromStream(dataStream, false);
 }
 

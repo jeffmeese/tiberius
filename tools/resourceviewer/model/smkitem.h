@@ -3,6 +3,8 @@
 
 #include "resourceitem.h"
 
+class Video;
+
 class SmkItem
     : public ResourceItem
 {
@@ -12,6 +14,9 @@ public:
 public:
   QWidget * createView() const override;
   QList<Property> getProperties() const override;
+
+private:
+  std::unique_ptr<Video> mVideo;
 };
 
 #endif // SMKITEM_H
