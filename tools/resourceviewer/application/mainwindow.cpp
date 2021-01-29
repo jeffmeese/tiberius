@@ -132,18 +132,6 @@ void MainWindow::handleChooseDirectory()
     mSoundsGroup->appendRow(item);
     dialog.setValue(++filesProcessed);
   }
-
-
-
-//  dialog.setLabelText("Reading Saved Game Files");
-//  for (int32_t i = 0; i < savedGameFiles.size(); i++) {
-//    QString fileName = savedGameFiles.at(i);
-//    QString pathName = c3Dir + QDir::separator() + fileName;
-//    std::unique_ptr<Game> game(new Game);
-//    GameItem * item = new GameItem(std::move(game), pathName);
-//    mSavedGamesGroup->appendRow(item);
-//    dialog.setValue(++filesProcessed);
-//  }
 }
 
 void MainWindow::handleExit()
@@ -203,32 +191,15 @@ void MainWindow::initModel()
   mMapsGroup = new QStandardItem("Map Files");
   mSoundsGroup = new QStandardItem("Sound Files");
   mVideosGroup = new QStandardItem("Video Files");
-  //mSavedGamesGroup = new QStandardItem("Saved Games");
 
   mResourceModel->appendRow(mGraphicsGroup);
   mResourceModel->appendRow(mLanguagesGroup);
   mResourceModel->appendRow(mMapsGroup);
   mResourceModel->appendRow(mVideosGroup);
   mResourceModel->appendRow(mSoundsGroup);
-  //mResourceModel->appendRow(mSavedGamesGroup);
 
   mUi->cResourcesView->setModel(mResourceModel.get());
 
   QItemSelectionModel * selModel = mUi->cResourcesView->selectionModel();
   connect(selModel, SIGNAL(selectionChanged(QItemSelection, QItemSelection)), SLOT(handleItemChanged()));
-}
-
-void MainWindow::loadSmkFiles(const QString & dirName)
-{
-  QString smkDir(dirName + QDir::separator() + "smk");
-  QStringList nameFilters;
-  nameFilters << "*.smk";
-
-  QDir dir(smkDir);
-  QStringList fileList = dir.entryList(nameFilters, QDir::Files);
-  for (int32_t i = 0; i < fileList.size(); i++) {
-    QString pathName = fileList.at(i);
-    SmkItem * item = new SmkItem(pathName);
-    mVideosGroup->appendRow(item);
-  }
 }

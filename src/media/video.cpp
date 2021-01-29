@@ -5,7 +5,40 @@
 #include <QAbstractVideoSurface>
 #include <QDebug>
 #include <QVideoFrame>
+#include <QThread>
 #include <QVideoSurfaceFormat>
+
+class VideoSurface
+    : public QAbstractVideoSurface
+{
+public:
+  QList<QVideoFrame::PixelFormat> supportedPixelFormats(QAbstractVideoBuffer::HandleType handleType = QAbstractVideoBuffer::NoHandle) const override;
+//  //bool isFormatSupported(const QVideoSurfaceFormat &format, QVideoSurfaceFormat *similar) const;
+  bool present(const QVideoFrame & frame) override;
+
+//  bool start(const QVideoSurfaceFormat &format);
+//  void stop();
+};
+
+QList<QVideoFrame::PixelFormat> VideoSurface::supportedPixelFormats(
+        QAbstractVideoBuffer::HandleType handleType) const
+{
+    if (handleType == QAbstractVideoBuffer::NoHandle) {
+        return QList<QVideoFrame::PixelFormat>()
+                << QVideoFrame::Format_RGB32
+                << QVideoFrame::Format_ARGB32
+                << QVideoFrame::Format_ARGB32_Premultiplied
+                << QVideoFrame::Format_RGB565
+                << QVideoFrame::Format_RGB555;
+    } else {
+        return QList<QVideoFrame::PixelFormat>();
+    }
+}
+
+bool VideoSurface::present(const QVideoFrame & frame)
+{
+  return true;
+}
 
 Video::Video(int id, const QString & fileName)
   : mLoaded(false)
@@ -69,20 +102,26 @@ void Video::play(QVideoWidget * widget)
 
   char r = smk_first(mSmkVideo);
   while (r == SMK_MORE) {
-    QVideoFrame videoFrame(mWidth*mHeight, sz, mWidth, QVideoFrame::Format_RGB32);
-    unsigned int index = 0;
+    //QVideoFrame videoFrame(mWidth*mHeight, sz, mWidth, QVideoFrame::Format_RGB32);
+    //unsigned int index = 0;
     const unsigned char * frame = smk_get_video(mSmkVideo);
-    for (unsigned int i = 0; i < mHeight; i++) {
-      for (unsigned int j = 0; j < mWidth; j++) {
-        unsigned char byte = frame[index];
+    QImage image(frame, mWidth, mHeight, mWidth, QImage::Format_RGB32);
+    QVideoFrame videoFrame(image);
+    //for (unsigned int i = 0; i < mHeight; i++) {
+    //  for (unsigned int j = 0; j < mWidth; j++) {
+        //unsigned char  = frame[index];
         //qDebug() << (int)byte;
-        index++;
-      }
-    }
+    //    index++;
+    //  }
+   // }
     widget->videoSurface()->present(videoFrame);
+    widget->repaint();
+    QThread::currentThread()->msleep(10);
     r = smk_next(mSmkVideo);
     qDebug() << (int)r;
   }
+
+  widget->videoSurface()->stop();
 }
 
 QString Video::scaleMode() const

@@ -21,6 +21,7 @@ class TiberiusApplication
 {
 public:
   TIBERIUS_LIB_DECL TiberiusApplication(int & argc, char ** argv);
+  TIBERIUS_LIB_DECL TiberiusApplication(const QString & c3Dir, int & argc, char ** argv);
   TIBERIUS_LIB_DECL ~TiberiusApplication();
 
 public:
@@ -36,7 +37,6 @@ public:
   TIBERIUS_LIB_DECL void setC3Dir(const QString & dirName);
 
 private:
-  static QSettings mSettings;
   static std::unique_ptr<C3Data> mC3Data;
   static QString mC3Dir;
 };

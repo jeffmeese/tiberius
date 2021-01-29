@@ -19,12 +19,20 @@
 #include <QFileInfo>
 #include <stdexcept>
 
+C3Data::C3Data()
+{
+  mImageData.reset(new ImageData);
+  mLanguage.reset(new Language);
+  mSoundData.reset(new SoundData);
+  mVideoData.reset(new VideoData);
+  mClimateImages = nullptr;
+  mEnemyImages = nullptr;
+}
+
 C3Data::C3Data(const QString & dirName)
 {
-  loadImageData(dirName);
-  loadLanguage(dirName);
-  loadSoundData(dirName);
-  loadVideoData(dirName);
+  load(dirName);
+
 }
 
 C3Data::~C3Data()
@@ -64,9 +72,21 @@ Language * C3Data::language()
   return mLanguage.get();
 }
 
-void C3Data::loadImageData(const QString &dirName)
+void C3Data::load(const QString &dirName)
 {
   mImageData.reset(new ImageData);
+  mLanguage.reset(new Language);
+  mSoundData.reset(new SoundData);
+  mVideoData.reset(new VideoData);
+
+  loadImageData(dirName);
+  loadLanguage(dirName);
+  loadSoundData(dirName);
+  loadVideoData(dirName);
+}
+
+void C3Data::loadImageData(const QString &dirName)
+{
   mImageData->loadFromDir(dirName);
 
   mClimateImages = mImageData->getImageSet("c3")->imageData();
@@ -92,14 +112,11 @@ void C3Data::loadLanguage(const QString &dirName)
   QFileInfo messageFileInfo(messageInfoList.at(0));
   QString messageFilePath = messageFileInfo.absoluteFilePath();
 
-  mLanguage.reset(new Language);
   mLanguage->load(stringFilePath, messageFilePath);
 }
 
 void C3Data::loadSoundData(const QString & dirName)
 {
-  mSoundData.reset(new SoundData);
-
   for (int i = 0; i < MAX_SOUNDS; i++) {
     int id = sounds[i].first;
     QString fileName = sounds[i].second;
@@ -111,8 +128,6 @@ void C3Data::loadSoundData(const QString & dirName)
 
 void C3Data::loadVideoData(const QString &dirName)
 {
-  mVideoData.reset(new VideoData);
-
   for (int i = 0; i < MAX_VIDEOS; i++) {
     int id = videos[i].first;
     QString fileName = videos[i].second;

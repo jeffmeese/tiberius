@@ -17,6 +17,7 @@ public:
   static Settings & settings();
 
 private:
+  //QString mC3Dir;
 };
 
 #endif // APPLICATION_H

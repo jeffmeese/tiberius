@@ -7,15 +7,19 @@
 #include <QDir>
 #include <stdexcept>
 
-static const QString C3_DIR_SETTING("c3Dir");
 QString TiberiusApplication::mC3Dir;
 std::unique_ptr<C3Data> TiberiusApplication::mC3Data;
-QSettings TiberiusApplication::mSettings;
 
 TiberiusApplication::TiberiusApplication(int & argc, char ** argv)
   : QApplication(argc, argv)
 {
-  mC3Dir = c3Dir();
+  mC3Data.reset(new C3Data);
+}
+
+TiberiusApplication::TiberiusApplication(const QString & c3DirName, int & argc, char ** argv)
+  : QApplication(argc, argv)
+{
+  setC3Dir(c3DirName);
 }
 
 TiberiusApplication::~TiberiusApplication()
@@ -24,33 +28,16 @@ TiberiusApplication::~TiberiusApplication()
 
 QString TiberiusApplication::c3Dir()
 {
-  QString dirName = mC3Dir;
-  if (dirName.isEmpty())
-    dirName = mSettings.value(C3_DIR_SETTING).toString();
-
-  if (dirName.isEmpty()) {
-    char title[] = {"Choose Caesar3 Directory"};
-    const char * path = tinyfd_selectFolderDialog(title, QDir::currentPath().toStdString().c_str());
-    if (path == nullptr) {
-      throw std::invalid_argument("No Casear 3 directory specified");
-    }
-
-    dirName = path;
-    mSettings.setValue(C3_DIR_SETTING, dirName);
-    mC3Data.reset(new C3Data(dirName));
-  }
-  return dirName;
+  return mC3Dir;
 }
 
 SgImageData * TiberiusApplication::climateImages()
 {
-  if (mC3Dir.isEmpty()) mC3Dir = c3Dir();
   return mC3Data->climateImages();
 }
 
 SgImageData * TiberiusApplication::enemyImages()
 {
-  if (mC3Dir.isEmpty()) mC3Dir = c3Dir();
   return mC3Data->enemyImages();
 }
 
@@ -69,13 +56,11 @@ QString TiberiusApplication::getPixelFileName(const QString &sgFileName, const Q
 
 ImageData * TiberiusApplication::imageData()
 {
-  if (mC3Dir.isEmpty()) mC3Dir = c3Dir();
   return mC3Data->imageData();
 }
 
 Language * TiberiusApplication::language()
 {
-  if (mC3Dir.isEmpty()) mC3Dir = c3Dir();
   return mC3Data->language();
 }
 
@@ -87,12 +72,10 @@ void TiberiusApplication::setC3Dir(const QString &dirName)
 
 SoundData * TiberiusApplication::soundData()
 {
-  if (mC3Dir.isEmpty()) mC3Dir = c3Dir();
   return mC3Data->soundData();
 }
 
 VideoData * TiberiusApplication::videoData()
 {
-  if (mC3Dir.isEmpty()) mC3Dir = c3Dir();
   return mC3Data->videoData();
 }

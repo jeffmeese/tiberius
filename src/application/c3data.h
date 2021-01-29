@@ -14,6 +14,7 @@ class VideoData;
 class C3Data
 {
 public:
+  C3Data();
   C3Data(const QString & dirName);
   ~C3Data();
 
@@ -26,6 +27,9 @@ public:
   TIBERIUS_LIB_DECL Language * language();
   TIBERIUS_LIB_DECL SoundData * soundData();
   TIBERIUS_LIB_DECL VideoData * videoData();
+
+public:
+  TIBERIUS_LIB_DECL void load(const QString & dirName);
 
 private:
   void loadImageData(const QString & dirName);

@@ -27,11 +27,7 @@ public:
 private:
   QWidget * createEmptyView();
   void initModel();
-  void loadGraphicsFiles(const QString & dirName);
-  void loadLanguageFiles(const QString & dirName);
-  void loadMapFiles(const QString & dirName);
-  void loadSavedGames(const QString & dirName);
-  void loadSmkFiles(const QString & dirName);
+
 
 private slots:
   void handleChooseDirectory();
